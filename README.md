@@ -78,7 +78,10 @@ X学习内容：
   遗留事件：
     git和gitHub的学习
 <<<<<<< HEAD
+<<<<<<< HEAD
   明天的计划：
+=======
+>>>>>>> parent of b17a169... Update README.md
 =======
 >>>>>>> parent of b17a169... Update README.md
   
