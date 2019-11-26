@@ -77,10 +77,7 @@ X学习内容：
     最近学习状态还不错
   遗留事件：
     git和gitHub的学习
-<<<<<<< HEAD
   明天的计划：
-=======
->>>>>>> parent of b17a169... Update README.md
   
 >>>>>>> parent of b17a169... Update README.md
 
