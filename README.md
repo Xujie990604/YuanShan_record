@@ -68,25 +68,13 @@ X学习内容：
   2.自己找多个联系，把最近学习到的只是全都多次使用，反复查看。
   3.预备下一个阶段的仿写网页。
 
-<<<<<<< HEAD
-=======
   2019.11.26
   学习内容：
     git和github的使用
   反思不足：
     最近学习状态还不错
   遗留事件：
-    git和gitHub的学习
-<<<<<<< HEAD
-<<<<<<< HEAD
-  明天的计划：
-=======
->>>>>>> parent of b17a169... Update README.md
-=======
->>>>>>> parent of b17a169... Update README.md
-  
->>>>>>> parent of b17a169... Update README.md
-
+    ##git和gitHub的学习
  
  
  
