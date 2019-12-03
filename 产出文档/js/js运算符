@@ -31,5 +31,8 @@
     ！！ 把表达式转化为布尔值在取反后再取反，相当于表达式转换为布尔值。
 
 
-if
+if  while  do while(没啥用)
+
+
+var n = parseInt(window.prompt('input'));
 
