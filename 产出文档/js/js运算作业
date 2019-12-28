@@ -1,0 +1,39 @@
+var n = parseInt(window.prompt('input'));
+        var mul = 1;
+        for(var i = 0;i < n;i++){
+            mul *= 2;
+        }
+        var mul = 1;
+        for(var i = 1;i <= n;i ++){
+            mul *= i;
+        }
+        document.write(mul);
+        var a = parseInt(window.prompt('input'));
+        var b = parseInt(window.prompt('input'));
+        var c = parseInt(window.prompt('input'));
+        if (a > b) {
+            if (a > c) {
+                document.write(a);
+            } else {
+                document.write(c);
+            }
+        } else {
+            if (b > c) {
+                document.write(b);
+            } else {
+                document.write(c);
+            }
+        }
+        var first = 1;
+        var second = 1;
+        var third;
+        if (n > 2) {
+            for (i = 0; i < n - 2; i++) {
+                third = first + second;
+                first = second;
+                second = third;
+            }
+            document.write(third);
+        } else {
+            document.write(1);
+        }
