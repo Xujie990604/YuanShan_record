@@ -1,0 +1,75 @@
+js是弱处理性语言 case里的数据类型完全可以不一样（和其他强类型语言不一样）
+break 循环终止 必须写在循环里面 
+continue 终止本次循环，开始下一次的循环
+switch(n){
+    case "n1":
+        console.log("");
+        break;
+    case "n2":
+        console.log("");
+        break;
+    case "n3":
+        console.log("");
+        break;
+
+}
+
+ 引用值 数组 对象
+
+ 数组内的数据类型可以是完全不同的数据类型
+ var arr=[1,2,"abd",undefinded]
+
+
+ js即面向过程又面向对象
+
+ typeof操作符 返回数据的类型 ！！！ 但是都是string的形式 typeof(typeof(a)) 结果为string
+ number string boolean object undefinded function
+ 泛泛的原始数据值都会被称为object
+
+ typeof(NAN) number
+ typeof(null) object 历史遗留问题
+
+ 显示类型转换
+ Number（） 可以把数据转换为数字类型   例如字母a(虽然类型变为了number但是数据值为NAN)  重点在于把数据给转换为数字
+
+ 123               "123"                 null                   true
+ number : 123      number : 123          number : 0             number : 1
+
+ "a"                undefined
+ number : NaN       number : NaN
+
+
+ parseInt 转换为整型数字 重点在于把数给你转换成整型 例如：布尔类型值转换之后为NAN
+ parseInt()有一个 砍断原则 从数据首位开始看一直到非数字类型截止 例如100px 转换之后变成100
+ 有基底parseInt(string,redix)  把string当做redix进制的数字看待，转成10进制数字
+
+ parseFloat()
+
+ string（）把数据类型转换为字符串类型
+ 
+ toString() !!! undefinded 和 null 不能用toString() 
+ num.toString(redix) 把num转换为redix进制的数字
+
+ Boolean（）除了那六种数据其他都转换为true 只有 undefinded null NaN "" 0 false 这六个字符转化为布尔值类型为false
+
+ 隐式类型转换
+ isNAN("num") 包含一个隐含的过程 先进行Number(num)操作然后再 isNAN(Number(num));
+
+ ++/-- +/-(一元正负) 都会调用Number()
+
+ + 当加号两端有一个string类型数字时，就会调用String()
+
+ -*/% 都会调用Number（）
+
+ && || ! 
+
+ < > <= >= 有数字相比较的就会隐式转换为数字
+
+ == !=
+
+不发生类型转换的
+===  !==
+
+
+
+
