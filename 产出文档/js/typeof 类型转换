@@ -47,10 +47,10 @@ switch(n){
 
  string（）把数据类型转换为字符串类型
  
- toString() !!! undefinded 和 null 不能用toString() 
+ toString() !!! undefended 和 null 不能用toString() 
  num.toString(redix) 把num转换为redix进制的数字
 
- Boolean（）除了那六种数据其他都转换为true 只有 undefinded null NaN "" 0 false 这六个字符转化为布尔值类型为false
+ Boolean（）除了那六种数据其他都转换为true 只有 undefended null NaN "" 0 false 这六个字符转化为布尔值类型为false
 
  隐式类型转换
  isNAN("num") 包含一个隐含的过程 先进行Number(num)操作然后再 isNAN(Number(num));
