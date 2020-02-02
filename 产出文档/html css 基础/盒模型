@@ -1,0 +1,25 @@
+标准盒模型：
+    width和height 只是content内容的大小
+    盒子的真实高度还要加上内边距和边框
+
+代替盒模型：
+    width 和 height 包含了内容区，内边距和边框
+
+    单个元素设置
+    .box {
+        box-sizing:border-box;
+    }
+
+    全局设置
+    html {
+        box-sizing； border-box;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    
+Margin collapsing(margin塌陷)
+    两个具有边距的元素相邻时，两个盒子之间的边距大小是最大的那个单个边距大小
+
+块盒的所有属性都受到尊重， 内联盒则不行(必须 display:inline-block)
