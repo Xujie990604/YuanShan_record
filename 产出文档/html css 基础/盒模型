@@ -23,3 +23,8 @@ Margin collapsing(margin塌陷)
     两个具有边距的元素相邻时，两个盒子之间的边距大小是最大的那个单个边距大小
 
 块盒的所有属性都受到尊重， 内联盒则不行(必须 display:inline-block)
+
+表单元素的重置
+box-sizing: border-box;
+padding: 0;
+margin: 0;
