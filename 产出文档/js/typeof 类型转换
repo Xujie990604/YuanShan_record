@@ -17,14 +17,16 @@ switch(n){
  引用值 数组 对象
 
  数组内的数据类型可以是完全不同的数据类型
- var arr=[1,2,"abd",undefinded]
+ var arr=[1,2,"abd",undefined]
 
 
  js即面向过程又面向对象
 
  typeof操作符 返回数据的类型 ！！！ 但是都是string的形式 typeof(typeof(a)) 结果为string
- number string boolean object undefinded function
+ number string boolean object undefined function
  泛泛的原始数据值都会被称为object
+
+ 只有一种情况下变量不定义就使用不报错，那就是使用typeof()时，并且返回字符串类型的undefined.
 
  typeof(NAN) number
  typeof(null) object 历史遗留问题
