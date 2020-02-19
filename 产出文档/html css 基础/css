@@ -43,3 +43,15 @@ css权重： 256进制相加
        伪元素选择器：         ::before  ::after
        属性选择器：           
        子串匹配选择器：
+
+
+
+文字水平居中：
+     line-height: height;
+     text-align: center;
+元素水平居中：
+     position: absolute
+     top: 50%
+     left:50%
+     margin-top: -0.5height
+     margin-left：-0.5width
