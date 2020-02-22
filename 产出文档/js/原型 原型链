@@ -7,4 +7,9 @@
 
 对象的原型中有constructor(可以手动改变)。constructor里面是对象的构造函数。
 
-
+构造函数内部原理三段论的深入理解：
+只有第一步不一样   隐式的构造的this对象，并不是真的空的。里面有__proto__指向的原型(所以说具体的对象是从__proto__指向的
+空间里取值，而不是直接从Person.prototype中取数据)
+var  this = {
+    __proto__: Person.prototype
+}
