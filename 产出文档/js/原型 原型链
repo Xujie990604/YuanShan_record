@@ -13,3 +13,4 @@
 var  this = {
     __proto__: Person.prototype
 }
+
