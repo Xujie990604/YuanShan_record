@@ -21,4 +21,24 @@ Object.prototype没有__proto__了，因为它是终点。
 
 
 var obj1 = Object.create(原型);
-就会把原型参数当做obj1的原型
+就会把原型参数当做obj1的原型 不可以手动添加原型，但可以手动修改已有原型。
+
+undefined就是一个原始值，它没有原型，所以没有toString方法
+null也没有原型，也没有toString
+
+
+Object有toString方法，它底下的Number，String，Array等包装类都重写了toString方法，所以不同类型的数据调用toString方法
+输出各异
+
+
+document.write其实隐式调用了toString方法
+
+
+js尽量避免小数运算，因为精度不准确
+
+可正常计算的范围 小数点前十六位，小数点后十六位
+
+call/apply重要
+改变this指向
+
+
