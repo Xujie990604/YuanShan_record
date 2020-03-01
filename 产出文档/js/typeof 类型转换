@@ -26,6 +26,8 @@ switch(n){
  number string boolean object undefined function
  泛泛的原始数据值都会被称为object
 
+ 三大原始值： number string boolean
+
  只有一种情况下变量不定义就使用不报错，那就是使用typeof()时，并且返回字符串类型的undefined.
 
  typeof(NAN) number
