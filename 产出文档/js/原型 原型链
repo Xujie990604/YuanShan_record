@@ -38,7 +38,9 @@ js尽量避免小数运算，因为精度不准确
 
 可正常计算的范围 小数点前十六位，小数点后十六位
 
-call/apply重要
-改变this指向
+call/apply重要    改变this指向
+默认方法的调用使用.call(obj,a,b,c) 用别人的方法实现自己的功能
+apply(obj,[a,b,c])的区别
+
 
 
