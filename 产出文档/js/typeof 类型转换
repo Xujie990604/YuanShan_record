@@ -46,8 +46,8 @@ switch(n){
  123               "123"                 "12345a"               "a"                  true
  number : 123      number : 123           number: NAN           number :  NAN        number : 1
 
- "null"            undefined             [123]                  [123,2334]
- number : 0        number : NaN          number:123              number；NAN
+ "null"            undefined             [123]                  [123,2334]            ""
+ number : 0        number : NaN          number:123              number；NAN          number: 0
 
  obj，function，NAN 转化完之后是NAN
 
@@ -91,6 +91,42 @@ switch(n){
 1.转成String类型。  + (字符串连接符)
 2.转成number类型。  ++/--(自增自减运算符) + - * / %(算数运算符) > < >= <= == != (关系运算符)
 3.转化为布尔类型。 ！(逻辑非运算符)
+4.不发生类型转换。 ===  !==
+
+
+！！！复杂数据类型会先隐式转换为String ，然后在转变为Number。
+复杂类型隐式转化：
+1.先用valueOf()方法获取其原始值。如果原始值不是Number类型，则使用toString()转换成String。
+2.再将String转换为number运算。
+
+
+！！！！空数组的toString()方法会得到空字符串。
+！！！！空对象的toString()方法会得到字符串[object,Object]
+
+
+[] == 0    //true
+[].valueOf().toString()得到空字符串
+Number("") == 0 成立
+
+
+![] == 0  //true
+逻辑非，先把表达式转换为布尔值在取反。[]不在那六种转换完为假的数据类型中。所以转换后为false
+Number(false) == 0 成立
+
+[] == ![]  //true
+[].valueOf().toString()得到空字符串
+逻辑非，先把表达式转换为布尔值在取反。[]不在那六种转换完为假的数据类型中。所以转换后为false
+Number("") == Number(false)  成立
+
+{} == !{}  //false
+{}.valueOf().toString()得到字符串[object,Object]
+!{}先把表达式转换为布尔值在取反。{}不在那六种转换完为假的数据类型中。所以转换后为false
+Number([object,Object]) == Number(false)  不成立
+
+[] == [] //false
+{} == {} //false
+引用数据存储在堆里，比较的是地址。所以不成立。
+
 
 
 
