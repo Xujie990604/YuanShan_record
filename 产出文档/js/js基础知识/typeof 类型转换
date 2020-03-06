@@ -49,6 +49,9 @@ switch(n){
  "null"            undefined             [123]                  [123,2334]            ""
  number : 0        number : NaN          number:123              number；NAN          number: 0
 
+ []
+ number: 0
+
  obj，function，NAN 转化完之后是NAN
 
 
