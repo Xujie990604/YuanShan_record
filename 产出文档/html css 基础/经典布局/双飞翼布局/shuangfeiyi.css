@@ -6,17 +6,13 @@
 
 .grid-s5m0e5 .col-main {
     float: left;
-    width: 100%;
-    min-height: 30px;
+    width: calc(100% - 400px);
+    margin-left: 200px;
+    margin-right: 200px;
+    min-height: 300px;
     background: #ffffff;
 }
 
-.grid-s5m0e5 .col-main .main-wrap {
-    margin-left: 200px;
-    margin-right: 200px;
-    background: #00ff00;
-    min-height: 30px;
-}
 
 .col-sub {
     float: left;
@@ -25,7 +21,7 @@
     background: #ff0000;
     /* 浮动情况下，负边界值会导致DIV上移，
     而使用-100%可以确实它移动到最左侧 */
-    margin-left: -100%;   
+    margin-left: -100%;
 }
 
 .col-extra {
