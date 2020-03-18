@@ -1,6 +1,6 @@
 圣杯布局
   1.float的元素使用负的margin值，会上浮到上一列。left，right两个div就浮上来了
-  2.middle的内容被遮挡，给middle加上padding。但是left和right也过来了。利用相对定位把left和right移向两侧
+  2.middle的内容被遮挡，给container加上padding。但是left和right也过来了。利用相对定位把left和right移向两侧
 
   注意要点：
     middle先于left和right定义。
