@@ -1,0 +1,17 @@
+onclick是句柄事件。相当于直接写在了行间样式(行间不用写function直接写执行语句    onclick = "console.log(a)")
+只能每个事件绑定一个函数。
+
+Element.addEventListener("事件类型 --> click"，处理函数，false)能给一个事件触发多个处理函数。一起触发，按照绑定顺序执行。
+IE9一下不兼容
+
+Element.attachEvent("on + 事件类型",function(){});能给一个事件绑定多个处理函数，重复的一模一样的事件也可以。
+IE独有
+
+用for循环绑定事件，容易出现闭包问题。
+
+
+解除事件函数
+
+ele.onclick = null/false;
+ele.removeEventListener(type,function,false)  function内使用另一个函数引用。不然清除的时候找不到。
+ele.detachEvent('on' + type,function);
