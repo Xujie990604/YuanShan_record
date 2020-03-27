@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button style="width: 100px; height: 100px; position: fixed; right: 0; top: 50%;">加速</button>
+    <script type="text/javascript">
+        var div = document.createElement("div");
+        document.body.appendChild(div);
+        div.style.width = "100px";
+        div.style.height = "100px";
+        div.style.backgroundColor = "red";
+        div.style.position = "absolute";
+        div.style.left = "0";
+        div.style.top = "0";
+        // speed = 1;
+        // var timer = setInterval(function(){
+        //     speed += speed/20;
+        //     div.style.left = parseInt(div.style.left) + speed + "px";
+        //     div.style.top = parseInt(div.style.top) + speed + "px";
+        //     if(parseInt(div.style.top) > 500 && parseInt(div.style.left) > 500){
+        //         clearInterval(timer);
+        //     }
+        // },30)
+        var speed = 5;
+        var btn = document.getElementsByTagName("button")[0];
+        btn.onclick = function(){
+            speed++;
+        }
+        document.onkeydown = function(e){
+            switch(e.which) {
+                case 38:
+                    div.style.top = parseInt(div.style.top) - speed +"px";
+                    break;
+                case 40:
+                    div.style.top = parseInt(div.style.top) + speed +"px";
+                    break;
+                case 37:
+                    div.style.left = parseInt(div.style.left) - speed + "px";
+                    break;
+                case 39:
+                    div.style.left = parseInt(div.style.left) + speed +"px";
+                    break;
+            }
+        }
+        
+
+    </script>
+    
+</body>
+</html>
