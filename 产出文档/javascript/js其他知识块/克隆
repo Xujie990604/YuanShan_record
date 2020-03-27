@@ -1,0 +1,25 @@
+深层克隆(克隆之后的对象或者数组的改变不会影响到被克隆的对象)
+直接复制引用的的话，会把地址也拷贝过来。但是复制原始值得话，不会拷贝地址。
+所以一旦有引用值我就自己创建。引用值里面的原始值我才复制。
+例如：Person{}我自己创建，但是Person.name我直接拿过来。
+
+function deepClone (origin,target) {
+    var target = target || {},  //如果没有传空对象的话，自动创建一个空对象
+    tostr = Object.prototype.toString,
+    arrStr = "[object Array]";
+
+    for(var prop in origin) {
+        if(origin.hasOwnProperty(prop)) {
+            if(origin[prop] !== "null" && typeof(origin[prop]) == "object"){
+                if(tostr.call(origin[prop]) == arrStr) {
+                    target[prop] = [];
+                } else {
+                    target[prop] = {};
+                }
+                deepClone(origin.[prop],target[prop]);
+            }
+        }
+        return target;
+    }
+三目运算符
+? :
