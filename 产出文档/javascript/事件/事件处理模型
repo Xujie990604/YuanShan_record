@@ -1,0 +1,36 @@
+事件冒泡：
+    结构上(非视觉上)嵌套关系的元素，会存在事件冒泡功能，即同一个事件，自子元素冒泡向父元素。(自底向上)
+
+事件捕获：
+    结构上(非视觉上)嵌套的元素，会存在事件捕获的功能，即同一个事件，自父元素，捕获至子元素(事件源元素)(自顶向下)
+
+一个对象的一个事件类型(的某一个函数)只能选择一种事件模型（冒泡或者捕获）
+
+I没有捕获ele.addEventListener(type,function,true);
+
+触发顺序：先捕获后冒泡。但是被点击的元素执行时，不是冒泡也不是捕获。他就是自己的事件执行。如果同时具有冒泡和捕获。
+按照绑定的顺序来执行。
+
+
+focus,blur,change,submit,reset,select等事件没有冒泡
+
+
+取消冒泡：
+    事件对象 e.stopPropagation();
+    IE9以下不兼容
+
+    IE e.cancelBubble = true;
+
+取消默认行为：
+    return false;  只有以句柄的方式定义才能取消
+    event.preventDefault() w3c标准，IE9以下不兼容
+    event.returnValue = false;  兼容IE
+
+
+    取消a标签的默认事件
+    <a href="javascript:void()">demo</a>
+
+
+IE独有 事件的获取
+div.setCapture()      整个浏览器内的事件都可以被该区域Dom获取
+div.releaseCapture()  释放
