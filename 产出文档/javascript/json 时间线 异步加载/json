@@ -1,0 +1,9 @@
+'{
+    "name" : "xujie",
+    "age" : "21"
+}'
+前端后端数据传递，字符串类型的json的格式
+
+JSON 静态类
+JSON.parse() string-->json 
+JSON.stringify() json --> string
