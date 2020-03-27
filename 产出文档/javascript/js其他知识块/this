@@ -1,0 +1,9 @@
+1.函数预编译过程中this指向windows
+2.全局作用域里this指向的是windows
+3.call/apply能够改变this的指向
+4.obj.func(); func()里面的this指向obj
+
+caller方法 函数在哪个环境中被调用
+
+arguments.callee()调用函数引用自身
+
