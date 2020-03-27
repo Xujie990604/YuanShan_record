@@ -1,0 +1,56 @@
+document代表的是整个文档。比html标签的范围要大。
+
+dom取出来得基本都是类数组
+
+DOM选择器
+
+byClassName不常用。ie9以上才可以用。就算是只有一个。取出来的也是类数组。
+
+byName对于表单元素，img , iframe才有用，几乎不用
+
+byId取出来的是一个对象。少用id会被改变，多用class。
+
+byTagName 根据标签名字
+
+querySelector可以直接按照css选择器类型进行选择。并且选择出来的是一个。
+querySelectorAll选择出来的是一组但是不用
+ie7及以下支持。主要是不是实时的。选择的 是副本
+
+节点树
+    parentNode   父节点
+    childNodes    子节点们
+    firstNode 第一个子节点
+    lastNode  最后一个子节点
+    nextSibling  下一个兄弟节点
+    previousSibling 前一个兄弟节点
+
+基于元素节点树的遍历
+    parentElement 返回当前元素的父元素节点
+    children 只返回当前元素的子节点
+    node.childElementCount ===node.children.length 当前元素节点的子节点个数
+    firstElementChild  返回的是第一个元素节点
+    lastElementChild 返回的是最后一个元素节点
+    nextElementSibling 返回下一个兄弟元素节点
+    previousElementSibling 返回前一个兄弟元素节点
+
+节点的四个属性
+    nodeName
+    元素的标签名，大写形式表示，只读。
+
+    nodeValue
+    text和comment节点的文本内容，可读可写。
+
+    nodeType
+    该节点的类型，只读
+        节点的类型
+            元素节点    1
+            属性节点    2
+            文本节点    3
+            注释节点    8
+            document    9
+            DocumentFragment    11
+
+    attributes
+    Element节点的属性集合
+
+Node.hasChildNodes()节点是否拥有子节点
