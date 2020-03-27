@@ -1,0 +1,42 @@
+查看滚动条的滚动距离
+window.pageXOffset/pageYOffset
+IE8和以下的浏览器
+document.body.scrollLeft + document.documentElement.scrollLeft
+
+
+查看可视窗口的大小
+window.innerWidth
+window.innerHeight
+IE8和以下的浏览器
+
+标准模式下：
+document.document.documentElement.clientWidth/clientHeight
+
+怪异模式：
+document.body.clientWidth/clientHeight
+
+
+怪异模式，向下兼容。去掉html文件的头文件。
+用document.compatMode查看是什么模式
+
+
+查看元素的几何尺位置。兼容性比较好。返回的不是实时的
+DomElement.getBoundingClientRect()
+
+查看元素的尺寸(整个盒模型不包含margin)
+DomElement.offsetWidth
+DomElement.offsetHeight
+
+查看元素的位置(对于无定位父级的元素，返回相对于文档的坐标，
+对于有定位父级的元素，返回相对于最近的有定位的父级的坐标)
+DomElement.offsetLeft
+DomElement.offsetTop
+
+查看最近的有定位的父级
+DOmElement.offsetParent
+
+让滚动条滚动
+window上有三个方法
+scroll(x,y)/scrollTo(x,y)     滚动到某个位置，不是累加滚动
+
+scrollBy(x,y)   累加滚动距离
