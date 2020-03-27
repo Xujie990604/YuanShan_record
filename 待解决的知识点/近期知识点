@@ -1,1 +1,29 @@
 vscode 的markdown语法。插件使用
+
+做一个轮播图，加一个按钮正这走，倒着走。
+
+提取密码框的密码
+
+方块的拖拽(封装，addEventListener,取消冒泡，默认事件，拖拽与点击)
+onmouseenter 鼠标移到内容区(不需要点击鼠标) 不支持事件冒泡
+onmouseleave 鼠标移出内容出
+
+onmouseover 移到目标区域里 支持冒泡
+onmouseout 移出
+
+onmousedown 在内容区域点击下去
+onmouseup 在内容区域点击上来
+
+onmousemove 在目标元素里鼠标坐标变化一次就执行一次函数
+
+方块随机移动，碰不到他。
+
+二阶菜单栏
+  
+贪吃蛇游戏  尾部运动
+
+扫雷游戏 扩散算法 注意闭包绑定事件
+
+打方块游戏
+
+文件去找
