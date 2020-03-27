@@ -1,0 +1,37 @@
+解决变量冲突的问题
+
+也可以使用闭包的方式
+
+init函数，大家约定的入口函数
+
+jq实现方法的连续调用，方法的最后return this.
+
+访问属性的方式
+    obj.name   --->  obj['name'](可以用于属性的拼接) 会隐式的转换
+    访问对象的属性时最好用obj['name']的形式。
+
+for in 循环专门用于遍历对象
+for(var prop in obj) {
+    obj.prop;会出现错误  
+    因为前面说过访问属性时，会有一个隐式的转换过程
+    obj.prop ----->   obj['prop'] 所以会把prop当做一个具体的字符串来看。
+    但是对象的枚举中不能用这种形式，因为prop本身就是字符串了。验证过了。所以用obj.[prop]
+    这种方法会把原型中的属性也打印出来。
+}
+
+hasOwnProperty用于判断是不是对象自己的属性返回布尔值，父类的不算
+
+in操作符 用于判断这个属性能不能在这个对象上调用(无论是父类有还是自己有都能返回true)
+
+ A instanceof B
+ 成哥的理解   看A的原型链上有没有B的原型
+
+区别数组和对象的三种方法
+    1.用constructor      []的原型里构造函数是Array
+    2.用instanceof       {}的原型里的构造函数是Object
+    3.用Object.prototype.toString.call([])    [object Array]
+    用Object.prototype.toString.call([])   [object Object]
+
+
+
+
