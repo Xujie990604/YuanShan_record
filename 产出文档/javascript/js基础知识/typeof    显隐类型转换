@@ -1,0 +1,134 @@
+js是弱处理性语言 case里的数据类型完全可以不一样（和其他强类型语言不一样）
+break 循环终止 必须写在循环里面 
+continue 终止本次循环，开始下一次的循环
+switch(n){
+    case "n1":
+        console.log("");
+        break;
+    case "n2":
+        console.log("");
+        break;
+    case "n3":
+        console.log("");
+        break;
+
+}
+ 数组内的数据类型可以是完全不同的数据类型
+ var arr=[1,2,"abd",undefined]
+
+
+ js即面向过程又面向对象
+
+ typeof操作符 返回数据的类型 ！！！ 但是都是string的形式 typeof(typeof(a)) 结果为string
+ number string boolean object undefined function
+ 泛泛的引用数据值（数组，对象，null）都会被称为object
+
+ 三大原始值： number string boolean
+
+ 只有一种情况下变量不定义就使用不报错，那就是使用typeof()时，并且返回字符串类型的undefined.
+
+ typeof(NAN) number
+ typeof(null) object 历史遗留问题
+
+ null === null     //true
+ undefined === undefined    //true
+ !!!!!!undefined == null      //true
+ undefined null和数字比较时。无论这个数是大于零，小于零还是等于零都返回false
+
+ NAN == NAN //false NaN不等于自身，只能用isNAN()来判断是不是NAN
+
+ 显示类型转换
+ Number（） 可以把数据转换为数字类型   例如字母a(虽然类型变为了number但是数据值为NAN)  重点在于把数据给转换为数字
+ Number（）没有砍断原则
+
+ 123               "123"                 "12345a"               "a"                  true
+ number : 123      number : 123           number: NAN           number :  NAN        number : 1
+
+ null              undefined             [123]                  [123,2334]            ""
+ number : 0        number : NaN          number:123              number；NAN          number: 0
+
+ []
+ number: 0
+
+ obj，function，NAN，undefined 转化完之后是NAN
+
+
+ parseInt 转换为整型数字 重点在于把数给你转换成整型（看起来就不是数的就是NAN） 例如：布尔类型值转换之后为NAN
+ parseInt()有一个 砍断原则 从数据首位开始看一直到非数字类型截止 例如100px 转换之后变成100
+ 有基底parseInt(string,radix)  把string当做radix(2-36)进制的数字看待，转成10进制数字
+ 基底是0的话，有的浏览器会直接输出原始值，或者NAN。
+ 如果出现了不属于该进制的输的话，输出NAN。 例如：以二进制为基底的8
+
+ parseFloat(string)返回一个浮点数。有一个 砍断原则 从数据首位开始看一直到非数字类型截止
+
+ string（par）把数据类型转换为字符串类型
+ 
+ par.toString() !!! undefined 和 null 不能用toString() 
+ num.toString(redix) 把num转换为redix进制的数字
+
+ Boolean（）除了那六种数据其他都转换为true 只有 undefended null NaN "" 0 false 这六个字符转化为布尔值类型为false
+
+ 隐式类型转换
+ isNAN("num") 包含一个隐含的过程 先进行Number(num)操作然后再 isNAN(Number(num));
+
+ ++/--(自增自减运算符)    +/-(一元正负) 都会调用Number()
+ -*/% 都会调用Number（）
+
+
+ && || 与或在决定返回值时是看表达式的布尔值为真或者为假
+ 逻辑非 !(转换为布尔类型，在取反) 
+
+
+ < > <= >= 有数字相比较的就会隐式转换为数字
+
+ + 当加号两端有一个string类型数字时，就会调用String()
+
+ == != 有隐式类型转换
+
+不发生类型转换的
+===  !==
+
+隐式转换规则：
+1.转成String类型。  + (字符串连接符)
+2.转成number类型。  ++/--(自增自减运算符) + - * / %(算数运算符) > < >= <= == != (关系运算符)
+3.转化为布尔类型。 ！(逻辑非运算符)
+4.不发生类型转换。 ===  !==
+
+
+！！！复杂数据类型会先隐式转换为String ，然后在转变为Number。
+复杂类型隐式转化：
+1.先用valueOf()方法获取其原始值。如果原始值不是Number类型，则使用toString()转换成String。
+2.再将String转换为number运算。
+
+
+！！！！空数组的toString()方法会得到空字符串。
+！！！！空对象的toString()方法会得到字符串[object,Object]
+
+
+[] == 0    //true
+[].valueOf().toString()得到空字符串
+Number("") == 0 成立
+
+
+![] == 0  //true
+逻辑非，先把表达式转换为布尔值在取反。[]不在那六种转换完为假的数据类型中。所以转换后为false
+Number(false) == 0 成立
+
+[] == ![]  //true
+[].valueOf().toString()得到空字符串
+逻辑非，先把表达式转换为布尔值在取反。[]不在那六种转换完为假的数据类型中。所以转换后为false
+Number("") == Number(false)  成立
+
+{} == !{}  //false
+{}.valueOf().toString()得到字符串[object,Object]
+!{}先把表达式转换为布尔值在取反。{}不在那六种转换完为假的数据类型中。所以转换后为false
+Number([object,Object]) == Number(false)  不成立
+
+[] == [] //false
+{} == {} //false
+引用数据存储在堆里，比较的是地址。所以不成立。
+
+
+
+
+
