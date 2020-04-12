@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.style.width = "200px";
+        div.style.height = "200px";
+        div.style.backgroundColor = "red";
+        div.style.position = "absolute";
+        div.style.left = "0";
+        div.style.top = "0";
+
+        var btn = document.createElement("button");
+        document.body.appendChild(btn);
+        btn.style.width = "100px";
+        btn.style.height = "50px";
+        btn.style.backgroundColor = "blue";
+        btn.style.top = "70%";
+        btn.style.right = "20px";
+        btn.style.position = "fixed";
+        btn.innerHTML = "加速";
+        var speed = 5;
+        btn.onclick = function () {
+            speed++;
+            console.log(speed);
+        }
+        document.onkeydown = function (e) {
+            switch (e.which) {
+                case 38:
+                    div.style.top = parseInt(div.style.top) - speed + "px";
+                    break;
+                case 40:
+                    div.style.top = parseInt(div.style.top) + speed + "px";
+                    break;
+                case 37:
+                    div.style.left = parseInt(div.style.left) - speed + "px";
+                    break;
+                case 39:
+                    div.style.left = parseInt(div.style.left) + speed + "px";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
