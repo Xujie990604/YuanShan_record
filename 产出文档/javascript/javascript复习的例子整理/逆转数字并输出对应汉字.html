@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+
+    <script type="text/javascript">
+        var target = window.prompt("input");
+        var reverse = function (target) {
+            var targetString = "";
+            var len = target.length;
+            //从字符串的末尾开始依次加入到targetString里面
+            for (var i = len - 1; i >= 0; i--) {
+                //字符串可以直接通过下角标来读取数据
+                targetString += transfer(target[i]);
+            }
+            console.log(targetString);
+        }
+
+        var transfer = function (target) {
+            switch (target) {
+                case "1":
+                    return "秀";
+                case "2":
+                    return "妍";
+                case "3":
+                    return "呀";
+            }
+        }
+        reverse(target);
+    </script>
+</body>
+
+</html>
