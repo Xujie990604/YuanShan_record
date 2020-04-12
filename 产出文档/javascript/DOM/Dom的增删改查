@@ -24,3 +24,6 @@ DOM基本操作
 节点的一些基本方法：
     setAttribute()给html添加行间样式的属性
     getAttribute() 获取属性
+
+如果想改变一个 div 结构或 dom 结构或 html 结构的 class，直接用 div.className=””
+就可以了，不用 setAttribute
