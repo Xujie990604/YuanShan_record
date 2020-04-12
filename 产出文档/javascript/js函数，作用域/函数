@@ -1,4 +1,4 @@
-弱数据语言永远都不可能输出地址。只会输出地址指向的房间
+弱数据语言永远都不可能输出地址。只会输出地址指向的房间。不像c语言一样会输出指针，指针里面是地址。
 函数声明
 function test() {
 
@@ -19,133 +19,20 @@ var test = function (){
     ...
 }
 ！！！天生的不定参 形参和实参的数量可以不一样
-argument[]用于接收实参列表
+
+arguments[]用于接收实参列表
 函数名.length 表示形参的长度
+arguments.length 表示实参的长度
 
 !!!!!函数内的形参和实参有一种映射关系，他们两个都会跟着对方变。
+实参列表出生时有几个就是几个。如果函数调用时传入的实参就比形参少，函数内再去给实参列表内缺少的形参赋值。
+arguments[]不会再跟着变了。
 
+function(a,b){
 
-
-练习代码：
-给出动物参数，输出动物对应的叫声
-var animal = function(animals) {
-       switch (animals) {
-           case "猫":
-               console.log("喵喵喵")
-               break;
-           case "狗":
-               console.log("汪汪汪")
-               break;
-           case "牛":
-               console.log("木木木")
-               break;
-           case "鸟":
-               console.log("咚咚咚")
-               break;
-           default:
-               break;
-       }
-  
-   }
-
-
-不限制参数数量的累加器
-      var add = function () {
-          var num = 0;
-          for (let index = 0; index < arguments.length; index++) {
-              num +=arguments[index];
-          }
-          console.log(num);
-      }
-      add(1,2,3,4,5);
-    虽然形参数量不定。但是arguments和形参有对应关系。
-
-    
-给出数字，逆转他，并输出对应的汉字 
-
-用两个方法 1。逆转 2.对应成汉字
-字符串可以和数组一样操作用下标取值，获取长度
-    var upNumber = function () {
-        var target = String(window.prompt("请输入你需要操作的数字"));
-        var str = "";
-        for (let index = target.length - 1; index >= 0; index--) {
-            str += luhan(target[index]);
-    }
-    document.write(str);
 }
+隐式的在函数里var a，var b。
 
-    function luhan(n){
-        switch (n) {
-            case "1":
-                return "我"
-                break;
-            case "2":
-                return "爱"
-                break;
-            case "3":
-                return "你"
-                break;
-            case "4":
-                return "全"
-                break;
-            case "5":
-                return "家"
-                break;
-            default:
-                break;
-        }
-    }
 
     
    
-求阶乘 
-1.循环
-    var target = parseInt(window.prompt("请输入n"));
-    var jie = function (n) {
-        num = 1;
-        for (let index = 1; index < n + 1; index++) {
-             num*=index;
-        }
-        console.log(num);
-    }
-    jie(target);
-2.递归
-function jc(n) {
-        if (n == 1) {
-            return 1;
-        }
-        return n *= jc(n - 1); 
-    }
-
-求普什么数列
-1.循环
-    var target = parseInt(window.prompt("请输入n"));
-    var pei = function (n) {
-        if (n < 0) {
-            console.log("输入错误")
-        } else if( n > 0 && n < 3){
-            console.log(1);
-        } else{
-            var first = 1;
-            var second = 1;
-            var third = 0;
-            for (let index = 0; index < n - 2; index++) {
-                third = first + second;
-                first = second;
-                second = third;
-            }
-            console.log(third);
-        }
-    }
-    pei(target);
-
-2.递归
-function pu(n) {
-        if (n < 0) {
-            return "error";
-        }else if (n < 3) {
-            return 1;
-        }else {
-            return pu(n - 1) + pu(n - 2);
-        }
-    }
