@@ -6,6 +6,7 @@ var num = (function (a,b,c){
 }(1,2,3));
 
 (function(){}())    W3C建议第一种
+
 (function(){})()
 ！！！原理就是()把函数声明转化为了表达式！！！
 
