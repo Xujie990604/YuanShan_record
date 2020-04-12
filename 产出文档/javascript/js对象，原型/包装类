@@ -8,7 +8,7 @@ new Number(123); 叫做数字对象
 var num = new Number(123)
 var str = new String("abcd")
 var bol = new Boolean()
-undefined 和 null 不能拥有属性
+undefined 和 null 不能拥有属性，因为他们没有包装类。
 
 在原始值直接进行属性的赋值时。会有一个隐式的转换过程(包装类)。让原始值能够进行属性的赋值。
 虽然不会报错，但是系统会删除赋值语句(全当这个语句没有存在过，不会对数据产生影响)。
