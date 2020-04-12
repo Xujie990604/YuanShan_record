@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var value = 'window';
+        var obj = {
+            value: 'obj'
+        }
+
+        function show(name, age) {
+            console.log(this.value);
+            return {
+                name: name,
+                age: age
+            }
+        }
+
+        var result = show.call(obj, 'xujie', 22);
+
+        Function.prototype.newCall = function () {
+            //数据验证，要是传进来的是null，this指向window
+            var ctx = arguments[0] || window;
+            //把函数体赋值给对象当做一个属性，事后在删除。
+            ctx.fn = this;
+            //新建一个数组用来承载参数，从arguments[1]开始。
+            var args = [];
+            for (var i = 1; i < arguments.length; i++) {
+                args.push('arguments['+ i +']');
+            }
+            //args = ['argument[1]','argument[2]'];
+            //args.join(',') = "arguments[1],arguments[2]"
+            //eval能够把字符串内的东西当做代码执行，并且把执行结果返回
+            var result = eval('ctx.fn(' + args.join(',') + ')');
+            //删除函数体
+            delete ctx.fn;
+            return result;
+        }
+        var res = show.newCall(obj, 'xujie', 22);
+
+        //apply的重写
+        Function.prototype.newApply = function (ctx, arr) {
+            var ctx = ctx || window;
+            ctx.fn = this;
+            if (!arr) {
+                var result = ctx.fn();
+                delete ctx.fn;
+                return result;
+            } else {
+                var args = [];
+                for (var i = 0; i < arr.length; i++) {
+                    args.push('arr[' + i + ']');
+                    var result = eval('ctx.fn(' + args.join(',') + ')');
+                    delete ctx.fn;
+                    return result;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
