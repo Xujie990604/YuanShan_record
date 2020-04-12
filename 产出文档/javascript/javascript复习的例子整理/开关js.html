@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="xujie"></div>
+    <script type="text/javascript">
+        var div = document.getElementsByTagName('div')[0];
+        div.style.width = "100px";
+        div.style.height = "100px";
+        div.style.backgroundColor = "red";
+
+        var num = 0;
+        div.onclick = function () {
+            num++;
+            if (num % 2 == 1) {
+                div.style.backgroundColor = "green";
+            } else {
+                div.style.backgroundColor = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>
