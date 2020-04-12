@@ -5,5 +5,5 @@
 
 caller方法 函数在哪个环境中被调用
 
-arguments.callee()调用函数引用自身
+arguments.callee()调用函数引用自身，在那个函数环境里就是引用哪个函数。
 
