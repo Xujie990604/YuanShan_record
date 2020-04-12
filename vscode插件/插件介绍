@@ -1,0 +1,39 @@
+Auto Complete Tag 自动闭合与更新相应的标签
+
+Beautify 自动化代码对齐显示  右键格式化
+Prettier Code formatter 代码格式化工具 shift+alt+f    js 和 css
+
+Bracket Pair Colorizer 为代码中的括号们添上一抹亮色
+Rainbow Brackets  彩虹括号(好像没起作用)
+
+Chinese 汉化插件
+
+Code Runner 代码一键运行
+
+Code Spell Checker 代码拼写检查，错误代码底下会有波浪线
+
+Community Material Theme 颜色主题
+Material Theme 颜色主题插件
+Material Theme Iocns 文件图标插件(好像没有起作用)
+vscode-Iocns 文件图标美化插件
+
+indent-rainbow 代码缩进空格不标准爆红
+
+Live Server 搭建简易服务器运行代码
+
+open in browser 在浏览器打开HTML文件
+view in browser 浏览器预览HTML文件(好像没有起作用)
+
+
+Vetur 编写vue代码用的插件
+
+
+
+Markdown All in One    markdown 编写插件 在所有拓展插件中，这个插件基础功能最全，快捷键多，方便使用。
+
+Markdown PDF  Markdown   文件PDF样式导出
+
+Markdown Preview Enhanced   code自带的暗色主题我廷喜欢的，很适合写代码，但是看文档和写文档有点不好看。所以这款是增强显示的。
+
+Markdownlint   Markdown文件语法规范提示 
+
