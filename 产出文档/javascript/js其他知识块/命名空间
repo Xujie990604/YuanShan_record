@@ -15,7 +15,7 @@ for(var prop in obj) {
     obj.prop;会出现错误  
     因为前面说过访问属性时，会有一个隐式的转换过程
     obj.prop ----->   obj['prop'] 所以会把prop当做一个具体的字符串来看。
-    但是对象的枚举中不能用这种形式，因为prop本身就是字符串了。验证过了。所以用obj.[prop]
+    但是对象的枚举中不能用这种形式，因为prop本身就是字符串了。验证过了。所以用obj[prop]
     这种方法会把原型中的属性也打印出来。
 }
 
@@ -28,9 +28,10 @@ in操作符 用于判断这个属性能不能在这个对象上调用(无论是�
 
 区别数组和对象的三种方法
     1.用constructor      []的原型里构造函数是Array
-    2.用instanceof       {}的原型里的构造函数是Object
+                          {}的原型里的构造函数是Object
+    2.用instanceof
     3.用Object.prototype.toString.call([])    [object Array]
-    用Object.prototype.toString.call([])   [object Object]
+    用Object.prototype.toString.call({})   [object Object]
 
 
 
