@@ -1,3 +1,11 @@
+1、找到 html 的方法：如 document.getElementsByTagName(‘div’)就能把所有的 div都选出来。如果想拿到第一个 div，
+写成 document.getElementsByTagName(‘div’) 后面就要加一个[0];就可以实现了
+2、div.style 选出来代表行间样式，选出来的就是 dom 对象
+3、js 不能写-，只能用小驼峰方法写。如 background-color 写成 backgroundColor
+
+有 dom 操作以后就变成动态交互可以操作的了（你动一下，他给你一个反应）
+div.onclick 是加一个交互效果的事件监听
+
 document代表的是整个文档。比html标签的范围要大。
 
 dom取出来得基本都是类数组
@@ -6,7 +14,7 @@ DOM选择器
 
 byClassName不常用。ie9以上才可以用。就算是只有一个。取出来的也是类数组。
 
-byName对于表单元素，img , iframe才有用，几乎不用
+对于表单元素，img , iframe才有用，几乎不用byName
 
 byId取出来的是一个对象。少用id会被改变，多用class。
 
@@ -20,14 +28,14 @@ ie7及以下支持。主要是不是实时的。选择的 是副本
     parentNode   父节点
     childNodes    子节点们
     firstNode 第一个子节点
-    lastNode  最后一个子节点
+    lastNode  最后一个子节点  
     nextSibling  下一个兄弟节点
     previousSibling 前一个兄弟节点
 
-基于元素节点树的遍历
+基于元素节点树的遍历(除了children除外，全部在ie9及以下不兼容)
     parentElement 返回当前元素的父元素节点
     children 只返回当前元素的子节点
-    node.childElementCount ===node.children.length 当前元素节点的子节点个数
+    node.childElementCount === node.children.length 当前元素节点的子节点个数
     firstElementChild  返回的是第一个元素节点
     lastElementChild 返回的是最后一个元素节点
     nextElementSibling 返回下一个兄弟元素节点
@@ -50,7 +58,6 @@ ie7及以下支持。主要是不是实时的。选择的 是副本
             document    9
             DocumentFragment    11
 
-    attributes
-    Element节点的属性集合
+    attributes   Element节点的属性(自身的属性例如class和id)集合
 
 Node.hasChildNodes()节点是否拥有子节点
