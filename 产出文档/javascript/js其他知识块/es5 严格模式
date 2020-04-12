@@ -1,5 +1,8 @@
-"use strict";严格模式启动 
-可以全局启动也可以函数内部局部启动
+"use strict" ;
+不再兼容 es3 的一些不规则语法。使用全新的 es5 规范。两种用法： 
+1、全局严格模式
+2、局部函数内严格模式（推荐）
+就是一行字符串，不会对不兼容严格模式的浏览器产生影响。
 
 witch(obj){
     改变作用域链的最顶端(将obj作为此代码块的作用域最顶端，通常配合命名空间使用)
@@ -9,6 +12,11 @@ arguments.callee()
 function.caller()      //这两个es5严格模式禁用
 
 变量赋值前必须声明  
+var a = b = 3;
+会报错，b is undefined
+
+a = 3;
+会报错,a is undefined  
 
 局部的this必须被赋值  在es5的严格模式下，预编译下的this不会指向windows。但是全局的this还是指向window
 
