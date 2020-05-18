@@ -8,7 +8,6 @@ Domtree + cssTree = randerTree
 
 按照randerTree去渲染页面
 
-reflow 重排  dom节点的删除，添加。
-            dom节点的宽高变化
-
-repaint 重绘 
+randerTree 触发重排（reflow）的情况：dom 节点的删除，添加，dom 节点的宽高变
+化，位置变化，display none ==> block，offsetWidth，offsetLeft 
+repaint 重绘：效率也比较低，效率影响较小。触发情况：改颜色，图片
