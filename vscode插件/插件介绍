@@ -26,6 +26,7 @@ view in browser 浏览器预览HTML文件(好像没有起作用)
 
 
 Vetur 编写vue代码用的插件
+Vue.js with TypeScript Snippets for VSCode  VS Code的此扩展添加了一些片段，以将Vue与TypeScript用作Composition API，标准API并基于类样式以及HTML。
 
 
 
@@ -36,4 +37,6 @@ Markdown PDF  Markdown   文件PDF样式导出
 Markdown Preview Enhanced   code自带的暗色主题我廷喜欢的，很适合写代码，但是看文档和写文档有点不好看。所以这款是增强显示的。
 
 Markdownlint   Markdown文件语法规范提示 
+
+JavaScript (ES6) code snippets 更好的识别Es6语法
 
