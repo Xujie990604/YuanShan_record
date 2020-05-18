@@ -1,0 +1,10 @@
+元素的BFC(块级格式上下文)特性： 
+    如何触发BFC：
+        float 的属性不为none；
+        overflow 的值为auto，scroll，hidden。
+        display 的值为table-call，table-caption，inline-block
+        position 的值不为relative，static。
+
+    元素的BFC特性：
+        元素BFC化后，与浮动元素做兄弟，不会与浮动元素重叠(尽管元素不重叠，但是BFC元素想要与左边元素有浮动时，
+        如果使用BFC元素的margin时，数值 = 目标间隔 + 浮动元素宽度)
