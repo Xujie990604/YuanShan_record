@@ -6,80 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .wrapper {
-            perspective: 1000px;
-        }
-
-        .card {
-            margin: 100px auto;
-            width: 200px;
-            position: relative;
-        }
-
-        .inner-card {
-            width: 200px;
-            border-radius: 4px;
-            height: 150px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.4s ease;
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .card.show .inner-card {
-            transform: rotateX(180deg);
-        }
-
-        .inner-card-front,
-        .inner-card-back {
-            position: absolute;
-            top: 0;
-            left: 0;
-            backface-visibility: hidden;
-            width: 200px;
-            height: 150px;
-            position: absolute;
-            background-color: #fff;
-        }
-
-        .inner-card-front  {
-            z-index: 2;
-            transform: rotateX(0);
-        }
-
-        .inner-card-back {
-            transform: rotateX(180deg);
-        }
     </style>
 </head>
 
 <body>
-    <div class="wrapper" id="wrapper">
-        <div class="card" id="card">
-            <div class="inner-card" id="inner-card">
-                <div class="inner-card-front" id="inner-card-front">
-                    <p>什么是javascript</p>
-                </div>
-                <div class="inner-card-back" id="inner-card-back">
-                    <p>javascript是一个轻量级语言</p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
     
     <script>
-        const card = document.getElementById("card");
+        
+        function add() {
 
-
-        card.addEventListener('click',() => {
-            card.classList.toggle("show");
-        })
+            const a = "";
+            const b = 'xujie';
+            return (a || b);
+        }
     </script>
 </body>
 
