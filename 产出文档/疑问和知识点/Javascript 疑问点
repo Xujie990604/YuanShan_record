@@ -15,7 +15,6 @@ push: ƒ push()
 splice: ƒ splice()
 __proto__: Object
 
-
 fontawesome字体图标引入
 控制台的全部功能
 
@@ -28,11 +27,6 @@ fontawesome字体图标引入
 html5 音频和视频一起学习
 
 
-ajax
-
-箭头函数
-
-html的表单事件的change和input，submit事件
 
 
 
