@@ -27,3 +27,5 @@
 * JSON.parse() 方法用来解析JSON字符串，构造由字符串描述的JavaScript值或对象。
 
 * toFixed(number)计算结果保留number位的小数。
+
+* Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
