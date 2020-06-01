@@ -23,7 +23,7 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 * 如果使用了vuex提供的方法，就可以直接调用对应的方法，或者数据
 
   ```javascript
-  import { , mapActions } from "vuex";
+  import { mapActions } from "vuex";
   mapActions(["fetchTodos"]),
   created() {
     this.fetchTodos();
@@ -93,3 +93,5 @@ Vue.component('base-checkbox', {
 * 用a来给router-link书写样式
 * 只要修改了vue.config.js就要重启项目
 * 切换路由并不会刷新页面。
+* this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
+* .prevent()拦截默认事件
