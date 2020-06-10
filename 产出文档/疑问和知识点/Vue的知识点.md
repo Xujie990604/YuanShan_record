@@ -39,6 +39,7 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 ## 父子组件传值
 
 * 如果子组件声明了，父组件却没有传值过来的话，值为undefined
+* 如果父组件给子组件传递的是引用类型数据的话，对象或者数组。可以不用注册事件，因为传递的是地址
 
 ## v-model的实现原理
 
@@ -87,6 +88,16 @@ Vue.component('base-checkbox', {
 <base-checkbox v-model="lovingVue"></base-checkbox>
 <!-- 这里的 lovingVue 的值将会传入这个名为 checked 的 prop。同时当 <base-checkbox> 触发一个 change 事件并附带一个新的值的时候，这个 lovingVue 的 property 将会被更新。 -->
 ```
+
+## this指向
+
+
+
+## computed 计算属性
+
+* 减少模板中表达式的使用
+* 当计算属性在模板中使用，并且计算属性的依赖值发现改变的时候就会触发他的更改(调用的是get函数)。如果不发生变化，使用的就是缓存的属性值。
+* 如果计算属性直接被赋值的话，就会调用该属性的set函数，get和set函数不一定一起触发。只有符合条件才能被触发。
 
 ## 其他知识点
 
