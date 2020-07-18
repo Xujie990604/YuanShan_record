@@ -1,6 +1,6 @@
 # javascript零散知识点
 
-* Number.tiFixed(number) 四舍五入的截取number位小数
+* Number.toFixed(number) 四舍五入的截取number位小数
 * Math.abs(取数字绝对值)
 * DOM.style.width 和 dom.clientWidth 有什么区别
   
@@ -14,11 +14,11 @@
 3. classList 属性是只读的，但你可以使用 add() 和 remove() 方法修改它。
 
 * let x = arr[Math.floor(Math.random() * arr.length)]; 随机获取数组中的一个单词
+  
 * 清空数组的三种方法。
-
-1. arr.length = 0;
-2. arr.splice(0);
-3. arr = [];
+    1. arr.length = 0;
+    2. arr.splice(0);
+    3. arr = [];
 
 * splice(0)的妙用，清空数组
 * 页面刷新时自动聚焦到输入框  inputEl.focus();
