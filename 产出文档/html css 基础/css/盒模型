@@ -21,20 +21,18 @@
     
 (margin合并)
     两个具有边距的元素上下相邻，两个盒子之间的边距大小是最大的那个单个边距大小。
+    左右相邻的时候没有bug
 
 Margin collapsing(margin塌陷)
 普通文档流中父子块级元素，如果父元素没有设置上内边距或上边框，子元素的上边距就会和父元素的上边距重合，
-以他们两个中间最大上边距为准，与距离他们最近的盒子隔开。(解决方式，父级元素触发bfc,父元素设置padding-top 和 border-top)
+以他们两个中间最大上边距为准，与距离他们最近的盒子隔开。
+解决方式，父级元素触发bfc,父元素设置padding-top 和 border-top
 
 body有个默认的padding 8px
 
 
 块盒的所有属性都受到尊重， 内联盒则不行(必须 display:inline-block)
 
-表单元素的重置
-box-sizing: border-box;
-padding: 0;
-margin: 0;
 
 
 以margin为例，padding同理
