@@ -28,10 +28,15 @@
 * 不利于SEO
 * 无法审查元素，不利于调试
 
-* css变量的使用。
+## css变量的使用
+
 :root {
     --primary-color:#5fbaa7;
 }
 h1 {
     color: var(--primary-color);
 }
+
+## reset.css
+
+* 为什么不推荐使用通配符然后，margin为0，padding为0，因为通配符选择器选择所有的元素，当网站的元素太多时，会妨碍执行效率
