@@ -95,3 +95,9 @@ ctx.fillText("Hello world", 10, 50);
 ## 动画
 
 ### requestAnimationFrame(callback) 在浏览器下次重绘之前调用指定的回调函数更新动画
+
+## canvas技术得评判
+
+* 尽管技术很是先进但是html5的canvas和flash一样，都不具备可访问性。
+* 不能够滥用canvas没合理的使用它。
+* 只有在基于用户操作交互的时候，使用canvas的优势才会凸显出来。
