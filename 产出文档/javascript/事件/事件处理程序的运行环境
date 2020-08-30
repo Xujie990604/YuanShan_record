@@ -1,8 +1,0 @@
-ele.onXXX = function(){}
-程序的this指向dom元素本身
-
-obj.addEventListener("type",function,false)
-程序的this指向dom元素本身
-
-obj.attachEvent('on+type',function)
-程序this指向window
