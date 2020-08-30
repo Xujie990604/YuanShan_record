@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- xujie -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片库</title>
+    <style>
+        #father {
+            width: 100%;
+            height: 200px;
+            border: solid red 1px;
+            padding: 50px;
+            position: relative;
+        }
+
+        #son {
+            width: 200px;
+            height: 100px;
+            border: solid black 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="grand">
+        <div id="father">
+            <div id="son">Son</div>
+        </div>
+    </div>
+
+
+    <script>
+        var parent = document.getElementById("grand");
+        var father = document.getElementById("father");
+        var son = document.getElementById("son");
+
+
+        parent.addEventListener('click', function () {
+            console.log("parent捕获")
+        }, true);
+
+        parent.addEventListener('click', function () {
+            console.log("parent冒泡");
+        }, false);
+
+        father.addEventListener('click', function () {
+            console.log("father捕获")
+            event.stopPropagation();
+        }, true);
+
+        father.addEventListener('click', function () {
+            console.log("father冒泡")
+        }, false);
+
+        son.addEventListener('click', function () {
+            console.log("son捕获")
+        }, true);
+
+        son.addEventListener('click', function () {
+            console.log("son冒泡")
+        }, false);
+    </script>
+</body>
+
+</html>
+<!-- 徐姐姐 -->
