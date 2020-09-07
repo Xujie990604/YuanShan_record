@@ -19,7 +19,6 @@
 * 使用innerHTML属性删除带有事件处理程序和js对象的DOM后，事件处理程序和js对象与DOM的引用，并没有断，会造成内存泄漏。、
 * 因此使用innerHTML，outerHTML和insertAdjacentHTML()方法时，最好手动删除事件处理程序和js对象的引用。
 * 使用innerHTML也会需要性能，尽量集中使用innerHTMl
-* ？？？ 以前的方法会吗？parent.removeChild()
 
 ## 动态创建标记
 
