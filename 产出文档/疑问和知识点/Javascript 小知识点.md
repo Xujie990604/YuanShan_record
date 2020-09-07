@@ -29,3 +29,5 @@
 * toFixed(number)计算结果保留number位的小数。
 
 * Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
+
+* 使用Array.prototype.slice.call(argument,0)可以把arguments对象转化为数组，也可以把NodeList对象转换为数组。
