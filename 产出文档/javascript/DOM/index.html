@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- xujie -->
 <html lang="en">
 
 <head>
@@ -8,7 +7,7 @@
     <title>图片库</title>
     <style>
         #father {
-            width: 100%;
+            width: 20%;
             height: 200px;
             border: solid red 1px;
             padding: 50px;
@@ -25,9 +24,8 @@
 
 <body>
     <div id="grand">
-        <div id="father">
-            <div id="son">Son</div>
-        </div>
+        <input id="father">
+        </input>
     </div>
 
 
@@ -36,33 +34,34 @@
         var father = document.getElementById("father");
         var son = document.getElementById("son");
 
+father.addEventListener("focusin",function() {
+    console.log("1");
+},false)
+        // parent.addEventListener('click', function () {
+        //     console.log("parent捕获")
+        // }, true);
 
-        parent.addEventListener('click', function () {
-            console.log("parent捕获")
-        }, true);
+        // parent.addEventListener('click', function () {
+        //     console.log("parent冒泡");
+        // }, false);
 
-        parent.addEventListener('click', function () {
-            console.log("parent冒泡");
-        }, false);
+        // father.addEventListener('click', function () {
+        //     console.log("father捕获")
+        //     event.stopPropagation();
+        // }, true);
 
-        father.addEventListener('click', function () {
-            console.log("father捕获")
-            event.stopPropagation();
-        }, true);
+        // father.addEventListener('click', function () {
+        //     console.log("father冒泡")
+        // }, false);
 
-        father.addEventListener('click', function () {
-            console.log("father冒泡")
-        }, false);
+        // son.addEventListener('click', function () {
+        //     console.log("son捕获")
+        // }, true);
 
-        son.addEventListener('click', function () {
-            console.log("son捕获")
-        }, true);
-
-        son.addEventListener('click', function () {
-            console.log("son冒泡")
-        }, false);
+        // son.addEventListener('click', function () {
+        //     console.log("son冒泡")
+        // }, false);
     </script>
 </body>
 
 </html>
-<!-- 徐姐姐 -->
