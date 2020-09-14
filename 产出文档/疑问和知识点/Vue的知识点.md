@@ -36,73 +36,13 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 
 * active-class属性用于给路由中给被选中的元素添加样式表
 
-## 父子组件传值
-
-* 如果子组件声明了，父组件却没有传值过来的话，值为undefined
-* 如果父组件给子组件传递的是引用类型数据的话，对象或者数组。可以不用注册事件，因为传递的是地址
-
-## v-model的实现原理
-
-```javascript
-Vue.component('custom-input', {
-  props: ['value'],
-  template: `
-    <input
-    // 父组件并没有给传value的值
-      v-bind:value="value"
-      // 是不是调动组件的地方会自动触发注册的input事件
-      v-on:input="$emit('input', $event.target.value)"
-    >
-  `
-})
-
-// 组件调用的地方
-<custom-input v-model="searchText"></custom-input>
-```
-
-## model模块
-
-* 一个组件上的v-model会默认利用名为value的prop和名为input的事件，但是像单选框，复选框类型的输入控件会不同，所以引用model模块来规范
-* v-model的值会传入名为value的prop值内，并且每触发一次input事件，v-model绑定的值都会被更新。
-
-```javascript
-Vue.component('base-checkbox', {
-  model: {
-    <!-- 使用model模块将默认的value指定为checked，input事件指定为change事件 -->
-    prop: 'checked',
-    event: 'change'
-  },
-  props: {
-    <!-- checked必须要在 props中声明 -->
-    checked: Boolean
-  },
-  template: `
-    <input
-      type="checkbox"
-      v-bind:checked="checked"
-      <!-- $event.target.checked是checked不是value -->
-      v-on:change="$emit('change', $event.target.checked)"
-    >
-  `
-})
-<base-checkbox v-model="lovingVue"></base-checkbox>
-<!-- 这里的 lovingVue 的值将会传入这个名为 checked 的 prop。同时当 <base-checkbox> 触发一个 change 事件并附带一个新的值的时候，这个 lovingVue 的 property 将会被更新。 -->
-```
-
-## this指向
-
-
-
-## computed 计算属性
-
-* 减少模板中表达式的使用
-* 当计算属性在模板中使用，并且计算属性的依赖值发现改变的时候就会触发他的更改(调用的是get函数)。如果不发生变化，使用的就是缓存的属性值。
-* 如果计算属性直接被赋值的话，就会调用该属性的set函数，get和set函数不一定一起触发。只有符合条件才能被触发。
-
 ## 其他知识点
 
 * 用a来给router-link书写样式
 * 只要修改了vue.config.js就要重启项目
 * 切换路由并不会刷新页面。
 * this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
-* .prevent()拦截默认事件
+* Vue绑定事件时加括号和不加括号 不加括号可以使用event访问事件对象，加了括号就必须传参数($event),加不加括号好像是有区别的好像是默认应该要加括号，不过能省略，但是需要使用函数的返回值的时候就必须要加括号(比如动态绑定class使用对象的时候，就可以使用一个函数的返回值).
+* Vue 里面的数据方法都是在一个Vue的实例里面定义的，因此需要使用数据和方法时候就直接使用this，代指当前对象(Vue)，可是本来在method里面调用的函数，使用this时，this应该是指代的method对象。这是由于Vue框架使用了代理(proxy)。
+* 语法糖：简写
+* 遍历的时候如果有很多地方不是直接使用遍历的数据，那么推荐一个一个列出来(图书购物车实例的小案例)
