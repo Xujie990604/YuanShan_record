@@ -1,46 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      .son {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: black;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
+      .father {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        padding: 200px;
+        /* border: 20px solid red; */
+      }
 
-        .father {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background-color: red;
-            /* opacity: 0.3; */
-            margin: 20px;
-            /* z-index: 2; */
-        }
-
-        .son {
-            position: absolute;
-            left: -20px;
-            top: -20px;
-            bottom: -20px;
-            right: -20px;
-            background-color: black;
-            color: white;
-            z-index: -1;
-        }
-
-
-
+      
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="father">
-        123
-        <div class="son">1231111111111111111111</div>
+      <div class="son">123</div>
     </div>
-    
-</body>
+  </body>
 </html>
