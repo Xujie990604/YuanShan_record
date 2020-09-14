@@ -13,7 +13,7 @@ v-bind:class="{ active: isActive, 'text-danger': hasError }"
 
 ```javascript
 <div v-bind:class="classObject"></div>
-设置可以把classObject设定为一个返回值为对象的计算属性，功能更加强大
+设置可以把classObject设定为一个返回值为对象的计算属性，功能更加强大(可以使用计算属性或者使用方法的返回值)
 data: {
   classObject: {
     active: true,
@@ -22,7 +22,7 @@ data: {
 }
 ```
 
-## 数组语法（class）
+## 数组语法（class）很少使用这种
 
 ```javascript
 <div v-bind:class="[activeClass, errorClass]"></div>
@@ -58,6 +58,8 @@ data: {
 ```javascript
 <div v-bind:style="[baseStyles, overridingStyles]"></div>
 ```
+
+* 然后在把baseStyles设置成一个对象，里面存储着键值对。
 
 ## 自动添加前缀
 
