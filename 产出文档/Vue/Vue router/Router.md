@@ -2,8 +2,8 @@
 
 ## 其他知识点
 
-* 如果使用模块化的编程，要调用Vue.use(VueRouter)
 * 可以通过this.$router和router来访问路由，只不过后者需要在每一个需要路由的组件里导入路由。
+* hash的URL很是不好看，不像是真正的URL，因此需要在Router实例中配置一下mode：history
 
 ## 起步
 
@@ -44,7 +44,7 @@
 * router.push({name:'home',params:{userId:"123"}})
 * 在有path参数的时候，不会处理params参数
 * router.replace()不会向history里面添加记录
-* router(n)在history记录中前几或者后退几步
+* go(n)在history记录中前几或者后退几步
 
 ## 命名路由
 
