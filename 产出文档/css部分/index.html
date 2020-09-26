@@ -13,10 +13,14 @@
       
     <script>
 
-      const aaa = { 
-        a:function(){
-          console.log(this);
-        }
+      const obj = {
+        id: 1,
+        name: 'xujie',
+        age: 18
+      }
+
+      for(let key in obj) {
+        console.log(String(obj[key]).includes('xu'));
       }
     </script>
   </body>
