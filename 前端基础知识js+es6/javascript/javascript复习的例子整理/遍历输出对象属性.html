@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        var obj = {
+            name: 123,
+            age: 22,
+            sex: "male",
+            height: 180,
+            __proto__: {
+                lastName: "xujie"
+            }
+        }
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                //obj.prop 隐式的转换为 obj[prop]
+                //prop本身就是字符串，所以不用带引号obj["prop"]
+                console.log(obj[prop]);
+            }
+        }
+    </script>
+</body>
+
+</html>
