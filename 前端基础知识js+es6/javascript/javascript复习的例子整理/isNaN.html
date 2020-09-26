@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+
+    <script type="text/javascript">
+        function isNAN(num){
+            var ret = Number(num);
+            //因为NaN连自己都不等于，所以只能把结果都转换为字符串类型来比较。
+            ret += "";
+            if(ret == "NaN"){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
