@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+</head>
+
+<body>
+    <div class="demo">
+        <li value="1">1</li>
+        <li value="2">2</li>
+        <li value="3">3</li>
+    </div>
+    <script>
+        var div = document.getElementsByTagName("div")[0];
+        var child = div.children;
+        var count = child.length;
+        for (var i = 0; i < count; i++) {
+            (function (j) {
+                child[j].addEventListener('click', function () {
+                    console.log(child[j].value);
+                }, false)
+            }(i))
+        }
+    </script>
+</body>
+
+</html>
