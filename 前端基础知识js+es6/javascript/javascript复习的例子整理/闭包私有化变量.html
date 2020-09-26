@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+
+    <script type="text/javascript">
+        function Deng(){
+            var prepareWife = "xujie";
+            this.name = name;
+            this.wife = wife;
+            this.divorce = function(){
+                this.wife = prepareWife;
+            }
+            this.changePrepareWife = function(){
+                prepareWife = target
+            }
+            this.sayPrepareWife = function(){
+                console.log(prepareWife);
+            }
+        }
+        var deng = new Deng("deng","xiaoliu");
+        //deng.prepareWife只有对象设置自己的方法改变他，才能改变他。
+        //其他人无法通过.prepareWife来查看这个属性。
+        //只有自己能看到，这就是闭包的私有化变量。
+    </script>
+</body>
+
+</html>
