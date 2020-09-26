@@ -31,3 +31,10 @@
 * Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
 
 * 使用Array.prototype.slice.call(argument,0)可以把arguments对象转化为数组，也可以把NodeList对象转换为数组。
+
+* 对象的遍历
+
+1. for...in方法
+2. Object.keys(obj),把对象里面的所有key值，组成一个数组
+3. Object.values(obj),把对象里面的所有value值，组成一个数组
+4. 使用Object.getOwnPropertyNames(obj)，包含不可枚举的属性
