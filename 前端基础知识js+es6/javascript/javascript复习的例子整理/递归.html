@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+n5 = 5*4*3*2*1;
+
+<body>
+
+递归就是一个函数在它的函数体内调用它自身。执行递归函数将反复调用其自身，每调用一次就进入新的一层。递归函数必须有结束条件。
+当函数在一直递推，直到遇到墙后返回，这个墙就是结束条件。
+所以递归要有两个要素，结束条件与递推关系
+    <script type="text/javascript">
+        //阶乘
+        //fbi(5) = 5 * fbi(4)
+        //fbi(4) = 4 * fbi(3)
+        //fbi(3) = 3 * fbi(2)
+        //fbi(2) = 2 * fbi(1)
+        //fbi(1) = 1;
+        // var count = 1;
+        // var n = parseInt(window.prompt('input'));
+
+        // function fbi(n) {
+        //     if(n == 0 || n == 1){
+        //         return 1;
+        //     }else{
+        //         return "数据有误";
+        //     }
+        //     return n *fbi(n - 1);
+        // }
+        // console.log(fbi(n));
+
+        //fbi数列
+        //fbi(5) = fbi(4) + fbi(3);
+        //fbi(4) = fbi(3) + fbi(2);
+        //fbi(3) = fbi(1) + fbi(2);
+        //fbi(2) = 1;
+        //fbi(1) = 1;
+
+        // var n = parseInt(window.prompt('input'));
+        // function fbi(n) {
+        //     if(n == 1 || n == 2){
+        //         return 1;
+        //     }
+        //     return fbi(n - 1) + fbi(n - 2);
+        // }
+        // console.log(fbi(n));
+    </script>
+</body>
+
+</html>
