@@ -64,10 +64,37 @@
 
 ### vue cli3的目录结构
 
-* public相当于static，并且其中包含index.html文件
+* public相当于static(不会被变动)，并且其中包含index.html文件
+* src中的asset 存放的也是静态文件，但是(可能会变动) 比如图片
 
 ## vue cli4
 
 ### vue cli 4的一些变化
 
+* src
+
 ### vue cli 4的结构目录
+
+* node_modules：用于存放我们项目的各种依赖；
+* public：用于存放静态资源（不会变动的）；
+    public/index.html：模板文件，作用是生成项目的入口文件。
+    浏览器访问项目的时候就会默认打开的是生成好的 index.html。
+* src：是存放各种 .vue 文件的地方。
+* src/assets：用于存放着各种静态文件（可能会变动），比如图片。
+* src/components：存放公共组件（可复用），比如 header.  vue、footer.vue 等。
+* src/router/index.js：vue-router 路由文件。
+    需要引入 src/views 文件夹下的 .vue，配置 path、name、component。
+* src/store/index.js：是 vuex 的文件，主要用于项目里边的一些状态保存。
+比如 state、mutations、actions、getters、modules。
+* src/views，存放页面组件（不可复用），比如 Login.vue，Home.vue。
+* src/App.vue：App.vue 是项目的主组件；
+* App.vue 中使用 router-link 引入其他模块，所有的页面都是在 App.vue 下切换的。
+* src/main.js：入口文件，主要作用是初始化 vue 实例，同时可以在此文件中引用某些组件库或者全局挂载一些变量。
+* .gitignore：配置 git 上传想要忽略的文件格式。
+* babel.config.js：一个工具链，主要用于在当前和较旧的浏览器或环境中将 ES6 的代码转换向后兼容（低版本ES）。
+* package.json：模块基本信息项目开发所需要的模块，版本，项目名称。
+* package-lock.json：是在 npm install 时候生成的一份文件，用于记录当前状态下实际安装的各个 npm package 的具体来源和版本号。
+
+#### vue项目部署到springBoot
+
+* 打包之后，把dist目录放到springBoot项目的static目录下
