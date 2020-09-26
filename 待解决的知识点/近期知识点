@@ -6,6 +6,8 @@ Vue的虚拟DOM的原理和列表遍历时key的最佳值。
 
 debugger的使用和关闭
 
+使用一个Vue的Ui框架
+
 html的表单配合着Vue的v-model进行总结，精通css看表单部分
 然后就是qq官网的切图的css代码的重构。接着把书看完，多了解一下css3的属性，把css3和html5结课。
 
