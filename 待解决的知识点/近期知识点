@@ -4,14 +4,27 @@ js 的BOM的方法，下拉加载和上拉刷新。懒加载
 
 Vue的虚拟DOM的原理和列表遍历时key的最佳值。
 
-ES6的箭头函数书写方式和this指向
+debugger的使用和关闭
 
 html的表单配合着Vue的v-model进行总结，精通css看表单部分
+然后就是qq官网的切图的css代码的重构。接着把书看完，多了解一下css3的属性，把css3和html5结课。
 
-解构赋值
+http和跨域和cookie的学习
+他妈的什么叫做跨域,
+如何使用fetch来获取本地的数据时，必须跑在服务器上？
+URL scheme must be "http" or "https" for CORS request.
+get post的区别在http的层面上
+fetch的封装，体会一下封装和fetch使用和async await的使用
+
 
 git的使用github的使用
 
-Vue cli学完之后就按照笔记，把webpack的配置回顾一下。
 
-然后就是qq官网的切图的css代码的重构。接着把书看完，多了解一下css3的属性，把css3和html5结课。
+代码的良好格式
+
+看面经！！！！！！
+做项目！！！！！！
+
+
+
+
