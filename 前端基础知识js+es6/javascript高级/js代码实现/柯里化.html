@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function add(a, b, c, d) {
+            return a + b + c + d;
+        }
+        //固定参数的方法
+        function FixedParamasCurry(fn) {
+            //获取第一次传入的参数(arguments不是真正的数组，无法直接使用数组的方法)
+            var _arg = [].slice.call(arguments, 1);
+            return function () {
+                //将第一次获得的参数和第二次获得的参数连接
+                var newArg = _arg.concat([].slice.call(arguments, 0));
+                return fn.apply(this, newArg);
+            }
+        }
+        // var newAdd = FixedParamasCurry(add,1)
+        // console.log(newAdd(2,3,4));
+
+        //不固定参数的方法
+        function Curry(fn, length) {
+            //fn.length方法名的length是形参的个数
+            var length = length || fn.length;
+            return function () {
+                if (arguments.length < length) {
+                    //把函数和参数放在数组里传入固定参数的方法中。
+                    var combined = [fn].concat([].splice.call(arguments, 0));
+                    //递归的调用Curry函数，直到参数满足需求。
+                    return Curry(FixedParamasCurry.apply(this, combined), length - arguments.length);
+                } else {
+                    return fn.apply(this, arguments);
+                }
+            }
+        }
+        var newAdd = Curry(add);
+        console.log(newAdd(1, 2, 3, 4));
+    </script>
+</body>
+
+</html>
