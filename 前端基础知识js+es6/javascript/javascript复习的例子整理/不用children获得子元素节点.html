@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        123
+        <!-- 123 -->
+        <strong></strong>
+        <em></em>
+        <i></i>
+    </div>
+
+    <script>
+        var div = document.getElementsByTagName('div')[0];
+        // function myChildren (ele){
+        //     //尽量把属性的.操作用变量收起来。节省效率。
+        //     var len = ele.childNodes.length;
+        //     var child = ele.childNodes;
+        //     var temp = [];
+        //     for(var i = 0; i < len; i ++){
+        //         if(child[i].nodeType === 1) {
+        //             temp.push(child[i]);
+        //         }
+        //     }
+        //     return temp;
+        // }
+
+        function myChildren(ele) {
+            //尽量把属性的.操作用变量收起来。节省效率。
+            var len = ele.childNodes.length;
+            var child = ele.childNodes;
+            //返回数据采用类数组。
+            var temp = {
+                length : 0,
+                push : Array.prototype.push,
+                splice : Array.prototype.splice
+            }
+            for (var i = 0; i < len; i++) {
+                if (child[i].nodeType === 1) {
+                    temp.push(child[i]);
+                }
+            }
+            return temp;
+        }
+    </script>
+</body>
+
+</html>
