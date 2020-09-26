@@ -32,10 +32,6 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 
 * 如果没有使用vuex提供的方法就要使用this.$store.dispatch(调用action函数的时候),commit(调用mutation的时候)，getters(调用getters的时候)，state(调用state的时候，通常放在computed里面)
 
-## 路由
-
-* active-class属性用于给路由中给被选中的元素添加样式表
-
 ## 其他知识点
 
 * 用a来给router-link书写样式
@@ -46,3 +42,4 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 * Vue 里面的数据方法都是在一个Vue的实例里面定义的，因此需要使用数据和方法时候就直接使用this，代指当前对象(Vue)，可是本来在method里面调用的函数，使用this时，this应该是指代的method对象。这是由于Vue框架使用了代理(proxy)。
 * 语法糖：简写
 * 遍历的时候如果有很多地方不是直接使用遍历的数据，那么推荐一个一个列出来(图书购物车实例的小案例)
+* 今天在使用vue的路由传值的时候，死活得不到数据，重新编译进入之后才好，不是因为重新编译的问题，而是因为需要路由的跳转才能得到数据，我一直在当前界面刷新当然得不到上个页面跳转来的数据！！！！
