@@ -38,3 +38,7 @@
 2. Object.keys(obj),把对象里面的所有key值，组成一个数组
 3. Object.values(obj),把对象里面的所有value值，组成一个数组
 4. 使用Object.getOwnPropertyNames(obj)，包含不可枚举的属性
+
+* window.location.reload();强制进行页面刷新
+
+* 页面刷新时自动聚焦到输入框 text.focus();
