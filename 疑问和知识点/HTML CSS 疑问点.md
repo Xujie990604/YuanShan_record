@@ -4,10 +4,6 @@ position: sticky
 
     top: 30px;    只有top值起作用 
 
-Git上传本地已经拥有的项目，多层的文件夹树没办法上传吗？
-
-css切图的时候需要注意调试台的使用。
-
 定位的时候父子元素都设置定位，在父元素有z-index的情况下，子元素是否能在父元素的上面。(一个元素的伪元素能否在真实的元素上面)
 
 background-size:400%;   background-position: -400% 0; 渐变的背景颜色设置为400%之后，-400%是定位到哪里。
@@ -21,3 +17,13 @@ vertical-align和行盒子的基线的问题。
 css的grid网格布局以后再学习，支持度还不是很高。
 
 css中span的margin属性不太支持吗？？必须转化为block才支持吗
+
+css变量的使用。
+:root {
+    --primary-color:#5fbaa7;
+}
+h1 {
+    color: var(--primary-color);
+}
+
+lorem70自动生成70个字节的英文单词
