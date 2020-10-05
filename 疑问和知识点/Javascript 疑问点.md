@@ -16,3 +16,10 @@ call的重写方法中，eval的使用和args.push('arguments['+ i +']');为什�
 事件的类型，看高程的事件类型  p362
 
 对象不仅仅可以通过['test']的方式来调用方法，还可以在对象的内部定义方法？？？？
+
+展开运算符，user里面的每一个项是一个对象，name的内容不变，money的数值翻倍
+{
+    name : name,
+    money : money
+}
+return {...user,money : user.money * 2}
