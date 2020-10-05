@@ -1,31 +1,36 @@
-基础的http协议
-
-js 的BOM的方法，下拉加载和上拉刷新。懒加载
-
+为何使用fetch来获取本地的数据时，必须跑在服务器上？
+公网ip和内网ip。公网ip是不是分配给服务器的，手机这种普通设备没有公网ip？
+宏任务和微任务
+css动画的优化，难道使用absolute脱离文档流不能减少整个页面的重排吗？？？？
+http的缺点
+http的优化
+http报文的重要首部
+http的方法的详解，定义和使用方式
+HTTP2.0
+网络攻击xss和CSRF
+输入URl的完整过程给过一遍
 Vue的虚拟DOM的原理和列表遍历时key的最佳值。
-
+js 的BOM的方法，下拉加载和上拉刷新。懒加载
 debugger的使用和关闭
+物理像素和css像素，分辨率，失真？？？
+
+
 
 使用一个Vue的Ui框架
 
-html的表单配合着Vue的v-model进行总结，精通css看表单部分
 然后就是qq官网的切图的css代码的重构。接着把书看完，多了解一下css3的属性，把css3和html5结课。
-
-http和跨域和cookie的学习
-他妈的什么叫做跨域,
-如何使用fetch来获取本地的数据时，必须跑在服务器上？
-URL scheme must be "http" or "https" for CORS request.
-get post的区别在http的层面上
-fetch的封装，体会一下封装和fetch使用和async await的使用
-
+把所有遗留下来的css问题解决。观看淘宝首页制造的视频。
+html的表单的使用，随用随查，总结到html的表单当中，总结的时候每种样式都要留下代码。
 
 git的使用github的使用
-
 
 代码的良好格式
 
 看面经！！！！！！
 做项目！！！！！！
+
+
+使用normalize文件来初始化自己的项目，很权威
 
 
 
