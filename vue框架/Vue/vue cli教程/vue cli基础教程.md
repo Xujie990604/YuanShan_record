@@ -98,3 +98,7 @@
 #### vue项目部署到springBoot
 
 * 打包之后，把dist目录放到springBoot项目的static目录下
+
+### editorConfig
+
+* 这是对于代码风格的要求的文件，在Vue cli2之后移除了这个文件，需要手动的去添加
