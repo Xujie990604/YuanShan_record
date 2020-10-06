@@ -10,8 +10,10 @@ production或者注明NODE_ENV变量值为production时，不会自动安装msbu
 
 ## npm install 和 Vue add 的区别
 
-* Vue add 安装时(好像和创建Vue项目时选择的插件一样，自动创建目录引用，并且直接可以全局使用(可能也是添加到了Vue函数的原型上))Vue cli脚手架会自动生成目录来存放你安装的东西(例如axios)然后就可以直接在组件中用axios来使用axios方法
+* Vue add 安装时(好像和创建Vue项目时选择的插件一样，自动创建目录引用，被Vue实例引用之后就可以全局使用了)Vue cli脚手架会自动生成目录来存放你安装的东西(例如axios)然后就可以直接在组件中用axios来使用axios方法
 * npm install 安装时不会自动创建目录，不能直接全局使用 需要自己手动引入 并且需要自己手动给Vue函数的原型上设置属性才能全局引用 Vue.prototype.$axios = axios; 使用this.axios全局引用
+* router store 需要Vue.use
+* 使用npm安装axios时不需要Vue.use但是需要手动在Vue的原型上添加一个axios属性。axios使用vue add安装时，直接使用axios来使用(里面好像使用到了vue.use)
 
 ## 生产环境和开发环境
 
