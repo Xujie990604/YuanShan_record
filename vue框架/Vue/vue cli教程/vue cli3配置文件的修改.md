@@ -6,6 +6,18 @@
 
 ```js
 module.exports = {
-    ...
+   configureWebpack: {
+    //起别名
+    // 在DOM中使用别名的话，需要加上~
+        resolve: {
+            alias: {
+                'assets': '@/assets',
+                'common': '@/common',
+                'components': '@/components',
+                'network': '@/network',
+                'views': '@/views',
+            }
+        }
+    }
 }
 ```
