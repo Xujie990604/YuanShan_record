@@ -9,14 +9,12 @@ Vue.use()是安装的意思，任何插件在使用前都需要在Vue中安装�
 Vue.use()命令会内部执行install命令，用来全局注册一些组件。axios不需要注册组件，element-ui，router，需要注册组件
 vuex需不需要注册组件 Vuex需要使用Vue.use()来安装插件一下
 
-element可以使用vue add来安装安装之后会有啥效果？？？？
-router的vue add 和 npm install有啥不一样？？？？
-
-使用最新的vuecli4 的脚手架的版本，总结一下vuecli4的新功能和一些不同的东西。
-
 vuex配合着async和await的使用，async的使用用途。
 async fetchTodos({commit}) {
         const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
         // console.log(response);
         commit("setTodos",response.data)
 }
+
+vue的父子两个组价中都对一个元素进行了css的处理，系统实现处理Vue中父组件的css还是处理子组件中的css，这涉及到css的层叠覆盖问题。
+目前来看是先看子组件的再看父组件的
