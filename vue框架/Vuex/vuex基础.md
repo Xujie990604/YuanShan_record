@@ -24,6 +24,12 @@
 * getters的方法中可以通过添加getter参数的形式来使用getter中的数据(getters方法中的第一个参数默认是state，第二个参数时getters)
 * 如果getters里面需要在调用时填入参数的时候，需要在getters的函数内部返回一个函数，那么在调用getters中的属性时，实际得到的是一个函数，并且这个函数内可以指定参数
 
+## mutations
+
+* 在这个阶段进行数据的更新(唯一的途径)，在mutations里面定义的方法会自动设置第一个参数为state
+* 在mutations中必须是同步的操作，异步的操作在DevTools中跟踪不到
+* 通过mutation的方法操作数据的过程可以被Devtools跟踪
+
 ## action
 
 * 类似于mutations，代替他做一些异步的操作，在actions中引入mutations中的函数
@@ -58,12 +64,6 @@ aUpdateStu(context,payload) {
    })
 }
 ```
-
-## mutations
-
-* 在这个阶段进行数据的更新(唯一的途径)，在mutations里面定义的方法会自动设置第一个参数为state
-* 在mutations中必须是同步的操作，异步的操作在DevTools中跟踪不到
-* 通过mutation的方法操作数据的过程可以被Devtools跟踪
 
 ### 普通的提交风格
 
