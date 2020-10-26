@@ -2,10 +2,12 @@
 
 ## 元素的BFC(块级格式上下文)
 
+* 块级格式化上下文，一个独立的块级渲染区域，该区域拥有一套渲染规格来约束块级盒子的布局，且与区域外部无关。
+
 ### 如何触发BFC
 
 * float 为 left,right
-* overflow 的值为auto，scroll，hidden。
+* overflow 的值为auto，hidden。
 * display 的值为table-call，table-caption，inline-block，flex
 * position 为 absolute,fixed
 

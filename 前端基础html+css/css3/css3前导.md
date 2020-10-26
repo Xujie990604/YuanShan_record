@@ -62,7 +62,3 @@ format里面的值填写的是字体的格式，因为浏览器无法通过后�
 * 实现视口覆盖，弹出框的蒙版。
 * vw, vh视区大小相关单位只适用于非定位元素的高度相关属性上！ //zxx: 高度相关属性如 – height/min-height/max-height/line-height/padding-top/padding-bottom等。因为在定位元素上可以使用%。来实现相同的效果。
 * body使用100vh实现固定一屏，没有滚动条的效果。
-
-## 高斯模糊
-
-* 
