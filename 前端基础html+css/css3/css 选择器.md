@@ -28,7 +28,7 @@
 * .a:nth-of-type(2)   没有指定元素类型，那就自动把所有的元素类型都过一遍。每种元素类型的第二个都被选中
 * div.a：nth-of-type(2) div用来指定范围，.a用来限定结果。 div(意味着，如果div.a前面有div.b他也在范围内)的父元素下的第二个div被选中。并且必须是带有.a的类名。
 
-```
+```html
 <style>
     div.a:nth-of-type(2) { color: red; }
     </style>
@@ -43,7 +43,7 @@
 </body>
 ```
 
-```
+```html
 <style>
         * {
             padding: 0;
