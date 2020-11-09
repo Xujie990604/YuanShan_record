@@ -79,6 +79,7 @@
 
 public中的文件不会变动指的是，public中的文件会随着index.html文件一起被放到dist文件夹中，但是如果你在组件里面使用了public中的资源，资源的地址依旧会变动。(比如说轮播图的图片不能通过放到public中来实现遍历字符串数组而遍历图片的功能)
 但是你可以在index.html中引入public中的一些文件。(想要在index.html中引入一些东西的时候。必须放到public中)
+使用node的request.context('')方法来引入图片的资源地址。
 
 * src中的asset 存放的也是静态文件，但是(可能会变动) 比如图片
 
