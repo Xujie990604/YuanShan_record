@@ -34,6 +34,7 @@ export default {
           disableOnInteraction: false,
         },
         loop: true,
+        // 遇到的问题就是如果多个轮播图切换，开启了loop会出现，其他轮播图里面有第一个轮播图的图片的内容的问题。！！！ 人生第一个项目就出现bug
         speed: 1000,
         // 小圆点
         pagination: {

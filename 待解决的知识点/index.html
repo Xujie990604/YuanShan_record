@@ -6,44 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* * {
+        * {
             padding: 0;
             margin: 0;
-        } */
+        }
         
-        .a {
-            position: absolute;
-            background: rgba(255, 0, 0, 0.5);
-        }
-
-        .b {
-            background: rgba(0, 255, 0, 0.4);
-            /* font-size: 30px; */
-        }
        
     </style>
 </head>
 
 <body>
-
-   <div class="a">
-       <span>123</span>
-   </div>
-
-    <div class="b">
-        <span>456</span>
-    </div>
-    
-
-
-
 </body>
-
 <script>
 
-    let a = reg = /[1234567890][1234567890][1234567890]/g;
-    let b = '1234err567ggg89';
-    console.log(b.match(a));
+    let reg  = /(\w)\1*/g;
+    let str = 'aaaaaaaaaabbbbbbbbbbbbbbbbbccc';
+    console.log(str.replace(reg,"$1"));
    
 </script>
 
