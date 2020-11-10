@@ -7,7 +7,7 @@
 5. this永远指向一个对象(数组也可以被当做this的指向,当数组里面存的是函数的时候  ```test[0]()```)
 6. this的指向完全取决于函数调用的位置
 7. 谁.function()那么这个this就指向谁，和函数在谁内部执行没有关系。主要就是看(.),比如一个函数在另一个函数内被执行，但是没有谁.这个函数，函数的this就是执行window，不考虑作用域关联。(因为函数可以被单纯当做值来调用，在不同的环境中this执行不同)
-8. this中的(有this的时候只考虑)环境对象和(没有this的时候考虑作用域)作用域完全不是一个概念
+8. this中的环境对象和作用域完全不是一个概念
 
 ```javascript
 var foo = {
@@ -30,6 +30,83 @@ anotherBaz(); // global - because the method anotherBaz() belongs to the global 
 ## call/apply
 
 * 改变this指向
-* 默认方法的调用使用.call(obj,a,b,c) 用别人的方法实现自己的功能
+* 默认方法的调用使用.call(obj,a,b,c) 用别人的方法实现自己的功能，所有函数的调用本质上都是使用了call函数。```js obj.say() === obj.say.call(null)```
 * apply(obj,[a,b,c])的区别就是传递参数时的不同
 * call/apply的this传递null的时候就是不起作用，正常执行函数
+
+## bind
+
+```js
+    const obj = {
+      name: 'xujie123',
+      say() {
+        console.log(this.name);
+      }
+    }
+    const b = {
+     name: 'xiaohan'
+    }
+    //  使用bind生成一个新的函数，这个函数的this值永远的被绑定在了 b这个对象上
+    let newSay = obj.say.bind(b);
+    // 直接执行bind就相当于每次都执行了一个(使用call改变了this指向的)函数一样
+    newSay();
+```
+
+### bind使用call实现
+
+```js
+    const obj = {
+        name: 'xujie123',
+        say(a, b) {
+            console.log(this.name + a + b);
+       }
+    }
+    const b = {
+        name: 'xiaohan'
+    }
+    // 使用call和闭包来实现bind方法
+    let newSay = function(...arg) {
+        return obj.say.call(obj,...arg)
+    }
+    // 直接调用方法，函数的this一直指向对象b
+    newSay('hello', 'world');
+```
+
+## 对象中的this
+
+```js
+// 不是说只有函数中才有this这个概念
+// 对象里面也有this这个属性，只不过对象中的this和他外面的最接近的作用域(作用域有函数作用域和全局作用域)的this一样
+const a = {
+      a: this,
+      name: 'xujie',
+      say() {
+        console.log(this);
+      },
+      b: {
+        c: this
+      }
+    }
+
+    a.say(); // 对象a
+    console.log(this) //window
+    console.log(a.a); //window a对象的最外层的作用域是全局，所以this指向window
+    console.log(a.b.c); //window  c对象的最外层作用域也在全局，所以this也是指向window(尽管b对象定义在a对象内部，但是没有用，对象没有作用域这个概念)
+
+// b对象定义在a对象的say方法里面，因为a的say方法是通过a.say调用的
+// 所以a的say方法中的this指向的是a对象
+// 因为b对象是被定义在say()函数中的，所以b对象中的this于他外面的最接近的作用域相同(也就是say函数)，所以说b对象中的this指向a对象
+     const a = {
+     name: 'a',
+     say() {
+       const b = {
+         name: "b",
+         c: this
+       }
+       console.log(b.c);
+     }
+   }
+
+   a.say()
+
+```
