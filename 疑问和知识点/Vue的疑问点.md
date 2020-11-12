@@ -13,7 +13,6 @@ Vue中父组件和子组件谁先被创建和挂载。
 vm.nextTick()和Vue.nextTick()的区别
 
 vue中何时函数的this指向为undefined?那些在methods属性里面的函数里面的函数，this指向是undefined？？？不是window吗？
-watch的定义和用法？有截图
 $listener的使用
 
 异步函数的请求： 一个函数中包含异步的请求，异步请求的下面就是需要本次请求结束才能执行的代码。如何保证已经做完了异步的请求在执行的下面的语句
