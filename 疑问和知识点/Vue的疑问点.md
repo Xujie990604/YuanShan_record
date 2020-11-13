@@ -8,7 +8,6 @@ async fetchTodos({commit}) {
 }
 
 父组件传给子组件的是对象(传的地址)的话，子组件修改数据是否还需要在注册事件告诉父组件。
-Vue中父组件和子组件谁先被创建和挂载。
 
 vm.nextTick()和Vue.nextTick()的区别
 
