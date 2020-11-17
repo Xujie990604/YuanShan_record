@@ -3,12 +3,12 @@
 ## 其他知识点
 
 * 可以通过this.$router和router来访问路由，只不过后者需要在每一个需要路由的组件里导入路由。
-* hash的URL很是不好看，不像是真正的URL，因此需要在Router实例中配置一下mode：history
+* hash的URL很是不好看，不像是真正的URL，因此需要在Router实例中配置一下mode：'history'
 
 ## 起步
 
 * 通过注入路由器，我们可以在任何组件中使用this.$router来访问路由器，通过this.$route来访问当前路由。
-* 当router-link的路由匹配成功时，将自动设置class属性值，.router-link-active
+* 当router-link的路由匹配成功时，将自动设置class属性值,router-link-active
 
 ## 动态路由匹配
 

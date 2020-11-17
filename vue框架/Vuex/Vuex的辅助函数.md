@@ -4,7 +4,7 @@
 
 ```js
 // 从vuex导入辅助函数
-import { mapSate,mapGetters,mapMutations,mapActions } from 'vuex
+import { mapSate, mapGetters, mapMutations, mapActions } from 'vuex
 // computed: {
     ...mapGetters(['name'])
     ...mapGetters({
