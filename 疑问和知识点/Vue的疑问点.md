@@ -7,12 +7,12 @@ async fetchTodos({commit}) {
         commit("setTlogodos",response.data)
 }
 
-vm.nextTick()和Vue.nextTick()的区别
+Vue的nextTick的原理，是事件循环的宏任务。
 
-$listener的使用
+$attrs和$listener的使用
 
-遍历数组的时候key值怎么写效率最高，遍历对象的话是不是key填写item.id最好？？？虚拟DOM的工作机制原理弄明白。
+key使用index的话会有隐患，在diff的层面来理解key值。在不同的场景下使用key和不使用key会有不同的效率。
 
 vueRouter的base属性作用
 
-Vue在二级路由底下刷新的时候。index.html中引入的文件会在前面自动加上一层路由，导致请求失败
+Vue在二级路由底下刷新的时候。index.html中引入的文件会在前面自动加上一层路由，导致请求失败。
