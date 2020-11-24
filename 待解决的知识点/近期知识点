@@ -1,32 +1,46 @@
-
-http的缺点
-http的优化
-http报文的重要首部
-http的方法的详解，定义和使用方式
-HTTP2.0
-http的知识点，http的状态码
-
-输入URl的完整过程给过一遍
-跨域的解决方案详细具体的
-
-debugger的使用和关闭
-
-z-index的层叠问题。flex中的z-index的使用。
 浮动的负边距，直接向上移动一行(双飞翼布局)
 
-vueCLi4的配置文件的书写格式。
 Vue的生命周期的destroy做什么
-Vue的路由总结和复习一遍。
-vuex的笔记看一遍
-使用一个Vue的Ui框架，把分类的那个部分实现
 
 ES6的class的使用。
 原型和原型链
 js 的BOM的方法，下拉加载和上拉刷新。懒加载
 
+git和github和邮箱的关系。到底是怎么一回事。SSH的原理弄清楚，顺便熟悉一下git的指令。
+如何在本地创建一个文件夹然后和github关联起来。
+查看当前电脑的git配置的是哪个。
+没有两个钥匙对的话，也能在电脑上往两个仓库push吗。公司的有权限
+把自己的电脑带到公司去试试。
+笔记本不能使用git访问github
 
+今天回去之后，把ele的项目和github关联起来。然后熟悉git的命令
 
+html的表单的使用，随用随查，总结到html的表单当中，总结的时候每种样式都要留下代码
 
+响应式布局的方法总结。 rem 媒体查询 flex布局
+物理像素和css像素和分辨率。
+
+异步，事件循环，微任务和宏任务 nextTick原理
+
+谷歌控制台的使用。
+
+axios使用的是http2协议吗？如何开启http2协议
+
+Ts的object和Object的区别。
+
+try catch块的使用
+
+Vue的github博客阅读
+
+better-scroll的使用,二次封装这个插件进行完善饿了么项目。
+
+vuecli中的配置信息，在谷歌的收藏夹里面有。
+如何使用postcss和typescript在Vuecli中。
+
+vuex中的promise和actions的联动。
+vuex中的函数中的参数都是什么。
+
+跨域的解决方案详细具体的，实现一遍。
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
