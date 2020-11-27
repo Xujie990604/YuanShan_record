@@ -12,31 +12,67 @@
             margin: 0;
         }
 
-        .img {
+        .aa {
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            z-index: 999;
+            height: 50px;
+            width: 50px;
+            background-color: black;
+        }
+
+        .a {
+            position: relative;
+            /* z-index: 998; */
             width: 800px;
-            height: 2400px;
+            height: 800px;
+            background-color: yellow;
         }
 
-        img {
-            /* width: 200px;
+        .b {
+            position: absolute;
+            z-index: 1;
+            width: 600px;
+            height: 600px;
+            background-color: green;
+        }
+
+        .c {
+            position: relative;
+            z-index: 1000;
+            width: 400px;
             height: 400px;
-            object-fit: ; */
-            /* max-width: 100%; */
+            background-color: blue;
         }
 
-
-        
+        .d {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            transform: scale(0.9);
+        }
+        .aaa {
+            height: 20000px;
+        }
+       
     </style>
 </head>
 
 <body>
-    <div class="img">
-        <img src="./img/keys.png" alt="">
+    <div class="aa"></div>
+    <div class="a">
+        <div class="b">
+            <div class="c">
+                <div class="d"></div>
+            </div>
+        </div>
     </div>
-
+    <div class="aaa"></div>
+    
 </body>
 <script>
-   
+    
 </script>
 
 </html>
