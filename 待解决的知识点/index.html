@@ -13,49 +13,75 @@
             margin: 0;
         }
 
-        .wrapper {
-            width: 1000px;
+        .outer {
+            height: 400px;
+            width: 400px;
+            background-color: blue;
+        }
+        .a {
+            height: 800px;
+            width: 800px;
+            background-color: yellow;
+        }
+
+        .inner {
             height: 200px;
-            overflow-x: scroll;
-        }
-
-        ul {
-            display: flex;
-        }
-
-        li {
-            flex: 0 0 200px;
             width: 200px;
-            height: 200px;
-            border: 1px solid red;
+            background-color: red;
         }
-
-        
     </style>
 </head>
 
 <body>
-    <div class="wrapper">
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-        </ul>
+    <div class="a">
+<div class="outer">
+    <div class="inner"></div>
+</div>
     </div>
+    
 
 </body>
 
 <script>
+    const inner = document.getElementsByClassName("inner")[0]
+    const outer = document.getElementsByClassName("outer")[0]
+    const a = document.getElementsByClassName("a")[0]
 
-   let a = [2, 4, 6, 23, 2, 9, 56]
-   let b = a.sort((a, b) => {
-       a - b
-   })
+    // inner.addEventListener('click', function () {
+    // console.log("inner 捕获");
+    // }, true)
+
+    // outer.addEventListener('click', function () {
+    // console.log("outer 捕获");
+    // }, true)
+
+    // a.addEventListener('click', function () {
+    // console.log("a 捕获");
+    // }, true)
+
+    // window.addEventListener('click', function () {
+    // console.log("window 捕获");
+    // }, true)
+
+    inner.addEventListener('click', function () {
+        console.log("inner");
+    }, false)
+
+    outer.addEventListener('click', function () {
+        event.stopPropagation()
+        console.log("outer");
+    }, false)
+
+    a.addEventListener('click', function () {
+    console.log("a");
+    }, false)
+
+    window.addEventListener('click', function () {
+        console.log("window");
+    }, false)
+
+
+     
 </script>
 
 </html>
