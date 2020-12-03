@@ -12,74 +12,15 @@
             padding: 0;
             margin: 0;
         }
-
-        .outer {
-            height: 400px;
-            width: 400px;
-            background-color: blue;
-        }
-        .a {
-            height: 800px;
-            width: 800px;
-            background-color: yellow;
-        }
-
-        .inner {
-            height: 200px;
-            width: 200px;
-            background-color: red;
-        }
     </style>
 </head>
 
 <body>
-    <div class="a">
-<div class="outer">
-    <div class="inner"></div>
-</div>
-    </div>
-    
+    <button onclick="console.log(this)">111111111</button>
 
 </body>
 
 <script>
-    const inner = document.getElementsByClassName("inner")[0]
-    const outer = document.getElementsByClassName("outer")[0]
-    const a = document.getElementsByClassName("a")[0]
-
-    // inner.addEventListener('click', function () {
-    // console.log("inner 捕获");
-    // }, true)
-
-    // outer.addEventListener('click', function () {
-    // console.log("outer 捕获");
-    // }, true)
-
-    // a.addEventListener('click', function () {
-    // console.log("a 捕获");
-    // }, true)
-
-    // window.addEventListener('click', function () {
-    // console.log("window 捕获");
-    // }, true)
-
-    inner.addEventListener('click', function () {
-        console.log("inner");
-    }, false)
-
-    outer.addEventListener('click', function () {
-        event.stopPropagation()
-        console.log("outer");
-    }, false)
-
-    a.addEventListener('click', function () {
-    console.log("a");
-    }, false)
-
-    window.addEventListener('click', function () {
-        console.log("window");
-    }, false)
-
 
      
 </script>
