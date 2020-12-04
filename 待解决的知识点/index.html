@@ -16,13 +16,27 @@
 </head>
 
 <body>
-    <button onclick="console.log(this)">111111111</button>
 
+    
 </body>
 
 <script>
+    function Xu() {
+        let counter = 0;
+        this.add = function() {
+            counter++;
+        }
+        this.getCounter = function() {
+            return counter;
+        }
+    }
+    const xujie = new Xu();
+    let a = xujie.getCounter()
+    xujie.add()
+    let b = xujie.getCounter()
 
-     
+    
 </script>
+
 
 </html>
