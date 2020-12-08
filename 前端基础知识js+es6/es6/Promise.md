@@ -41,19 +41,26 @@ new Promise((resolve, reject) => {
 
 * ```new Promise ((resolve, reject) => { resolve()}) === Promise.resolve()```
 * 会实例化一个Promise并将状态转化为resolved
-* 可以把任何值都转化为一个期约
-* 如果参数是一个期约的话， 那么外面的Promise.resolve()就相当于一个空包装 
+* 可以包装任何非期约值，包括错误对象。并将其转化为以解决的期约
+
+```js
+new Promise((resolve, reject) => {
+    resolve(new Error("xujie"))
+}) //Promise <resolved> :Error:xujie
+```
+
+* 如果参数是一个期约的话， 那么外面的Promise.resolve()就相当于一个空包装
 * 是一个幂等的方法
 
 ```js
-let p = Promise.resolve(3)
+let p = Promise.resolve(3) // Promise <pending>
 setTimeout(console.log, 0, p === Promise.resolve(p)) //true
 setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p))) //true
 ```
 
 ### Promise.reject()
 
-* 实例化一个Promise拒绝的期约， 并抛出一个错误。 (这个错误不能通过try catch捕获)
+* 实例化一个Promise拒绝的期约， 并抛出一个错误。 (这个错误不能通过try catch捕获, 只能通过)
 * Promise.reject()没有实现和Promise.resolve()一样的幂等逻辑，如果一个期约被当做参数，那么这个被传入的期约就会变成参数。
 
 ```js
@@ -100,6 +107,13 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 #### Promise.all()
 
 #### Promise.race()
+
+## 终止Promise(终止不是中断，Promise一旦被创建就没办法被中断)
+
+### 终止Promise执行器函数
+
+### 终止Promise的链式调用
+
 
 
 ```js
