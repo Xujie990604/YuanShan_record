@@ -1,5 +1,8 @@
 # try catch
 
+* try catch块的优点是，当try中的代码有警告的话， 代码不会直接死掉而是可以在catch中尝试解决这个错误
+* 还可以使用throw来自定义错误
+
 ## Error.name的六种对应的信息
 
 1. EvalError: eval()的使用和定义不一致
@@ -9,16 +12,19 @@
 5. TypeError：操作数类型错误
 6. URLError：URL处理函数使用不当
 
+```js
 try {
-    console.log("a");
-    console.log(b);
-    console.log("c");
+   ...
 } catch (e) {
-         console.log(e.name + e.message);
-    }
-    console.log("d");
+    console.log(e.name + e.message);
+}
+```
 
-try里面的代码报错的时候,catch里面的代码才会执行,finally里面的代码永远会执行
-　　catch和finally里面,正常的代码会从上到下顺序执行
-　　如果只是catch里面代码出错,则报catch里面的错误
-　　如果catch和finally都出错则会报finally里面的错误
+## throw
+
+* throw错误的时候，可以直接throw("..."), 也可以throw一个 Error对象(throw New Error("..."))
+
+## 注意点
+
+* try catch只会对运行时的error有效， 如果代码包含语法的错误，try catch将会无法正常工作
+* try中如果包含了计划要执行的函数， 例如setTimeout里面的错误不会被捕捉到()

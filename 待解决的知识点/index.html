@@ -17,15 +17,30 @@
 
 <body>
 
-    
+
 </body>
 
 <script>
-    var a = setTimeout(() => {
-        console.log("1");
-    },1000)
-    console.log(typeof(a));
-    
+    let p = new Promise((resolve, reject) => {
+            console.log("a");
+            resolve("error")
+        })
+        .then((data) => {
+            console.log("c");
+            console.log(data);
+            return "aaa"
+        })
+        .catch((res) => {
+            console.log("b");
+            console.log(res);
+            return "123";
+        })
+        .then(qw => {
+            console.log(qw);
+        })
+        .finally(() => {
+            console.log("d");
+        })
 </script>
 
 
