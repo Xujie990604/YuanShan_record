@@ -78,8 +78,9 @@ anotherBaz(); // global - because the method anotherBaz() belongs to the global 
 ## 对象中的this
 
 ```js
-// 不是说只有函数中才有this这个概念
-// 对象里面也有this这个属性，只不过对象中的this和他外面的最接近的作用域(作用域有函数作用域和全局作用域)的this一样
+// 不是说只有函数中才有this这个概念 概念理解有误差
+// 对象里面也有this这个属性，只不过对象中的this和他外面的最接近的作用域(作用域有函数作用域和全局作用域)的this一样 概念理解有误差
+// this是函数的一个参数，是函数的独有的(window中的this为window，在严格模式修正为undefined)。对象并没有自己的this。对象中的this不过只是它所处的函数的this
 const a = {
       a: this,
       name: 'xujie',
