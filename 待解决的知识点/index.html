@@ -12,18 +12,49 @@
             padding: 0;
             margin: 0;
         }
+
+        .box {
+            width: 150px;
+            height: 200px;
+            overflow: scroll;
+            margin: 100px;
+        }
+
+        .scrollbar {
+            width: 30px;
+            height: 300px;
+            margin: 0 auto;
+
+        }
+
+        /*滚动条整体样式*/
+        .box::-webkit-scrollbar {
+            width: 10px;
+            height: 0px;
+        }
+
+        /*滚动条滑块*/
+        .box::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: red;
+        }
+
+        /*滚动条轨道*/
+        .box::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background: #ccc;
+        }
     </style>
 </head>
 
 <body>
 
-
+    <div class="box">
+        <div class="scrollbar"></div>
+    </div>
 </body>
 
 <script>
-    let a = new Promise((resolve, reject) => {
-        resolve(new Error("xujie"))
-    })
 
 </script>
 
