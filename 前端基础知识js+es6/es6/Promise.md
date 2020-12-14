@@ -72,6 +72,7 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 ### Promise.prototype.then()
 
 * 其实then方法可以提供两个回调函数，第一个在上面的执行器promise resolve时执行回调，第二个在上面的执行器promise reject时执行回调(重要)
+* then的期待的参数时函数， 任何非函数的参数都会被静默处理。
 
 * p.then的返回值是一个新的Promise实例(p代指上面的执行器Promise)，then的返回值的值根据和p的执行状态的对应的then中的回调有关(也就是说如果p resolve，那么then的返回值就和then中的第一个回调有关， 如果p reject，那么then的返回值就和then中的第二个返回值有关)。
 
@@ -83,18 +84,34 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 
 ```js
 let p = new Promise((resolve, reject) => {
-    resolve("resolve p!")
-})
-let a = p.then(() => {
-   return Error("xujie")
-}) //返回的是错误对象的话， 不会爆出红色的异常，会把Error实例经过Promise.resolve()包装当做then处理程序的返回值
+     return new Error("err");
+ }) //不会报错，p的值是pending: undefined   new Error("err")就像消失了一样
 
-let p = new Promise((resolve, reject) => {
-    resolve("resolve p!")
-})
-let a = p.then(() => {
-   throw("xujie")
-})//如果是throw一个错误的话， 会爆出红色的异常，并且会把Promise.reject("xujie")经过Promise.resolve()包装之后当做then处理器的返回值
+ let p = new Promise((resolve, reject) => {
+     resolve(new Error('err'))
+ }) //不会报错，p的值是resolve: Error: err 任何非Promise的值都会被包装为promise对象
+
+ let p = new Promise((resolve, reject) => {
+     throw(Error("error"))
+     reject(new Error("err"))
+ }) //会抛出异步的错误，p的值是reject: Error: err throw一个错误，就类似于reject的理由是一个错误对象
+
+ let p = new Promise((resolve, reject) => {
+     resolve("success")
+ })
+ let a = p.then(() => {
+     return new Error("err")
+ })//不会报错， a的值为resolve: Error: err 在处理程序中返回任意一个非Promise都会被包装成Promise对象
+
+ let p = new Promise((resolve, reject) => {
+     resolve("success")
+ })
+ let a = p.then(() => {
+     throw new Error("err")
+     return Promise.reject(new Error("err")) //这两种方式应该是等价
+ })
+ //  会报错,如果下面没有catch来处理错误，a的返回值就是reject: Error: err,
+ // 要是下面有catch来捕获错误，a的返回值就是resolve: undefined
 ```
 
 ### Promise.prototype.catch()
@@ -105,6 +122,13 @@ let a = p.then(() => {
 ### Promise.prototype.finally()
 
 * 无论p的状态如何都会执行,所以finally不接受任何参数。finally的返回值和状态无关，大多数情况下表现为父期约的传递。
+
+```js
+// 这两种情况就是特殊情况
+p.finally(() => new Promise(() => {})) //Promise `<pending>`
+p.finally(() => Promise.reject()) //Promise `<reject>`: undefined
+```
+
 * 主要是为了解决冗余代码
 
 ### 拒绝期约和拒绝错误信息(有很大问题，回头看书)
@@ -118,70 +142,20 @@ let a = p.then(() => {
 
 * 可以使用连缀方法的调用的形式
 * 实现的原理主要是then，catch，finally处理程序的返回值都是一个Promise。
+* 链式调用后面的内容需要等前一个调用执行完才会执行。
 
 ### 期约合成
 
-#### Promise.all()
+#### Promise.all([p, p])
 
-#### Promise.race()
-
-## 终止Promise(终止不是中断，Promise一旦被创建就没办法被中断)
-
-### 终止Promise执行器函数
-
-### 终止Promise的链式调用
-
-
+* Promise.all()静态方法会在一组期约全部解决之后再解决， 返回**一个新期约**
 
 ```js
-new Promise((resolve,reject) => {
-            setTimeout(() => {
-                resolve()
-            })
-        }).then(() => {
-            console.log("第一步的异步请求")
-
-            return new Promise((resolve,reject) => {
-                setTimeout(() => {
-                    resolve()
-                })
-            })
-        }).then(() => {
-            console.log('第二次异步请求')
-
-            return new Promise((resolve,reject) => {
-                resolve()
-            })
-        }).then(() => {
-            console.log("第三次异步请求");
-        })
+let p = Promise.all([Promise.resolve("xujie"), Promise.resolve("xiaohan")]) //新期约的值是一个数组，["xujie", "xiaohan"]
+let a = Promise.all([1, 2]) //原始值会被Promise.resolve()包装处理
+let b = Promise.all([]) //这条语句等价于Promise.resolve()
+let d = Promise.all() //无效的语法
 ```
-
-## promise的链式调用和简写
-
-```js
-new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('aaa');
-        });
-      }).then((res) => {
-          console.log(res);
-
-          return res + 111;
-        }).then((res) => {
-          console.log(res);
-
-          return res + 222
-        }).then((res) => {
-          console.log(res);
-        });
-```
-
-* 可以通过这种方式来进行链式调用，对于同一个数据进行多次处理 链式调用的基础是then和catch，finally的返回值都是一个Promise
-* Promise.resolve()和Promise.reject()是Promise的一个简便的写法
-* return res + 111,其实是Promise API内置的Promise.resolve()更加简便写法。其实这个语句在内部调用了一次 new Promise()
-
-## Promise.all()方法
 
 ```js
 Promise.all([
@@ -196,3 +170,22 @@ Promise.all([
     result[1] //里面是第二次执行的结果
 })
 ```
+
+* 有一个包含的期约待定，则合成的期约也待定。一个包含的期约拒绝，则合成的期约也拒绝(第一个拒绝的理由会成为合成期约的拒绝理由),
+* all和race传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then的第二个参数或者后面的catch捕获；但并不会影响数组中其它的异步任务的执行。
+* 如果所有期约都成功解决， 合成期约的值就是包含期约解决值的数组。
+
+#### Promise.race([p, p])
+
+* 返回一个包装期约，是一组集合中最先解决或者拒绝的期约的镜像。
+* 不区别解决和拒绝，只要是第一个落定的期约，Promise.race()就会包装其解决值或者拒绝理由并返回新期约
+* all和race传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then的第二个参数或者后面的catch捕获；但并不会影响数组中其它的异步任务的执行。
+* 多个期约解决，按照顺序来决定第一个
+
+```js
+let a = Promise.race([1, 2]) //原始值会被Promise.resolve()包装处理
+let b = Promise.race([]) //这条语句等价于Promise.resolve()
+let d = Promise.race() //无效的语法
+```
+
+## 终止Promise(终止不是中断，Promise一旦被创建就没办法被中断)
