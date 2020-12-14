@@ -18,26 +18,26 @@
 </body>
 
 <script>
-    const first = () => (new Promise((resolve, reject) => {
-        console.log(3);
-        let p = new Promise((resolve, reject) => {
-            console.log(7);
-            setTimeout(() => {
-                console.log(5);
-                resolve(6);
-                console.log(p)
-            }, 0)
-            resolve(1); //wei 1
-        });
-        resolve(2); //wei 2
-        p.then((arg) => {
-            console.log(arg);
-        });
-    }));
-    first().then((arg) => {
-        console.log(arg);
-    });
-    console.log(4);
+    // let arr = [1, 2, 3];
+
+    // arr.reduce((total, item) => {
+    //     total.then(() => {
+    //         setTimeout(() => {
+    //             console.log(item)
+    //         },1000)
+    //     })
+    //     return total;
+    // },Promise.resolve())
+
+    const arr = [1, 2, 3]
+    arr.reduce((p, x) => {
+        let a = p.then(() => {
+            return new Promise(resolve => {
+                setTimeout(() => resolve(console.log(x)), 1000)
+            })
+        })
+        return a;
+    }, Promise.resolve())
 
     
 </script>

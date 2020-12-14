@@ -83,3 +83,68 @@ new Promise(resolve => {
     })
 })
 ```
+
+* **await**后如果promise状态不发生改变的话，await后面的语句会一直处于等待状态，永远不会执行
+* then中传入非期望函数参数会被直接忽略
+* 宏任务(setTimeout)的添加需要看看是在多少ms之后
+
+```js
+const async1 = async () => {
+    console.log('async1');
+    setTimeout(() => {//宏任务2 尽管位置考上， 但是是在2000ms后加入消息队列
+        console.log('timer1')
+    }, 2000)
+    await new Promise(resolve => {
+        console.log('promise1')
+    })
+    console.log('async1 end') // 因为await后面的Promise永远是pending状态，所以包括这条语句的下面两条语句永远不会执行
+    return 'async1 success'//不会执行
+}
+console.log('script start');
+async1().then(res => console.log(res));  //因为async()的return语句不会执行，所以这个then处理程序不会执行
+console.log('script end');
+Promise.resolve(1)
+    .then(2) //非期望函数值，忽略这条语句
+    .then(Promise.resolve(3)) //非期望函数值，忽略这条语句
+    .catch(4)//非期望函数值，忽略这条语句
+    .then(res => console.log(res))//微任务1
+setTimeout(() => { // 宏任务1 尽管位置考下，但是是在1000ms后加入消息队列
+    console.log('timer2')
+}, 1000)
+```
+
+* finally不接受任何参数
+* 当执行器和处理程序链式调用的时候，用一个变量接受，变量最终的值是最后一个执行程序的值，**不是执行器的值**
+
+```js
+const p1 = new Promise((resolve) => {
+  setTimeout(() => {   //hong 1
+      resolve('resolve3');
+      console.log('timer1')
+  }, 0)
+  resolve('resovle1');
+  resolve('resolve2');
+}).then(res => {
+  console.log(res)
+  setTimeout(() => { //hong 2
+      console.log(p1) 
+  //打印的p1不是执行器的值，因为执行器和then，finally处理程序链式写在了一起，所以p1是finally的值，
+  //finally在不抛出错误和Promise一直是pending的情况下，是上一个Promise的值，也就是then的值。then没有显式的return一个值，所以then的返回值是undefined
+  }, 1000)
+}).finally(res => { //因为finally不接受任何参数，所以res是个迷惑项 res是undefined
+  console.log('finally', res)
+})
+```
+
+* 串行异步操作， 让异步操作顺序执行
+
+```js
+const arr = [1, 2, 3]
+  arr.reduce((p, x) => {
+      return p.then(() => { //p.then()很有特色，关键理解reduce方法。第一次调用的p是下面的Promise.resolve(),以后的每个p都是下面的新生成的Promise。
+          return new Promise(resolve => {
+              setTimeout(() => resolve(console.log(x)), 1000) //只有本次的Promise成功兑换之后，上面的p.then()才能开始执行
+          })
+      })
+  }, Promise.resolve())
+```
