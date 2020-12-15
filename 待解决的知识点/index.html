@@ -6,55 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面</title>
     <p>xujie</p>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         * {
             padding: 0;
             margin: 0;
         }
 
-        .box {
-            width: 150px;
-            height: 200px;
-            overflow: scroll;
-            margin: 100px;
-        }
 
-        .scrollbar {
-            width: 30px;
-            height: 300px;
-            margin: 0 auto;
 
-        }
-
-        /*滚动条整体样式*/
-        .box::-webkit-scrollbar {
-            width: 10px;
-            height: 0px;
-        }
-
-        /*滚动条滑块*/
-        .box::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: red;
-        }
-
-        /*滚动条轨道*/
-        .box::-webkit-scrollbar-track {
-            border-radius: 10px;
-            background: #ccc;
-        }
     </style>
 </head>
 
 <body>
 
-    <div class="box">
-        <div class="scrollbar"></div>
-    </div>
+    
 </body>
 
 <script>
+   new Promise((resolve,reject) => {
+       try{
+           throw(Error("xujie"))
+       }catch(e) {
+           console.log(e);
+       }
+       resolve()
+   })
 
 </script>
 
