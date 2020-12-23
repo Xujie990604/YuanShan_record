@@ -26,14 +26,24 @@
 
 ## mutations
 
+* 每个mutation都有一个字符串的事件类型(type)和一个回调函数
 * 在这个阶段进行数据的更新(唯一的途径)，在mutations里面定义的方法会自动设置第一个参数为state
 * 在mutations中必须是同步的操作，异步的操作在DevTools中跟踪不到
 * 通过mutation的方法操作数据的过程可以被Devtools跟踪
 
+```js
+const mutations = {
+  // 使用[]是ES6的语法，同时使用了对象的[]语法，又使用了对象的对象字面量语法.
+  [ADD_PRODUCT_COUNT](state, payload) {
+        payload.count += 1;
+  }
+}
+```
+
 ## action
 
 * 类似于mutations，代替他做一些异步的操作，在actions中引入mutations中的函数
-* action中的方法也有一个默认的参数是context(上下文)，在没有modules的模块中。context就指代实例化的唯一的那个store
+* action中的方法也有一个默认的参数是context(上下文)， context是一个与store实例具有相同的方法和属性的对象(但是并不是真正的store的实例)
 * 在调动action的方法时，需要使用dispatch
 
 ### 使用Promise和Vuex梦幻联动
@@ -72,13 +82,13 @@ aUpdateStu(context,payload) {
 ```js
 // 调用方法
 addCount(count) {
-      this.$store.commit('incrementCount',count)
-    }
+  this.$store.commit('incrementCount',count)
+}
 
 // 定义方法
 incrementCount(state,count) {
-        state.counter += count;
-    }
+  state.counter += count;
+}
 ```
 
 ### mutations中的特殊的提交风格
@@ -88,18 +98,18 @@ incrementCount(state,count) {
 
 ```js
 // 调用方式
- addCount(count) {
-      this.$store.commit({
-        type: 'incrementCount',
-        count
-      })
-    }
+addCount(count) {
+  this.$store.commit({
+    type: 'incrementCount',
+    count
+  })
+}
 
     // 定义方式
-    incrementCount(state,payload) {
-            console.log(payload);
-            state.counter += payload.count;
-        }
+incrementCount(state,payload) {
+  console.log(payload);
+  state.counter += payload.count;
+}
 ```
 
 ### 使用常量的提交方式

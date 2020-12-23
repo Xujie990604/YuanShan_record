@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         .a {
-            
+
             /* width: 150px;
             height: 400px; */
             /* background-image: url("../待解决的知识点//img/keys.png");
@@ -32,14 +32,12 @@
     </div>
 
     <script>
-        var obj = {
-            a: "aaa",
-            say() {
-                console.log(this.a);
-            }
+        const types = {
+            SET_LOCATION: 'SET_LOCATION', //是一个对象包含着很多东西
+            SET_ADDRESS: 'SET_ADDRESS', //是一个字符串地址
+            ORDER_INFO: 'ORDER_INFO', //是用户保存在购物车中的商品的信息
         }
-
-        console.log(obj.b.console);
+        console.log([types.SET_ADDRESS]);
     </script>
 
 </body>
