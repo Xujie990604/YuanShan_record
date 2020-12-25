@@ -6,38 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .a {
-
-            /* width: 150px;
-            height: 400px; */
-            /* background-image: url("../待解决的知识点//img/keys.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center; */
+        .img {
+            margin: 100px 0 0 200px;
+        }
+        .img img {
+            animation: change 1.5s ease infinite;
+            transform-origin: top left;
         }
 
-        img {
-            border: 1px solid red;
-            width: 150px;
-            height: 400px;
-            object-fit: cover;
+        @keyframes change {
+            0% {
+                 transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(0.8);
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="a">
-        <img src="../待解决的知识点/img/keys.png" alt="">
+    <div class="img">
+        <!-- <img src="./img//button_with_hand.png" alt=""> -->
     </div>
 
+
     <script>
-        const types = {
-            SET_LOCATION: 'SET_LOCATION', //是一个对象包含着很多东西
-            SET_ADDRESS: 'SET_ADDRESS', //是一个字符串地址
-            ORDER_INFO: 'ORDER_INFO', //是用户保存在购物车中的商品的信息
-        }
-        console.log([types.SET_ADDRESS]);
+
     </script>
 
 </body>
