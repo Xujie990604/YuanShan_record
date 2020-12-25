@@ -4,42 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>页面</title>
-    <p>xujie</p>
+    <title>Document</title>
     <style>
+        .a {
 
+            /* width: 150px;
+            height: 400px; */
+            /* background-image: url("../待解决的知识点//img/keys.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center; */
+        }
+
+        img {
+            border: 1px solid red;
+            width: 150px;
+            height: 400px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body>
 
+    <div class="a">
+        <img src="../待解决的知识点/img/keys.png" alt="">
+    </div>
+
+    <script>
+        const types = {
+            SET_LOCATION: 'SET_LOCATION', //是一个对象包含着很多东西
+            SET_ADDRESS: 'SET_ADDRESS', //是一个字符串地址
+            ORDER_INFO: 'ORDER_INFO', //是用户保存在购物车中的商品的信息
+        }
+        console.log([types.SET_ADDRESS]);
+    </script>
 
 </body>
-
-<script>
-    // let arr = [1, 2, 3];
-
-    // arr.reduce((total, item) => {
-    //     total.then(() => {
-    //         setTimeout(() => {
-    //             console.log(item)
-    //         },1000)
-    //     })
-    //     return total;
-    // },Promise.resolve())
-
-    const arr = [1, 2, 3]
-    arr.reduce((p, x) => {
-        let a = p.then(() => {
-            return new Promise(resolve => {
-                setTimeout(() => resolve(console.log(x)), 1000)
-            })
-        })
-        return a;
-    }, Promise.resolve())
-
-    
-</script>
-
 
 </html>
