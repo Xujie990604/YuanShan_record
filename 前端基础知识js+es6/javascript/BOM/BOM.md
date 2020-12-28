@@ -36,10 +36,6 @@
 ## clientWidth/clientHeight
 
 * 元素的尺寸大小
-* IE8和以下的浏览器获取视口大小
 
-1. 标准模式下： document.documentElement.clientWidth/clientHeight
-2. 怪异模式：document.body.clientWidth/clientHeight
-
-* clientWidth的实际宽度 clientWidth = width+左右padding
+* clientWidth的实际宽度 clientWidth = width + 左右padding
 * clientHeigh的实际高度 clientHeigh = height + 上下padding
