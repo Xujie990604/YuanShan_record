@@ -3,11 +3,11 @@
 1. element > element(div>p) 直接子元素选择器用于选取带有特定父元素的元素。
 注释：如果元素不是父元素的直接子元素，则不会被选择。
 2. element + element (div + p) 相邻兄弟选择器。可选择紧接在另一元素后的元素，且二者有相同父元素。
-3. element ~ element (div ~ p) 兄弟选择器 二者具有相同的父元素，并且不一定位置上紧紧相连。
-4. [attribute] [type]  属性选择器 选择带有 target 属性所有元素。
-5. [attribute = value] [type = "text"] 属性选择器 选择 target="_blank" 的所有元素。
+3. element ~ element (div ~ p) 兄弟选择器   可选择位于该元素后面的，所有同辈的兄弟元素。
+4. element[attribute]  (div[type])  属性选择器 选择带有 type 属性所有元素。
+5. element[attribute = value] (div[type = "text"]) 属性选择器 选择 type="text" 的所有元素。
 6. 属性以什么开头(^=)，结尾($=)，包含(~=)，存在(*=)等于都有对应的选择器。
-7. :focus input:focus 伪类选择器 选择获得焦点的 input 元素。
+7. :focus (input:focus) 伪类选择器 选择获得焦点的 input 元素。
 8. :first-child (p:first-child) p元素的父元素的第一个子元素并且是p元素。
 9. :last-child (p:last-child) p元素的父元素的倒数第一个子元素并且是p元素。
 10. :nth-child(n) (p:nth-child(2)) 选择属于其父元素的第二个子元素，并且是p元素 even 偶数 odd 奇数 2n + 1 n从零开始
@@ -22,7 +22,7 @@
 19. :empty 空标签选择器，一个空格都不行。伪元素添加的话不算文本内有东西。伪元素不占DOM结构。
 20. :selection 使用鼠标选中（突出显示的文本）时，才会出现的样式。 user-select: none;不允许用户选中文本。
 
-!!! 伪类选择器的：前最好放置的是元素的类型比如p div啥的。如果放置类名的话会有不预期的效果。
+!!! **伪类选择器的：前最好放置的是元素的类型比如p div啥的。如果放置类名的话会有不预期的效果。**
 
 * div:nth-of-type(2)  div用来确定范围 在div的父元素下的第二个div
 * .a:nth-of-type(2)   没有指定元素类型，那就自动把所有的元素类型都过一遍。每种元素类型的第二个都被选中
@@ -30,7 +30,7 @@
 
 ```html
 <style>
-    div.a:nth-of-type(2) { color: red; }
+    div .a:nth-of-type(2) { color: red; }
     </style>
 </head>
 <body>

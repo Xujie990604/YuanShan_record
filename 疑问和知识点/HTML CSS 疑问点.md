@@ -16,6 +16,4 @@ vertical-align和行盒子的基线的问题。
 
 css的grid网格布局以后再学习，支持度还不是很高。
 
-css中span的margin属性不太支持吗？？必须转化为block才支持吗
-
 lorem70自动生成70个字节的英文单词
