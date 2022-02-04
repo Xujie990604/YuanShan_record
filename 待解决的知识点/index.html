@@ -7,21 +7,43 @@
     <title>Document</title>
     <style>
         * {
-        padding: 0;
-        margin: 0;
+            padding: 0;
+            margin: 0;
         }
 
-        div:nth-of-type(2) { color: red; }
+        .a {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+        }
+
+        .b {
+            background-color: blue;
+            width: 150px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .c {
+            background-color: yellow;
+            height: 150px;
+            overflow: hidden;
+        }
     </style>
 </head>
 
 <body>
-   <div>
-       <div class="a">1</div>
-       <p class="b">2</p> 
-       <div class="a">3</div>
-       <div class="a">4</div>
-   </div>
+    <div class="a clearfix">
+        <div class="b son"></div>
+        <div class="c son">
+            <span>11111111111111111111111111111</span>
+        </div>
+    </div>
 </body>
 
 </html>

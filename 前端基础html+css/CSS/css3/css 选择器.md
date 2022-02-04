@@ -1,6 +1,6 @@
 # css选择器
 
-1. element > element(div>p) 直接子元素选择器用于选取带有特定父元素的元素。
+1. element > element(div > p) 直接子元素选择器用于选取带有特定父元素的元素。
 注释：如果元素不是父元素的直接子元素，则不会被选择。
 2. element + element (div + p) 相邻兄弟选择器。可选择紧接在另一元素后的元素，且二者有相同父元素。
 3. element ~ element (div ~ p) 兄弟选择器   可选择位于该元素后面的，所有同辈的兄弟元素。
@@ -8,7 +8,7 @@
 5. element[attribute = value] (div[type = "text"]) 属性选择器 选择 type="text" 的所有元素。
 6. 属性以什么开头(^=)，结尾($=)，包含(~=)，存在(*=)等于都有对应的选择器。
 7. :focus (input:focus) 伪类选择器 选择获得焦点的 input 元素。
-8. :first-child (p:first-child) p元素的父元素的第一个子元素并且是p元素。
+8. :first-child (p:first-child) 偽元素選擇器 p元素的父元素的第一个子元素并且是p元素。
 9. :last-child (p:last-child) p元素的父元素的倒数第一个子元素并且是p元素。
 10. :nth-child(n) (p:nth-child(2)) 选择属于其父元素的第二个子元素，并且是p元素 even 偶数 odd 奇数 2n + 1 n从零开始
 11. :nth-last-child(n) (:nth-last-child(2)) 选择属于其父元素的倒数第二个子元素，并且是p元素
