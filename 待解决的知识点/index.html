@@ -11,38 +11,51 @@
             margin: 0;
         }
 
-        .a {
-            width: 400px;
-            height: 400px;
-            background-color: red;
+
+        body {
+            min-width: 400px;
+        }
+        .container {
+            padding: 0 100px 0 100px;
+            overflow: hidden; 
         }
 
-        .son {
-            width: 100px;
-            height: 100px;
-        }
-
-        .b {
-            background-color: blue;
-            width: 150px;
+        .middle {
             float: left;
-            margin-right: 10px;
+            width: 100%;
+            height: 100px;
+            background-color: red;
+
         }
 
-        .c {
+        .left {
+            position: relative;
+            left: -100px;
+            float: left;
+            height: 100px;
+            width: 100px;
+            margin-left: -100%;
             background-color: yellow;
-            height: 150px;
-            overflow: hidden;
         }
+
+        .right {
+            position: relative;
+            right: -100px;
+            float: left;
+            height: 100px;
+            width: 100px;
+            margin-left: -100px;
+            background-color: blue;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="a clearfix">
-        <div class="b son"></div>
-        <div class="c son">
-            <span>11111111111111111111111111111</span>
-        </div>
+    <div class="container">
+        <div class="middle">middle</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
     </div>
 </body>
 
