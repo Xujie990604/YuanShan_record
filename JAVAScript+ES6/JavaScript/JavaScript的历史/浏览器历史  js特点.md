@@ -22,6 +22,6 @@ java 先编译后解释 因为java虚拟机的存在
 
 js特点
     1.解释语言
-    2.单线程（论转时间片，类似于吃饭）
+    2.单线程（论转时间片）
     3.ECMA标准 js原生也称为ECMAScript
         js三大阶段：ECMAScript + DOM + BOM（后两个由浏览器提供）
