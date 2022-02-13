@@ -6,31 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
-    .xujie {
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .father {
       height: 200px;
       width: 200px;
       background-color: red;
-      padding: 20px;
     }
 
-    .xiaohan {
-      height: 200px;
-      width: 200px;
-      background-color: black;
-      padding: 20px;
+    .son {
+      height: 100px;
+      width: 100px;
+      background-color: yellow;
     }
   </style>
 </head>
 
 <body>
+  <div class="father">
+    <div class="son"></div>
+  </div>
 
   <script>
-    var a = 123;
-    a.name = "x";
+    let father = document.getElementsByClassName("father")[0];
+    let son = document.getElementsByClassName("son")[0];
 
-    
-
-    
+    son.onclick = test;
+    father.addEventListener("click", test, false);
+    function test() {
+      console.log(this)
+    }
   </script>
 </body>
 

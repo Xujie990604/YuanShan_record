@@ -37,7 +37,7 @@
 
 #### 在行间直接使用语句
 
-* 没有绑定方法是直接在元素中指定了语句，这时函数中的this就是元素本身。因为js代码直接写在了html中，此时的this就是点击事件发生时的目标元素。
+* 没有绑定方法而是直接在元素中指定了语句，这时函数中的this就是元素本身。因为js代码直接写在了html中，此时的this就是点击事件发生时的目标元素。
 * 可以使用this.href来直接访问当前元素的href属性。(也可以直接使用href，因为js的内部机制)
 * 在行间内直接使用语句的时候，在执行时会动态的创建一个函数，在这个函数中使用with改变了作用域，使用了with(this)语句，因为this就是执行当前元素，所以直接使用href就能直接访问，(如果是input，能够直接访问到input的父元素Form的作用域，方便各个input表单之间互相通信)
 
@@ -53,5 +53,5 @@ ele.onXXX = function(){}
 obj.addEventListener("type",function,false)
 程序的this指向dom元素本身
 
-obj.attachEvent('on+type',function) IE的吧？
+obj.attachEvent('on+type',function) IE的方法
 程序this指向window

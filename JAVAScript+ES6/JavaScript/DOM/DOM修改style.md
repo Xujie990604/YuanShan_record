@@ -11,7 +11,7 @@
 
 ### 每个元素都会有一个style属性，这个属性是一个对象。样式都存放在这个对象中
 
-* js 不能写-(会被识别为减号运算符)，只能用小驼峰方法写。如 background-color 写成 backgroundColor.float(因为是关键字)所以写成cssFloat
+* js 不能写-(会被识别为减号运算符)，只能用小驼峰方法写。如 background-color 写成 backgroundColor float(因为是关键字)所以写成cssFloat
 * 可以识别速记属性。基本上定义的css和使用DOM查询的css样式，单位是一样的，比如设置的是px返回px，设置的是em，返回em。
 * style对象上的属性可读可写。style对象上的属性全是以字符串的形式来读取和赋值。
 

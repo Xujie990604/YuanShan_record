@@ -24,15 +24,6 @@
 
 * 为了解决命名冲突的问题，已经弃用。
 
-## 区别数组和对象的三种方法
-
-1. 用constructor          []的原型里构造函数是Array
-                          {}的原型里的构造函数是Object
-2. 用instanceof           [] instanceof Array true
-                           {} instanceof Array false
-3. 用Object.prototype.toString.call([])    [object Array]
-   用Object.prototype.toString.call({})   [object Object]
-
 ## jq如何实现链式调用
 
 * 方法的最后return this。
