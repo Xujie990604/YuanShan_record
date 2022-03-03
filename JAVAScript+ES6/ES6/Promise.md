@@ -52,7 +52,7 @@ new Promise((resolve, reject) => {
 * 是一个幂等的方法
 
 ```js
-let p = Promise.resolve(3) // Promise <pending>
+let p = Promise.resolve(3) // Promise <fulfilled>
 setTimeout(console.log, 0, p === Promise.resolve(p)) //true
 setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p))) //true
 ```
@@ -72,7 +72,7 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 ### Promise.prototype.then()
 
 * 其实then方法可以提供两个回调函数，第一个在上面的执行器promise resolve时执行回调，第二个在上面的执行器promise reject时执行回调(重要)
-* then的期待的参数时函数， 任何非函数的参数都会被静默处理。
+* then期待的参数是函数， 任何非函数的参数都会被静默处理。
 
 * p.then的返回值是一个**新的Promise实例**(p代指上面的执行器Promise)，then的返回值的值根据和p的执行状态的对应的then中的回调有关(也就是说如果p resolve，那么then的返回值就和then中的第一个回调有关， 如果p reject，那么then的返回值就和then中的第二个返回值有关)。
 
@@ -94,7 +94,7 @@ let p = new Promise((resolve, reject) => {
  let p = new Promise((resolve, reject) => {
      throw(Error("error"))
      reject(new Error("err"))
- }) //会抛出异步的错误，p的值是reject: Error: err throw一个错误，就类似于reject的理由是一个错误对象
+ }) //会抛出异步的错误，p的值是reject: Error: err throw一个错误，就类似于reject的理由是一个错误对象(throw和reject谁的语句书写在前面，p的值就是谁的值)
 
  let p = new Promise((resolve, reject) => {
      resolve("success")
@@ -107,10 +107,10 @@ let p = new Promise((resolve, reject) => {
      resolve("success")
  })
  let a = p.then(() => {
-     throw new Error("err")
+     throw new Error("error")
      return Promise.reject(new Error("err")) //这两种方式应该是等价
  })
- //  会报错,如果下面没有catch来处理错误，a的返回值就是reject: Error: err,
+ //  会报错,如果下面没有catch来处理错误，a的返回值就是reject: Error: error,
  // 要是下面有catch来捕获错误，a的返回值就是resolve: undefined
 ```
 

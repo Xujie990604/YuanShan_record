@@ -3,10 +3,7 @@
 ## JSON的书写格式
 
 ```json
-{
-    "name": "xujie",
-    "age": 22
-}
+'{"name": "xujie","age": 22}' (方括号的外面必须带有单引号)
 ```
 
 * JSON是一种数据格式而不是编程语言，JSON不属于javascript

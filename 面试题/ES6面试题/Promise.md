@@ -4,7 +4,7 @@
 
 ```js
  const promise = new Promise((resolve, reject) => {
-    reject("error");
+    reject("error");  //promise在折里抛出错误后，代码会终止执行。因此const promise的值为Promise:{reject, error} 
     resolve("success2");
 });
 promise
@@ -24,7 +24,7 @@ promise
 ```js
 // 输出结果是 1 finally2 finally finally2后面的then函数2
 // 当有多个执行器下面都有多个链式调用的时候，不会一股脑的把一个执行器的微任务全都添加到微任务队列中
-// 而是先把执行器1的then添加到微任务队列， 在把执行器2的finally添加到微任务队列，等这两个微任务都执行完了， 再把执行器2的finally添加到微任务队列...
+// 而是先把执行器1的then添加到微任务队列， 在把执行器2的finally添加到微任务队列，等这两个微任务都执行完了， 再把执行器1的finally添加到微任务队列...
 // 你可以理解为链式调用后面的内容需要等前一个调用执行完才会执行。
 Promise.resolve('1')
   .then(res => {
