@@ -4,16 +4,17 @@
 
 ### 需要固定宽高的
 
-* absolute和margin-left: 负宽度的一半，margin-top: 负高度的一半;
-* absolute和四个方位设置为零，margin：auto;
+* absolute和top: 50%; left: 50%; margin-left: 负宽度的一半，margin-top: 负高度的一半;(相对定位配合负边距)
+* absolute和top: calc(50% - 子元素宽度的一半); left: calc(50% - 子元素宽度的一半);(相对定位配合着 calc函数)
 
 ### 不需要固定宽高的
 
 * absolute和transform: translate(-50%, -50%);配合使用
+* absolute和四个方位设置为零，margin：auto;
 * flex和align-items，justify-content进行使用
 * flex和margin: auto;进行搭配使用 并且margin的分配是在justify-content分配之前。
 
-## 行内元素的水平垂直居中
+## 行内元素中文字的水平垂直居中
 
 * line-height: height的高度;
 * text-align: center;

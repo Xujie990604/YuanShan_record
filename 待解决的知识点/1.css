@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 600px;
+}
+
+.header {
+    display: flex;
+    height: 100px;
+    background-color: red;
+}
+
+.main {
+    height: 100px;
+    width: 1200px;
+    margin: auto;
+    background-color: yellow;
+}
+
