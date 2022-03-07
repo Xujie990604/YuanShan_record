@@ -11,11 +11,20 @@
 </head>
 
 <body>
-  <div class="header">
-      <div class="main">徐杰</div>
-  </div>
-
 
 </body>
+
+<script>
+  Person.prototype = {
+    name: "xxxx"
+  }
+  function Person(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  const person1 = new Person("xxx", 10);
+
+</script>
 
 </html>

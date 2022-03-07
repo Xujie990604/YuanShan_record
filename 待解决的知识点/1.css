@@ -9,14 +9,34 @@ body {
 
 .header {
     display: flex;
-    height: 100px;
     background-color: red;
 }
 
-.main {
-    height: 100px;
+.content {
+    position: relative;
+    height: 50px;
     width: 1200px;
     margin: auto;
-    background-color: yellow;
+    font-size: 18px;
+    line-height: 50px;
+    background-color: green;
+}
+
+.location {
+    position: absolute;
+    left: 0;
+    height: 50px;
+}
+
+.list {
+    position: absolute;
+    display: flex;
+    right: 0;
+    height: 50px;
+}
+
+.item {
+    min-width: 40px;
+    margin-right: 10px;
 }
 
