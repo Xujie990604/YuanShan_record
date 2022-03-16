@@ -7,9 +7,11 @@
 
 2. 用instanceof           [] instanceof Array true
                          {} instanceof Array false
+(使用了原型链有关的方法，instanceof的含义是: 实例的原型链中是否出现过该构造函数)
 
 3. Array.prototype.isPrototypeOf(arr) // true
    Array.prototype.isPrototypeOf(obj) // false
+(实例的原型链中是否出现过该原型)
 
 4. 用Object.prototype.toString.call([])    [object Array]
    用Object.prototype.toString.call({})   [object Object]
@@ -19,5 +21,5 @@
 
 ## 将类数组转化为数组
 
-1. 使用Array.prototype.slice.call(arguments)。slice()方法如果不传参数的话，会返回原数组的拷贝
+1. 使用Array.prototype.slice.call(arguments)。 slice()方法如果不传参数的话，会返回原数组的拷贝
 2. Array.from(arguments)  是ES6中提供的方法，只要有length属性的对象都可以使用这个方法来转换为数组

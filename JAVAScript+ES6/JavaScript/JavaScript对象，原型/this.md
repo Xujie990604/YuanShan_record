@@ -10,6 +10,8 @@
 6. 谁.function()那么这个this就指向谁，和函数在谁内部执行没有关系。主要就是看(.),比如一个函数在另一个函数内被执行，但是没有谁.这个函数，函数的this就是执行window，不考虑作用域关联。(因为函数可以被单纯当做值来调用，在不同的环境中this执行不同)
 7. this中的环境对象和作用域完全不是一个概念
 8. 非严格模式下，全局中的函数的this指向window， 严格模式下，全局中的函数的this指向undefined。
+9. 在全局作用域中使用let const声明的变量不会绑定到window对象中，而是会被绑定到script作用域上。script和window是平级别的。
+10. setTimeout定时器里面回调函数的this指向是window。
 
 ```javascript
 var foo = {
@@ -88,7 +90,7 @@ const a = {
       },
       b: {
         c: this
-      }
+      } 
     }
 
     a.say(); // 对象a

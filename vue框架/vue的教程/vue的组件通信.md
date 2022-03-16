@@ -47,7 +47,7 @@
 
 ### $root
 
-* 访问根组件，Vue实例
+* 访问根组件，Vue实例(根实例不是app.vue(app.vue只是一个组件)而是main.js中的那个Vue实例)
 
 ### $refs
 

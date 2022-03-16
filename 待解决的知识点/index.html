@@ -2,29 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    </style>
-    <link rel="stylesheet" href="./1.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .style {
+       height: 50px;
+       line-height: 20px;
+       font-size: 20px;
+       text-align: center;
+    }
+
+  </style>
+  <link rel="stylesheet" href="./1.css">
 </head>
 
 <body>
-
+<div class="a style">a</div>
+<div class="b style">b</div>
+<div class="c style" onclick="test()">c</div>
+<div class="d style" onclick="console.log(this)">d</div>
 </body>
-
-<script>
-  Person.prototype = {
-    name: "xxxx"
-  }
-  function Person(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  const person1 = new Person("xxx", 10);
-
-</script>
+<script src="./script.js"></script>
 
 </html>

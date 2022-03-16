@@ -35,6 +35,8 @@ new Promise((resolve, reject) => {
 ```
 
 * 这两个回调函数(resolve reject)直接执行的话，是同步的函数，但是这两个回调函数里面的参数(包括成功的值和错误的理由)的**抛出**就是异步的过程了。
+* Promise.then()才是微任务的异步任务注册函数，then里面的回调函数是被放置到消息队列中的消息。
+* 如果Promise对象的结果没有被改变，即使碰到了p.then()方法，也不会注册微任务
 
 ### Promise.resolve()
 
