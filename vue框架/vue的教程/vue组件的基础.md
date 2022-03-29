@@ -3,7 +3,7 @@
 ## 组件的构建
 
 * 使用Vue.extend()创建组件构造器 Vue2.x之后就很少显示的使用这个了，被合并到vue.component()这个过程中了
-* 使用vue.component()来注册全局组件。如果是在某个Vue实例的component属性中进行注册的那么就是局部组件。
+* 使用vue.component()来注册全局组件(全局组件可以在多个Vue实例中使用)。如果是在某个Vue实例的component属性中进行注册的那么就是局部组件。
 
 ## 组价和根实例的区别是实例拥有el选项
 
@@ -11,7 +11,7 @@
 * Vue.component注册的是全局组件
 * 定义组件时，需要在父组件里面使用到的子组件要在父组件之前定义
 
-### 全局注册
+### 全局注册(router-link组件就是router自动注册的全局组件，我们不需要在当前组件中import就可以使用)
 
 * 全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
 * 子组件之间也可以互相引用
@@ -21,7 +21,7 @@
 Vue.component('my-component-name', { /* 组件内容 */ })
 ```
 
-### 局部注册
+### 局部注册（我们自己使用组件时一般都是局部注册的组件）
 
 * 像定义一个普通的js对象来定义组件
 * 避免性能的浪费
@@ -54,3 +54,14 @@ var ComponentA = { /* 组件内容 */ }
 ### 作用域插槽
 
 * 在父组件的作用域内获取子组件的变量的值，用来插槽中。
+
+```html
+// 子组件中定义插槽(插槽中有默认内容)(插槽中还有用于辨识的name属性)，并且传递数据给父组件
+<slot :data="name" name="app-m">子组件默认内容</slot>
+<!-- 父组件中引入子组件，并且使用template中的slot-scope属性来得到子组件传过来的数据 -->
+<app-model>
+    <template slot-scope="slot" slot="app-m">
+        <span>{{slot.data}}</span>
+    </template>
+</app-model>
+```

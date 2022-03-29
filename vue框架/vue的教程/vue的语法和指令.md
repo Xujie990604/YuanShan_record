@@ -8,25 +8,25 @@
 
 ## v-once
 
-* v-once指令可以让插值处的内容不在更新
+* v-once指令可以让插值处的内容不在更新(v-once指令写在DOM结构中)
 * 在视图首次展示，不会响应数据的变化。
 
 ## 原始html
 
-* 使用v-html指令来解析原始html```<span v-html="msg"></span>```
+* 使用v-html指令来解析原始html(如果data中的数据是一个DOM结构的话，使用v-html指令来告知Vue把这个数据按照DOM来解析而不是按照一个字符串来解析)
+* ```<span v-html="msg"></span>      msg: '<a href="www.baidu.com">百度一下</a>'```
 * 作为载体的span标签会被msg中的html结构代替
 * 动态的HTML十分危险，请保证安全的HTML部分使用插值的形式
 
 ## Vue渲染
 
 * 先是按照正常的html来解析html，然后使用Vue来解析Vue特定的指令，语法
-* 所以Vue的语法会覆盖原生的语法，在使用script引用时，刷新页面会闪一下。
+* 所以Vue的语法会覆盖原生的语法，在使用script引用Vue.js时，刷新页面会闪一下。
 
 ## v-cloak
 
-* 这是一个属性，添加到DOM上，具有这个属性的DOM不会被解析，只有Vue代码执行完毕之后(v-cloak属性会被去除)
-* 通过css的属性选择器来给具有这个属性的DOM设置display：none;
-* 用来解决画面闪烁的问题
+* 这是一个属性，添加到DOM上，具有这个属性的DOM不会被解析，只有Vue代码执行完毕之后才会对具有v-clock属性的DOM进行解析(v-cloak属性在vue代码执行前会存在，vue代码执行完毕之后v-clock会被去除)
+* 通过css的属性选择器来给具有这个属性的DOM设置display：none;(在vue代码没有执行前v-clock属性存在，但是因为设置了display:none; Vue代码执行前DOM不会被渲染，等到vue代码执行完成v-clock属性消失后DOM才会被渲染。)这样的话就可以解决画面闪烁的问题(适用于使用script引入vue的场景)
 
 ## 属性绑定v-bind
 
@@ -43,11 +43,10 @@
 ```js
 // 定义showDate过滤器
 filters: {
-    showDate: function (value) {
-      let date = new Date(value * 1000);
-      return date
+    showDate(value) {
+      return "$" +  date;
     },
   }
 // 使用过滤器
- <span class="date">{{ commentInfo.created | showDate }}</span>
+ <span class="date">{{ commentInfo.value | showDate }}</span>
 ```

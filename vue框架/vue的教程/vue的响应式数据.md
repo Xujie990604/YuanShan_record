@@ -4,6 +4,16 @@
 
 * vue在构造函数new Vue()时，就通过Object.defineProperty中的getter和setter 这两个方法，完成了对数据的绑定。所以直接通过vm.arr[1] = ‘aa’的方法，无法修改值去触发vue中视图的更新，必须还得通过Object.defineProperty的方法去改变，而Vue.$set（）就封装了js底层的Object.defineProperty方法。
 
+```js
+// 在能访问到Vue实例的地方，比如main.js里面使用这种方式
+Vue.set(要修改的数组，索引值，修改后的元素)
+Vue.set(this.lists, 0, "xujie)
+
+// 在Vue的组件内使用这种形式
+this.$set(要修改的数组，索引值，修改后的元素)
+this.$set(this.lists, 0, "xujie)
+```
+
 ### 会触发响应式
 
 * push()pop()shift()unshift()splice()sort()reverse()称为变更方法，会触发视图更新

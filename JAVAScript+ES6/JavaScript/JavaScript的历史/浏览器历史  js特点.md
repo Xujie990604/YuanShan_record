@@ -20,8 +20,21 @@
 java 先编译后解释 因为java虚拟机的存在
     .java ----java c --编译--.class--jvm(虚拟机)--解释执行
 
-js特点
-    1.解释语言
-    2.单线程（论转时间片）
-    3.ECMA标准 js原生也称为ECMAScript
-        js三大阶段：ECMAScript + DOM + BOM（后两个由浏览器提供）
+## js特点
+
+1. 解释语言
+2. 单线程（论转时间片）
+3. ECMA标准 js原生也称为ECMAScript。js三大阶段：ECMAScript + DOM + BOM（后两个由浏览器提供）
+
+## js是弱处理性语言
+
+1. case里的数据类型完全可以不一样（和其他强类型语言不一样）
+2. 数组内的数据类型可以是完全不同的数据类型 var arr=[1,2,"abd",undefined]
+
+## javascript的垃圾回收
+
+* javascript会进行自动的内存回收，所以不必关心内存管理问题
+* 标记清除法，常用策略。
+* 引用计数法，有很大的问题，其中常见的为循环引用。导致该策略性能较低
+
+* js的字符串也是基于数组的，可以通过下标取数值(也可以通过str.charAt(i)来取值)。也有length属性

@@ -1,46 +1,11 @@
 # 脚手架
 
-* 快速搭建Vue开发环境以及对应的webpack配置
-* 脚手架的使用环境需要node
-* e2e端到端的测试
-* env 是environment环境的意思
-* preset 配置
-
-## @ ~ ^
-
-* ~3.2.2 的意思就是会自动匹配到3.2.x的最新版本，3.3.0的版本不会自动更新
-* ^3.2.2 的意思就是会自动匹配到3.x.x的最新版本 4.x.x的版本不会自动更新(现在的npm默认的形式)
-* npm安装的时候。使用@符号可以指定插件的版本
-
-* 3.2.1
-
-3的位置版本变化代表不能兼容的大版本变化
-2的位置版本变化代表增加新的功能 可以向后兼容
-1的位置版本变化代表修复了BUG 可以向后兼容
-
-## npm cnpm yarn
-
-* npm和cnpm在我现在的电脑上可以使用
-* yarn的使用以后再说，先把npm的搞明白。
-* 使用npm install -g @vue/cli 命令全局安装vue cli3的版本
-* 然后使用npm install @vue/cli-init -g命令拉取vue cli2的版本
-
-## vue cli的版本
-
-* 讲师演示的是vue cli3的版本，其中使用到vue cli2的一些语法的话，需要使用命令拉取vue cli2的模板
-* 使用vue -V的命令查看vue cli的版本
-
 ## 使用命令
 
 ### 安装vue的项目
 
-* vue cli2使用 vue init webpack my-project
 * vue cli3使用 vue create my-project
 * 项目的名字不要有中文
-
-### 插件
-
-* EsLint很严格的js代码规范
 
 ## vue cli2的项目目录
 

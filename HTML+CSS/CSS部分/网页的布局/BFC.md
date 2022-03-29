@@ -8,7 +8,7 @@
 
 ### Box和Formatting Context
 
-* Box就是css布局的的对象和基本单位，一个页面有很多个Box组成，元素的类型合display属性，决定了这个Box的类型，会参与不同的Formatting Box。最常见的有Block formatting Box(bfc)和inline formatting Box(IFC)
+* Box就是css布局的的对象和基本单位，一个页面有很多个Box组成，元素的类型和display属性，决定了这个Box的类型，会参与不同的Formatting Box。最常见的有Block formatting Box(bfc)和inline formatting Box(IFC)
 * Formatting Context 是页面中的一块渲染区域，有一套渲染的规则，他决定了子元素是如何的定位，以及和其他元素的关系和相互作用。
 
 ### 如何触发BFC

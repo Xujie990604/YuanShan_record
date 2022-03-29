@@ -1,4 +1,4 @@
-# Vue的原理
+# Vue的介绍
 
 ## Vue可以不再直接操作Dom结构
 
@@ -13,10 +13,13 @@
 
 ### CDN的引用
 
+* CND从更近的服务器来引入内容。能够更加快速的交付内容。
 * 开发版本的CDN 没有压缩过代码，可以看源码。还有帮助的命令行警告
 * 生产环境的CDN 压缩代码，优化了尺寸和速度。
 
 ### 下载使用
+
+* 直接将源码下载到本地进行使用
 
 ### NPM的安装使用
 
@@ -37,22 +40,13 @@
 * 面向对象编程(对象是第一公民)
 * 面向函数编程(函数是第一公民)
 
-## Vue的mvvm
-
-* mvvm是指view  viewModel  model
-* Vue就是viewModel 实现数据绑定和DOM监听的功能
-
 ## Vue的选项
 
 * 创建Vue实例的时候，传进去一个options(选项),都可以有什么。在Vue官网api中只要带有选项的就可以。
 
-* el 可以填写字符串或者HTMLElement
+* el 该属性决定要将Vue对象挂载到哪一个元素上。
 * data 可以填写对象或者函数(组件中必须填写函数)
 * methods 填写方法
-
-## 函数和方法
-
-* 定义在对象里面叫方法，定义在全局叫函数
 
 ## mvc和mvvm
 
@@ -63,7 +57,8 @@
 
 ### MVVM
 
-* view -><- viewModel -><- model
+* view       -><-      viewModel    -><-     model
+* template模板        new Vue(...)         data() {...}
 * viewModel会实现view和model的同步显示
 * Model用纯javascript对象来表示，View负责显示，两者做到了最大程度的分离。把Model和View相关联起来的就是ViewModel
 * 我们不必再考虑DOM的结构，我们只需要操作model，最简单的数据存储方式就是对象

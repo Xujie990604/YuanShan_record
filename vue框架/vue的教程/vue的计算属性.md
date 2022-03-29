@@ -20,7 +20,7 @@
       get () {
         return this.firstName + ' ' + this.lastName
       },
-      // setter
+      // setter 赋值的时候firstName和lastName之间必须要有一个空格
       set(newValue) {
         var names = newValue.split(' ')
         this.firstName = names[0]

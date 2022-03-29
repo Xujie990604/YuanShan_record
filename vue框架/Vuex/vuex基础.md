@@ -4,7 +4,7 @@
 
 * 需要使用Vue.use()来安装插件
 * new Vuex时，需要 new Vuex.Store({})
-* 同时也需要在main.js的Vue实例中引入一下Vuex.store()的实例store,这样的话就可以在Vue.prototype中添加一个$store的属性，这样就能在每个组件中使用$store属性
+* 同时也需要在main.js的Vue实例中引入一下Vuex.store()的实例store,这样的话就可以(Vuex插件会自动)在Vue.prototype中添加一个$store的属性，这样就能在每个组件中使用$store属性
 
 ## DevTools插件
 
@@ -15,7 +15,12 @@
 ## state
 
 * 在vuex中保留数据的最基本的形式
-* 单一状态树，单一数据源，只创建一个store实例，方便调试和维护
+* 单一状态树的数据理念！！，单一数据源，只创建一个store实例，方便调试和维护
+
+```js
+// 使用$store来调用
+{{$store.state.counter}}
+```
 
 ## Getters
 
@@ -24,16 +29,38 @@
 * getters的方法中可以通过添加getter参数的形式来使用getter中的数据(getters方法中的第一个参数默认是state，第二个参数时getters)
 * 如果getters里面需要在调用时填入参数的时候，需要在getters的函数内部返回一个函数，那么在调用getters中的属性时，实际得到的是一个函数，并且这个函数内可以指定参数
 
+```js
+ getters: {
+  //  第一个参数默认是state
+    powerCounter(state) {
+      return  state.counter * state.counter;
+    },
+    // 第二个参数默认是getters
+    powerCounterTwo(state,getters) {
+      return getters.powerCounter + 2;
+    },
+    // 如果想要在getters中使用函数，就要返回值是一个函数
+    // 在调用这个getters的时候也要使用调用函数的形式，并且传入参数
+    {{$store.getters.ifDayu(11)}}
+    ifDayu(state) {
+      return function(age) {
+        return state.counter > age;
+      }
+    }
+  },
+```
+
 ## mutations
 
 * 每个mutation都有一个字符串的事件类型(type)和一个回调函数
-* 在这个阶段进行数据的更新(唯一的途径)，在mutations里面定义的方法会自动设置第一个参数为state
+* 在这个阶段进行数据的更新(唯一的途径)，在mutations里面定义的方法会自动设置第一个参数为state，第二个参数是我们调用时传递的参数。
 * 在mutations中必须是同步的操作，异步的操作在DevTools中跟踪不到
 * 通过mutation的方法操作数据的过程可以被Devtools跟踪
 
 ```js
 const mutations = {
-  // 使用[]是ES6的语法，同时使用了对象的[]语法，又使用了对象的对象字面量语法.
+  // 在对象的key值部分，js不会将key值当做变量来识别，例如对象有个key是name，并不会去系统中找是否有name的变量。而是直接将name当做一个字符串是被添加到对象的属性上
+  // 但是当对象的key值部分加上[]方括号时，就会把方括号中的东西当做表达式来识别。
   [ADD_PRODUCT_COUNT](state, payload) {
         payload.count += 1;
   }
@@ -45,6 +72,26 @@ const mutations = {
 * 类似于mutations，代替他做一些异步的操作，在actions中引入mutations中的函数
 * action中的方法也有一个默认的参数是context(上下文)， context是一个与store实例具有相同的方法和属性的对象(但是并不是真正的store的实例)
 * 在调动action的方法时，需要使用dispatch
+
+```js
+mutations: {
+  // 同步更改代码的的地方
+    changeInfo(state) {
+        state.info.name = "xiaohan";  
+    }
+  },
+  // 异步更改代码的地方
+  // 在action中还是要调用mutation中的同步函数
+  actions: {
+    aUptateInfo(context,payload) {
+      setTimeout(() => {
+        console.log(payload)
+        context.commit('changeInfo');
+      }, 1000);
+    }
+
+  },
+```
 
 ### 使用Promise和Vuex梦幻联动
 

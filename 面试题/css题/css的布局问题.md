@@ -14,7 +14,7 @@
 * flex和align-items，justify-content进行使用
 * flex和margin: auto;进行搭配使用 并且margin的分配是在justify-content分配之前。
 
-## 行内元素的垂直居中
+## 行内元素的垂直居中(这两天语句不是设置在子元素上，而是设置在父元素上)
 
 * line-height: height的高度;
 * text-align: center;(这条语句不单单是让文字水平居中，同时也可以让块级元素内的行内元素水平居中 例如div中的span元素)

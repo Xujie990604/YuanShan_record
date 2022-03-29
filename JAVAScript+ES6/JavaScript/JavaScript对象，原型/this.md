@@ -11,7 +11,45 @@
 7. this中的环境对象和作用域完全不是一个概念
 8. 非严格模式下，全局中的函数的this指向window， 严格模式下，全局中的函数的this指向undefined。
 9. 在全局作用域中使用let const声明的变量不会绑定到window对象中，而是会被绑定到script作用域上。script和window是平级别的。
-10. setTimeout定时器里面回调函数的this指向是window。
+10. setTimeOut中的this指向
+
+* 回调函数不使用箭头函数
+
+```js
+setTimeout(function() {
+  console.log(this)  //window  因为回调函数是被异步调用的，是在全局作用域中执行的，所以回调函数中的this值在非严格模式下指向window
+},0)
+
+function say() {
+    console.log(this)
+}
+setTimeout(say,2000) //window 因为回调函数是被异步调用的，是在全局作用域中执行的，所以回调函数中的this值在非严格模式下指向window
+
+let obj = {
+    say: function () {
+      console.log(this); //延迟执行函数中的this
+    },
+    print: function () {
+      setTimeout(this.say, 0); //setTimeout调用环境中的this，指向调用者即obj
+      // this是函数的属性，尽管this.say写在了setTimeout的()执行符号里，但是并没有写在setTimeout的函数体里。因此setTimeout执行符号中的this和print函数中的this是同一个。
+    }
+  };
+  obj.print() //window
+```
+
+* 回调函数使用箭头函数
+
+```js
+let obj = {
+    name: "jay",
+    print: function () {
+      setTimeout(() => {
+        console.log(this.name)   //因为箭头函数没有自己的this，箭头函数的this是被定义时所处作用域的this。箭头函数被定义在setTimOut函数的执行符号里面，而不是setTimeout的{}方括号里面，所以箭头函数的this就是print函数的this
+      }, 0);
+    }
+  };
+  obj.print() //jay
+```
 
 ```javascript
 var foo = {

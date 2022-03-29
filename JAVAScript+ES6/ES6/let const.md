@@ -1,5 +1,7 @@
 # let const
 
+* 在全局作用域中声明的let 和 const 不再window中，而是在script中。(script和window是同级别的一个概念)
+
 ## let
 
 1. 只在命令所在的块级作用域有效
