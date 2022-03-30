@@ -1,11 +1,15 @@
 # 脚手架
 
-## 使用命令
+## Vue使用命令
 
-### 安装vue的项目
+* vue create 文件名 
+* vue ui 启动一个本地的服务器,用于图形化的管理本地的项目。
+* 单独运行一个vue文件的方式，不在src下，在总目录下建一个xx.vue文件，执行vue serve xx.vue 或者vue build xx.vue
+* Vue add xx  在vue-cli项目中安装插件并调用
 
-* vue cli3使用 vue create my-project
-* 项目的名字不要有中文
+* Vue add 安装时(好像和创建Vue项目时选择的插件一样，自动创建目录引用，被Vue实例引用之后就可以全局使用了)Vue cli脚手架会自动生成目录来存放你安装的东西(例如axios)然后就可以直接在组件中用axios来使用axios方法
+* npm install 安装时不会自动创建目录，不能直接全局使用 需要自己手动引入 并且需要自己手动给Vue函数的原型上设置属性才能全局引用 Vue.prototype.$axios = axios; 使用this.axios全局引用,或者是手动在Vue的实例中引入该插件。
+* 使用npm安装axios时不需要Vue.use()但是需要手动在Vue的原型上添加一个$axios属性。axios使用vue add安装时，直接使用axios来使用
 
 ## vue cli2的项目目录
 
@@ -27,26 +31,15 @@
 
 ### vue cli3的一些变化
 
-* vue cli 3基于webpack4打造 vue cli 2基于webpack3
 * vue-cli 3的原则是零配置，移除config和build文件夹
 * 提供了vue ui命令
 * 移除了static文件夹，新增了public文件夹，并且把index.html文件移动到public中
 
-### vuecli3的一些命令
+### public和assets的区别
 
-* vue create 文件名
-* vue ui启动一个本地的服务器,用于图形化的管理本地的项目。
-* 单独运行一个vue文件的方式，不在src下，在总目录下建一个xx.vue文件，执行vue serve xx.vue 或者vue build xx.vue
-
-### vue cli3的目录结构
-
-* public相当于static(不会被变动)，并且其中包含index.html文件
-
-public中的文件不会变动指的是，public中的文件会随着index.html文件一起被放到dist文件夹中，但是如果你在组件里面使用了public中的资源，资源的地址依旧会变动。(比如说轮播图的图片不能通过放到public中来实现遍历字符串数组而遍历图片的功能)
-但是你可以在index.html中引入public中的一些文件。(想要在index.html中引入一些东西的时候。必须放到public中)
-使用node的request.context('')方法来引入图片的资源地址。
-
-* src中的asset 存放的也是静态文件，但是(可能会变动) 比如图片
+* Vue在打包之后，会将一些业务级的js文件合并到一个js文件夹中去。再开发时我们可能会使用一些第三方的插件(比如layer.js弹窗文件)。这些第三方我们我们不愿意在打包时被压缩到业务级的js文件中。那么就需要一个静态的，非改变的目录来存放这些第三方插件。
+* build文件夹在打包的时候，会被原封不动的移动到dist目录中
+* assets文件夹在打包时，会被压缩，合并到js业务代码中。
 
 ## vue cli4
 

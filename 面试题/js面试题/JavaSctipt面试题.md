@@ -23,3 +23,12 @@
 
 1. 使用Array.prototype.slice.call(arguments)。 slice()方法如果不传参数的话，会返回原数组的拷贝
 2. Array.from(arguments)  是ES6中提供的方法，只要有length属性的对象都可以使用这个方法来转换为数组
+
+## 逆转字符串(不使用循环)
+
+```js
+// 字符串的逆转，就先把字符串转化为数组。
+ function reverseStr(str) {
+   return str.split("").reverse().join("")
+ }
+```

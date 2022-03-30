@@ -4,9 +4,9 @@
 
 ## 舍入方法
 
-* Math.ceil()
-* Math.floor()
-* Math.round()
+* Math.ceil() 向上取整
+* Math.floor() 向下取整
+* Math.round()  四舍五入取整
 
 ## random()
 

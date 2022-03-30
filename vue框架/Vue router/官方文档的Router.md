@@ -103,7 +103,7 @@
 ```js
 <router-link to="/home">Home</router-link>  //访问/home路由。url为/home,路由匹配到home
 <router-link to="/xujie">Home</router-link> //访问/xujie路由。url为/xujie，路由匹配到home
-相当于给了一个组件 多种(路径和url)被访问的方式
+// 相当于给了一个组件 多种(路径和url)被访问的方式
  {
     path: '/home',
     name: 'Home',
@@ -137,7 +137,7 @@ export default {
 {
     path: '/user/:id',
     component: () => import('../views/User.vue'),
-    prop: true //设置为true的时候,route.params会被设置为组件的属性
+    props: true //设置为true的时候,route.params会被设置为组件的属性
 }
 ```
 
