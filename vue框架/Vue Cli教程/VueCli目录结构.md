@@ -58,7 +58,7 @@
 * src/App.vue：App.vue 是项目的主组件；
 * App.vue 中使用 router-link 引入其他模块，所有的页面都是在 App.vue 下切换的。
 * src/main.js：入口文件，主要作用是初始化 vue 实例，同时可以在此文件中引用某些组件库或者全局挂载一些变量。
-* .gitignore：配置 git 上传想要忽略的文件格式。
+* .gitignore：配置 git 上传想要忽略的文件格式。(node_modules在上传到gitHub时一定要剔除，太大了)
 * babel.config.js：一个工具链，主要用于在当前和较旧的浏览器或环境中将 ES6 的代码转换向后兼容（低版本ES）。
 * package.json：模块基本信息项目开发所需要的模块，版本，项目名称。
 * package-lock.json：是在 npm install 时候生成的一份文件，用于记录当前状态下实际安装的各个 npm package 的具体来源和版本号。

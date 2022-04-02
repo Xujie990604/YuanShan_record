@@ -26,6 +26,15 @@ java 先编译后解释 因为java虚拟机的存在
 2. 单线程（论转时间片）
 3. ECMA标准 js原生也称为ECMAScript。js三大阶段：ECMAScript + DOM + BOM（后两个由浏览器提供）
 
+## 浏览器中javaScript的运行环境
+
+* 在chrome浏览器运行环境中
+* v8是chrome浏览器中的js解析引擎
+* 内置API: DOM BOM js内置对象 Canvas等等(内置API是由运行环境提供的特殊接口，只能在所属的运行环境中被调用，浏览器有自己的API，Node也有自己的一套API)
+* 待执行的js代码(程序员在浏览器中编写js代码的时候，会使用浏览器内置的API)(也就是说DOM的方法， BOM的方法，还有js中各种构造函数和方法都是内置在浏览器中的)
+
+![js在浏览器中执行](../../JavaScript/img/yunxing.png )
+
 ## js是弱处理性语言
 
 1. case里的数据类型完全可以不一样（和其他强类型语言不一样）

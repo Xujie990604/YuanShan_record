@@ -50,10 +50,10 @@
 
 ## 顶层对象的属性
 
-1. ES5之前，顶层对象的属性(window)和全局变量是等价的 (变量未声明就使用不报错)
-2. ES6之后，var 和 function 声明的全局变量依旧是顶层对象(window窗口)的属性，let,const,class声明的全局变量不在属于顶层对象。
+1. ES5之前，顶层对象的属性(window)和全局变量是等价的 (变量未声明就使用不报错)(window对象是当前的浏览器窗口，是当前页面的顶层对象)
+2. ES6之后，var 和 function 声明的全局变量依旧是顶层对象(window窗口)的属性，let,const,class声明的全局变量不在属于顶层对象(在控制台中查看时属于一个叫script的对象，这个对象和window对象是平级的关系)
 
-## globalThis对象
+## globalThis对象(和宿主环境有关)
 
 1. 浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。
 2. 浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。

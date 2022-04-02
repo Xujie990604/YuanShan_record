@@ -82,6 +82,23 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 2. 如果then中的第一个回调函数被定义，但是没有返回值，那么then的返回值就是undefined经过Promise.resolve()包装
 3. 如果then的中的第一个回调函数没有被定义， 那么then的返回值就是上面的p的解决之后的值。
 
+```js
+new Promise((resolve,reject) => {
+   resolve("111")
+ })
+ .then(res => {
+   console.log(res)
+   return 'aaa'   //有返回值，所以这个then的返回值就是'aaa'经过resolve()函数包装
+ })
+ .then(null,err => { //then中第一个回调函数没有定义。所以这个then的返回值就是上一个then的返回值
+   console.log(err)
+   throw("bbb");
+ })
+ .then((res) => {    
+   console.log(res)  //aaa  得到的数据是“aaa”
+ })
+```
+
 #### 实例中返回错误
 
 ```js

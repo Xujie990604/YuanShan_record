@@ -53,3 +53,31 @@ Object.defineProperty(Vue.prototype, '$router', {
 // 注册<router-link>组件
   Vue.component('RouterLink', Link)
 ```
+
+## Vue组件的style标签中的scoped属性
+
+* 当一个style标签拥有scoped属性时，它的CSS样式就只能作用于当前的组件，也就是说，该样式只能适用于当前组件元素。通过该属性，可以使得组件之间的样式不互相污染。如果一个项目中的所有style标签全部加上了scoped，相当于实现了样式的模块化。
+
+### 原理
+
+给一个组件中的所有dom添加了一个独一无二的动态属性(同一个组件内的DOM添加的动态属性是一样的)，然后，给CSS选择器额外添加一个对应的属性选择器来选择该组件中dom，这种做法使得样式只作用于含有该属性的dom(组件内部dom)
+
+### scoped的弊端
+
+* 在我们自己的Vue组件中(组件的style带有scoped属性)引入第三方的插件时，按照普通的css层级去修改第三方插件的DOM不会生效。
+* 例如在vue.app组件中(组件的style带有scoped属性)引入element-ui插件。在带有scoped属性的style标签中去修改Element组件的内部DOM的css属性不会生效。因为Vue只会在当前组件的第一层DOM结构上添加那个动态的属性，不会在引用组件的第二层DOM上添加动态属性，但是只要是写在带有scoped属性的style标签中的css选择器都会被加上动态属性。因此会导致我们书写的css选择器和我们想要控制的DOM匹配不上。
+
+### scoped弊端的解决方案
+
+* 使用 >>> 击穿符号
+* 使用两个style标签
+
+```css
+<style>
+/* 用于修改第三方库的样式 */
+</style>
+ 
+<style scoped>
+/* 自己的组件内样式 */
+</style>
+```
