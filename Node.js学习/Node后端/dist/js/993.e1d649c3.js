@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkvue_test"]=self["webpackChunkvue_test"]||[]).push([[993],{9993:function(t,e,u){u.r(e),u.d(e,{default:function(){return o}});var n=function(){var t=this,e=t.$createElement,u=t._self._c||e;return u("div",{attrs:{id:"my-About"}},[t._v("About页面的内容")])},r=[],s={name:"MyAbout",data(){return{a:"啊啊啊"}},methods:{}},a=s,c=u(1001),l=(0,c.Z)(a,n,r,!1,null,"c29d0ec0",null),o=l.exports}}]);
+//# sourceMappingURL=993.e1d649c3.js.map
