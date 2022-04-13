@@ -19,7 +19,15 @@
 </body>
 
 <script>
- 
+  let i = 0;
+  for (let index = 7; i < 10; i++, index += i) {
+    for (let b = i; b < 2 * (i - 1) + 1; b++) {
+      console.log("_")
+    }
+    for (let a = 0; a < index; a++) {
+      console.log("*")
+    }
+  }
 </script>
 
 </html>
