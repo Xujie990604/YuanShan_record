@@ -7,7 +7,7 @@
 ```js
 module.exports = {
    configureWebpack: {
-    //起别名
+    //起别名 系统默认的配置@是文件夹src
     // 在DOM中使用别名的话，需要加上~
         resolve: {
             alias: {

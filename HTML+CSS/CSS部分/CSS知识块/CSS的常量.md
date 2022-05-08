@@ -34,6 +34,6 @@ div {
 ```js
 // document.documentElement获取的就是html标签
 // 可以在html上设置自定义属性
-// 也就是可以理解为css中的常量差不多就是css的属性
+// 也就是可以理解为css中的常量差不多就是 html DOM 的属性
 document.documentElement.style.setProperty("--animate-duration", '5s')
 ```

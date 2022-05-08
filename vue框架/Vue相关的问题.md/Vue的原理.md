@@ -69,7 +69,7 @@ Object.defineProperty(Vue.prototype, '$router', {
 
 ### scoped弊端的解决方案
 
-* 使用 >>> 击穿符号
+* 使用 >>> 击穿符号(或者 ::v-deep, /deep/ 指令)
 * 使用两个style标签
 
 ```css

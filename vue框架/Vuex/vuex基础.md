@@ -3,14 +3,7 @@
 ## 基础使用
 
 * 需要使用Vue.use()来安装插件
-* new Vuex时，需要 new Vuex.Store({})
 * 同时也需要在main.js的Vue实例中引入一下Vuex.store()的实例store,这样的话就可以(Vuex插件会自动)在Vue.prototype中添加一个$store的属性，这样就能在每个组件中使用$store属性
-
-## DevTools插件
-
-* 只有使用mutations来改变state的话，才能在DevTools中被记录到
-* 异步操作放到actions中，mutation中只处理同步的操作，否则也会跟踪不到
-* backend是后端 frontend是前端
 
 ## state
 
@@ -26,7 +19,7 @@
 
 * 类似于计算属性,被看做一个属性。
 * 使用this.$store.getters.powerCounter来获取store中的getters里面的属性
-* getters的方法中可以通过添加getter参数的形式来使用getter中的数据(getters方法中的第一个参数默认是state，第二个参数时getters)
+* getters的方法中可以通过添加getter参数的形式来使用getter中的数据(getters方法中的第一个参数默认是state，第二个参数是getters)
 * 如果getters里面需要在调用时填入参数的时候，需要在getters的函数内部返回一个函数，那么在调用getters中的属性时，实际得到的是一个函数，并且这个函数内可以指定参数
 
 ```js

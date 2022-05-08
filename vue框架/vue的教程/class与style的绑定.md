@@ -4,7 +4,7 @@
 
 ### 数组的语法
 
-```js
+```html
 // 数组语法中的aaa和bbb都是vue中定义的变量
 // 数组语法中想要使用条件切换就要使用三元运算符
 <div class="father" :class="[ isActive ? aaa : '', bbb ]"></div>
@@ -14,7 +14,7 @@
 
 * 通常和计算属性进行配合，控制类名的是否渲染。
 
-```js
+```html
 // 对象语法中的active不是Vue中的变量，就是字符串'active'
 <div class="static" :class="{ active: isActive, 'text-danger': hasError }"></div>
 // 可以同普通的class attribute并存一个DOM结构可以同时有class和:class
@@ -25,7 +25,7 @@
 
 ### style中对象的语法
 
-```js
+```html
 // 属性名fontSize既可以使用大驼峰的形式。 还可以使用连字符的形式font-size
 
 // '50px'加上了单引号Vue就会把'50px'当做字符串来解析
@@ -45,7 +45,7 @@ data{
 
 ### style中的数组的语法
 
-```js
+```html
 // sStyle,bStyle都是定义在data中的对象
 <div class="main" :style="[sStyle,bStyle]">数据</div>
 ```
