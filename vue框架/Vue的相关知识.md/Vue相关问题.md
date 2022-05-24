@@ -29,4 +29,3 @@ const imagesList = images.keys().map(item => images(item));
 * 在main.js中使用的是@import语法，全局引入
 * 在app.vue中根据coder加不加scoped。会有全局引用和组件内引用的不同
 * 在index.html中使用的是`<link>`标签引入。使用link不仅仅是引入css，同时还支持更多的功能
-
