@@ -1,16 +1,5 @@
 # 脚手架
 
-## Vue使用命令
-
-* vue create 文件名
-* vue ui 启动一个本地的服务器,用于图形化的管理本地的项目。
-* 单独运行一个vue文件的方式，不在src下，在总目录下建一个xx.vue文件，执行vue serve xx.vue 或者vue build xx.vue
-* Vue add xx  在vue-cli项目中安装插件并调用
-
-* Vue add 安装时(好像和创建Vue项目时选择的插件一样，自动创建目录引用，被Vue实例引用之后就可以全局使用了)Vue cli脚手架会自动生成目录来存放你安装的东西(例如axios)然后就可以直接在组件中用axios来使用axios方法
-* npm install 安装时不会自动创建目录，不能直接全局使用 需要自己手动引入 并且需要自己手动给Vue函数的原型上设置属性才能全局引用 Vue.prototype.$axios = axios; 使用this.axios全局引用,或者是手动在Vue的实例中引入该插件。
-* 使用npm安装axios时不需要Vue.use()但是需要手动在Vue的原型上添加一个$axios属性。axios使用vue add安装时，直接使用axios来使用
-
 ## vue cli2的项目目录
 
 * build文件夹放置的都是配置文件(抽离过的)
