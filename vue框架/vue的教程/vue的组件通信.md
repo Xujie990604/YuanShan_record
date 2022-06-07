@@ -11,7 +11,7 @@
 * 如果子组件声明了，父组件却没有传值过来的话，值为undefined
 
 ```js
-// 父组件将本页面的name变量传递给自组件。自组件接受值得时候需要使用s-name的小驼峰版本
+// 父组件将本页面的name变量传递给自组件。子组件接受值的时候需要使用s-name的小驼峰版本
 <view-first  :s-name="name" :s-message="message" ></view-first>
 ```
 
