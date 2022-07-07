@@ -14,19 +14,20 @@
 </head>
 
 <body>
-  <div class="a"></div>
-  <li class="xujie1">1</li>
-  <li class="xujie2">1</li>
-  <li class="xujie3">1</li>
-  <li class="xujie4">1</li>
-  <li class="xujie5">1</li>
-
+  
 </body>
 <script>
- let arr = [1, [2, 3]];
- let arr1 = [...arr];
- 
-
+  dataMap = {
+    name: 'xiaohan'
+  }
+const obj = {
+  dataMap: {
+    name: 'xujie'
+  },
+  get() {
+    console.log(dataMap.name)
+  }
+}
 </script>
 
 </html>
