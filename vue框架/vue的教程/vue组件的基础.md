@@ -1,3 +1,11 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-08 11:56:04
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue组件的基础.md
+ * @Description: 
+-->
 # Vue组件的基础
 
 * 所有的Vue组件都是Vue实例,全部都接受相同的选项对象(根实例独有的特性除外)
@@ -67,3 +75,19 @@ var ComponentA = { /* 组件内容 */ }
     </template>
 </app-model>
 ```
+
+## 解析DOM模板时注意事项
+
+```html
+ <ul>
+    <li
+      is="todo-item"
+      v-for="(todo, index) in todos"
+      v-bind:key="todo.id"
+      v-bind:title="todo.title"
+    ></li>
+</ul>
+```
+
+* 这个 is attribute 是十分必要的，is attribute 的作用是将li DOM 结构变成 todo-item 组件来加载。
+* 不直接将 todo-item组件 写在ul中，是因为ul中只能包含li。否则浏览器DOM解析时会报错。(Vue的模板加载策略是先按照html语法来解析模板，然后再用Vue来解析Vue使用到的语法)
