@@ -1,3 +1,11 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-05-25 23:06:32
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-07-10 01:34:57
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
+ * @Description:
+-->
 # VueCli基础
 
 * Vue CLI使用了一套基于插件的架构，如果查阅一个新创建项目的package.json 就会发现依赖都是以 @vue/cli-plugin-开头的
@@ -17,7 +25,7 @@
 
 ## Vue 请求静态资源中的路径
 
-* URL中是绝对路径，URL会被直接保存下来(适合请求public文件夹中的内容)
+* URL中是绝对路径，URL会被直接保存下来(适合请求public文件夹中的内容)(注意此时的路径应该是基于打包后的路径)
 * URL中是相对路径。URL中的内容会被作为一个模块进行请求。且基于你的文件系统中的目录结构进行解析。(适合请求assets文件夹中的内容)
 * URL开头是~  其后任何内容都会被当做模块解析(可以加载含有别名的静态资源，又能够加载node-modules中的资源)
 * URL开头是@  好处是@是一个别名
