@@ -1,3 +1,11 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-08 11:07:53
+ * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +26,14 @@
 </body>
 <script>
   dataMap = {
-    name: 'xiaohan'
+    name: 'xiaohan',
+    age: '19'
   }
-const obj = {
-  dataMap: {
-    name: 'xujie'
-  },
-  get() {
-    console.log(dataMap.name)
+  dataMap = ['1', '2', '3']
+  for (item in dataMap) {
+    console.log(item)
   }
-}
+
 </script>
 
 </html>

@@ -1,3 +1,11 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-08 11:35:00
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue的响应式数据.md
+ * @Description:
+-->
 # Vue的响应式数据
 
 * 由于Vue会在实例初始化的时候对 property 进行getter/setter转化。所以只有在一开始就存在data中的数据才是响应式的。(比如在组件的created, beforeCreate钩子函数中为组件添加一个属性，这个数据不是响应式的数据)(所有需要响应式的值都要在data中声明，即使它目前是一个空值，也要占上位子)
@@ -21,6 +29,8 @@ this.$set(this.lists, 0, "xujie")
 ### 会触发响应式
 
 * push()pop()shift()unshift()splice()sort()reverse()称为变更方法，会触发视图更新
+* 这些方法会触发Vue的数据响应式，是因为Vue在原方法的基础上进行加工。
+* 可能本质上push()等方法是不会改变Object.defineProperty()定义的属性的，???需要验证
 
 ### 不会触发响应式
 

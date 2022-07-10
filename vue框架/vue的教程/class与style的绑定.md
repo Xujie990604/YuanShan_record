@@ -1,3 +1,11 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-08 10:27:43
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\class与style的绑定.md
+ * @Description: 
+-->
 # class与style的绑定
 
 ## class的绑定
@@ -30,7 +38,7 @@
 
 // '50px'加上了单引号Vue就会把'50px'当做字符串来解析
 <div class="main" :style="{fontSize: '50px'}">数据</div>
-// finallySize没有加双引号的时候，Vue就会把finallySize当做变量来解析
+// finallySize没有加单引号的时候，Vue就会把finallySize当做变量来解析
 <div class="main" :style="{fontSize: finallySize}">数据</div>
 
 // 可以将这个对象写在data数据中，方便DOM结构的清晰

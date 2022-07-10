@@ -1,3 +1,11 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-08 10:55:49
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的相关知识.md\Vue相关问题.md
+ * @Description: 
+-->
 # Vue的问题
 
 * 自定义组件的名字永远不要使用单个单词，以免和未来的html标签冲突
@@ -33,7 +41,7 @@ const imagesList = images.keys().map(item => images(item));
 ## template模板
 
 * template的最重要特点就是不会被渲染成DOM元素
-* 一般template搭配 v-for或者v-show使用。
+* 一般template搭配 v-for或者v-if使用。
 
 ```js
 // 想要同时控制五个li的显示，需要给li外面加上一个容器，然后配合v-show指令使用。
