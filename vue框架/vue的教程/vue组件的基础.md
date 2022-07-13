@@ -2,44 +2,21 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-08 11:56:04
+ * @LastEditTime: 2022-07-13 10:43:18
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue组件的基础.md
- * @Description: 
+ * @Description: Vue组件基础
 -->
 # Vue组件的基础
 
-* 所有的Vue组件都是Vue实例,全部都接受相同的选项对象(根实例独有的特性除外)
-
-## 组件的构建
-
-* 使用Vue.extend()创建组件构造器 Vue2.x之后就很少显示的使用这个了，被合并到vue.component()这个过程中了
-* 使用vue.component()来注册全局组件(全局组件可以在多个Vue实例中使用)。如果是在某个Vue实例的component属性中进行注册的那么就是局部组件。
+* 所有的Vue组件都是Vue实例,全部都接受相同的选项对象(根实例独有的el特性除外)
 
 ## 组价和根实例的区别是实例拥有el选项
 
-* new Vue创建的是Vue的根实例
-* Vue.component注册的是全局组件
-* 定义组件时，需要在父组件里面使用到的子组件要在父组件之前定义
-
 ### 全局注册(router-link组件就是router自动注册的全局组件，我们不需要在当前组件中import就可以使用)
 
-* 全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
-* 子组件之间也可以互相引用
-* 可以直接把内容写在下文的组件内容部分，也可以使用模板分离的方式，使用template标签。
+### 局部注册
 
-```javascript
-Vue.component('my-component-name', { /* 组件内容 */ })
-```
-
-### 局部注册（我们自己使用组件时一般都是局部注册的组件）
-
-* 像定义一个普通的js对象来定义组件
-* 避免性能的浪费
-* 局部注册需要在父组件中进行注册
-
-```javascript
-var ComponentA = { /* 组件内容 */ }
-```
+* 在使用webpack的情况下，我们通过 xxx.vue 文件形式定义的组件都是 局部组件
 
 ## 组件的data必须是一个函数
 
