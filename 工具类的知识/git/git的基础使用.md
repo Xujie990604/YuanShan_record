@@ -21,8 +21,8 @@
 * git diff file 来查看某个文件在工作区和暂存区的改动(也就是说现在要git add file 的话，file中都包含哪些修改)
 * git diff        查看当前目录下所有文件在工作区和暂存区的改动(也就是说现在要git add .的话。当前目录都会有哪些修改)
 
-* git diff --cached 查看暂存区和仓库差异，
-* git diff HEAD     查看工作区和仓库的差异，
+* git diff --cached 查看暂存区和仓库差异
+* git diff HEAD     查看工作区和仓库的差异
 
 ### git status
 

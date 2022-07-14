@@ -159,3 +159,67 @@ app.use(cors())
 * 响应头部的相关字段
 
 1. ```Access-Control-Allow-Origin: <origin> | *``` 允许哪些域的网站访问服务器，可以设置制定域名，或者通配符
+
+## Session认证
+
+* express-session中间件的使用
+
+```js
+// 导入 session 模块
+const session = require('express-session')
+// 注册 session 全局中间件， 并进行配置
+// session 中间件配置成功之后就可以使用req.session来访问和使用session对象，从而存储用户的关键信息
+app.use(session({
+    secret: 'xujie', // 属性的值可以为任意的字符串
+    resave: false, // 固定写法
+    saveUninitialized: true //固定写法
+}))
+
+// 登录的 API 接口
+app.post('/api/login', (req, res) => {
+    // 判断用户提交的登录信息是否正确
+    if(req.body.username != 'xujie' || req.body.password !='xujie123') {
+        return res.send({ status: 0, msg: '登陆失败' })
+    }
+
+    // 登陆成功之后，将用户信息保存到 session 中
+    req.session.user = req.body  // 用户的信息
+    req.session.isLogin = true // 用户的登录状态
+
+    res.send({ status: 1, msg: '登录成功' })
+})
+```
+
+## JWT认证
+
+* jsonwebtoken (用于生成JWT字符串)  express-jwt(用于将JWT字符串还原成JSON对象)
+* 需要定义一个secret密钥。在加密和还原过程中都需要使用这个secret(secret本质上就是一个字符串，定义的时候越是复杂越好)
+
+```js
+// 在用户登陆成功之后， 调用 jwt.sign() 方法生成 JWT 字符串
+// 参数1：用户的信息对象
+// 参数2：加密的密钥(定义的 secret 字符串)
+// 参数3：配置对象，可以配置当前 Token 的有效期
+const Token = jwT.sign({ username: 'xxx' }, secretKey, { expiresIn: '1h' })
+
+// 在收到客户端发送的 JWT 字符串时，使用 expressJWt 将字符串解析成 JSON 对象
+app.use(expressJWt({ secret: secretKey }))
+
+// 登录的 API 接口
+app.post('/api/login', (req, res) => {
+  // 注意： 只要 expressJWt 中间件配置成功之后，就会把解析出来的用户信息，挂载到 req.user 属性上
+  // 现在在这里就可以访问到 req.user 属性
+  console.log(req.user)
+})
+
+// 如果 JWT 解析失败后会抛出错误，需要自己定义一个 全局的错误处理中间件 来捕获和处理错误
+app.use((err, req, res, next) => {
+    // 这个错误是由于 Token 解析失败导致的
+    if(err.name === 'UnauthorizedError') {
+        return res.send({
+            status: 0,
+            msg: '无效的Token'
+        })
+    }
+})
+```

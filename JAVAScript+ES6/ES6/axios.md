@@ -156,9 +156,9 @@ import {request} from './network/request'
 
 request({
   url: '/home/multidata'
-}.res => {
+}, res => {
   console.log(res);
-}.err => {
+}, err => {
   console.log(err);
 })
 ```
@@ -181,7 +181,7 @@ export function request(config) {
     // 所以直接返回instance，就可以在调用request时直接使用then和catch
     return instance(config);
 
-    // 加入以后的第三方框架不是promise的类型的数据
+    // 假如以后的第三方框架不是promise的类型的数据
     // 那就就要return new Promise((resolve,reject) => {
         // 里面是异步的处理代码
     } )
