@@ -33,25 +33,21 @@ props: {
   },
 ```
 
-#### props的验证
+#### 父组件传值了，但是子组件没有在props中声明
 
-* 基本的数据类型验证 Number String Object
-* 多种可能的类型 propB:[String,Number]
-* 必填的字段 propA：{type:String,required:true}
-* 带有默认值的数字 PropA:{type:Number,default:100}
-* 对象和数组的默认值必须从一个工厂函数来获取
-* prop会在组件的实例创建之前被验证，所以data，computed在props的default和验证函数里面是不可以使用的。
+* 如果父组件传递了一个值，但是子组件却没有在props中声明，那么这个属性就会作为子组件的根元素 DOM 上的attribute(一般来说父组件传递的 attribute 会覆盖子组件中的 attribute ，但是class和style除外，它俩会把父子组件上的内容合并)
+* 实例上的 this.$attrs property 里面包含了，父组件传了值，但是子组件中没有用props声明的属性。(这个在组件多层传值的时候使用很方便，具体使用看官网)
 
 ### 子传父
 
 #### 注册事件
 
-* 子组件通过$emit("son-method",count)方法并传入事件名称来触发一个事件
+* 子组件通过$emit("son-method", count)方法并传入事件名称来触发一个事件
 * 如果父组件直接在内联样式处理子组件传递过来的参数使用$event，如果事件的处理函数是一个方法，会当做第一个参数传进去。($event是Vue的语法，在浏览器事件中就代表event事件对象，在自定义事件中就代表子组件传递过来的参数)
 
 ```js
 // 在子组件中提交事件
-<div id="first" @click="$emit('a-click',123)" ></div>
+<div id="first" @click="$emit('a-click', 123)" ></div>
 // 在父组件中监听事件
 <view-first  @a-click="fClick($event)" ></view-first>
 // 父组件中事件处理函数的定义
@@ -62,7 +58,7 @@ fClick(data) {
     }
 ```
 
-## 父子组价之间的通信(不是数据的传递，而是直接调用属性或者方法)
+## 父子组件之间的通信(不是数据的传递，而是直接调用属性或者方法)
 
 ### $children
 
