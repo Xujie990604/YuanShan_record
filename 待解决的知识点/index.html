@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-11 20:24:45
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-07-17 14:29:06
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
  * @Description: 
 -->
@@ -14,10 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-   ul {
-     list-style: none;
-     display: inline-block;
-   }
   </style>
 </head>
 
@@ -25,7 +21,13 @@
   
 </body>
 <script>
+  function add(callback) {
+    let a = 'a';
+    let b = 'b';
+    callback(a, b)
+  }
 
+  add((err,result)=> {console.log(err, result)})
 </script>
 
 </html>
