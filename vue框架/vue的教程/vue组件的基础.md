@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-13 10:43:18
+ * @LastEditTime: 2022-07-19 10:59:17
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue组件的基础.md
  * @Description: Vue组件基础
 -->
@@ -68,3 +68,36 @@
 
 * 这个 is attribute 是十分必要的，is attribute 的作用是将li DOM 结构变成 todo-item 组件来加载。
 * 不直接将 todo-item组件 写在ul中，是因为ul中只能包含li。否则浏览器DOM解析时会报错。(Vue的模板加载策略是先按照html语法来解析模板，然后再用Vue来解析Vue使用到的语法)
+
+## 将一个组价内的函数当做变量传递给另一个组件
+
+* 在子组件内执行函数时，函数中的this指向的是父组件。也就是说函数中涉及到的一些变量都是父组件中的变量
+
+```html
+<template>
+  <div class="test-view">
+    <!-- 传递给子组件 -->
+    <test-home-page :data="list"></test-home-page>
+  </div>
+</template>
+<script>
+import TestHomePage from '@/components/testPages/TestHomePage.vue';
+export default {
+  data() {
+    return {
+      list: [
+        {
+          name: 'xujie',
+          callback: this.onclick
+        }
+      ],
+      arr: 'test'
+    }
+  },
+  methods: {
+    onclick() {
+      console.log(this.arr)
+    }
+  },
+};
+```
