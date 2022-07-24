@@ -70,6 +70,24 @@ fClick(data) {
     }
 ```
 
+### sync修饰符的使用
+
+```html
+<!-- 父组件中调用子组件，使用和不适用sync的两种方式 -->
+<div class="test-view">
+    <!-- 使用sync修饰符 -->
+    <test-view-page :number.sync="number"></test-view-page>
+    <!-- 正常组件通信 -->
+    <test-view-page :number="number" @update:number = "number = $event"></test-view-page>
+  </div>
+
+  <!-- 子组件中定义 -->
+<div class="test-view-page">
+  {{ number }}
+  <el-button @click="$emit('update:number', number + 1)" >增加</el-button>
+</div>
+```
+
 ## 父子组件之间的通信(不是数据的传递，而是直接调用属性或者方法)
 
 ### $children
