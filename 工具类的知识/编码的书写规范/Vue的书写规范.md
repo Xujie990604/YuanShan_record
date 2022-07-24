@@ -1,4 +1,13 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:11:00
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\工具类的知识\编码的书写规范\Vue的书写规范.md
+ * @Description: 
+-->
 # Vue中的书写和命名格式
+
+## 项目结构
 
 ## 命名格式
 

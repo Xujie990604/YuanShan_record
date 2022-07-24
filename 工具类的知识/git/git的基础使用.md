@@ -1,5 +1,7 @@
 # git
 
+* git的良好使用习惯，在 push 之前先 pull
+
 ## Git的本地命令
 
 ### git init
@@ -59,15 +61,15 @@
 
 ### git remote
 
-* git remote add origin "GitHub上的仓库地址"   本地文件关联GitHub上的仓库(git默认远程库的名字为origin，但是也可以改成别的？？这个origin在哪体现了？？)
+* git remote add origin "GitHub上的仓库地址"   本地文件关联GitHub上的仓库(git默认远程库的名字为origin(见名识意)，这条命令的作用是把本地的git仓库和远程的仓库联系起来)
 * git remote rm origin 解除本地和远程的绑定关系
 * git remote -v 查看远程库的信息
 
 ### git push
 
-* git push -u origin master  把本地的仓库推送到远程，其实是把当前的master分支推送到远程
-* 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
-* 现在起，只要本地作了提交，就可以通过命令  git push origin master把本地master分支的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！
+* git push -u origin master  (这条命令的作用是：把本地仓库的 当前所在分支 推送到远程仓库的 master 分支上)(本地分支的名字和远程仓库的分支名字保持一致十分重要，能够很清楚的知道本地哪个分支和远程的哪个分支相对应)
+* 在第一次推送本地的分支时，远程库是没有 master 分支的，所以我们加上了 -u 参数，Git不但会把本地的master分支内容推送的远程新的 master 分支，还会把本地的master分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。
+* 现在起，只要本地作了提交，就可以通过命令  git push  把本地 master 分支的最新修改推送至 GitHub 的 master 分支，现在，你就拥有了真正的分布式版本库！
 
 ### 从远程仓库克隆
 
@@ -102,6 +104,19 @@
 
 * 查看分支合并图
 
+## 分支切换的问题
+
+* git系统中，未 add ，commit的内容不属于任何一个分支，也就是说对于所有的分支而言，工作区和暂存区是公共的
+* 如果两个分支(最后一次的commit是相同的)，可以在不add或者commit新修改的情况下切换分支(例如从a->b)，但是本来在 a 分支上的修改会被带到 b 分支上，如果此时在 b 分支上add 或者 commit，那么那些这些改动会被添加到 b 分支上。(也是验证了git系统中的暂存区和工作区是公共的)
+* 如果两个分支(最后一次 的commit不一样)，那么在没有add 或者 commit的情况下，不可以切换分支。
+
+### 不提交代码的情况下进行分支的切换
+
+* git stash 指令，将没有add 和 commit 的内容缓存起来。
+* git stash list 指令，查看缓存的列表
+* git stash pop stash@{id} 在当前分支上恢复缓存的内容，并且会将此次缓存删除掉
+* git stash apply stash@{id} 在当前分支上恢复缓存的内容，但是不会将这次缓存删除
+
 ## vscode
 
-* VSCode可以直接把本地的文件夹添加到GitHub上。不需要事先在GitHub上创建仓库然后clone，也不需要使用git remote命令把本地的文件夹和GitHub上的仓库建立起联系。
+* VSCode可以直接把本地的文件夹添加到GitHub上。不需要事先在GitHub上创建仓库然后clone，也不需要使用git remote命令把本地的文件夹和GitHub上的仓库建立起联系

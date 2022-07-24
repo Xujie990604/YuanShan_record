@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:11:00
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue的语法和指令.md
+ * @Description: 
+-->
 # Vue的语法和指令
 
 ## mustache语法
@@ -34,6 +41,15 @@
 * ```<div v-bind:id="msg"></div>```
 * 语法糖的写法就是 :
 * 不仅仅是需要绑定变量的时候才使用v-bind，只要是需要Vue解析语法就需要使用v-bind(如果你就是想要传递一个没有被变量引用的字符串时，不要使用v-bind，反而会出错，会自动把你想要当字符串传递的字符串当做变量来识别。相反不加v-bind的话，你传的什么都会被当做字符串.)
+
+```js
+// 尽管这些都不是变量，但是还是要加上v-bind修饰符。因为不加v-bind即使你写的是 数字42 布尔值false 都会被当作纯字符串被传入
+// 只有使用了v-bind修饰符，Vue才会尝试将他们识别为 Number Boolean Array Object
+<blog-post v-bind:likes="42"></blog-post>
+<blog-post v-bind:is-published="false"></blog-post>
+<blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+<blog-post v-bind:author="{ name: 'Veronica', company: 'Veridian Dynamics'}"></blog-post>
+```
 
 ## 动态参数
 
