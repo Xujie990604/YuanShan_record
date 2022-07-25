@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-10 01:34:57
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-07-25 10:47:51
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
  * @Description:
 -->
@@ -29,6 +29,11 @@
 * URL中是相对路径。URL中的内容会被作为一个模块进行请求。且基于你的文件系统中的目录结构进行解析。(适合请求assets文件夹中的内容)
 * URL开头是~  其后任何内容都会被当做模块解析(可以加载含有别名的静态资源，又能够加载node-modules中的资源)
 * URL开头是@  好处是@是一个别名
+
+### Vue-loader
+
+* require 是属于 node 的语法，是用来导入模块信息的。但是在Vue项目的 template 和 style 中我们没有使用 require导入 通过相对路径的方式直接使用其他模块的静态资源。这是因为Vue-loader自动帮我们做了一次导入。
+* template 中使用 别名需要在前面加上 ~。 style 中不可以使用别名
 
 ## 配置文件
 
