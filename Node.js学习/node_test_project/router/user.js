@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:55:21
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-17 16:09:59
+ * @LastEditTime: 2022-07-25 21:41:23
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\router\user.js
  * @Description: 存放客户端请求与处理函数之间的映射关系
  */
@@ -30,6 +30,6 @@ const { register, login } = require('../router_handler/user')
 router.post('/register', expressJoi(reg_login_schema), register)
 
 // 用户登录对应的路由
-router.post('/login', login)
+router.post('/login', expressJoi(reg_login_schema), login)
 
 module.exports = router;
