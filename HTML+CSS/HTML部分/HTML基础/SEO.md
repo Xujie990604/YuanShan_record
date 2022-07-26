@@ -1,8 +1,20 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:21
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\HTML+CSS\HTML部分\HTML基础\SEO.md
+ * @Description: SEO的概念以及最佳实践
+-->
 # SEO
 
 ## SEO的定义
 
 SEO(Search Engine Optimization)，即搜索引擎优化。SEO是随着搜索引擎的出现而来的，两者是相互促进，互利共生的关系。SEO的存在就是为了提升网页在搜索引擎自然搜索结果中的收录数量以及排序位置而做的优化行为。而优化的目的就是为了提升网站在搜索引擎中的权重，增加对搜索引擎的友好度，使得用户在访问网站时能排在前面。
+
+### 单页面应用 SEO
+
+* SEO检测的是URL返回的html页面中的 DOM 元素，如果是静态页面的话输入网站的 URL 会将静态页面的内容全部返回。爬虫就可以 检索 返回内容中的DOM结构
+* 但是在单页面应用中，输入网站的 URL 返回的html页面中只有一个空的根节点元素。 页面的所有内容都是通过执行 js 文件得到的。所以爬虫在检索返回内容时找不到页面中应该有的内容
 
 ## SEO的规范
 
