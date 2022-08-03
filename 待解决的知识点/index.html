@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-31 22:27:24
+ * @LastEditTime: 2022-08-02 22:34:48
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
@@ -22,13 +22,68 @@
 </body>
 <script>
 
-foo();
+  // setTimeout(() => {
+  //   let a = "浙江"
+  //   setTimeout(() => {
+  //     console.log(a)
+  //     let b = "杭州"
+  //     setTimeout(() => {
+  //       console.log(a + b)
+  //       let c = "滨江"
+  //       setTimeout(() => {
+  //         console.log(a + b +c)
+  //       }, 2000);
+  //     }, 2000);
+  //   }, 2000);
+  // }, 2000);
+
+// new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("浙江")
+//   }, 2000);
+// })
+// .then(res => {
+//   console.log(res)
+//   return new Promise((resolve,reject) => {
+//     setTimeout(() => {
+//       resolve(res + "杭州")
+//     }, 2000);
+//   })
+// })
+// .then(res => {
+//   console.log(res)
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(res + "滨江")
+//     }, 2000);
+//   })
+// })
+// .then(res => {
+//   console.log(res)
+// })
+
 async function foo() {
   let a = await new Promise((resolve, reject) => {
-    
+    setTimeout(() => {
+      resolve('浙江')
+    }, 2000);
   })
-  console.log(a)
+  console.log(a);
+  let b = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(a + '杭州')
+    }, 2000);
+  })
+  console.log(b)
+  let c = await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(b + '滨江')
+    }, 2000);
+  })
+  console.log(c)
 }
+
+foo()
 
 </script>
 
