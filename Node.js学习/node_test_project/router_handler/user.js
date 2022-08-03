@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:56:04
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-17 16:31:40
+ * @LastEditTime: 2022-07-25 22:09:38
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\router_handler\user.js
  * @Description: 专门负责存放每个路由的处理函数
  */
@@ -68,7 +68,26 @@ const register = (req, res) => {
  * @return {*}
  */
 const login = (req, res) => {
-    res.send("login OK")
+  // 获取客户端提交到服务端的信息
+    const userInfo = req.body;
+    // 定义查询指定 username 的SQL语句
+    const sqlStr= 'select * from user where username=?'
+    db.query(sqlStr, userInfo.username, (err, results) => {
+      // 执行Sql语句失败
+      if(err) {
+        return res.cc(err)
+      }
+      // 执行 Sql 语句成功，但是获取到的数据不等于1
+      if(results.length !== 1) {
+        return res.cc("登录失败，请稍后再试")
+      }
+      // TODO: 检查密码是否正确
+      // p81 10:00
+      res.send({
+        status: 1,
+        message: '登录成功'
+      }) 
+    })
 }
 
 // 导出事件处理函数
