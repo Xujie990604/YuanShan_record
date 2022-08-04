@@ -133,3 +133,13 @@ this.$bus.$on('itemImageLoad',(index) => {
       console.log(index);
     });
 ```
+
+## Vue组件中的零散知识点
+
+* 子组件中需要一个布尔值时，使用单标签的形式，相当于传递true
+
+```js
+// 两种方式等价
+<test lazy-model></test>
+<test :lazy-model="true" ></test>
+```
