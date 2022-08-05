@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:10:58
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\let const.md
+ * @Description: 
+-->
 # let const
 
 * 在全局作用域中声明的let 和 const 不再window中，而是在script中。(script和window是同级别的一个概念)
@@ -47,16 +54,3 @@
 * 本质是const执行的内存地址不改变，简单类型的值就是常量，复合类型的值保证指针是不变的。
 * const声明的对象可以添加属性。不可以重新赋值新的对象。实质是不改变地址。对象的属性添加不更改地址。
 * 想要对象冻结，使用Object.freeze()方法
-
-## 顶层对象的属性
-
-1. ES5之前，顶层对象的属性(window)和全局变量是等价的 (变量未声明就使用不报错)(window对象是当前的浏览器窗口，是当前页面的顶层对象)
-2. ES6之后，var 和 function 声明的全局变量依旧是顶层对象(window窗口)的属性，let,const,class声明的全局变量不在属于顶层对象(在控制台中查看时属于一个叫script的对象，这个对象和window对象是平级的关系)
-
-## globalThis对象(和宿主环境有关)
-
-1. 浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。
-2. 浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。
-3. Node 里面，顶层对象是global，但其他环境都不支持。
-
-**ES2020在语言标准的层面，引入globalThis作为顶层对象。也就是说，任何环境下，globalThis都是存在的，都可以从它拿到顶层对象，指向全局环境下的this。**
