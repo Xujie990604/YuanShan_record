@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-08-03 23:22:33
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-08-05 11:00:36
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
@@ -21,21 +21,30 @@
   
 </body>
 <script>
+const obj = {
+  name: 'xujie',
+  call: () => {
+    console.log(this.name);
+  }
+}
+obj.call()
 
-  setTimeout(() => {
-    let a = "浙江"
-    setTimeout(() => {
-      console.log(a)
-      let b = "杭州"
-      setTimeout(() => {
-        console.log(a + b)
-        let c = "滨江"
-        setTimeout(() => {1
-          console.log(a + b +c)
-        }, 2000);
-      }, 2000);
-    }, 2000);
-  }, 2000);
+
+
+  // setTimeout(() => {
+  //   let a = "浙江"
+  //   setTimeout(() => {
+  //     console.log(a)
+  //     let b = "杭州"
+  //     setTimeout(() => {
+  //       console.log(a + b)
+  //       let c = "滨江"
+  //       setTimeout(() => {1
+  //         console.log(a + b +c)
+  //       }, 2000);
+  //     }, 2000);
+  //   }, 2000);
+  // }, 2000);
 
 // new Promise((resolve, reject) => {
 //   setTimeout(() => {
