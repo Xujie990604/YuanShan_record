@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-08-05 11:00:36
+ * @LastEditTime: 2022-08-08 16:08:23
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
@@ -21,16 +21,6 @@
   
 </body>
 <script>
-const obj = {
-  name: 'xujie',
-  call: () => {
-    console.log(this.name);
-  }
-}
-obj.call()
-
-
-
   // setTimeout(() => {
   //   let a = "浙江"
   //   setTimeout(() => {
@@ -92,6 +82,13 @@ obj.call()
 //   console.log(c)
 // }
 // foo()
+
+async function foo() {
+  let a = await 1 + 1;
+  console.log("同步代码")
+  console.log(a)
+}
+foo()
 
 </script>
 
