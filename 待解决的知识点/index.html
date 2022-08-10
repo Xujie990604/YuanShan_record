@@ -1,98 +1,92 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-08-05 11:00:36
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-08-06 16:53:35
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-  </style>
-</head>
+  <body></body>
+  <script>
+    setInterval(() => {
+      console.time("sss");
+      let a = 10000000000;
+      for (let index = 0; index < a; index++) {
+        let b = index;
+      }
+      console.log("aa");
+      console.timeEnd("sss");
+    }, 500);
 
-<body>
-  
-</body>
-<script>
-const obj = {
-  name: 'xujie',
-  call: () => {
-    console.log(this.name);
-  }
-}
-obj.call()
+    // setTimeout(() => {
+    //   let a = "浙江"
+    //   setTimeout(() => {
+    //     console.log(a)
+    //     let b = "杭州"
+    //     setTimeout(() => {
+    //       console.log(a + b)
+    //       let c = "滨江"
+    //       setTimeout(() => {1
+    //         console.log(a + b +c)
+    //       }, 2000);
+    //     }, 2000);
+    //   }, 2000);
+    // }, 2000);
 
+    // new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("浙江")
+    //   }, 2000);
+    // })
+    // .then(res => {
+    //   console.log(res)
+    //   return new Promise((resolve,reject) => {
+    //     setTimeout(() => {
+    //       resolve(res + "杭州")
+    //     }, 2000);
+    //   })
+    // })
+    // .then(res => {
+    //   console.log(res)
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(res + "滨江")
+    //     }, 2000);
+    //   })
+    // })
+    // .then(res => {
+    //   console.log(res)
+    // })
 
-
-  // setTimeout(() => {
-  //   let a = "浙江"
-  //   setTimeout(() => {
-  //     console.log(a)
-  //     let b = "杭州"
-  //     setTimeout(() => {
-  //       console.log(a + b)
-  //       let c = "滨江"
-  //       setTimeout(() => {1
-  //         console.log(a + b +c)
-  //       }, 2000);
-  //     }, 2000);
-  //   }, 2000);
-  // }, 2000);
-
-// new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve("浙江")
-//   }, 2000);
-// })
-// .then(res => {
-//   console.log(res)
-//   return new Promise((resolve,reject) => {
-//     setTimeout(() => {
-//       resolve(res + "杭州")
-//     }, 2000);
-//   })
-// })
-// .then(res => {
-//   console.log(res)
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(res + "滨江")
-//     }, 2000);
-//   })
-// })
-// .then(res => {
-//   console.log(res)
-// })
-
-// async function foo() {
-//   let a = await new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve('浙江')
-//     }, 2000);
-//   })
-//   console.log(a);
-//   let b = await new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(a + '杭州')
-//     }, 2000);
-//   })
-//   console.log(b)
-//   let c = await new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(b + '滨江')
-//     }, 2000);
-//   })
-//   console.log(c)
-// }
-// foo()
-
-</script>
-
+    // async function foo() {
+    //   let a = await new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve('浙江')
+    //     }, 2000);
+    //   })
+    //   console.log(a);
+    //   let b = await new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(a + '杭州')
+    //     }, 2000);
+    //   })
+    //   console.log(b)
+    //   let c = await new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(b + '滨江')
+    //     }, 2000);
+    //   })
+    //   console.log(c)
+    // }
+    // foo()
+  </script>
 </html>
