@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-08-08 16:08:23
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-08-10 22:58:38
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
@@ -17,15 +17,16 @@
 
   <body></body>
   <script>
-    setInterval(() => {
-      console.time("sss");
-      let a = 10000000000;
-      for (let index = 0; index < a; index++) {
-        let b = index;
-      }
-      console.log("aa");
-      console.timeEnd("sss");
-    }, 500);
+   new Promise((resolve,reject) => {
+    try {
+      reject("ggsfgh")
+    } catch (error) {
+      console.log(error)
+    }
+   })
+
+    
+    
 
     // setTimeout(() => {
     //   let a = "浙江"

@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:10:58
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\DOM\事件\事件处理的this.md
+ * @Description: 
+-->
 # 事件处理函数的this指向
 
 ## this指向
@@ -8,20 +15,13 @@
 * 但是如果把test()赋值给事件上，那么this值为window，因为只给一个函数名是把函数的引用赋值给了事件，将来这个函数是被这个元素调用的，也就是说执行环境是DOM元素，但是要是把test()直接赋值给事件，那就是把函数的执行结果赋值给了事件，那么这个函数时在全局被调用的。
 
 ```javascript
-   <p id="xujie">这是一个段落</p>
-   var eleP = document.getElementById("xujie");
-        eleP.onclick = function() {
-            console.log(this)
-        }
-  
-  ```
+// 两种不同的动态绑定事件的方法
+ele.onXXX = function(){}
+程序的this指向dom元素本身
 
-### 通过元素的特性来指定事件处理程序
-
-* 某个元素支持的某种事件，都可以通过与事件处理程序同名的HTML特性来指定(HTML的特性应该是一些值)
-* 因为是值，所以直接在行内添加代码时，不能出现未经转义的字符。
-* 这个特性的值应该是能够执行的js代码(因此在行间绑定函数时需要加()执行符号，而不是添函数的引用。)
-* 缺点 ： 事件处理程序和HTML元素紧密耦合，一是改动代码时麻烦，二是HTML刚加载完时，那些代码不具备被执行的条件(还没有解析到事件特性中使用到的函数)，导致错误。还有就是扩展程序的作用域链不同的浏览器的支持程度不一样。
+obj.addEventListener("type",function,false)
+程序的this指向dom元素本身
+```
 
 #### 在行内绑定事件处理程序
 
@@ -44,14 +44,3 @@
 ```javascript
 <p id="xujie" onclick="console.log(this)">xujie</p>
 ```
-
-## 方法绑定的不同this
-
-ele.onXXX = function(){}
-程序的this指向dom元素本身
-
-obj.addEventListener("type",function,false)
-程序的this指向dom元素本身
-
-obj.attachEvent('on+type',function) IE的方法
-程序this指向window
