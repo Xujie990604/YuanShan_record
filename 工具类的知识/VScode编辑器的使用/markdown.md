@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:11:00
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\工具类的知识\VScode编辑器的使用\markdown.md
+ * @Description: 
+-->
 # Markdown 语法的使用
 
 ## 标题
@@ -34,7 +41,7 @@
 
 1. 第一行
 2. 1999\.若是想要用数字开头。使用\反斜杠来转义英文的句号
-   1. 嵌套的第一行包含代码```JavaScript```
+   1. 嵌套的第一行包含代码```JavaScript```(使用三个空格的缩进代表下一个层级)
    2. 嵌套的第二行
 
 ## 代码
