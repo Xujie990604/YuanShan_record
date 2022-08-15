@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:21
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Set 和 Map数据结构.md
+ * @Description: Set和Map两种全新的数据结构
+-->
 # Set 和 Map
 
 ## Set
@@ -14,7 +21,7 @@ const s = new Set();
   })
 
 // Set函数可以接受一个数组（或者具有 iterable 接口的其他数据结构）作为参数，用来初始化。
-// 数组去重
+// 数组去重！！！这是目前知道的一个比较实用的用法
 [...new Set(arr)]
 // Array.from()可以将Set结构转换为数组
 // 这也是数组去重的一种方式
@@ -44,7 +51,7 @@ Array.from(new Set(arr))
 
 ## Map
 
-* JavaScript的对象本质上是键值对的集合，但是传统上只能把字符串当做键值。
+* JavaScript的对象本质上是键值对的集合，但是传统上只能把字符串当做key值。
 * Map类似于对象，也是键值对的集合，但是键的范围不限制于字符串，各种类型的值(包括对象)都可以当做键。
 * 作为一个构造函数，Map也可以接受一个数组当做参数，该数组的成员也是一个个表示键值对的数组
 

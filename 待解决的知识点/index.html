@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-08-15 09:34:52
+ * @LastEditTime: 2022-08-15 20:34:19
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
 -->
 
@@ -79,12 +79,12 @@
     // }
     // foo()
 
-    async function foo() {
-      let a = await 1 + 1;
-      console.log("同步代码")
-      console.log(a)
-    }
-    foo()
+    // async function foo() {
+    //   let a = await 1 + 1;
+    //   console.log("同步代码")
+    //   console.log(a)
+    // }
+    // foo()
 
     // async function foo() {
     //   let a = await setTimeout(() => {
@@ -106,5 +106,24 @@
     //   console.log(a);
     // }
     // foo();
+
+    class Foo {
+      constructor() {
+        console.log(1);
+      }
+    }
+
+    // 使用extend关键字实现继承
+    class Bar extends Foo {
+      constructor() {
+        // 在子类的 constructor 中必须先调用一次super()之后才能使用 this关键字
+        // super()函数就是在调用父类的构造函数，生成一个父类的实例对象，这个实例对象拥有父类上的属性和方法
+        // 然后将这个实例对象当做子类的this。子类在这个对象上进行属性和方法的添加，这样来实现子类的实例既有父类的方法属性又有自身的方法属性
+        super();
+        console.log(2);
+      }
+    }
+
+    const bar = new Bar();  // 控制台会打印 1 2 因为子类实例构建的同时，会调用super()执行一次父类的构造
   </script>
 </html>
