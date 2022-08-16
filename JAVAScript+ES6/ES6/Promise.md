@@ -96,35 +96,10 @@ new Promise((resolve,reject) => {
 #### 实例中返回错误
 
 ```js
-let p = new Promise((resolve, reject) => {
-     return new Error("err");
- }) //不会报错，p的值是pending: undefined   new Error("err")就像消失了一样
-
  let p = new Promise((resolve, reject) => {
-     resolve(new Error('err'))
- }) //不会报错，p的值是resolve: Error: err 任何非Promise的值都会被包装为promise对象
-
- let p = new Promise((resolve, reject) => {
-     throw(Error("error"))
-     reject(new Error("err"))
- }) //会抛出异步的错误，p的值是reject: Error: err throw一个错误，就类似于reject的理由是一个错误对象(throw和reject谁的语句书写在前面，p的值就是谁的值)
-
- let p = new Promise((resolve, reject) => {
-     resolve("success")
- })
- let a = p.then(() => {
-     return new Error("err")
- })//不会报错， a的值为resolve: Error: err 在处理程序中返回任意一个非Promise都会被包装成Promise对象
-
- let p = new Promise((resolve, reject) => {
-     resolve("success")
- })
- let a = p.then(() => {
-     throw new Error("error")
-     return Promise.reject(new Error("err")) //这两种方式应该是等价
- })
- //  会报错,如果下面没有catch来处理错误，a的返回值就是reject: Error: error,
- // 要是下面有catch来捕获错误，a的返回值就是resolve: undefined
+     reject(new Error("err")) // 一般在Promise抛出错误的形式
+     throw(Error("error"))    //使用throw语句同样也可以使得Promise的状态改变为reject
+ }) 
 ```
 
 ### Promise.prototype.catch()
@@ -144,16 +119,11 @@ p.finally(() => Promise.reject()) //Promise `<reject>`: undefined
 
 * 主要是为了解决冗余代码
 
-### 非重入特性
-
-* 在一个解决期约上调用then处理程序，会把then中的回调函数推荐消息队列。
-* 因此then中的回调函数才是真正异步的函数。
-
 ### 拒绝期约和拒绝错误处理
 
 * throw一个错误对象和在reject中返回一个Error对象，都会返回一个内容为错误对象的状态为reject的Promise。
 * 期约可以使用任何理由拒绝，但是最好使用一个Error对象，因为Error对象会包含一些用于调试的信息，
-* 这些错误都是通过异步抛出且未处理的，异步的错误只能通过异步的处理程序来捕获(注意只有经历了then等处理程序的错误才是异步的)
+* 这些错误都是通过异步抛出且未处理的，异步的错误只能通过异步的处理程序来捕获
 
 ```js
 new Promise((resolve,reject) => {
