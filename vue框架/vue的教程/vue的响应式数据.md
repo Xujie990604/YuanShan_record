@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-08-14 01:47:45
+ * @LastEditTime: 2022-08-21 20:48:35
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -11,7 +11,7 @@
 * 由于Vue会在实例初始化的时候对 property 进行getter/setter转化。所以只有在一开始就存在data中的数据才是响应式的。(比如在组件的created, beforeCreate钩子函数中为组件添加一个属性，这个数据不是响应式的数据)(所有需要响应式的值都要在data中声明，即使它目前是一个空值，也要占上位子)
 * 尽量不要在beforeCreate钩子函数中定义变量值 1.只在beforeCreate定义属性不在data中定义属性则该属性不是响应式的 2.在beforeCreate中定义属性又在data中定义属性的话会被覆盖。
 * 对于已经创建的实例，Vue不允许动态的添加 根级别(!!!Vue.set()设置的属性不是根级别的) 的响应式 property
-* Vue中一个状态所绑定的依赖是一个组件，状态发生变化之后会通知到组件，组件内部再使用虚拟DOM进行对比。
+* Vue 中一个状态所绑定的依赖是一个组件，状态发生变化之后会通知到组件，组件内部再使用虚拟DOM进行对比。
 
 ## Vue响应式的原理
 
