@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-31 00:26:42
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-08-23 12:08:33
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
  * @Description:
 -->
@@ -32,7 +32,7 @@
 
 ### Vue-loader
 
-* require 是属于 node 的语法，是用来导入模块信息的。但是在Vue项目的 template 和 style 中我们没有使用 require导入 通过相对路径的方式直接使用其他模块的静态资源。这是因为Vue-loader自动帮我们做了一次导入。
+* require 是属于 node 的语法，是用来导入模块信息的。但是在Vue项目的 template 和 style 中我们没有使用 require导入 通过相对路径的方式直接使用其他模块的静态资源。这是因为 Vue-loader自动帮我们做了一次导入。
 * template 中使用 别名需要在前面加上 ~。 style中使用别名也要在前面加上 ~ 符号
 
 ## 配置文件
