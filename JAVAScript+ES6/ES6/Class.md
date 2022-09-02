@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-15 15:20:39
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Class.md
  * @Description: Class的用法
 -->
@@ -45,7 +45,7 @@ class Point {
     const p = new Point(1,3)
     
     typeof Point // "function" Class实际上就是一个语法糖，Point类本质还是一个函数
-    Point === Point.prototype.constructor // true、
+    Point === Point.prototype.constructor // true
 ```
 
 ## 类的继承
