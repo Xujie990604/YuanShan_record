@@ -16,9 +16,74 @@
 <body>
   
   <script>
-    
+    // 定义一个 dep 类，专门用来管理依赖
+    class Dep {
+      constructor() {
+        this.subs = [];
+      }
+      // 在 dep 实例中添加一个依赖
+      addSub(sub) {
+        this.subs.push(sub);
+      }
+      // 在 dep 实例中移除一个依赖
+      removeSub(sub) {
+        remove(this.subs, sub);
+      }
+      // 在依赖添加之前进行一次判断，在依赖不为undefined时才会添加
+      depend() {
+        if (window.target) {
+          this.addSub(window.target);
+        }
+      }
+      // 循环触发 dep 实例中依赖的update方法
+      notify() {
+        // 返回数组的拷贝
+        const subs = this.subs.slice();
+        // 循环的触发所有依赖
+        for (let index = 0; index < subs.length; index++) {
+          subs[i].update();
+        }
+      }
+    }
 
+    // 收集的依赖是一个什么东西，起一个名字叫做watcher
+    // watcher 是一个中介的角色，数据发生变化的时候通知它，然后它在通知其他的地方
+    class Watcher {
+      constructor(vm, expOrFn, cb) {
+        this.vm = vm;
+        // 执行 this.getter() ，就可以读取某个属性的值
+        this.getter = parsePath();
+        this.cb = cb;
+        // 在实例化一个 watcher 实例的时候，会自动执行 get 方法
+        this.value = this.get();
+      }
+      // 在执行 get 方法时，将 watcher 实例本身赋值给 window.target
+      get() {
+        window.target = this;
+        // 调用 this.getter 方法时 会读取某个属性的值，因为属性做了响应式处理，会把 window.target(也就是watcher实例) 放到 dep 实例中
+        let value = this.getter.call(this.vm, this.vm)
+        // 将依赖插入 dep 实例后，将 window.target 赋值为 undefined
+        window.target = undefined;
+        return value
+      }
+
+      update() {
+        const oldValue = this.value;
+        this.value = this.get()
+        this.cb.call(this.vm, this.value, oldValue)
+      }
+    }
+
+    // remove 函数用来在数组中移除指定的数据,并将移除的数据当作函数的返回值
+    function remove(arr, item) {
+      if (arr.length) {
+        const index = arr.indexOf(item);
+        if (index > -1) {
+          return arr.splice(index, 1);
+        }
+      }
+    }
+
+    // const bar = new Bar();  // 控制台会打印 1 2 因为子类实例构建的同时，会调用super()执行一次父类的构造
   </script>
-  
-</body>
 </html>
