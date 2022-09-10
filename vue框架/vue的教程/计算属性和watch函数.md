@@ -1,9 +1,9 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-08 10:14:52
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue的计算属性.md
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-09-05 22:21:17
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\计算属性和watch函数.md
  * @Description: 
 -->
 # vue的计算属性
@@ -11,7 +11,7 @@
 ## computed
 
 * 减少模板中表达式的使用
-* 当计算属性在模板中使用，并且计算属性的依赖值(只要是定义在computed中的就，哪怕是return的时候和这个值无关)发生改变的时候就会触发他的更改(调用的是getter函数)。如果不发生变化，使用的就是缓存的属性值
+* 当计算属性在模板中使用，并且计算属性的依赖值(只要是在computed中出现过的，哪怕return的时候和这个值无关)发生改变的时候就会触发他的更改(调用的是getter函数)。如果不发生变化，使用的就是缓存的属性值
 * 计算属性其实本质就是一个对象，只不过省略使用的话可以写成一个函数。所以使用计算属性的时候不需要加括号。
 * 计算属性中的getter函数要求是没有副作用的(就是函数里面不能改变数据，在使用eslint的情况下在getter中改变已有属性会报错)
 
