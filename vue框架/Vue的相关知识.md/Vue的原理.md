@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-24 22:14:52
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的相关知识.md\Vue的原理.md
  * @Description: 一些和Vue的原理有关的知识点
 -->
@@ -89,6 +89,7 @@ Object.defineProperty(Vue.prototype, '$router', {
 /* 使用::v-deep{ } 语法时可以前面没有父选择器 */
 ::v-deep {
   .son {
+    
     ...
   }
 }
