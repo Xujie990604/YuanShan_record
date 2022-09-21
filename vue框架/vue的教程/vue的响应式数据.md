@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-08-28 00:05:59
+ * @LastEditTime: 2022-09-18 16:48:06
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -54,6 +54,8 @@ this.$set(this.error,'phone','手机号不能为空');
 * 在 getter 中收集依赖，在 setter 中触发依赖
 
 ```js
+1。外部需要通过 watcher 来读取数据，在 watcher 中会读取一下 data 中的数据，然后触发了响应式的 get 方法。在 get 的时候将 watcher 添加到 data 的依赖数组 dep 中(完成依赖收集)
+2. 在改变 data 中数据的值时，触发响应式的 set 方法。在 set 中通过 dep 的 notice 去循环的触发 watcher 上面的 update 方法。 update 方法中可以执行用户传进来的 callback 回调函数来执行用户想要的操作
     // 定义一个 dep 类，专门用来管理依赖
     class Dep {
       constructor() {

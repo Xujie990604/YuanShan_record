@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:10:59
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\webpack学习\npm的使用.md
+ * @Description: 
+-->
 # NPM的使用
 
 ## 基础的指
@@ -39,6 +46,6 @@
 
 * npm install X 不会修改package.json 以后运行npm install时，不会自动安装
 * npm install X --save(--save可以简写-S) 修改package.json文件，把版本号和插件名字写进dependencies(生成环境)模块中。 以后运行 npm install 会自动安装到node_modules目录中 安装到生成环境例如 vue react axios。
-* npm install X --save-dev(--save-dev可以简写-D) 修改package.json文件，把版本号和插件名字写进devDependencies(开发环境)模块中。使用npm install时根据是npm包还是项目会有不同的作用。例如gulp babel webpack等辅助构建工具
+* npm install X --save-dev(--save-dev可以简写-D) 修改package.json文件，把版本号和插件名字写进devDependencies(开发环境)模块中。使用npm install时根据是 npm 包还是项目会有不同的作用。例如gulp babel webpack等辅助构建工具
 
-* 在发布npm包的时候，本身dependencies(生成环境)下的模块会作为依赖，一起被下载；devDependencies(开发环境)下面的模块就不会自动下载了；但对于项目而言，npm install 会自动下载devDependencies和dependencies下面的模块。
+* 在发布npm包的时候，本身dependencies(生成环境)下的模块会作为依赖，一起被下载；devDependencies(开发环境)下面的模块就不会自动下载了；但对于项目而言，npm install 会自动下载 devDependencies 和 dependencies 下面的模块。

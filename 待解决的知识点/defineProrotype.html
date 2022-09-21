@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-08-27 19:05:20
+ * @LastEditTime: 2022-09-19 00:19:13
 -->
 
 <!DOCTYPE html>
@@ -16,128 +16,38 @@
 
   <body></body>
   <script>
-    // 定义一个 dep 类，专门用来管理依赖
-    class Dep {
-      constructor() {
-        this.subs = [];
-      }
-      // 在 dep 实例中添加一个依赖
-      addSub(sub) {
-        this.subs.push(sub);
-      }
-      // 在 dep 实例中移除一个依赖
-      removeSub(sub) {
-        remove(this.subs, sub);
-      }
-      // 在依赖添加之前进行一次判断，在依赖不为 undefined 时才会添加
-      depend() {
-        if (window.target) {
-          this.addSub(window.target);
-        }
-      }
-      // 循环触发 dep 实例中依赖的update方法
-      notify() {
-        // 返回数组的拷贝
-        const subs = this.subs.slice();
-        // 循环的触发所有依赖
-        for (let index = 0; index < subs.length; index++) {
-          subs[i].update();
-        }
-      }
-    }
-
-    // 收集的依赖是一个什么东西，起一个名字叫做watcher
-    // watcher 是一个中介的角色
-    // 外界通过 watcher 来读取数据, watcher 中 读取数据前将自身赋值给 window.target , 然后读取数据，使得自身当做依赖被收集
-    // 数据发生变化时，触发 setter ，在 setter 中通知 watcher，然后 watcher 在通知给外界
-    class Watcher {
-      // vm 是 引用类型数据(Object, Arr)
-      // expOrFn 是需要响应式处理的那个属性 (key值)
-      // cb 回调函数(callback)
-      constructor(vm, expOrFn, cb) {
-        this.vm = vm;
-        // 执行 this.getter() ，就可以读取某个属性的值
-        this.getter = parsePath(expOrFn);
-        this.cb = cb;
-        // 在实例化一个 watcher 实例的时候，会自动执行 get 方法
-        this.value = this.get();
-      }
-      // 在执行 get 方法时，将 watcher 实例本身赋值给 window.target
-      get() {
-        window.target = this;
-        // 调用 this.getter 方法时 会读取某个属性的值，因为属性做了响应式处理，会把 window.target(也就是watcher实例) 放到 dep 实例中
-        let value = this.getter.call(this.vm, this.vm)
-        // 将依赖插入 dep 实例后，将 window.target 赋值为 undefined
-        window.target = undefined;
-        return value
-      }
-      // 在执行 update 的时候，会执行传进来的回调函数，来执行用户定义的操作
-      update() {
-        const oldValue = this.value;
-        this.value = this.get()
-        this.cb.call(this.vm, this.value, oldValue)
-      }
-    }
-
-    // remove 函数用来在数组中移除指定的数据,并将移除的数据当作函数的返回值
-    function remove(arr, item) {
-      if (arr.length) {
-        const index = arr.indexOf(item);
-        if (index > -1) {
-          return arr.splice(index, 1);
-        }
-      }
-    }
+    const arrayProto = Array.prototype
+    // arrayMethods 这个对象的原型上拥有和 Array 原型上一样的方法和属性
+    // arrayMethods 对象是拦截器(在这个对象中的方法不仅能实现原有的功能，还能 发送变化通知)
+    export const arrayMethods = Object.create(arrayProto)
+    ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function(method){
+      // 缓存原始方法
+      const original = arrayProto[method]
+      Object.defineProperty(arrayMethods, methods, {
+        value: function mutator(...args) {
+          // 在调用 arrayMethods 对象中的方法时，实际上调用的还是 Array 原型上面的方法
+          // 但是我们可以在这个函数中做一些其他事情，比如 发送变化通知
+          return original.apply(this, args)
+        },
+        enumerable: false,
+        writable: true,
+        configurable: true
+      })
+    });
 
     // Observer 类会附加到每一个被侦测的 Object 上
     // 一但被附加上，Observer 会将 object 的所有属性转换为 getter/setter 的形式
     class Observer {
       constructor(value) {
         this.value = value
-        // 只有当 value 的数据类型 object 时才能执行 walk 方法
-        if(!Array.is(value)) {
-          this.walk(value)
+        // 只有当 value 的数据类型 Array 时,将上面的拦截器替换 Array 类型数据原有的原型
+        // 如果浏览器不支持 __proto__ 的使用，直接粗暴的在 value 为 Array 类型的数值上逐个添加拦截器上的方法
+        // (自己身上有的属性就不会去原型上面找，从而实现了方法的覆盖)
+        if(Array.isArray(value)) {
+          value.__proto__ = arrayMethods
         }
       }
-      // 会将 obj 的每一个 key 值都调用一次 defineReactive 方法
-      walk(obj) {
-        const keys = Object.keys(obj)
-        keys.forEach(item => {
-          defineReactive(obj, item, obj[item])
-        })
-      }
     }
-    // 如果 value 数据类型为基本数据类型，就把这个属性设置为响应式的
-    // 如果 value 数据类型为 Object，就递归的把这个对象的所有属性(包括子属性) 全都转换成响应式的
-    // { Object } Obj 引用类型对象
-    // { String } key 对象的键值
-    // { any }  value  Obj[key]的值
-    function defineReactive(obj, key, value) {
-      // 如果 value 是一个引用类型的话，通过 Observer 实例来循环的将每一个值都设置为响应式的
-      if(typeof value === "Object") {
-        new Observer(value)
-      }
-      // 每个 key 值对应的依赖，存储在 dep 实例中
-      let dep = new Dep();
-      Object.defineProperty(obj, key, {
-        configurable: true,
-        enumerable: true,
-        get() {
-          // 收集依赖
-          dep.depend();
-          return value;
-        },
-        set(newValue) {
-          // 如果改变过后的值和之前的值一样，则什么也不做
-          // value 变量存储在 defineReactive 函数的作用域中
-          if (value === newValue) {
-            return;
-          }
-          val = newValue;
-          // 触发依赖
-          dep.notify();
-        },
-      });
-    }
+    
   </script>
 </html>

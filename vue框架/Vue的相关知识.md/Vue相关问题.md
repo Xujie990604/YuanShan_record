@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-08 10:55:49
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-09-14 19:42:33
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的相关知识.md\Vue相关问题.md
  * @Description: 
 -->
@@ -55,3 +55,8 @@ const imagesList = images.keys().map(item => images(item));
     <li class="xujie5">1</li>
 </template>
 ```
+
+## 在 template模板中可以使用为 window 属性吗？
+
+  1. 在Vue的Template中应该是无法使用 window 全局属性
+  2. 但是可以使用Object.keys() 。应该是通过 Vue 的原型链找到了 Object原型上的方法
