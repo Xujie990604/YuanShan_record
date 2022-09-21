@@ -15,6 +15,14 @@
   </head>
   <body>
     <script>
+      function a() {
+        console.log(this, "A")
+        function b() {
+          console.log(this, "b")
+        }
+        b()
+      }
+      a()
     </script>
   </body>
 </html>
