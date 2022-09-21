@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-26 10:18:33
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\arr.html
  * @Description: 
 -->
@@ -15,12 +15,14 @@
   </head>
   <body>
     <script>
-      const obj = {
-        ddd: 333,
-        davd: 'rrr',
+      function a() {
+        console.log(this, "A")
+        function b() {
+          console.log(this, "b")
+        }
+        b()
       }
-      let a = 'ddd'
-      obj['name' + a] = "xujie"
+      a()
     </script>
   </body>
 </html>

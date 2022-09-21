@@ -1,9 +1,9 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-05 22:21:17
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\计算属性和watch函数.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-09-15 17:57:38
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\计算属性和watch函数.md
  * @Description: 
 -->
 # vue的计算属性
@@ -39,15 +39,9 @@
 }
 ```
 
-### 引用数据类型和v-model配合使用
-
-* 待定。。。
-
 ## set方法
 
 * 如果是普通的变量需要调用set函数的时候，赋值形式为 this.fullName = "xu jie",不是像函数一样去传参
-* 因为get的返回值是依赖data数据的，所以在使用set的时候也要依赖data中的数据。
-* 如果set的函数改变了get函数的依赖项，那么计算属性的get函数就会被调用。
 
 ## 计算属性VS方法
 
@@ -56,7 +50,6 @@
 
 ## 侦听器
 
-* 通过watch选项提供了侦听器的方法。
 * 适合在调试的时候使用
 * watch是在属性有改变的时候调用对应的方法
 
@@ -79,6 +72,16 @@
             // 假设这是一个进行axios请求的函数
         }
     }
+
+// 想要监听一个对象的深层变化时，需要加上 deep 关键字
+watch: {
+  combo: {
+    handler: function() {
+      ......
+    },
+    deep: true
+  }
+}
 ```
 
 ## 侦听器和计算属性

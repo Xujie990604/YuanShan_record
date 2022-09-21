@@ -77,7 +77,7 @@ Object.defineProperty(Vue.prototype, '$router', {
 
 ### scoped弊端的解决方案
 
-* 使用 >>>(普通css) 击穿符号(或者 ::v-deep(预处理CSS), /deep/)(在Vue Cli3版本以上不可以使用) 指令) 使用穿透符号之后，在穿透符号后面的 CSS选择器上 不会被加上动态的属性
+* 使用 >>> (普通css) 击穿符号(或者 ::v-deep(预处理CSS), /deep/)(在Vue Cli3版本以上不可以使用) 指令) 使用穿透符号之后，在穿透符号后面的 CSS选择器上 不会被加上动态的属性
 
 ```css
 /* 使用v-deep语法时前面需要有父选择器 */
