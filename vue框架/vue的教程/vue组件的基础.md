@@ -1,16 +1,30 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-23 23:05:54
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue组件的基础.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-09-23 17:25:50
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue组件的基础.md
  * @Description: Vue组件基础
 -->
 # Vue组件的基础
 
 * 所有的Vue组件都是Vue实例,全部都接受相同的选项对象(根实例独有的el特性除外)
 
-## 组价和根实例的区别是实例拥有el选项
+## 组件和根实例的区别是实例拥有el选项
+
+### Vue.extend()
+
+```js
+// 使用 Vue.extend() 生成的不是一个组件实例，而是一个构造器
+const Myself = Vue.extend({
+  template: '<p>使用Vue.extend()创建的组件</p>',
+  data() {
+    return {}
+  }
+})
+// 需要使用 $mount() 方法来把这个组件挂载到 DOM 节点上
+new Myself().$mount('#my-self')
+```
 
 ### 全局注册(router-link组件就是router自动注册的全局组件，我们不需要在当前组件中import就可以使用)
 
@@ -20,6 +34,16 @@
 // 在main.js中定义全局组件，然后在整个项目中都可以直接使用这个组件
 import GlobalButton from './GlobalButton.vue';
 Vue.component('global-button', GlobalButton)
+// 通过 options 参数的方式来注册全局组件。
+// 其实 Vue.component 内部默认调用 Vue.extend
+Vue.component('myself-component', {
+  data() {
+    return {
+      name: '自定义的全局组件'
+    }
+  },
+  template: '<div>{{name}}</div>'
+})
 ```
 
 ### 局部注册
