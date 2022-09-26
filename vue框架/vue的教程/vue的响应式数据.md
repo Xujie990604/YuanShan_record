@@ -2,8 +2,8 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-18 16:48:06
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
+ * @LastEditTime: 2022-09-25 22:43:35
+ * @FilePath: \supermarketc:\Users\epiphany\Desktop\HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
  * @Description:
 -->
 # Vue的响应式数据
@@ -177,7 +177,7 @@ this.$set(this.error,'phone','手机号不能为空');
           val = newValue;
           // 触发依赖
           dep.notify();
-        },
+        }
       });
     }
 ```
