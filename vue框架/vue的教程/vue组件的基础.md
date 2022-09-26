@@ -2,13 +2,13 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-09-23 17:25:50
+ * @LastEditTime: 2022-09-26 13:48:09
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue组件的基础.md
  * @Description: Vue组件基础
 -->
 # Vue组件的基础
 
-* 所有的Vue组件都是Vue实例,全部都接受相同的选项对象(根实例独有的el特性除外)
+* 所有的 Vue 组件都是 Vue 实例,全部都接受相同的选项对象(根实例独有的el特性除外)
 
 ## 组件和根实例的区别是实例拥有el选项
 
@@ -16,6 +16,8 @@
 
 ```js
 // 使用 Vue.extend() 生成的不是一个组件实例，而是一个构造器
+// 平时的业务开发时很少会直接使用 Vue.extend() 方法来把这个组件挂载到
+// 但是在使用 Vue.component 全局注册和通过 components 局部组件注册时，Vue 都会默认调用一次这个方法
 const Myself = Vue.extend({
   template: '<p>使用Vue.extend()创建的组件</p>',
   data() {
@@ -31,11 +33,12 @@ new Myself().$mount('#my-self')
 * 对于一些使用频率很高，但是逻辑非常少的组件，我们可以在main.js中全局注册组件(在new Vue({...})之前)
 
 ```js
-// 在main.js中定义全局组件，然后在整个项目中都可以直接使用这个组件
+// 在 main.js 中定义全局组件，然后在整个项目中都可以直接使用这个组件
 import GlobalButton from './GlobalButton.vue';
 Vue.component('global-button', GlobalButton)
+
 // 通过 options 参数的方式来注册全局组件。
-// 其实 Vue.component 内部默认调用 Vue.extend
+// 其实 Vue.component 内部默认调用了 Vue.extend 方法
 Vue.component('myself-component', {
   data() {
     return {
@@ -48,7 +51,21 @@ Vue.component('myself-component', {
 
 ### 局部注册
 
-* 在使用webpack的情况下，我们通过 xxx.vue 文件形式定义的组件都是 局部组件
+```js
+import TestViewPageVue from './TestViewPage.vue'
+// 通过 import 导入的 TestViewPageVue 本质上就是一个对象
+// Vue 会在导出 .vue 文件的时候将 template 模板编译为 render 函数，放到 TestViewPageVue 对象中
+console.log(TestViewPageVue)
+export default {
+  // 在一个组件的 components 属性中定义的组件就是一个局部组件
+  // 在这里也是默认调用了一次 Vue.extend()
+  components: { TestViewPage },
+  name: 'TestView',
+  data() {
+    return {}
+  },
+}
+```
 
 ## 组件的data必须是一个函数
 
@@ -144,7 +161,7 @@ components: {
 * 这个 is attribute 是十分必要的，is attribute 的作用是将li DOM 结构变成 todo-item 组件来加载。
 * 不直接将 todo-item 组件 写在 ul 中，是因为 ul 中只能包含 li。否则浏览器 DOM 解析时会报错。(Vue的模板加载策略是先按照html语法来解析模板，然后再用Vue来解析Vue使用到的语法)
 
-## 将一个组价内的函数当做变量传递给另一个组件
+## 将一个组件内的函数当做变量传递给另一个组件
 
 * 在子组件内执行函数时，函数中的this指向的是父组件。也就是说函数中涉及到的一些变量都是父组件中的变量
 
