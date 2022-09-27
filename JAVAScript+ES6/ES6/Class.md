@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-15 15:20:39
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Class.md
  * @Description: Class的用法
 -->
@@ -11,47 +11,53 @@
 
 ```js
 class Point {
-      // constructor方法是类中的默认方法
-      // constructor方法的返回值默认是this对象
+      // constructor 方法是类中的默认方法
+      // constructor 方法的返回值默认是 this 对象
       constructor(x, y) {
         this.a = x;
         this.b = y;
       }
-      // 属性前面加上static关键字代表这是一个静态属性
-      static prop = 1
-      // 私有属性：只能在类的内部使用，在类的外部使用会报错
-      #a = 'xujie'
-
-      // 类的所有方法都是定义在prototype属性上
-      // 用类的实例调用方法，其实就是调用prototype上的方法
+      // 这种普通的变量是定义在 new 生成的实例上的
+      number = 100
+      
+      // 类的所有方法都是定义在 prototype 属性上
+      // 用类的实例调用方法，其实就是调用 prototype 上的方法
       toString() {
         return `${this.a} + ${this.b}`
       }
-      
-      // 方法前面加上static关键字代表这是一个静态方法
-      // 静态方法： 只能通过类调用，不能通过类的实例调用
-      // 静态方法中如果使用了this关键字，this代表类本身，而不是实例
+
+      // 属性前面加上 static 关键字代表这是一个静态属性
+      // 静态属性不会存在于通过 new 生成的实例中
+      // 静态属性可以通过类直接调用，或者是被静态方法调用
+      static prop = 1
+      // 方法前面加上 static 关键字代表这是一个静态方法
+      // 静态方法：只能通过类调用，不能通过类的实例调用
+      // 静态方法中如果使用了 this 关键字，this 代表类本身，而不是实例(也就是通过 this 可以来调用静态属性)
       static add() {
-        return this.a + this.b;
+        return this.prop;
       }
 
+      // 私有属性：只能在类的内部使用，在类的外部使用会报错
+      // 私有属性会存在于 new 生成的实例中，就是不可以被调用
+      #a = 'xujie'
       // 私有方法: 只能在类的内部调用，在类的外部调用会报错
+      // 因为私有属性和方法存在于实例中，所以不可以在 static 方法中调用
       #delete() {
         return 'delete'
       }
     }
 
     // 类在调用时必须使用new操作符，使用()把类当做函数调用会报错
-    const p = new Point(1,3)
+    const p = new Point(1, 3)
     
-    typeof Point // "function" Class实际上就是一个语法糖，Point类本质还是一个函数
+    typeof Point // "function" Class 实际上就是一个语法糖，Point 类本质还是一个函数
     Point === Point.prototype.constructor // true
 ```
 
 ## 类的继承
 
 * 父类的静态属性和方法会被子类继承
-* 父类的私有属性和方法不会被子类继承
+* 父类的私有属性和方法不会被子类继承(其实私有属性还会在子类 new 出来的实例中存在，只不过是不能用)(私有属性只能在定义它的类中使用)
 
 ```js
 class Foo {
@@ -63,9 +69,9 @@ class Foo {
     // 使用extend关键字实现继承
     class Bar extends Foo {
       constructor() {
-        // 在子类的 constructor 中必须先调用一次super()之后才能使用 this关键字
-        // super()函数就是在调用父类的构造函数，生成一个父类的实例对象，这个实例对象拥有父类上的属性和方法
-        // 然后将这个实例对象当做子类的this。子类在这个对象上进行属性和方法的添加，这样来实现子类的实例既有父类的方法属性又有自身的方法属性
+        // 在子类的 constructor 中必须先调用一次 super() 之后才能使用 this 关键字
+        // super() 函数就是在调用父类的构造函数，生成一个父类的实例对象，这个实例对象拥有父类上的属性和方法
+        // 然后将这个实例对象当做子类的 this。子类在这个对象上进行属性和方法的添加，这样来实现子类的实例既有父类的方法属性又有自身的方法属性
         super();
         console.log(2);
       }

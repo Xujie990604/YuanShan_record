@@ -6,10 +6,10 @@
 
 * 如果父组件给子组件传递的是引用类型数据的话，对象或者数组。子组件修改传过来的数据的话。可以不用注册事件，因为传递的是地址，但是不推荐这种做法，这样做无法清晰的了解数据改变的来源。
 
-#### props传递数据
+#### props 传递数据
 
 * 如果子组件声明了，父组件却没有传值过来的话，值为undefined
-* 使用prop进行数据的传递是单向数据流，在子组件中不允许直接修改从父组件传递过来的数值(正确方法是：采用提交事件的方式 或者 在子组件使用一个变量进行接收)
+* 使用 prop 进行数据的传递是单向数据流，在子组件中不允许直接修改从父组件传递过来的数值(正确方法是：采用提交事件的方式 或者 在子组件使用一个变量进行接收)
 
 ```js
 // 父组件将本页面的name变量传递给自组件。子组件接受值的时候需要使用s-name的小驼峰版本sName接收
@@ -142,4 +142,38 @@ this.$bus.$on('itemImageLoad',(index) => {
 // 两种方式等价
 <test lazy-model></test>
 <test :lazy-model="true" ></test>
+```
+
+## 将父组件内的函数当做变量传递给子组件
+
+* 在子组件内执行函数时，函数中的 this 指向的是父组件。也就是说可以在子组件中通过这个 this 来修改父组件中的数据
+* 这种情况是十分不被推荐的！！！Vue 的 Props 定义为单向数据流，在子组的内部是不允许修改父组件的值的。在子组件中 props 是只读的。如果想要修改父组件的值也要通过提交事件的方来修改父组件的值。
+
+```html
+<template>
+  <div class="test-view">
+    <!-- 传递给子组件 -->
+    <test-home-page :data="list"></test-home-page>
+  </div>
+</template>
+<script>
+import TestHomePage from '@/components/testPages/TestHomePage.vue';
+export default {
+  data() {
+    return {
+      list: [
+        {
+          name: 'xujie',
+          callback: this.onclick
+        }
+      ],
+      arr: 'test'
+    }
+  },
+  methods: {
+    onclick() {
+      console.log(this.arr)
+    }
+  },
+};
 ```
