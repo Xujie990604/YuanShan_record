@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-25 22:43:35
+ * @LastEditTime: 2022-09-26 23:38:50
  * @FilePath: \supermarketc:\Users\epiphany\Desktop\HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -51,7 +51,7 @@ this.$set(this.error,'phone','手机号不能为空');
 
 ## Vue的响应式原理
 
-* 在 getter 中收集依赖，在 setter 中触发依赖
+* Object 在 getter 中收集依赖，在 setter 中触发依赖
 
 ```js
 1。外部需要通过 watcher 来读取数据，在 watcher 中会读取一下 data 中的数据，然后触发了响应式的 get 方法。在 get 的时候将 watcher 添加到 data 的依赖数组 dep 中(完成依赖收集)
@@ -179,5 +179,127 @@ this.$set(this.error,'phone','手机号不能为空');
           dep.notify();
         }
       });
+    }
+```
+
+* Array 在 getter 中收集依赖，在拦截器中触发依赖
+
+```js
+    const arrayProto = Array.prototype
+    // arrayMethods 这个对象的原型上拥有和 Array 原型上一样的方法和属性
+    // arrayMethods 对象是拦截器(在这个对象中的方法不仅能实现原有的功能，还能 发送变化通知)
+    const arrayMethods = Object.create(arrayProto)
+    ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function(method){
+      // 缓存原始方法
+      const original = arrayProto[method]
+      // 通过 switch 判断如果是 push,unshift，splice等可以新增数组元素的方法
+      // 将新增的元素取出来放到 inserted 中
+      def(arrayMethods, method, function mutator(...args) {
+        const result = original.apply(this, args)
+        const ob = this.__ob__
+        let inserted
+        switch (method) {
+          case 'push':
+          case 'unshift':
+          inserted = args
+            break;
+          case 'splice':
+            inserted = args.slice(2)
+            break;
+            // 如果检测到数组元素有新增的话，把新增的数据也变成响应式的
+          if(inserted) {
+            ob.dep.notice()
+          }
+            ob.dep.notify()
+            return result
+        }
+      })
+      Object.defineProperty(arrayMethods, methods, {
+        value: function mutator(...args) {
+          // 在拦截器中直接通过 this.__ob__ 来访问 value 上面的 Observer 实例
+          const ob = this.__ob__
+          // 在拦截器中，检测到数组发生变化时，就会通知依赖数据发生了变化
+          ob.dep.notify()
+          // 在调用 arrayMethods 对象中的方法时，实际上调用的还是 Array 原型上面的方法
+          // 但是我们可以在这个函数中做一些其他事情，比如 发送变化通知
+          return original.apply(this, args)
+        },
+        enumerable: false,
+        writable: true,
+        configurable: true
+      })
+    });
+
+    // Observer 类会附加到每一个被侦测的 Array 上
+    // 被侦测的 Array 会被替换原型上的方法，或者直接在自身上添加重写之后的方法
+    class Observer {
+      constructor(value) {
+        this.value = value
+        // Array 类型的数据，在 Observer 中存储依赖列表
+        // 因为 Array 在 getter 中收集依赖，在拦截器中触发依赖，所以依赖要保存在一个双方都可以访问到的地方
+        this.dep = new Dep()
+        // 调用 def 函数用于在 value 上新增一个 __ob__ 属性，这个属性的值就是当前 Observer 实例
+        def(value, '__ob__', this)
+        // 只有当 value 的数据类型 Array 时,将上面的拦截器替换 Array 类型数据原有的原型
+        // 如果浏览器不支持 __proto__ 的使用，直接粗暴的在 value 为 Array 类型的数值上逐个添加拦截器上的方法
+        // (自己身上有的属性就不会去原型上面找，从而实现了方法的覆盖)
+        if(Array.isArray(value)) {
+          this.observerArray()
+        }
+      }
+      // 工具函数，用于循环的将数组中的所有属性都变成响应式的。例如 length 属性
+      observerArray(items) {
+        for(let i = 0, L = items.length; i < L; i++){
+          observe(items[i])
+        }
+    }
+    }
+
+    // def 工具函数，用于在 value 上添加 Observer 实例
+    // 1. 添加完实例之后，在 getter 中可以通过 value.__ob__.dep 来访问 Observer 上面的 dep 
+    // 2. 在拦截器中，可以通过 this.__ob__(在拦截器中 this 就是 value) 来访问 Observer 上面的 dep 
+    function def(obj, key, val, enumerable) {
+      Object.defineProperty(obj, key, {
+        value: val,
+        enumerable: !enumerable,
+        writable: true,
+        configurable: true
+      })
+    }
+
+    // 通过 defineReactive 对数据进行响应式的处理(当前函数只考虑 Array 的场景)
+    // Array 在 getter 中收集依赖， 在拦截器中触发依赖
+    function defineReactive(obj, key, value) {
+      // 通过 Observer 函数将 Array 数据类型的数据上的原生方法进行处理
+      if(typeof(val === 'object')){
+        new Observer(val)
+      }
+       let childOb = observe(val)
+      Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function() {
+          // 收集依赖
+          if(childOb) {
+            childOb.dep.depend()
+          }
+          return val;
+        }
+      })
+    }
+    
+    // 尝试为 value 创建一个 Observer 实例
+    // 如果 value 已经是响应式数据了，不需要再次创建一个新的 Observer 实例，直接返回已有的实例
+    function observe(value, asRootData) {
+      if(!isObject(value)){
+        return
+      }
+      let ob
+      if(hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+        ob = value.__ob__
+      }else {
+        ob = new Observer(value)
+      }
+      return ob
     }
 ```

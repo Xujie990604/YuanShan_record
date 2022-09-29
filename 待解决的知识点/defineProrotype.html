@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-26 00:43:48
+ * @LastEditTime: 2022-09-26 23:36:21
 -->
 
 <!DOCTYPE html>
@@ -16,36 +16,6 @@
 
   <body></body>
   <script>
-    // 定义一个 dep 类，专门用来管理依赖
-    class Dep {
-      constructor() {
-        this.subs = [];
-      }
-      // 在 dep 实例中添加一个依赖
-      addSub(sub) {
-        this.subs.push(sub);
-      }
-      // 在 dep 实例中移除一个依赖
-      removeSub(sub) {
-        remove(this.subs, sub);
-      }
-      // 在依赖添加之前进行一次判断，在依赖不为 undefined 时才会添加
-      depend() {
-        if (window.target) {
-          this.addSub(window.target);
-        }
-      }
-      // 循环触发 dep 实例中依赖的 update 方法
-      notify() {
-        // 返回数组的拷贝
-        const subs = this.subs.slice();
-        // 循环的触发所有依赖
-        for (let index = 0; index < subs.length; index++) {
-          subs[i].update();
-          {
-      }
-    }
-
     const arrayProto = Array.prototype
     // arrayMethods 这个对象的原型上拥有和 Array 原型上一样的方法和属性
     // arrayMethods 对象是拦截器(在这个对象中的方法不仅能实现原有的功能，还能 发送变化通知)
@@ -53,6 +23,28 @@
     ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function(method){
       // 缓存原始方法
       const original = arrayProto[method]
+      // 通过 switch 判断如果是 push,unshift，splice等可以新增数组元素的方法
+      // 将新增的元素取出来放到 inserted 中
+      def(arrayMethods, method, function mutator(...args) {
+        const result = original.apply(this, args)
+        const ob = this.__ob__
+        let inserted
+        switch (method) {
+          case 'push':
+          case 'unshift':
+          inserted = args
+            break;
+          case 'splice':
+            inserted = args.slice(2)
+            break;
+            // 如果检测到数组元素有新增的话，把新增的数据也变成响应式的
+          if(inserted) {
+            ob.dep.notice()
+          }
+            ob.dep.notify()
+            return result
+        }
+      })
       Object.defineProperty(arrayMethods, methods, {
         value: function mutator(...args) {
           // 在拦截器中直接通过 this.__ob__ 来访问 value 上面的 Observer 实例
@@ -84,11 +76,9 @@
         // (自己身上有的属性就不会去原型上面找，从而实现了方法的覆盖)
         if(Array.isArray(value)) {
           this.observerArray()
-        }else{
-          this.walk(value)
         }
       }
-      // 工具函数，用于循环的将数组中的所有属性都变成响应式的
+      // 工具函数，用于循环的将数组中的所有属性都变成响应式的。例如 length 属性
       observerArray(items) {
         for(let i = 0, L = items.length; i < L; i++){
           observe(items[i])
@@ -116,31 +106,19 @@
         new Observer(val)
       }
        let childOb = observe(val)
-      // 每个 key 值对应的依赖，存储在 dep 实例中
-      let dep = new Dep()
       Object.defineProperty(data, key, {
         enumerable: true,
         configurable: true,
         get: function() {
           // 收集依赖
-          dep.depend()
           if(childOb) {
             childOb.dep.depend()
           }
           return val;
-        },
-        set: function() {
-          // 如果改变过后的值和之前的值一样，则什么也不做
-          // value 变量存储在 defineReactive 函数的作用域中 
-          if(val === newVal){
-            return
-          }
-          // 触发依赖
-          dep.notify()
-          val = newVal
         }
       })
     }
+    
     // 尝试为 value 创建一个 Observer 实例
     // 如果 value 已经是响应式数据了，不需要再次创建一个新的 Observer 实例，直接返回已有的实例
     function observe(value, asRootData) {

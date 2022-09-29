@@ -1,9 +1,9 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-09-15 17:57:38
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\计算属性和watch函数.md
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-09-26 23:50:22
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\计算属性和watch函数.md
  * @Description: 
 -->
 # vue的计算属性
@@ -48,7 +48,7 @@
 * 计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数。
 * 相比之下，每当触发重新渲染时，调用方法将总会再次执行函数。
 
-## 侦听器
+## vm.$watch() 侦听器
 
 * 适合在调试的时候使用
 * watch是在属性有改变的时候调用对应的方法
@@ -75,10 +75,12 @@
 
 // 想要监听一个对象的深层变化时，需要加上 deep 关键字
 watch: {
+  // 监听的变量只接受以 . 为分隔的路径(obj.person.name)
   combo: {
     handler: function() {
       ......
     },
+    // 想要监听对象内部值的变化，需要指定 deep 为 true(值得注意的是，监听数组的变化不需要这样做)
     deep: true
   }
 }
