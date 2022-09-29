@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-26 10:18:33
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\arr.html
  * @Description: 
 -->
@@ -15,14 +15,53 @@
   </head>
   <body>
     <script>
-      function a() {
-        console.log(this, "A")
-        function b() {
-          console.log(this, "b")
+      class Person {
+        constructor(name, age) {
+          this.name = name
+          this.age = age
         }
-        b()
+        societyType = "直立行走动物"
+        talk() {
+          console.log(`我是${this.societyType} ${this.name} ${this.age}`)
+        }
+        add() {
+          this.age++
+          console.log(this.name + "已经" + this.age + "岁了")
+        }
+      
       }
-      a()
+      let person1 = new Person('John', 20)
+
+      function Human(name, age) {
+        this.name = name
+        this.age = age
+
+        societyType = "直立行走动物"
+        this.talk =  function() {
+          console.log(`我是${societyType} ${this.name} ${this.age}`)
+        }
+
+        this.add = function () {
+          this.age++
+          console.log(this.name + "已经" + this.age + "岁了")
+        }
+      }
+
+      let human1 = new Human('hom', 33)
+
+      Woman.prototype = human1
+      
+      function Woman(hobby) {
+        this.hobby = hobby
+
+        this.say = function() {
+          console.log(this.hobby)
+        }
+      }
+
+      let woman1 = new Woman('化妆')
+    
+
     </script>
   </body>
 </html>
