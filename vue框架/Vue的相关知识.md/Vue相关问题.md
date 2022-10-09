@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-14 19:42:33
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-10-09 15:30:11
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的相关知识.md\Vue相关问题.md
  * @Description: 
 -->
@@ -38,10 +38,10 @@ const imagesList = images.keys().map(item => images(item));
 * 在app.vue中根据 coder 加不加 scoped。会有全局引用和组件内引用的不同
 * 在index.html中使用的是`<link>`标签引入。使用link不仅仅是引入css，同时还支持更多的功能
 
-## template模板
+## template 模板
 
-* template的最重要特点就是不会被渲染成DOM元素
-* 一般template搭配 v-for或者v-if使用。
+* template 的最重要特点就是不会被渲染成DOM元素
+* 一般 template 搭配 v-for 或者 v-if 使用。
 
 ```js
 // 想要同时控制五个li的显示，需要给li外面加上一个容器，然后配合v-show指令使用。
@@ -55,8 +55,3 @@ const imagesList = images.keys().map(item => images(item));
     <li class="xujie5">1</li>
 </template>
 ```
-
-## 在 template模板中可以使用为 window 属性吗？
-
-  1. 在Vue的Template中应该是无法使用 window 全局属性
-  2. 但是可以使用Object.keys() 。应该是通过 Vue 的原型链找到了 Object原型上的方法

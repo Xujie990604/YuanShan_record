@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-16 17:30:03
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\Vue的源码分析.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue的源码分析.md
  * @Description: Vue的源码分析
 -->
 # Vue的源码分析
@@ -44,7 +44,7 @@ new Vue({
 
 * 因为在 Vue.js 2.0 中，最终渲染都是通过 render 函数，如果写 template 属性，则需要编译成 render 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。
 
-## Vue的DOM结构
+## Vue的 DOM 结构
 
-* 一共有三种方式 1. template 2. 使用模板字符串(.vue文件中的定义方式) 3. render方式
+* 一共有三种方式 1. template 2. 使用模板字符串 3. render方式
 * 最终都要转换成 render 的形式
