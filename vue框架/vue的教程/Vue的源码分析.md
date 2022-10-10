@@ -7,7 +7,7 @@
 -->
 # Vue的源码分析
 
-* Vue内部使用flow来进行静态类型检验
+* Vue 内部使用 flow 来进行静态类型检验
 
 ## Vue的源码目录
 
@@ -15,36 +15,50 @@
 
 1. compiler 目录包含 Vue.js 所有编译相关的代码。它包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。编译是一项比较耗时的工作
 2. core 目录包含了 Vue.js 的核心代码，包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。重点学习的目录
-3. Vue.js 是一个跨平台的 MVVM 框架，它可以跑在 web 上，也可以配合 weex 跑在 native 客户端上。platform 是 Vue.js 的入口，2 个目录代表 2 个主要入口，分别打包成运行在 web 上和 weex 上的 Vue.js。重点学习WEB打包后的Vue文件
+3. Vue.js 是一个跨平台的 MVVM 框架，它可以跑在 web 上，也可以配合 weex 跑在 native 客户端上。platform 是 Vue.js 的入口，2 个目录代表 2 个主要入口，分别打包成运行在 web 上和 weex 上的 Vue.js。重点学习WEB打包后的 Vue 文件
 4. Vue.js 2.0 支持了服务端渲染，所有服务端渲染相关的逻辑都在这个目录下。注意：这部分代码是跑在服务端的 Node.js，不要和跑在浏览器端的 Vue.js 混为一谈。服务端渲染主要的工作是把组件渲染为服务器端的 HTML 字符串，将它们直接发送到浏览器。
 5. 通常我们开发 Vue.js 都会借助 webpack 构建， 然后通过 .vue 单文件来编写组件。sfc目录下的代码逻辑会把 .vue 文件内容解析成一个 JavaScript 的对象。
 6. Vue.js 会定义一些工具方法，shared 定义的工具方法都是会被浏览器端的 Vue.js 和服务端的 Vue.js 所共享的
 
-## Vue不同的两个版本
+## 从源码的层面来理解 Vue 的生命周期
 
-### Runtime Only
-
-* 代码的体积更小
-
-### Runtime + Compiler
+* 实例方法指的是挂载到 Vue 的 prototype 上(这个 Vue 指的是 构造函数吗？直接直接往构造函数上添加方法？)
+* 全局方法指的是挂在到 Vue 上(全局方法和实例方法会有什么不一样吗？)
 
 ```js
- 需要编译器的版本
-new Vue({
-  template: '<div>{{ hi }}</div>'
-})
-
-// 这种情况不需要
-new Vue({
-  render (h) {
-    return h('div', this.hi)
-  }
-})
+function Vue() {
+  ...
+  // 这五个函数的作用就是向 Vue 的原型中挂载方法
+  initMixin(Vue)
+  stateMixin(Vue)
+  eventsMixin(Vue)
+  lifecycleMixin(Vue)
+  renderMixin(Vue)
+}
 ```
 
-* 因为在 Vue.js 2.0 中，最终渲染都是通过 render 函数，如果写 template 属性，则需要编译成 render 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。
+### initMixin
 
-## Vue的 DOM 结构
+* 会向 Vue 的 protoType 中 添加 _init 方法，在 new Vue() 的时候，会执行这个方法。这个方法实现了一系列的初始化操作，包括生命周期和响应式系统流程的启动
 
-* 一共有三种方式 1. template 2. 使用模板字符串 3. render方式
-* 最终都要转换成 render 的形式
+### stateMixin
+
+* vm.$watch()
+* vm.$set()
+* vm.$delete()
+
+### eventsMixin
+
+* vm.$on
+* vm.$once
+* vm.$off
+* vm.$emit
+
+### lifecycleMixin
+
+* vm.$mount
+* vm.$forceUpdate
+* vm.$nextTick
+* vm.$destroy
+
+### Vue 中的全局 API
