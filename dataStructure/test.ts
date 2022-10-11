@@ -5,6 +5,15 @@
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\test.ts
  * @Description: 
  */
-enum Color { Red = 1, Green = 5, Blue = 3 };
-let c: Color = Color.Green;
-console.log(c)
+interface paramsTs{
+  label?: string,
+  name?: string
+}
+function test(params: paramsTs) {
+  console.log(params.label)
+}
+
+test({
+  name: "ddd",
+  label: "xujie"
+})

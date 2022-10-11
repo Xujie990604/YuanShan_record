@@ -15,53 +15,7 @@
   </head>
   <body>
     <script>
-      class Person {
-        constructor(name, age) {
-          this.name = name
-          this.age = age
-        }
-        societyType = "直立行走动物"
-        talk() {
-          console.log(`我是${this.societyType} ${this.name} ${this.age}`)
-        }
-        add() {
-          this.age++
-          console.log(this.name + "已经" + this.age + "岁了")
-        }
-      
-      }
-      let person1 = new Person('John', 20)
-
-      function Human(name, age) {
-        this.name = name
-        this.age = age
-
-        societyType = "直立行走动物"
-        this.talk =  function() {
-          console.log(`我是${societyType} ${this.name} ${this.age}`)
-        }
-
-        this.add = function () {
-          this.age++
-          console.log(this.name + "已经" + this.age + "岁了")
-        }
-      }
-
-      let human1 = new Human('hom', 33)
-
-      Woman.prototype = human1
-      
-      function Woman(hobby) {
-        this.hobby = hobby
-
-        this.say = function() {
-          console.log(this.hobby)
-        }
-      }
-
-      let woman1 = new Woman('化妆')
-      window.console.log(woman1)
-    
+      let [arr, ...rest] = [1,2,3,4,5]
 
     </script>
   </body>
