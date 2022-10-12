@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:10:59
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\Ts基础类型.md
+ * @Description: 
+-->
 # TypeScript
 
 ## 基础类型
@@ -5,10 +12,14 @@
 * 布尔值 isTrue: boolean
 * 数字 num: number Ts中所有的数字都是浮点数
 * 字符串 str: string
-* 数组 list: number[] = [1, 2, 3]表示由数字类型构成的数组  list: Array<number> = [1, 2, 3] 使用数组泛型来定义
-* 就算是在定义值的时候你没有手动的定义类型，系统也会根据第一次的赋值类型来规范数据，首次赋值为string之后，就不能在复制number类型了。
+* 数组 :
 
-* 元组类型 允许表示一个已知数量和类型的数组，各元素的类型不必相同，越界访问的时候，会使用联合数据类型代替。也就是说你可以越界定义一个值为string或者是number，但是不能越界定义一个Boolean类型的值。???自己试验的时候元组类型不能越界访问。
+1. list: number[] = [1, 2, 3]      元素类型后面接上[]  表示由数字类型构成的数组  
+2. list: Array<number> = [1, 2, 3]  Array<元素类型>   使用数组泛型来定义
+
+* 就算是在定义值的时候你没有手动的定义类型，系统也会根据第一次的赋值类型来规范数据，首次赋值为string之后，就不能在复制number类型了(类型推断)
+
+* 元组类型 允许表示一个已知数量和类型的数组，各元素的类型不必相同，越界访问的时候，会使用联合数据类型代替。也就是说你可以越界定义一个值为string或者是number，但是不能越界定义一个Boolean类型的值。
 
 ```typeScript
 let x: [string,number];
@@ -40,13 +51,13 @@ list[1]  //xujie
 
 * void表示没有类型，当一个函数没有返回值的时候通常定义返回类型为void。声明一个void类型的变量没有什么意义，因为只能被赋值undefined或者null。
 
-* null和undefined类型，默认情况下null和undefined类型是所有类型的子类型。可以被赋值给number类型。但是当你指定了--strictNullChecks标记(官方推荐使用这个标记)，null就只能被赋值给void和他们自身。但是也可以用联合属性来打破这个规则。
+* null 和 undefined 类型，默认情况下 null 和 undefined 类型是所有类型的子类型。可以被赋值给 number 类型。但是当你指定了--strictNullChecks标记(官方推荐使用这个标记)，null 就只能被赋值给 void 和他们自身。但是也可以用联合属性来打破这个规则。
 
 * never类型  
 
 1. 表示的是永不存在的值的类型
 2. never类型是那些总是会抛出异常或者根本就不会有返回值的函数的返回值类型。
-3. never是任何类型的子类型，可以赋值给任何类型，没有任何类型是never的子类型(除了自身),即使是any也不能赋值给never。
+3. never是任何类型的子类型，可以赋值给任何类型，没有任何类型是never的子类型(除了自身),即使是 any 也不能赋值给 never。
 
 * object类型(小写的o)
 
@@ -56,14 +67,14 @@ list[1]  //xujie
 * 类型断言
 
 1. 适用于你比Typescript更加了解某个值的详情
-2. 尖括号语法 和 as语法
+2. 尖括号语法 和 as 语法
 
 ```ts
 let someValue: any = "this is a string";
-// 相当于强制的把any类型转化为string类型，两种形式是等价的.
+// 相当于强制的把 any 类型转化为 string 类型，两种形式是等价的.
 let strLength: number = (<string>someValue).length;
 
 let someValue1: any = "this is a string";
-// 相当于强制的把any类型转化为string类型，并且我明确的知道这个就是string类型的数值
+// 相当于强制的把 any 类型转化为 string 类型，并且我明确的知道这个就是 string 类型的数值
 let strLength1: number = (someValue1 as string).length;
 ```
