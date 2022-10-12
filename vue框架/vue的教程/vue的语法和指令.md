@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\vue的语法和指令.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue的语法和指令.md
  * @Description: 
 -->
 # Vue的语法和指令
@@ -12,6 +12,10 @@
 * {{}}
 * 该语法中不仅可以放置变量，还可以放表达式
 * 不过一般不会放表达式，如果有这种需求也是让computed属性进行计算。
+
+## v-if
+
+* 实际上利用的就是三目运算符
 
 ## v-once
 
