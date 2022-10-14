@@ -1,6 +1,6 @@
 # Express
 
-* Express是一个三方的用来创建 Web 服务器的模块(基于 node 内置的 http 模块进一步封装的)
+* Express 是一个三方的用来创建  Web  服务器的模块(基于  node  内置的  http  模块进一步封装的)
 
 ## 基本使用
 

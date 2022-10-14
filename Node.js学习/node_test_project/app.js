@@ -2,9 +2,9 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:47:55
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-10-14 00:00:25
+ * @LastEditTime: 2022-10-15 00:04:25
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\app.js
- * @Description: node项目的入口文件
+ * @Description: node 项目的入口文件
  */
 
 // 导入 express 模块
@@ -14,7 +14,7 @@ const joi = require('joi')
 // 创建 express 的服务器实例对象
 const app = express()
 
-// 导入 cors 中间件
+// 导入 cors 中间件(用于跨域的)
 const cors = require('cors')
 // 注册为全局可用的中间件
 // 注意：跨域中间价的注册一定要在路由挂载之前

@@ -1,21 +1,21 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-10-08 21:08:20
- * @FilePath: \supermarketc:\Users\epiphany\Desktop\HTML-CSS-Javascript-\Vue框架\vue的教程\vue的响应式数据.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-10-14 15:21:25
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue的响应式数据.md
  * @Description:
 -->
 # Vue的响应式数据
 
 * 由于 Vue 会在实例初始化的时候对 property 进行 getter/setter 转化。所以只有在一开始就存在 data 中的数据才是响应式的。(比如在组件的created, beforeCreate钩子函数中为组件添加一个属性，这个数据不是响应式的数据)(所有需要响应式的值都要在 data 中声明，即使它目前是一个空值，也要占上位子)
-* 尽量不要在beforeCreate钩子函数中定义变量值 1.只在beforeCreate定义属性不在data中定义属性则该属性不是响应式的 2.在beforeCreate中定义属性又在data中定义属性的话会被覆盖。
-* 对于已经创建的实例，Vue不允许动态的添加 根级别的响应式 property `this.$set(object, 'key', value)` 也就是说这个object参数，不能是this._data 及以上更高级别的数据
+* 尽量不要在 beforeCreate 钩子函数中定义变量值 1.只在 beforeCreate 定义属性不在 data 中定义属性则该属性不是响应式的 2.在 beforeCreate 中定义属性又在 data 中定义属性的话会被覆盖。
+* 对于已经创建的实例，Vue 不允许动态的添加 根级别的响应式 property `this.$set(object, 'key', value)` 也就是说这个 object 参数，不能是 this._data 及以上更高级别的数据
 * Vue 中一个状态所绑定的依赖是一个组件，状态发生变化之后会通知到组件，组件内部再使用虚拟DOM进行对比。
   
 ## 数组
 
-* vue在构造函数new Vue()时，就通过Object.defineProperty中的getter和setter 这两个方法，完成了对数据的绑定。所以直接通过vm.arr[1] = 'aa'的方法，无法修改值去触发vue中视图的更新，必须还得通过Object.defineProperty的方法去改变，而Vue.$set()就封装了js底层的Object.defineProperty方法。
+* vue在构造函数new Vue()时，就通过 Object.defineProperty 中的 getter 和 setter 这两个方法，完成了对数据的绑定。所以直接通过vm.arr[1] = 'aa'的方法，无法修改值去触发 vue 中视图的更新，必须还得通过 Object.defineProperty 的方法去改变，而 Vue.$set() 就封装了 js 底层的 Object.defineProperty 方法。
 
 ```js
 // 数组中使用 $set 方法实际上就是 Vue 将操作转化为使用 splice 方法去做
@@ -32,8 +32,7 @@ this.$set(this.lists, 0)
 ### 会触发响应式
 
 * push()pop()shift()unshift()splice()sort()reverse()称为变更方法，会触发视图更新
-* 这些方法会触发Vue的数据响应式，是因为Vue在原方法的基础上进行加工。
-* 可能本质上push()等方法是不会改变Object.defineProperty()定义的属性的，???需要验证
+* 这些方法会触发 Vue 的数据响应式，是因为 Vue 在原方法的基础上进行加工。
 
 ### 不会触发响应式
 

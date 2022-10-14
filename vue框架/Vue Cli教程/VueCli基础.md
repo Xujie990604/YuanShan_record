@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-14 19:53:57
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-10-14 10:09:59
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
  * @Description:
 -->
@@ -21,7 +21,7 @@
 
 * Vue在打包之后，会将一些业务级的js文件合并到一个js文件夹中去。再开发时我们可能会使用一些第三方的插件(比如layer.js弹窗文件)。这些第三方我们我们不愿意在打包时被压缩到业务级的js文件中。那么就需要一个静态的，非改变的目录来存放这些第三方插件。(这些文件可以在index.html文件中通过相对路径引入,因为打包后(public文件不受影响)资源和index.html的相对路径并不会变化)
 * public 文件夹中的内容在打包的时候，会被原封不动的移动到dist目录中
-* assets文件夹在打包时，会被webpack处理，合并到js业务代码中。(所以不可以在index.html文件中通过 相对路径来引入assets文件夹中的资源，打包过后资源和index.html的相对位置会发生变化)
+* assets文件夹在打包时，会被 webpack 处理，合并到 js 业务代码中。(所以不可以在index.html文件中通过 相对路径来引入assets文件夹中的资源，打包过后资源和index.html的相对位置会发生变化)
 
 ## Vue 请求静态资源中的路径
 

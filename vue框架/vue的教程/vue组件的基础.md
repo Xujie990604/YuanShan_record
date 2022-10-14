@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-09-27 20:16:31
+ * @LastEditTime: 2022-10-12 11:10:44
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue组件的基础.md
  * @Description: Vue组件基础
 -->
@@ -15,22 +15,29 @@
 ### Vue.extend()
 
 ```js
-// 使用 Vue.extend() 生成的不是一个组件实例，而是一个构造器
-// 平时的业务开发时很少会直接使用 Vue.extend() 方法来把这个组件挂载到
-// 但是在使用 Vue.component 全局注册和通过 components 局部组件注册时，Vue 都会默认调用一次这个方法
+// 使用 Vue.extend(options) 生成的不是一个组件实例，而是一个构造器(带有一部分预设参数的 构造函数)
+// Myself ==  ƒ VueComponent(options) {this._init(options);}
 const Myself = Vue.extend({
   template: '<p>使用Vue.extend()创建的组件</p>',
   data() {
     return {}
   }
 })
+const mySelfComponent = new Myself()
+
+// 使用 new 来执行构造函数，mySelfComponent 的值是一个 Vue 对象
+// mySelfComponent == VueComponent {_uid: 2, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
+
 // 需要使用 $mount() 方法来把这个组件挂载到 DOM 节点上
+// 或者使用 Vue.component() 来把这个组件注册为全局组件
 new Myself().$mount('#my-self')
+
 ```
 
 ### 全局注册(router-link组件就是router自动注册的全局组件，我们不需要在当前组件中import就可以使用)
 
 * 对于一些使用频率很高，但是逻辑非常少的组件，我们可以在main.js中全局注册组件(在new Vue({...})之前)
+* Vue.component 的作用仅是用来注册(把一个 Vue 实例赋给一个名字，或者挂载到 DOM 上)。Vue.component 内部默认调用了 Vue.extend 方法来生成 Vue 实例。
 
 ```js
 // 在 main.js 中定义全局组件，然后在整个项目中都可以直接使用这个组件

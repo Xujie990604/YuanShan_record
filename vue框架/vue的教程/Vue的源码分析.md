@@ -20,10 +20,10 @@
 5. 通常我们开发 Vue.js 都会借助 webpack 构建， 然后通过 .vue 单文件来编写组件。sfc目录下的代码逻辑会把 .vue 文件内容解析成一个 JavaScript 的对象。
 6. Vue.js 会定义一些工具方法，shared 定义的工具方法都是会被浏览器端的 Vue.js 和服务端的 Vue.js 所共享的
 
-## 从源码的层面来理解 Vue 的生命周期
+## Vue 中的实例方法
 
-* 实例方法指的是挂载到 Vue 的 prototype 上(这个 Vue 指的是 构造函数吗？直接直接往构造函数上添加方法？)
-* 全局方法指的是挂在到 Vue 上(全局方法和实例方法会有什么不一样吗？)
+* 实例方法指的是挂载到 Vue 的 prototype 上
+* 全局方法指的是挂在到 Vue(构造函数) 上
 
 ```js
 function Vue() {
@@ -61,4 +61,51 @@ function Vue() {
 * vm.$nextTick
 * vm.$destroy
 
-### Vue 中的全局 API
+## Vue 中的全局 API
+
+### Vue.extend()
+
+* Vue.extend() 是 Vue 的基础构造器
+* Vue.extend 的作用是创建一个子类，所以可以创建一个子类，然后让它继承 Vue 身上的一些功能。
+
+```js
+// 子类的原型，继承于父类的原型
+// 这个子类之后就可以使用父类上的一些属性和方法
+02  Sub.prototype = Object.create(Super.prototype)
+03  Sub.prototype.constructor = Sub
+04  Sub.cid = cid++
+```
+
+### Vue.component()
+
+* 注册或获取全局组件
+
+### Vue.nextTick()
+
+### Vue.set()
+
+### Vue.delete()
+
+### Vue.directive
+
+* 注册或获取全局指令
+
+### Vue.filter()
+
+* 注册或获取全局过滤器
+
+### Vue.use()
+
+* 安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。调用 install 方法时，会将 Vue 作为参数传入。install 方法被同一个插件多次调用时，插件也只会被安装一次
+
+### Vue.mixin
+
+* 安装Vue.js插件。如果插件是一个对象，必须提供install方法。如果插件是一个函数，它会被作为install方法。调用install方法时，会将Vue作为参数传入。install方法被同一个插件多次调用时，插件也只会被安装一次
+
+### Vue.compile
+
+* 编译模板字符串并返回包含渲染函数的对象
+
+### Vue.version
+
+* 编译模板字符串并返回包含渲染函数的对象
