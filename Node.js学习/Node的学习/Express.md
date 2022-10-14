@@ -1,6 +1,6 @@
 # Express
 
-* Express是一个三方的用来创建Web服务器的模块(基于node内置的http模块进一步封装的)
+* Express是一个三方的用来创建 Web 服务器的模块(基于 node 内置的 http 模块进一步封装的)
 
 ## 基本使用
 
@@ -162,7 +162,7 @@ app.use(cors())
 
 ## Session认证
 
-* express-session中间件的使用
+* express-session 中间件的使用
 
 ```js
 // 导入 session 模块
@@ -192,8 +192,8 @@ app.post('/api/login', (req, res) => {
 
 ## JWT认证
 
-* jsonwebtoken (用于生成JWT字符串)  express-jwt(用于将JWT字符串还原成JSON对象)
-* 需要定义一个secret密钥。在加密和还原过程中都需要使用这个secret(secret本质上就是一个字符串，定义的时候越是复杂越好)
+* jsonwebtoken (用于生成JWT字符串)  express-jwt (用于将 JWT 字符串还原成 JSON 对象)
+* 需要定义一个 secret 密钥。在加密和还原过程中都需要使用这个 secret (secret 本质上就是一个字符串，定义的时候越是复杂越好)
 
 ```js
 // 在用户登陆成功之后， 调用 jwt.sign() 方法生成 JWT 字符串
