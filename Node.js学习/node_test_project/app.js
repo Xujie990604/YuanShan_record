@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:47:55
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-10-15 00:04:25
+ * @LastEditTime: 2022-10-15 22:24:13
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\app.js
  * @Description: node 项目的入口文件
  */
@@ -44,10 +44,14 @@ const config = require('./config')
 app.use(expressJwt({secret: config.jwtSecretKey}).unless({path: [/^\/api/]}))
 
 // 导入用户路由模块
-const userRouter = require('./router/user')
+const userRouter = require('./router/user.js')
 // 注册路由模块
 // 注意： 为这个路由模块添加了统一的访问前缀 /api
 app.use('/api', userRouter)
+
+// 导入用户信息路由模块
+const userInfoRouter = require('./router/userInfo.js')
+app.use('/my', userInfoRouter)
 
 // 定义全局的错误级别的中间件
 // 注意：全局的错误级别的中间件要在 路由注册 之后注册

@@ -4,7 +4,7 @@
  * @LastEditors: xujie 1607526161@qq.com
  * @LastEditTime: 2022-10-13 23:52:14
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\router_handler\user.js
- * @Description: 专门负责存放每个路由的处理函数
+ * @Description: 存放登录，注册接口路由的处理函数
  */
 
 // 导入数据库对象
