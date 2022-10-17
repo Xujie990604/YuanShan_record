@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-10-14 15:21:25
+ * @LastEditTime: 2022-10-17 11:49:48
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -95,7 +95,7 @@ this.$delete(this.error,'phone');
       }
     }
 
-    // 收集的依赖是一个什么东西，起一个名字叫做 watcher
+    // 收集的依赖是一个什么东西，起一个名字叫做 watcher(每一个 Vue 实例，对应着一个 渲染watcher)
     // watcher 是一个中介的角色
     // 外界通过 watcher 来读取数据, watcher 中 读取数据前将自身赋值给 window.target , 然后读取数据，使得自身当做依赖被收集
     // 数据发生变化时，触发 setter ，在 setter 中通知 watcher，然后 watcher 在通知给外界 
@@ -120,7 +120,7 @@ this.$delete(this.error,'phone');
         window.target = undefined;
         return value
       }
-      // 在执行 update 的时候，会执行传进来的回调函数，来执行用户定义的操作
+      // 在执行 update 的时候，会执行传进来的回调函数(在 Vue 中这个回调函数的作用就是用来进行视图渲染)
       update() {
         const oldValue = this.value;
         this.value = this.get()

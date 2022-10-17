@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:21
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\HTML+CSS\CSS部分\CSS知识块\CSS选择器.md
+ * @Description: CSS中的各类选择器
+-->
 # css选择器
 
 * 有效且结构良好的文档是添加样式的基础
@@ -24,4 +31,4 @@
 19. :empty 空标签选择器，一个空格都不行。伪元素添加的话不算文本内有东西。伪元素不占DOM结构。
 20. :selection 使用鼠标选中（突出显示的文本）时，才会出现的样式。 user-select: none;不允许用户选中文本。
 
-**伪类选择器的前面最好放置的是元素的 类型 例如p div等。如果放置 类名 的话会有不预期的效果。**
+**伪类选择器的前面最好放置的是元素的 类型 例如 p div 等。如果放置 类名 的话会有不预期的效果。**
