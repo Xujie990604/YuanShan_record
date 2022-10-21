@@ -1,6 +1,6 @@
 # Express
 
-* Express 是一个三方的用来创建  Web  服务器的模块(基于  node  内置的  http  模块进一步封装的)
+* Express 是一个三方的用来创建  Web  服务器的模块(基于 node 内置的 http 模块进一步封装的)
 
 ## 基本使用
 
@@ -13,7 +13,7 @@ const app = express();
 // 调用 express.static('public')方法， 快速的对外提供静态资源
 // 注意: public 这个目录名不会出现在 URL 中
 // 注意: 如果要托管多个静态文件，就要多次调用express.static('public'),文件夹的优先级和文件夹的调用顺序一致
-// app.use(express.static(path.join(__dirname, '/dist')))
+app.use(express.static(path.join(__dirname, '/dist')))
 
 // 挂载路径前缀
 // 需要在 URL 地址中加入 'public' 前缀才能访问 "clock" 目录中的文件
@@ -25,12 +25,12 @@ app.listen(80,()=> {
 })
 
 // 通过 get 方法用于 监听 客户端对应的get请求
-app.get('/user',(req,res) => {
+app.get('/user',(req, res) => {
     // res.send()用来向客户端响应数据
     res.send({name: 'xujie', gender: '男'})
 })
 
-// 通过 post 方法用于 监听 客户端对应的post请求
+// 通过 post 方法用于 监听 客户端对应的 post 请求
 app.post('/user', (req, res) => {
     res.send("得到post请求")
 })
@@ -42,7 +42,7 @@ app.get('/',(req,res) => {
     res.send(req.query)
 })
 
-// 通过 req.params 来获取URL中的通过: 动态匹配的参数值
+// 通过 req.params 来获取 URL 中的通过: 动态匹配的参数值
 // 注意: 默认情况下，req.params 是一个空对象
 app.get('/user/:id', (req, res) => {
     console.log(req.params)
@@ -52,7 +52,7 @@ app.get('/user/:id', (req, res) => {
 
 ## 路由
 
-* express中，路由指的是 客户端的请求 和 服务器处理函数 之间的映射关系
+* express 中，路由指的是 客户端的请求 和 服务器处理函数 之间的映射关系
 * 每一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的回调函数
 * 路由的匹配会按照路由路由的定义顺序进行匹配
 
@@ -110,32 +110,32 @@ app.use(function(req, res, next) {
 * 局部的中间件
 
 ```js
-const vm = function(req,res,next) {
+const vm = function(req, res, next) {
     console.log("我是局部的中间件")
     next()
 }
 // 使用单个局部中间件
-app.get('/user',vm,(req,res)=> {
+app.get('/user',vm,(req, res)=> {
     console.log("i am get user")
 })
 // 使用多个局部中间件
-app.get('/user',vm1,vm2,vm3(req,res)=> {
+app.get('/user',vm1,vm2,vm3(req, res)=> {
     console.log("i am get user")
 })
-app.get('/user',[vm1,vm2.vm3],(req,res)=> {
+app.get('/user',[vm1,vm2.vm3],(req, res)=> {
     console.log("i am get user")
 })
 ```
 
 ### 中间件的分类
 
-1. 应用级别的中间件: 绑定到app实例上的中间件
-2. 路由级别的中间件: 绑定到router实例上的中间件
-3. 错误级别的中间件: (err,req,res,next)有四个参数 专门用来捕获整个项目中发生的异常错误，使用app.use()全局注册。错误级别的中间件必须要放到所有的路由之后
-4. express内置的中间件: 1. express.static()快速托管静态资源 2. express.json()解析JSON格式的请求体数据 3.express.urlencoded()解析URL-encoded格式的请求体数据
+1. 应用级别的中间件: 绑定到 app 实例上的中间件
+2. 路由级别的中间件: 绑定到 router 实例上的中间件
+3. 错误级别的中间件: (err, req, res, next)有四个参数 专门用来捕获整个项目中发生的异常错误，使用 app.use()全局注册。错误级别的中间件必须要放到所有的路由之后
+4. express 内置的中间件: 1. express.static()快速托管静态资源 2. express.json() 解析 JSON 格式的请求体数据 3.express.urlencoded()解析 URL-encoded 格式的请求体数据
 
 ```js
-// 只需要在路由之前注册一下这个中间件，不需要和js的JSON方法一样调用函数去解析得到的数据。
+// 只需要在路由之前注册一下这个中间件，不需要和 js 的 JSON 方法一样调用函数去解析得到的数据。
 // 通过 express.json 这个中间件解析表单中的JSON格式的数据
 app.use(express.json())
 // 通过 express.urlencoded 这个中间件来解析表单中的 url-encoded 格式的数据
