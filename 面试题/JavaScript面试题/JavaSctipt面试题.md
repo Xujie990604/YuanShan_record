@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-09-06 20:57:39
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\面试题\JavaScript面试题\JavaSctipt面试题.md
+ * @Description: 
+-->
 # 面试题
 
 ## 区别数组和对象的五种方法
@@ -17,7 +24,7 @@
    用Object.prototype.toString.call({})   [object Object]
    目前这个方法还不是特别懂。大概是Object.prototype.toString()方法能够输出各种类型，但是Object下面的String() Array()等构造函数把String()方法给重写了。所以不得已使用call()方法来改变this的指向。使得执行时函数体是Object()的函数体，但是this的指向变成了我们要区别类型的变量(数组或者是对象)
 
-5. 使用Array.isArray([]) Array.isArray({}) 来判断数据类型是否为数组
+5. 使用 Array.isArray([]) Array.isArray({}) 来判断数据类型是否为数组
 
 ## 将类数组转化为数组
 
@@ -32,3 +39,11 @@
    return str.split("").reverse().join("")
  }
 ```
+
+## 数组判空
+
+* arr.length === 0
+
+## 对象判空
+
+* Object.keys(obj).length === 0
