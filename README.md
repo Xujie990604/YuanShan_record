@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\README.md
+ * @Description: 个人学习笔记涉及到的参考资料
+-->
 # 介绍
 
 * 一个前端程序员的成长笔记
@@ -12,7 +19,7 @@
 
 ## JavaScript
 
-* B站- 渡一教育- JavaScript入门宝典
+* B站- 渡一教育- JavaScript 入门宝典
 * 腾讯课堂- 米修在线- JavaScript 30个实战项目彻底掌握原生JS
 * 《JavaScript DOM 编程艺术》第二版
 * 《JavaScript 高级程序设计》第三版
@@ -30,6 +37,11 @@
 
 ## Vue框架
 
-* Vue.js官方文档
+* Vue.js 官方文档
 * 腾讯课堂- 米修在线- 还原饿了么订餐app 1 2 3 4
-* B站- codeWhy- 2019Vue.js全套教程
+* B站- codeWhy- 2019 Vue.js全套教程
+* 《深入浅出 Vue.js》
+
+## 数据结构与算法
+
+* 《JavaScript 数据结构与算法》

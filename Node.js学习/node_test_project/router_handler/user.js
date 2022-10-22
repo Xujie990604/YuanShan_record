@@ -1,10 +1,10 @@
 /*
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:56:04
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-10-13 23:52:14
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2022-10-21 10:36:06
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\router_handler\user.js
- * @Description: 存放登录，注册接口路由的处理函数
+ * @Description: 存放 user 模块的路由处理函数
  */
 
 // 导入数据库对象
@@ -20,7 +20,7 @@ const config = require('../config')
  * @description: 注册路由对应的处理函数
  * @param { Object } req 和客户端请求有关的数据
  * @param { Object } res 和服务端响应有关的数据
- * @return { none }
+ * @return { object } 函数的相应信息
  */
 const register = (req, res) => {
   // 获取客户端提交到服务器的用户信息
@@ -67,9 +67,9 @@ const register = (req, res) => {
 
 /**
  * @description: 登录路由对应的处理函数
- * @param {*} req
- * @param {*} res
- * @return {*}
+ * @param { Object } req 和客户端请求有关的数据
+ * @param { Object } res 和服务端响应有关的数据
+ * @return { object } 函数的相应信息
  */
 const login = (req, res) => {
   // 获取客户端提交到服务端的信息

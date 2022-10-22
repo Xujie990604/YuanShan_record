@@ -1,7 +1,12 @@
+/*
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-07-18 13:38:36
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\db\index.js
+ * @Description: 数据库连接文件
+ */
 // 导入mysql模块
-const { request } = require('express');
 const mysql = require('mysql');
-
 
 // 创建数据库连接对象
 const db = mysql.createPool({
