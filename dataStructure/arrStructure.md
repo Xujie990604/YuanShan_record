@@ -85,11 +85,13 @@ myArr.shift()
 ## 在任意位置删除和添加元素
 
 ```js
+// 使用 splice 方法
 myArr.splice()
 ```
 
-// 八， 二维数组
+## 二维数组
 
+```js
 let averageTemp = []
 averageTemp[0] = [21, 43, 53, 78, 434, 789]
 averageTemp[1] = [564, 43, 343, 753, 44, 3459]
