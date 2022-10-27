@@ -11,20 +11,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>测试用的页面</title>
   </head>
   <body>
     <script>
-      let arr = [1, 1,'true','true',true,true,15,15,false,false, undefined, undefined,
-       null, null, NaN, NaN,'NaN', 0, 0,'a', 'a',{},{}]
-      function unique(arr) {
-        var obj = {};
-        return arr.filter(function(item, index, arr){
-          return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
-        })
-      }
-      
-
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      const isEVen = x => x % 2 === 0
+      let result = arr.join("-")
     </script>
   </body>
 </html>

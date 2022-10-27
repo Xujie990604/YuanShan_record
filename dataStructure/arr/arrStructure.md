@@ -99,3 +99,51 @@ averageTemp[1] = [564, 43, 343, 753, 44, 3459]
 // 表格化输出二维数组，输出更加美观
 console.table(averageTemp)
 ```
+
+## 数组合并
+
+```js
+const zero = 0;
+const positiveNumbers = [1, 2, 3];
+const negativeNumbers = [-3, -2, -1];
+let numbers = negativeNumbers.concat(zero, positiveNumbers); // [-3, -2, -1, 0, 1, 2, 3]
+```
+
+## 元素排序
+
+```js
+// 使用 reverse 来逆转元素的顺序
+numbers.reverse();
+
+// 使用 sort 来进行元素的排序(可以使用函数当做参数来自定义排序的规则)
+numbers.sort((a, b) => a - b);
+```
+
+## 元素搜索
+
+```js
+// indexOf 返回数组中与参数匹配的第一个元素的索引
+// lastIndexOf 返回数组中与参数匹配的最后一个元素的索引
+numbers.indexOf(10)
+numbers.lastIndexOf(10)
+
+// find 返回第一个符合回调函数条件的元素
+// findIndex 返回第一个符合回调函数条件的元素的索引
+// 注：参数从智能指定具体值，扩展成了可以满足某个条件
+numbers.find(x => x.age > 18)
+numbers.findIndex(x => x.age > 18)
+
+// includes 返回值为 Boolean 判断数组中是否包含一个指定的值
+numbers.includes(20)
+```
+
+## 将数组变成字符串
+
+```js
+// 使用 toString 将数组转化为字符串(默认使用 , 当做分隔符)
+number.toString() //'1,2,3,4,5,6,7,8,9,10'
+
+// 使用 join 将数组按照指定的分隔符转化为字符串
+number.join("-") // '1-2-3-4-5-6-7-8-9-10'
+
+```
