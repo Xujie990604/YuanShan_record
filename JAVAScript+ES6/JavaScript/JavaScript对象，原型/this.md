@@ -11,7 +11,7 @@
 7. this 中的环境对象和作用域完全不是一个概念
 8. 非严格模式下，全局中的函数的 this 指向 window， 严格模式下，全局中的函数的 this 指向undefined。
 9. 在全局作用域中使用 let const 声明的变量不会绑定到 window 对象中，而是会被绑定到 script 作用域上。script和 window 是平级别的。
-10. setTimeOut中的 this 指向
+10. setTimeOut 中的 this 指向
 
 * 回调函数不使用箭头函数
 
