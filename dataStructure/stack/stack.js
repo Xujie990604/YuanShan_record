@@ -1,7 +1,7 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-10-27 17:26:11
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stack.js
  * @Description: 
  */
