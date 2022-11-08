@@ -14,7 +14,7 @@
 
 ## 应用实例
 
-* Vue的这种使用方法和 node 是在是太像了
+* Vue 的这种使用方法和 node 是在是太像了
 
 ```js
 app.use(router)
@@ -70,8 +70,9 @@ console.log(proxy === raw) // false
 
 ### reactive()
 
-* 仅对对象类型有效。(string, number, boolean)等类型无效
+* 仅对对象类型有效(对象，数组，Set，Map)等。(string, number, boolean)等类型无效
 * 必须始终保持对该响应式对象的相同引用，不可以随意的替换一个响应对象
+* 为保证访问代理的一致性，对同一个原始对象调用 reactive() 会总是返回同样的代理对象，而对一个已存在的代理对象调用 reactive() 会返回其本身。
 
 ### ref()
 
