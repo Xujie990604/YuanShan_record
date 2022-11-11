@@ -1,7 +1,7 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-11-01 15:36:37
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stackObj.js
  * @Description: 基于对象来创建一个栈的数据结构
  */
@@ -33,6 +33,34 @@ class Stack {
     const result = this.item[this.count]
     delete this.item[this.count]
     return result
+  }
+
+  // 查看栈顶的元素
+  peek() {
+     // 如果栈为空的话，直接返回 undefined
+    if(this.isEmpty()) {
+      return undefined
+    }
+    // 返回栈顶的数据
+    return this.item[this.count - 1]
+  }
+
+  // 清除栈内元素
+  clear() {
+    this.item = {}
+    this.count = 0
+  }
+
+  // 模拟数组的 toString 方法
+  toString() {
+    if (this.isEmpty()) {
+      return '';
+    }
+    let objString = `${this.items[0]}`;
+    for (let i = 1; i < this.count; i++) {
+      objString = `${objString}, ${this.items[i]}`;
+    }
+    return objString;
   }
 }
 
