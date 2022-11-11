@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-10 08:51:48
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\Javascript 小知识点.md
+ * @Description: JS涉及到的一些零散知识点
+-->
 # javascript零散知识点
 
 * Number.toFixed(number) 四舍五入的截取number位小数
@@ -54,3 +61,5 @@
 * 对象的key值如果使用[]方括号括起来的话， 会将[]内的内容当做变量来解析
 
 * 浏览器URL中使用斜杠 /   window系统的文件目录下使用反斜杠 \
+
+* 为啥检测变量是否为空时，不能直接使用强等于号： xxx === undefined 而是非要使用 typeof： typeof(xxx) === "undefined" (答：在变量没有声明的情况下，如果直接使用 xxx === undefined 会报错， 但是typeof(xxx) === 'undefined' 就不会报错)
