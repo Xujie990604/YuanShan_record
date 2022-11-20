@@ -3,7 +3,7 @@
  * @Date: 2022-10-27 17:26:11
  * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stack.js
- * @Description: 
+ * @Description: 基于数组来创建一个栈数据结构
  */
 /*
  * @Author: x09898 coder_xujie@163.com

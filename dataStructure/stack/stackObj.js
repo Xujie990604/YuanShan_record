@@ -7,7 +7,9 @@
  */
 class Stack {
   constructor() {
+    // 存储数据
     this.item = {}
+    // 记录栈中数据条数
     this.count = 0
   }
 
@@ -51,11 +53,11 @@ class Stack {
     this.count = 0
   }
 
-  // 模拟数组的 toString 方法
+  // 输出栈中的元素
   toString() {
     if (this.isEmpty()) {
       return '';
-    }
+    } 
     let objString = `${this.items[0]}`;
     for (let i = 1; i < this.count; i++) {
       objString = `${objString}, ${this.items[i]}`;

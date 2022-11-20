@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-10-17 20:21:48
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\arrStructure.md
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\dataStructure\arr\arrStructure.md
  * @Description: 
 -->
 # 数组的数据结构讲解
@@ -129,7 +129,7 @@ numbers.lastIndexOf(10)
 
 // find 返回第一个符合回调函数条件的元素
 // findIndex 返回第一个符合回调函数条件的元素的索引
-// 注：参数从智能指定具体值，扩展成了可以满足某个条件
+// 注：参数从智只能指定具体值，扩展成了可以满足某个条件
 numbers.find(x => x.age > 18)
 numbers.findIndex(x => x.age > 18)
 
