@@ -3,13 +3,6 @@
  * @Date: 2022-10-27 17:26:11
  * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stack.js
- * @Description: 基于数组来创建一个栈数据结构
- */
-/*
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-10-27 17:26:11
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stack.js
  * @Description: 基于数组来定义一个栈的数据结构
  */
 class Stack {
@@ -33,7 +26,7 @@ class Stack {
     return this.item[this.item.length - 1]
   }
 
-  // isEmpty 查看栈是否为空(改成属性的形式)
+  // isEmpty 查看栈是否为空
   isEmpty() {
     return this.item.length === 0
   }

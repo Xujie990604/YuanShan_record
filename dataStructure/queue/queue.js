@@ -7,9 +7,9 @@
  */
 class Queue{
   constructor() {
-    // 记录队尾元素的下标值
+    // 记录队尾结点下一个位置的下标值
     this.count = 0
-    // 记录队头元素的下标值
+    // 记录队头结点的下标值
     this.lowestCount = 0
     // 存储数据
     this.items = {}
@@ -29,7 +29,7 @@ class Queue{
     }
     const result = this.items[this.lowestCount]
     delete this.items[this.lowestCount]
-    this.count.lowestCount++
+    this.lowestCount++
     return result
   }
 
@@ -67,5 +67,6 @@ class Queue{
     for(let i = this.lowestCount + 1; i< this.count; i++) {
       objString = `${objString}, ${this.items[i]}`
     }
+    return objString
   }
  }

@@ -3,13 +3,6 @@
  * @Date: 2022-10-31 18:04:16
  * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stackStructure.md
- * @Description: 
--->
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-10-31 18:04:16
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stackStructure.md
  * @Description: 数据结构栈
 -->
 # 栈
