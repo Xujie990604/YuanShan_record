@@ -119,4 +119,4 @@
 
 ## vscode
 
-* VSCode可以直接把本地的文件夹添加到GitHub上。不需要事先在GitHub上创建仓库然后clone，也不需要使用git remote命令把本地的文件夹和GitHub上的仓库建立起联系
+* VSCode可以直接把本地的文件夹添加到GitHub上。不需要事先在GitHub上创建仓库然后clone，也不需要使用git remote 命令把本地的文件夹和GitHub上的仓库建立起联系
