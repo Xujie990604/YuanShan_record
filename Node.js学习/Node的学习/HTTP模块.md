@@ -1,13 +1,13 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\Node的学习\HTTP模块.md
  * @Description: node 的 Http 模块
 -->
 # HTTP模块
 
-* HTTP 模块是用来创建 Web 服务器的模块。通过 HTTP 的方法就能把一台电脑变成一台 Web 服务器，从而对外提供Web 资源服务。
+* HTTP 模块是用来创建 Web 服务器的模块。通过 HTTP 的方法就能把一台电脑变成一台 Web 服务器，从而对外提供 Web 资源服务。
 * 127.0.0.1 IP地址 对应的域名是 localhost 用来访问本机(测试用)
 
 ```js

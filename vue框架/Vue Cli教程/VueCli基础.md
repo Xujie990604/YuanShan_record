@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-10-14 10:09:59
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2022-12-06 19:32:56
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
  * @Description:
 -->
@@ -29,7 +29,7 @@
 * URL中是相对路径。URL中的内容会被作为一个模块进行请求。且基于你的文件系统中的目录结构进行解析。(适合请求assets文件夹中的内容)
 * URL开头是~  其后任何内容都会被当做模块解析(可以加载含有别名的静态资源，又能够加载node-modules中的资源)
 `<img src="assets/img/home/recommend_bg.jpg" alt="">`如果不加~符号的话，无法判断这是想用别名还是绝对路径
-* URL开头是@  好处是@是一个别名
+* URL开头是@  好处是@是 src 的别名
 
 ### Vue-loader
 
