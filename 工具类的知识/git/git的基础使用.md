@@ -32,17 +32,17 @@
 
 ### git log
 
-* 显示所有的commit的版本。那些一大串的十六进制数字是commit的版本号。
-* 使用q来结束git log命令
+* 显示所有的 commit 的版本。那些一大串的十六进制数字是commit的版本号。
+* 使用 q 来结束 git log 命令
 
 ### git reset --hard  commit_id
 
-* 回退到某个指定的commit版本
-* 也可以使用HEAD表示当前版本，上个版本就是HEAD^。上一百个版本HEAD~100
+* 回退到某个指定的 commit 版本
+* 也可以使用 HEAD 表示当前版本，上个版本就是 HEAD^。上一百个版本 HEAD~100
 
 ### git reflog
 
-* 可以查看commit版本的穿梭历史
+* 可以查看 commit 版本的穿梭历史
 * (使用了回退命令后，git log命令显示commit版本会显示不全，使用git relog命令会完整的显示所有commit版本，包括因为回退而被丢弃的commit版本)
 
 ### git restore -- 文件夹(修改还未添加到暂存区)

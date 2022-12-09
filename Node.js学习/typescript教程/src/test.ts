@@ -9,7 +9,16 @@ const obj = {
   name: "why",
   age: 18,
   ddd: 'ddd'
+
+function test(params: {label: string}) {
+  console.log(params.label)
+}
+let a = {
+  size: 10,
+  label: "xujie"
 }
 
 console.log(obj)
 
+
+test(a)
