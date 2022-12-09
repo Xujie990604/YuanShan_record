@@ -7,5 +7,9 @@
  */
 const obj = {
   name: "why",
-  age: 18
+  age: 18,
+  ddd: 'ddd'
 }
+
+console.log(obj)
+
