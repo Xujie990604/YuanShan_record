@@ -1,3 +1,10 @@
+<!--
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-04-22 13:10:59
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\笔记\TS解构赋值.md
+ * @Description: 
+-->
 # Ts变量声明
 
 ## let const
@@ -10,7 +17,7 @@
 
 ```ts
 //数组的解构赋值
-function add([first,second]: [number,number]) {
+function add([ ,second]: [number,number]) {
     console.log(first);
     console.log(second);
 

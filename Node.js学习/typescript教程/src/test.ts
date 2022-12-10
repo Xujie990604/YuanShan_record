@@ -5,20 +5,12 @@
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\src\test.ts
  * @Description: TS练习
  */
-const obj = {
-  name: "why",
-  age: 18,
-  ddd: 'ddd'
 
-function test(params: {label: string}) {
-  console.log(params.label)
-}
-let a = {
-  size: 10,
-  label: "xujie"
+function add(a: number, b:number): number
+function add(a: string, b:string): string
+function add(number1: any, number2: any): any {
+  return number1 + number2
 }
 
-console.log(obj)
-
-
-test(a)
+console.log(add(10,78))
+console.log(add('we','ty'))
