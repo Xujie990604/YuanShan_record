@@ -6,11 +6,17 @@
  * @Description: TS练习
  */
 
-function add(a: number, b:number): number
-function add(a: string, b:string): string
-function add(number1: any, number2: any): any {
-  return number1 + number2
+// type paraType = string | number
+interface aType {
+  content: string
+  say: (content: string) => void
 }
 
-console.log(add(10,78))
-console.log(add('we','ty'))
+let a: aType = {
+  content: '111',
+  say: function() {}
+}
+
+interface aType {
+  name?: string
+}

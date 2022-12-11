@@ -17,7 +17,7 @@
 
 ```ts
 //数组的解构赋值
-function add([ ,second]: [number,number]) {
+function add([first ,second]: [number,number]) {
     console.log(first);
     console.log(second);
 
