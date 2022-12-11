@@ -7,9 +7,6 @@
 -->
 # TypeScript
 
-* javaScript不会在编码的过程中报告错误，只会在实际执行的时候报告错误。TypeScript解决了这个痛点
-* JavaScript缺失类型的概念
-
 * :string 代表的是Ts中的字符串类型
 * :String 代表的是JS中的字符串包装类类型
 
@@ -145,11 +142,30 @@ const b = arr[0] // TS 会推断出来 b 是个 string 类型
 是js标准数据类型的一个补充。使用枚举类型可以为一组数值赋予友好的名字，下标值默认从零开始，也可以自己手动赋值。
 
 ```ts
-enum Color { Red = 1, Green = 5, Blue = 3 };
-// 把 Green 当做属性来用，使用 . 操作符
-let c: Color = Color.Green;  // c === 5
-// 把 5 当做下标值来用，使用 [] 操作符
-let colorName: string = Color[5]  //colorName === Green
+// 定义一组常量
+// 这样做的话是代码的可读性特别好
+enum Position {
+  LEFT,
+  RIGHT
+}
+
+function test(position: Position) {
+  switch(position){
+    case Position.LEFT:
+      console.log('left')
+      break;
+    case Position.RIGHT:
+      console.log('right')
+      break;
+      default:
+        let result: never = position
+  }
+}
+
+// 其实 Position.LEFT 是有值的，具体值为 0 
+// 其实传参数的时候，也就是把 0 传进去了。但是我们并不关心这个值是多少，这样写的话代码可读性非常好，一眼就看出了我想要执行的是 left 相关的操作。否则的话还需要定义一个映射表 0-left 1-right 然后当参数为 0 时执行 left 相关的操作
+// 并且在传参时，输入 Position. 编辑器会提示你有几种类型的值可以传
+test(Position.LEFT)
 ```
 
 ### object 类型

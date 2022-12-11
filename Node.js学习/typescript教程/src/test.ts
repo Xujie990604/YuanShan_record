@@ -6,17 +6,13 @@
  * @Description: TS练习
  */
 
-// type paraType = string | number
-interface aType {
-  content: string
-  say: (content: string) => void
+interface Length {
+  length: number
+}
+function test<T extends Length>(arg: T) {
+  return arg.length
 }
 
-let a: aType = {
-  content: '111',
-  say: function() {}
-}
-
-interface aType {
-  name?: string
-}
+test('abc')
+test(['122', '445'])
+test({length: 90})
