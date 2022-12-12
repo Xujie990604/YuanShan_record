@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-07-08 10:27:43
+ * @LastEditTime: 2022-12-12 15:27:54
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\class与style的绑定.md
  * @Description: 
 -->
@@ -34,7 +34,7 @@
 ### style中对象的语法
 
 ```html
-// 属性名fontSize既可以使用大驼峰的形式。 还可以使用连字符的形式font-size
+// 属性名 fontSize 既可以使用大驼峰的形式。 还可以使用连字符的形式 font-size
 
 // '50px'加上了单引号Vue就会把'50px'当做字符串来解析
 <div class="main" :style="{fontSize: '50px'}">数据</div>
