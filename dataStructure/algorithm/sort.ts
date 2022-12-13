@@ -32,24 +32,32 @@ function swap(array: number[], num1: number, num2: number) {
 
 // 冒泡排序的算法实现 O(n²)
 function bubbleSort(array: number[], compareFn = defaultCompare) {
+  console.log(`原数组: ${array}`)
+  console.time(`time`)
   const { length } = array
   // 外循环, 有多少条数据就要循环多少次
   for(let i = 0; i < length; i++) {
     // 内循环，每轮结束后都会将数组 无序部分 中最大的值放到 无序部分 的末尾和 有序部分 组成新的 有序数组
     // 每轮内循环结束后, 无序部分 数量都会减一，所以下一轮要比较的次数就可以减少一次，避免无效运算
     for(let j = 0; j < length - 1 - i ; j++) {
+      console.count('对比次数')
       if(compareFn(array[j], array[j + 1]) === compareResult.BIGGER) {
         swap(array, j, j + 1)
+        console.count('交换次数')
+        console.log(`交换 ${array[j + 1]} 和 ${array[j]} 后: ${array}`)
       }
-      console.log(array)
     }
+    console.log(`外循环: 无序数组中最大值: ${array[length - i - 1]} 被放到有序数组的开头。数组后 ${i+1} 位有序: ${array}`)
   }
+  console.timeEnd(`time`)
   return array
 }
 
 
 // 选择排序的算法实现 O(n²)
 function selectActionSort(array: number[], compareFn = defaultCompare) {
+  console.time('time')
+  console.log(`原数组: ${array}`)
   const { length } = array
   let indexMin
   // 外循环，n 条数据，循环 n-1 次。因为每次循环都会把 无序部分 的*最*小值放到数组开头组成有序部分
@@ -57,21 +65,61 @@ function selectActionSort(array: number[], compareFn = defaultCompare) {
   for(let i = 0; i < length - 1; i++ ) {
     // 假设 无序部分 的第一条数据为 无序部分 的最小值
     indexMin = i
-    // 内循环，每次内循环过后都会有一条数据放到最终位置(并且是放在数组开头)
-    // 所以第 n 次内循环时，前 n-1 项是有序的，不需要进行对比
+    console.log(`假定无序数组第一位: ${array[i]} 为当前无序数组中最小值`)
+    // 内循环，每次内循环过后都会有一条数据放到最终位置
+    // 所以第 n 次内循环时，前 n-1 项是有序的，不需要参与对比
     for(let j = i + 1; j < length; j++) {
+      console.count('对比次数')
       if(compareFn(array[indexMin], array[j]) === compareResult.BIGGER) {
         indexMin = j
+        console.log(`内循环: ${array[indexMin]} 是当前较小值`)
       }
-      // 将无序部分的最小值放到无序部分的开头
-      if(indexMin !== i) {
-        swap(array, i, indexMin)
-      }
-      console.log(array)
     }
+    // 将无序部分的最小值放到有序部分的结尾
+    if(indexMin !== i) {
+      swap(array, i, indexMin)
+      console.count('交换次数')
+    }
+    console.log(`外循环: ${array[i]} 是无序数组中的最小值,放到有序数组第 ${i+1} 位。前 ${i + 1} 位数据是有序的: ${array}`)
   }
+  console.timeEnd('time')
   return array
 }
 
+// 插入排序的算法实现
+function insertSort(array: number[], compareFn = defaultCompare) {
+  console.time('time')
+  console.log(`原数组: ${array}`)
+  const { length } = array
+  // 认为第一个值就是有序的，所以从第二个值开始循环比较
+  for(let i = 1; i < length; i++) {
+    // 使用变量接收待比较值的索引
+    let j = i
+    // 这一轮需要被比较的值
+    const temp = array[i]
+    // j 会一直递减
+    // 只要有一次前面的数值不大于 temp 就可以退出循环了，因为前面的数组已经是有序的
+    while(j > 0 && compareFn(array[j - 1], temp) === compareResult.BIGGER) {
+      // 如果 j-1 位置的值大于 temp, 则将 j-1 的值后移一位(j-1 前面的位置就空出来了)
+      // 这个空出来的位置有两种情况 
+      // 1. 下一次循环的值不大于 temp 了，这个位置就是给 temp 留的
+      // 2. 下一次循环的位置还大于 temp, 则下一次循环的值占用这次空出来的位置~
+      // ~下一次循环值的位置又空出来了......直到碰到情况 1.
+      array[j] = array[j - 1]
+      console.log(`内循环: ${array[j-1]} 被后移: ${array}`);
+      console.count('移位次数')
+      j--
+    }
+    // 两种情况
+    // 1. while 语句没有执行过，就是将原数据放回原处
+    // 2. while 语句有执行过，就是把 temp 放到空出来的位置上
+    array[j] = temp
+    console.log(`外循环: ${temp} 被放到有序数组中: ${array}`)
+    console.count('赋值次数')
+  }
+  console.timeEnd('time')
+  return array
+}
 
-selectActionSort([6,7,3,8,4,78,32])
+bubbleSort([8,4,9,5,2,6,3,1])
+

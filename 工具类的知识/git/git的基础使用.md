@@ -117,6 +117,12 @@
 * git stash pop stash@{id} 在当前分支上恢复缓存的内容，并且会将此次缓存删除掉
 * git stash apply stash@{id} 在当前分支上恢复缓存的内容，但是不会将这次缓存删除
 
+## 打标签
+
+* git tag xxx 创建标签
+* git tag 展示所有标签
+* git tag origin xxx 将标签推送到远程
+
 ## vscode
 
 * VSCode可以直接把本地的文件夹添加到GitHub上。不需要事先在GitHub上创建仓库然后clone，也不需要使用git remote 命令把本地的文件夹和GitHub上的仓库建立起联系

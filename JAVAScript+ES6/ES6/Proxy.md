@@ -1,8 +1,15 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-08-22 11:29:51
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Proxy.md
+ * @Description: 
+-->
 # Proxy
 
-* Proxy用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种"元编程"，即对编程语言进行编程。
+* Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种"元编程"，即对编程语言进行编程。
 
-## Proxy的主要作用
+## Proxy 的主要作用
 
 * 对于一个目标对象进行一次拦截处理，外界对于改对象的访问，都必须先通过这层拦截。因此提供了这种机制，可以对外界的访问进行过滤和改写。
 
