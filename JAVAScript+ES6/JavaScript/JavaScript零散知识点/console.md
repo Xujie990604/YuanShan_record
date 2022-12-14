@@ -50,3 +50,7 @@ console.log("%c你好,你的信息", 'color: red; font-size: 30px;')
 console.time('x')
 console.timeEnd('x')
 ```
+
+## console.track()
+
+* 打印此时的函数调用栈

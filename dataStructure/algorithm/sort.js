@@ -85,7 +85,7 @@ function selectActionSort(array, compareFn) {
     console.timeEnd('time');
     return array;
 }
-// 插入排序的算法实现
+// 插入排序的算法实现 O(n²)
 function insertSort(array, compareFn) {
     if (compareFn === void 0) { compareFn = defaultCompare; }
     console.time('time');
@@ -120,4 +120,38 @@ function insertSort(array, compareFn) {
     console.timeEnd('time');
     return array;
 }
-bubbleSort([8, 4, 9, 5, 2, 6, 3, 1]);
+// 归并排序的算法实现 O(nlog(n))
+// 使用分治的思想，使用递归方式
+function mergeSort(array, compareFn) {
+    if (compareFn === void 0) { compareFn = defaultCompare; }
+    var length = array.length;
+    length > 1 ? console.log("\u9700\u8981\u88AB\u62C6\u5206\u7684\u6570\u7EC4: ".concat(array)) : console.log("".concat(array, " \u6570\u7EC4\u4E2D\u53EA\u6709\u4E00\u4F4D\u6570\uFF0C\u4E0D\u9700\u8981\u518D\u62C6\u9664"));
+    console.trace();
+    if (array.length > 1) {
+        var middle = Math.floor(length / 2);
+        var left = mergeSort(array.slice(0, middle), compareFn);
+        var right = mergeSort(array.slice(middle, length), compareFn);
+        console.log("\u51C6\u5907\u5C06left: ".concat(left, " \u548C right: ").concat(right, " \u8FDB\u884C\u5408\u5E76"));
+        array = merge(left, right, compareFn);
+    }
+    return array;
+}
+// 在归并的过程中进行排序
+function merge(left, right, compareFn) {
+    if (compareFn === void 0) { compareFn = defaultCompare; }
+    var i = 0;
+    var j = 0;
+    var result = [];
+    // 
+    while (i < left.length && j < right.length) {
+        // cResult nResult 只用于打印调试信息，和程序执行无关
+        var cResult = compareFn(left[i], right[j]) === compareResult.SMALLER;
+        var nResult = cResult ? left[i] : right[j];
+        result.push(compareFn(left[i], right[j]) === compareResult.SMALLER ? left[i++] : right[j++]);
+        console.log("\u5408\u5E76: \u5C06\u5BF9\u6BD4\u65F6\u8F83\u5C0F\u7684\u6570 ".concat(nResult, " \u653E\u5230\u6570\u7EC4\u4E2D: ").concat(result));
+    }
+    console.trace();
+    console.log("\u5C06\u8F83\u957F\u6570\u7EC4\u4E2D\u672A\u5BF9\u6BD4\u5143\u7D20\u76F4\u63A5\u63D2\u5165\u6570\u7EC4\u4E2D: ".concat(result.concat(i < left.length ? left.slice(i) : right.slice(j))));
+    return result.concat(i < left.length ? left.slice(i) : right.slice(j));
+}
+mergeSort([8, 4, 9, 5, 2, 6, 3, 1]);

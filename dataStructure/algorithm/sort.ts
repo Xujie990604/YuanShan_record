@@ -86,7 +86,7 @@ function selectActionSort(array: number[], compareFn = defaultCompare) {
   return array
 }
 
-// 插入排序的算法实现
+// 插入排序的算法实现 O(n²)
 function insertSort(array: number[], compareFn = defaultCompare) {
   console.time('time')
   console.log(`原数组: ${array}`)
@@ -121,5 +121,39 @@ function insertSort(array: number[], compareFn = defaultCompare) {
   return array
 }
 
-bubbleSort([8,4,9,5,2,6,3,1])
+// 归并排序的算法实现 O(nlog(n))
+// 使用分治的思想，使用递归方式
+function mergeSort(array: number[], compareFn = defaultCompare){
+  const { length } = array
+  length > 1 ? console.log(`需要被拆分的数组: ${array}`) : console.log(`${array} 数组中只有一位数，不需要再拆除`)
+  console.trace()
+  if(array.length > 1) {
+    const middle: number = Math.floor(length / 2)
+    const left: number[] = mergeSort(array.slice(0, middle), compareFn)
+    const right: number[] = mergeSort(array.slice(middle, length), compareFn)
+    console.log(`准备将left: ${left} 和 right: ${right} 进行合并`)
+    array = merge(left, right, compareFn)
+  }
+  return array
+}
+
+// 在归并的过程中进行排序
+function merge(left: number[], right: number[], compareFn = defaultCompare) {
+  let i: number = 0
+  let j: number = 0
+  const result:number[] = []
+  // 对比时需要保证两个数据的下标值都没有超
+  while(i < left.length && j < right.length) {
+    // cResult nResult 只用于打印调试信息，和程序执行无关
+    const cResult: boolean = compareFn(left[i], right[j]) === compareResult.SMALLER
+    const nResult: number = cResult ? left[i] : right[j]
+    result.push(compareFn(left[i], right[j]) === compareResult.SMALLER ? left[i++] : right[j++])
+    console.log(`合并: 将对比时较小的数 ${nResult} 放到数组中: ${result}`)
+  }
+  console.trace()
+  console.log(`将较长数组中未对比元素直接插入数组中: ${result.concat(i < left.length ? left.slice(i) : right.slice(j))}`)
+  return result.concat(i < left.length ? left.slice(i) : right.slice(j))
+}
+
+mergeSort([8,4,9,5,2,6,3,1])
 
