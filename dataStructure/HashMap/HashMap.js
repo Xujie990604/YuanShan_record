@@ -1,7 +1,7 @@
 
 
 /**
- * @description: 将字典的 key 转化为 String 类型的函数
+ * @description: 将散列表的 key 转化为 String 类型的函数
  * @param {*} item 传入的 key 值
  * @return { string }
  */
@@ -16,9 +16,9 @@ function defaultToString(item) {
   return item.toString()
 }
 
-// 字典的值使用类实现
+// 散列表的值使用类实现
 class ValuePair {
-  // 字典的值中不但包含 值 还包含 键
+  // 散列表的值中不但包含 值 还包含 键
   constructor(key, value) {
     this.key = key;
     this.value = value;
