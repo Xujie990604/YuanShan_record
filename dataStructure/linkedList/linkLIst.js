@@ -25,7 +25,7 @@ class LinkedList {
   // 使用了默认参数的形式，用户可自行传入对比函数(如果不传，则使用默认的)
   constructor(equals = defaultEquals) {
     this.count = 0 // 存储链表中的元素个数
-    this.head = undefined  // 链表的头结点
+    this.head = undefined  // 链表的头结点指针
     this.equalsFn = equals   // 类内部的方法，用来对比两个链结点是否一致
   }
 
@@ -179,5 +179,277 @@ class LinkedList {
       current = current.next;
     }
     return objString;
+  }
+}
+
+// 双向链表的结点
+class DoublyNode extends Node {
+  constructor(element, next, prev) {
+    super(element, next)
+    // 指针指向上一个结点
+    this.prev = prev
+  }
+}
+
+//双链表的实现
+class DoubleLinkedList extends LinkedList {
+  constructor(equalsFn = defaultEquals) {
+    super(equalsFn)
+    // 链表的尾结点指针
+    this.tail = undefined
+  }
+
+  // 尾结点
+  get Tail() {
+  return this.tail
+}
+
+/**
+ * @description: 在链表的末尾添加结点
+ * @param {*} element 结点的值
+ * @return {void}
+ */
+push(element) {
+  const node = new DoublyNode(element);
+  if (this.head == null) {
+    this.head = node;
+    this.tail = node;
+  } else {
+    this.tail.next = node;
+    node.prev = this.tail;
+    this.tail = node;
+  }
+  this.count++;
+}
+
+/**
+ * @description: 在双链表的指定位置插入一个结点
+ * @param {*} element 结点的值
+ * @param {*} index 插入的位置
+ * @return {Boolean} 是否插入成功
+ */
+insert(element, index) {
+  // 检查下标值是否合法
+  if (index >= 0 && index <= this.count) {
+    const node = new DoublyNode(element);
+    let current = this.head;
+    // 要在第一位插入结点
+    if (index === 0) {
+      // 如果链表的长度为零
+      if (this.head == null) {
+        this.head = node;
+        this.tail = node;
+      } else {
+        // 链表的长度不为零
+        node.next = this.head;
+        current.prev = node;
+        this.head = node;
+      }
+      // 如果要在链表的尾部进行插入
+    } else if (index === this.count) {
+      current = this.tail;
+      current.next = node;
+      node.prev = current;
+      this.tail = node;
+    } else {
+      // 如果是在链表的中间插入
+      const previous = this.getElementAt(index - 1);
+      current = previous.next;
+      node.next = current;
+      previous.next = node;
+      current.prev = node;
+      node.prev = previous;
+    }
+    this.count++;
+    return true;
+  }
+  return false;
+}
+
+/**
+ * @description: 从链表的任意位置移除结点
+ * @param {number} index 移除结点的下标值 
+ * @return {DoubleNode | undefined} 被移除的结点
+ */
+removeAt(index) {
+  if (index >= 0 && index < this.count) {
+    let current = this.head;
+    // 移除第一个结点
+    if (index === 0) {
+      this.head = current.next;
+      // 如果只有一项，更新tail
+      if (this.count === 1) {
+        this.tail = undefined;
+      } else {
+        this.head.prev = undefined;
+      }
+      // 移除最后一项
+    } else if (index === this.count - 1) {
+      current = this.tail;
+      this.tail = current.prev;
+      this.tail.next = undefined;
+    } else {
+      // 移除链表中间的结点
+      current = this.getElementAt(index)
+      const previous = current.prev
+      // 将previous与current的下一项链接起来——跳过current
+      previous.next = current.next
+      current.next.prev = previous
+    }
+    this.count--;
+    return current.element;
+  }
+  return undefined;
+}
+
+/**
+ * @description: 查找指定结点的下标值
+ * @param {*} element 结点的值
+ * @return {number}
+ */
+indexOf(element) {
+  let current = this.head;
+  let index = 0;
+  while (current != null) {
+    if (this.equalsFn(element, current.element)) {
+      return index;
+    }
+    index++;
+    current = current.next;
+  }
+  return -1;
+}
+
+/**
+ * @description: 清除双链表
+ * @return {void}
+ */
+clear() {
+  super.clear()
+  this.tail = undefined
+}
+
+/**
+ * @description: 字符串的形式输出所有结点
+ * @return {string}
+ */
+toString() {
+  if (this.head == null) {
+    return '';
+  }
+  let objString = `${this.head.element}`;
+  let current = this.head.next;
+  while (current != null) {
+    objString = `${objString},${current.element}`;
+    current = current.next;
+  }
+  return objString;
+}
+
+/**
+ * @description: 字符串的形式反向输出所有结点
+ * @return {string}
+ */
+inverseToString() {
+  if (this.tail == null) {
+    return '';
+  }
+  let objString = `${this.tail.element}`;
+  let previous = this.tail.prev;
+  while (previous != null) {
+    objString = `${objString},${previous.element}`;
+    previous = previous.prev;
+  }
+  return objString;
+  }
+}
+
+// 循环链表的定义
+class CircularLinkedList extends LinkedList {
+  constructor(equalsFn = defaultEquals) {
+    super(equalsFn);
+  }
+
+  /**
+   * @description: 在链表的尾部插入新结点
+   * @param {*} element
+   * @return {*}
+   */  
+  push(element) {
+    const node = new Node(element);
+    let current;
+    if (this.head == null) {
+      this.head = node;
+    } else {
+      current = this.getElementAt(this.size - 1);
+      current.next = node;
+    }
+    // 将尾部结点的指针指向头结点
+    node.next = this.head;
+    this.count++;
+  }
+
+
+  /**
+   * @description: 在指定位置插入结点
+   * @param {*} element 结点的值
+   * @param {*} index 索引值
+   * @return {boolean}
+   */  
+  insert(element, index) {
+    if (index >= 0 && index <= this.count) {
+      const node = new Node(element);
+      let current = this.head;
+      // 在链表开头插入结点
+      if (index === 0) {
+        // 链表为空
+        if (this.head == null) {
+          this.head = node;
+          node.next = this.head;
+        } else {
+          node.next = current;
+          current = this.getElementAt(this.size);
+          this.head = node; 
+          current.next = this.head;
+        }
+      } else {
+        const previous = this.getElementAt(index - 1);
+        node.next = previous.next;
+        previous.next = node;
+      }
+      this.count++;
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @description: 在任意位置删除元素
+   * @param {*} index
+   * @return {*}
+   */  
+  removeAt(index) {
+    if (index >= 0 && index < this.count) {
+      let current = this.head;
+      if (index === 0) {
+        if (this.size === 1) {
+          this.head = undefined;
+        } else {
+          const removed = this.head;
+          current = this.getElementAt(this.size())
+          this.head = this.head.next
+          current.next = this.head
+          current = removed;
+        }
+      } else {
+        // 不需要修改循环链表最后一个元素
+        const previous = this.getElementAt(index - 1);
+        current = previous.next;
+        previous.next = current.next;
+      }
+      this.count--;
+      return current.element
+    }
+    return undefined;
   }
 }
