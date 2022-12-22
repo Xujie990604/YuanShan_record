@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-07-14 19:56:04
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-10-21 10:36:06
+ * @LastEditTime: 2022-12-22 17:40:05
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\node_test_project\router_handler\user.js
  * @Description: 存放 user 模块的路由处理函数
  */
@@ -61,8 +61,6 @@ const register = (req, res) => {
       })
     })
   })
-  
-  
 }
 
 /**
