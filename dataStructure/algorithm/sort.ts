@@ -53,7 +53,6 @@ function bubbleSort(array: number[], compareFn = defaultCompare) {
   return array
 }
 
-
 // 选择排序的算法实现 O(n²)
 function selectActionSort(array: number[], compareFn = defaultCompare) {
   console.time('time')
