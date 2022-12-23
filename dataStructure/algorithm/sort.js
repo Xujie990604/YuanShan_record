@@ -13,7 +13,7 @@ var compareResult;
     compareResult[compareResult["EQUAL"] = 2] = "EQUAL";
 })(compareResult || (compareResult = {}));
 // 对比函数
-function defaultCompare(num1, num2) {
+var defaultCompare = function (num1, num2) {
     if (num1 > num2) {
         return compareResult.BIGGER;
     }
@@ -23,7 +23,7 @@ function defaultCompare(num1, num2) {
     else {
         return compareResult.EQUAL;
     }
-}
+};
 // 交换函数
 function swap(array, num1, num2) {
     var _a;
@@ -142,7 +142,7 @@ function merge(left, right, compareFn) {
     var i = 0;
     var j = 0;
     var result = [];
-    // 
+    // 对比时需要保证两个数据的下标值都没有超
     while (i < left.length && j < right.length) {
         // cResult nResult 只用于打印调试信息，和程序执行无关
         var cResult = compareFn(left[i], right[j]) === compareResult.SMALLER;
@@ -154,4 +154,59 @@ function merge(left, right, compareFn) {
     console.log("\u5C06\u8F83\u957F\u6570\u7EC4\u4E2D\u672A\u5BF9\u6BD4\u5143\u7D20\u76F4\u63A5\u63D2\u5165\u6570\u7EC4\u4E2D: ".concat(result.concat(i < left.length ? left.slice(i) : right.slice(j))));
     return result.concat(i < left.length ? left.slice(i) : right.slice(j));
 }
-mergeSort([8, 4, 9, 5, 2, 6, 3, 1]);
+// 快速排序O(nlog(n))
+// 使用分治的思想
+function quickSort(array, compareFn) {
+    if (compareFn === void 0) { compareFn = defaultCompare; }
+    console.log("\u539F\u6570\u7EC4\u4E3A: ".concat(array));
+    return quick(array, 0, array.length - 1, compareFn);
+}
+;
+// 该函数用来划分子数组，不断的递归调用自身，直到子数组的长度为一
+function quick(array, left, right, compareFn) {
+    // 用来划分下一次子数组的依据
+    var index;
+    if (array.length > 1) {
+        index = partition(array, left, right, compareFn);
+        if (left < index - 1) {
+            quick(array, left, index - 1, compareFn);
+        }
+        if (index < right) {
+            quick(array, index, right, compareFn);
+        }
+    }
+    return array;
+}
+// 该函数用来对比和交换子数组中数据
+function partition(array, left, right, compareFn) {
+    var pivot = array[Math.floor((right + left) / 2)];
+    console.log("\u672C\u8F6E\u6392\u5E8F\u7684\u5B50\u6570\u7EC4\u4E3A: ".concat(array.slice(left, right + 1), ",\u4E2D\u67A2\u503C\u4E3A").concat(pivot));
+    var i = left;
+    var j = right;
+    while (i <= j) {
+        while (compareFn(array[i], pivot) === compareResult.SMALLER) {
+            console.log("".concat(array[i], "\u5C0F\u4E8E").concat(pivot, ",\u4E0D\u51C6\u5907\u4EA4\u6362\uFF0C\u5BF9\u6BD4\u4E0B\u4E00\u4E2A"));
+            i++;
+        }
+        if (compareFn(array[i], pivot) !== compareResult.SMALLER) {
+            console.log("".concat(array[i], "\u4E0D\u5C0F\u4E8E").concat(pivot, "\u9700\u8981\u4EA4\u6362\u4F4D\u7F6E"));
+        }
+        while (compareFn(array[j], pivot) === compareResult.BIGGER) {
+            console.log("".concat(array[j], "\u5927\u4E8E").concat(pivot, ",\u4E0D\u51C6\u5907\u4EA4\u6362\uFF0C\u5BF9\u6BD4\u4E0B\u4E00\u4E2A"));
+            j--;
+        }
+        if (compareFn(array[j], pivot) !== compareResult.BIGGER) {
+            console.log("".concat(array[j], "\u4E0D\u5927\u4E8E").concat(pivot, "\u9700\u8981\u4EA4\u6362\u4F4D\u7F6E"));
+        }
+        if (i <= j) {
+            console.log("\u51C6\u5907\u4EA4\u6362".concat(array[i], "\u548C").concat(array[j]));
+            swap(array, i, j);
+            console.log("\u4E00\u6B21\u4EA4\u6362\u5B8C\u6BD5\u4EA4\u6362\u540E\u5B50\u6570\u7EC4:".concat(array.slice(left, right + 1)));
+            i++;
+            j--;
+        }
+    }
+    console.log("\u4E00\u6B21\u6392\u5E8F\u8FC7\u540E\u7684\u5168\u6570\u7EC4\uFF1A".concat(array));
+    return i;
+}
+console.log(quickSort([21, 4, 89, 86, 35, 74, 89, 65, 84, 4, 86, 95]));

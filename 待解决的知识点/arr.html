@@ -15,9 +15,11 @@
   </head>
   <body>
     <script>
-      const map = new Map()
-      map.set('name', 'xujie')
-      console.log(map.get('name'))
+      let arr = [1,2,3]
+      arr.__proto__.sss = 'dd'
+      for(let key of arr) {
+        console.log(key)
+      }
     </script>
   </body>
 </html>
