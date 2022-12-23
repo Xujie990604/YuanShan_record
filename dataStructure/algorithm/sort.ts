@@ -13,8 +13,10 @@ enum compareResult {
   EQUAL
 }
 
+// 对比函数的类型
+type compareFnType = (x: number, y: number) => compareResult
 // 对比函数
-function defaultCompare (num1: number, num2: number) {
+const defaultCompare: compareFnType = function(num1, num2) {
   if(num1 > num2) {
     return compareResult.BIGGER
   } else if( num1 < num2) {
@@ -154,5 +156,59 @@ function merge(left: number[], right: number[], compareFn = defaultCompare) {
   return result.concat(i < left.length ? left.slice(i) : right.slice(j))
 }
 
-mergeSort([8,4,9,5,2,6,3,1])
+// 快速排序O(nlog(n))
+// 使用分治的思想
+function quickSort(array: number [], compareFn = defaultCompare) {
+  console.log(`原数组为: ${array}`)
+  return quick(array, 0, array.length -1, compareFn);
+};
+// 该函数用来划分子数组，不断的递归调用自身，直到子数组的长度为一
+function quick(array: number[], left: number, right: number, compareFn: compareFnType) {
+  // 用来划分下一次子数组的依据
+  let index: number;
+  if (array.length > 1) {
+    index = partition(array, left, right, compareFn)
+    if (left < index -1) { 
+      quick(array, left, index -1, compareFn)
+    }
+    if (index < right) {
+      quick(array, index, right, compareFn)
+    }
+  }
+  return array;
+}
+// 该函数用来对比和交换子数组中数据
+function partition(array: number[], left: number, right:number, compareFn: compareFnType) {
+  const pivot: number = array[Math.floor((right + left) / 2)]
+  console.log(`本轮排序的子数组为: ${array.slice(left, right+1)},中枢值为${pivot}`)
+  let i: number = left
+  let j: number = right
+  while (i <= j) {
+    while (compareFn(array[i], pivot) === compareResult.SMALLER) {
+      console.log(`${array[i]}小于${pivot},不准备交换，对比下一个`)
+      i++;
+    }
+    if(compareFn(array[i], pivot) !== compareResult.SMALLER) {
+      console.log(`${array[i]}不小于${pivot}需要交换位置`)
+    }
+    while (compareFn(array[j], pivot) === compareResult.BIGGER) {
+      console.log(`${array[j]}大于${pivot},不准备交换，对比下一个`)
+      j--;
+    }
+    if(compareFn(array[j], pivot) !== compareResult.BIGGER) {
+      console.log(`${array[j]}不大于${pivot}需要交换位置`)
+    }
+    if (i <= j) {
+      console.log(`准备交换${array[i]}和${array[j]}`)
+      swap(array, i, j)
+      console.log(`一次交换完毕交换后子数组:${array.slice(left, right+1)}`)
+      i++;
+      j--;
+    }
+  }
+  console.log(`一次排序过后的全数组：${array}`)
+  return i;
+}
+
+console.log(quickSort([21,4,89,86,35,74,89,65,84,4,86,95]))
 
