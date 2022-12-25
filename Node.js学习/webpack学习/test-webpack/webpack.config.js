@@ -9,8 +9,13 @@ const path = require('path')
 // loader 不需要导入， plugin 需要手动导入
 // 打包文件时，会自动删除之前的包在生成新的包
 const {cleanWebpackPlugin} = require("clean-webpack-plugin")
+const HtmlWebpackPlugin  = require('html-webpack-plugin')
+const {DefaultPlugin} = require("webpack")
 
 module.exports =  {
+  mode: "development",
+  devtool:"source-map",
+  watch: true, // 开启 webpack watch 模式，依赖图发生更新会自动编译
   entry: "./src/index.js", // 打包文件的入口
   output: {
     path: path.resolve(__dirname, './build'),  // 打包文件的出口
@@ -65,6 +70,12 @@ module.exports =  {
     ]
   },
   plugins: [
-    new cleanWebpackPlugin()
+    new cleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      "template": "./public/index.html"  // 指定打包时使用的 index 模板
+    }),
+    new DefaultPlugin({
+      BASE_URL: "'./'"   // BASE_URL 变量的定义
+    })
   ]
 }

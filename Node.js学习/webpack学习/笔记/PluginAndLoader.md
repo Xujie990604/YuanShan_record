@@ -13,7 +13,7 @@
 
 ## 常见的插件
 
-### 普通插件
+### plugin
 
 * 版权插件的使用 BannerPlugin 这个插件是 webpack 自带的
 
@@ -22,6 +22,8 @@
 * 压缩js的插件。uglifyjs-webpack-plugin， 压缩 js 文件
 
 * cleanWebpackPlugin 打包文件时，会自动删除之前的包在生成新的包
+
+* copy-webpack-plugin 在webpack 进行打包时，直接将某个文件复制过去
 
 * EsLint 很严格的 js 代码规范-
 
