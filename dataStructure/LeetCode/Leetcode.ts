@@ -1,11 +1,11 @@
-/*
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-12-22 20:25:29
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\LeetCode\Leetcode.ts
- * @Description: LeetCode刷题
- */
 
+/*
+ * @Author: xujie 1607526161@qq.com
+ * @Date: 2022-12-22 22:59:15
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\dataStructure\LeetCode\Leetcode.ts
+ * @Description: 
+ */
 // LeetCode_001
 function twoSum(array: number[], target: number) {
   // 定义一个 map，通过映射表的特点使用O(1)效率查找目标值
@@ -26,3 +26,5 @@ function twoSum(array: number[], target: number) {
   }
   return resultArray
 }
+
+export{}

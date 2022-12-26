@@ -2,13 +2,13 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
  * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-12-06 19:32:56
+ * @LastEditTime: 2022-12-25 18:22:35
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue Cli教程\VueCli基础.md
  * @Description:
 -->
 # VueCli基础
 
-* Vue CLI使用了一套基于插件的架构，如果查阅一个新创建项目的package.json 就会发现依赖都是以 @vue/cli-plugin-开头的
+* Vue CLI(cli 命令行简写)使用了一套基于插件的架构，如果查阅一个新创建项目的package.json 就会发现依赖都是以 @vue/cli-plugin-开头的
 
 ## vue命令
 
@@ -33,7 +33,7 @@
 
 ### Vue-loader
 
-* require 是属于 node 的语法，是用来导入模块信息的。但是在 Vue 项目的 template 和 style 中我们没有使用 require 导入 通过相对路径的方式直接使用其他模块的静态资源。这是因为 Vue-loader自动帮我们做了一次导入。
+* require 是属于 node 的语法，是用来导入模块信息的。但是在 Vue 项目的 template 和 style 中我们没有使用 require 导入 通过相对路径的方式直接使用其他模块的静态资源。这是因为 Vue-loader 自动帮我们做了一次导入。
 * template 中使用 别名需要在前面加上 ~。 style中使用别名也要在前面加上 ~ 符号
 
 ## 配置文件
