@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-10 08:51:48
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\基础js部件的设置.md
+ * @Description: 
+-->
 # js的基础组建的设置
 
 ## 进度条
@@ -6,8 +13,8 @@
 
 ## 折叠侧边栏
 
-需要折叠的侧边栏通过fixed定位，然后在 transform: translateX(-100%);隐藏自身。
-切换时，通过js来给body添加类名。然后再根据实现定义好的类名transform: translateX(200px);达到平移效果。
+需要折叠的侧边栏通过 fixed 定位，然后在 transform: translateX(-100%);隐藏自身。
+切换时，通过 js 来给 body 添加类名。然后再根据实现定义好的类名 transform: translateX(200px); 达到平移效果。
 
 ## 登录表单全覆盖网页，透明色背景
 

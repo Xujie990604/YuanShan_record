@@ -2,7 +2,7 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-12-26 14:50:29
+ * @LastEditTime: 2022-12-26 16:26:40
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue 脚手架\VueCli\VueCli基础.md
  * @Description:
 -->
@@ -13,9 +13,9 @@
 
 ## vue命令
 
-* vue create 文件名 生成一个Vue项目
+* vue create 文件名 生成一个 Vue 项目
 * vue ui 启动一个本地的服务器,用于图形化的管理本地的项目。
-* 单独运行一个vue文件的方式，不在src下，在总目录下建一个xx.vue文件，执行vue serve xx.vue 或者vue build xx.vue
+* 单独运行一个 vue 文件的方式，不在src下，在总目录下建一个xx.vue文件，执行vue serve xx.vue 或者vue build xx.vue
 * vue add xx  在vue-cli项目中安装插件并调用(vue add 就是在 npm 安装依赖的的基础上还会创建一些文件)
 
 ## 插值
