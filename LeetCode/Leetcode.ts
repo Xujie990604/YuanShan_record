@@ -2,9 +2,9 @@
 /*
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-12-22 22:59:15
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\LeetCode\Leetcode.ts
- * @Description: 
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\LeetCode\Leetcode.ts
+ * @Description: LeetCode刷题记录
  */
 // LeetCode_001
 function twoSum(array: number[], target: number) {
@@ -27,4 +27,5 @@ function twoSum(array: number[], target: number) {
   return resultArray
 }
 
+// 避免和其他模块的变量命名冲突
 export{}

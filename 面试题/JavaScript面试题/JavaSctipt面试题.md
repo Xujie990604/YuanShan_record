@@ -9,10 +9,10 @@
 
 ## 区别数组和对象的五种方法
 
-1. 用constructor          []的原型里构造函数是Array
+1. 用 constructor          []的原型里构造函数是Array
                           {}的原型里的构造函数是Object
 
-2. 用instanceof           [] instanceof Array true
+2. 用 instanceof           [] instanceof Array true
                          {} instanceof Array false
 (使用了原型链有关的方法，instanceof的含义是: 实例的原型链中是否出现过该构造函数)
 
