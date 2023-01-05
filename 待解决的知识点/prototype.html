@@ -15,34 +15,8 @@
 </head>
 <body>
   <script>
-    // 自定义一个动物世界
-
-    // Animal 的原型指向源对象
-    Animal.prototype = Object.create(null)
-    function Animal() {
-      // this 是通过 Object.create(Animal.prototype) 克隆源对象生成的
-      this.type = "animal"
-      this.makeSound = function() {
-        console.log('animal sound')
-      }
-
-    }
-    // 生成的 animal 对象就是在克隆 源对象 的基础上添加一些自定义的属性和方法
-    const animal = new Animal()
-
-    // Dog 的原型指向 animal 实例(animal 实例是在克隆 源对象 的基础上添加了一些数据)
-    Dog.prototype = new Animal()
-    function Dog() {
-      // this 是通过 Object.create(Dog.prototype) 克隆 animal实例生成的
-      this.type = 'dog'
-      this.eat = function() {
-        console.log('dog eat')
-      }
-    }
-
-    // 生成的 dog 对象就是在克隆 animal 实例的基础上添加了一些自定义的属性和方法
-    // 又因为 animal 实例克隆了 源对象。所以 dog 实例最终的克隆源头也是 源对象
-    const dog = new Dog()
+    Object.prototype = Object.create(null)
+    const obj = new Object()
   </script>
 </body>
 </html>
