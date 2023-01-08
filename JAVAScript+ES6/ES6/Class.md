@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-15 15:20:39
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Class.md
  * @Description: Class的用法
 -->
@@ -64,7 +64,7 @@ class Point {
       }
     }
 
-    // 类在调用时必须使用new操作符，使用()把类当做函数调用会报错
+    // 类在调用时必须使用 new 操作符，使用()把类当做函数调用会报错
     const p = new Point(1, 3)
     
     typeof Point // "function" Class 实际上就是一个语法糖，Point 类本质还是一个函数
@@ -99,7 +99,7 @@ class Bar extends Foo {
     console.log(2);
   }
   
-  // 父类和子类都有方法 size 时，子类的方法会重载父类的方法实现(重载也就是覆盖)
+  // 父类和子类都有方法 size 时，子类的方法会重写父类的方法实现(重写也就是覆盖)
   // 但是可以通过 super.size() 的方式实现，调用子类方法时先执行一遍父类的方法
   size() {
     super.size()
