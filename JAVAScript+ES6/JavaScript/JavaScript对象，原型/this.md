@@ -1,55 +1,26 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:22
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript对象，原型\this.md
+ * @Description: 
+-->
 # this
 
-注意**this是函数内部的自动生成的一个参数**
+* 注意 **this是函数内部的自动生成的一个参数**
+* this 永远指向一个对象
+* this 指的是函数运行时(不是定义)所在的环境(不是作用域！！！)
+* 因为在 JS 中函数可以像值一样被传递，所以函数中的 this 指向是不固定的。要看函数运行时实际所在的环境
+* 函数预编译过程中 this 指向 windows(起始的时候都是指向 window，后来随着环境的改变(谁.了函数)而改变 this 的指向)
 
-1. 在 js 中，使用 new 调用构造函数时，在实例的方法内部引用 this 时，指代的是这个新的实例(新对象)
-2. this 指的是函数运行时(不是定义)所在的环境(对象)(不是作用域！！！),在哪个环境被调用。
-3. 任何函数的内部 this 的值永远不会是静态的，它总是在每次调用函数时确定，但在函数实际执行其代码之前就已确定。函数内部的 this 的值实际上是由调用该函数的父范围提供的，更重要的是，实际函数语法的编写方式。每当调用函数时，我们都必须查看方括号/括号"()"的紧靠左侧。如果在括号的左侧可以看到一个引用，则传递给函数调用的 this 的值正是该对象所属的
-4. 在事件处理程序中，在动态绑定中，关键字 this 永远指向的是触发它的元素。在行内绑定函数时，函数里面的this 指的是 window。没有绑定方法而是直接在元素中指定了语句，这时的 this 就是元素本身。
-5. this 永远指向一个对象(数组也可以被当做 this 的指向,当数组里面存的是函数的时候  ```test[0]()```)
-6. 谁.function() 那么这个 this 就指向谁，和函数在谁内部执行没有关系。主要就是看(.),比如一个函数在另一个函数内被执行，但是没有谁.这个函数，函数的 this 就是执行 window，不考虑作用域关联。(因为函数可以被单纯当做值来调用，在不同的环境中 this 执行不同)
-7. this 中的环境对象和作用域完全不是一个概念
-8. 非严格模式下，全局中的函数的 this 指向 window， 严格模式下，全局中的函数的 this 指向undefined。
-9. 在全局作用域中使用 let const 声明的变量不会绑定到 window 对象中，而是会被绑定到 script 作用域上。script和 window 是平级别的。
-10. setTimeOut 中的 this 指向
+## 作为对象的方法被调用
 
-* 回调函数不使用箭头函数
+* this 指向的是对象
 
-```js
-setTimeout(function() {
-  console.log(this)  //window  因为回调函数是被异步调用的，是在全局作用域中执行的，所以回调函数中的this值在非严格模式下指向window
-},0)
+## 作为普通函数被调用
 
-function say() {
-    console.log(this)
-}
-setTimeout(say,2000) //window 因为回调函数是被异步调用的，是在全局作用域中执行的，所以回调函数中的this值在非严格模式下指向window
-
-let obj = {
-    say: function () {
-      console.log(this); //延迟执行函数中的this
-    },
-    print: function () {
-      setTimeout(this.say, 0); //setTimeout 调用环境中的 this，指向调用者即 obj
-      // this 是函数的属性，尽管 this.say 写在了setTimeout 的()执行符号里，但是并没有写在setTimeout 的函数体里。因此 setTimeout 执行符号中的 this 和 print 函数中的 this 是同一个。
-    }
-  };
-  obj.print() //window
-```
-
-* 回调函数使用箭头函数
-
-```js
-let obj = {
-    name: "jay",
-    print: function () {
-      setTimeout(() => {
-        console.log(this.name)   //因为箭头函数没有自己的this，箭头函数的this是被定义时所处作用域的this。箭头函数被定义在setTimOut函数的执行符号里面，而不是setTimeout的{}方括号里面，所以箭头函数的this就是print函数的this
-      }, 0);
-    }
-  };
-  obj.print() //jay
-```
+* this 指向的是全局对象
+* 非严格模式下，全局中的函数的 this 指向 window， 严格模式下，全局中的函数的 this 指向undefined。
 
 ```javascript
 var foo = {
@@ -61,22 +32,35 @@ foo.baz(); // foo - because baz belongs to the foo object when invoked
 
 var anotherBaz = foo.baz;
 anotherBaz(); // global - because the method anotherBaz() belongs to the global object when invoked, NOT foo
-
 ```
 
-1.函数预编译过程中 this 指向 windows(起始的时候都是指向 window，后来随着环境的改变(谁.了函数)而改变this 的指向)
-2.全局作用域里 this 指向的是 windows
-3.call/apply能够改变this的指向
-4.obj.func(); func()里面的this指向obj
+```js
+name = 'window'
+const obj = {
+  name: 'obj',
+  a: function() {
+    test()
+    function test() {
+      console.log(this.name)  // !!!注意 test()是作为函数被调用的。没有 xxx.test()。所以this指向window
+    }
+    console.log(this.name) // a() 是作为obj的方法被调用的。this指向obj
+  }
+}
+obj.a()
+```
+
+## 在构造函数中
+
+* 使用 new 调用构造函数时，构造函数中的 this，指代的是这个新的实例(新对象)
 
 ## call/apply
 
-* 改变this指向
-* 默认方法的调用使用.call(obj,a,b,c) 用别人的方法实现自己的功能，所有函数的调用本质上都是使用了call函数。```js obj.say() === obj.say.call(null)```
+* 改变 this 指向(修正 this 的指向)
+* obj1.call(obj2,a,b,c)。实现用别人的方法来完成自己的功能。
 * apply(obj,[a,b,c])的区别就是传递参数时的不同
-* call/apply的 this 传递 null 的时候就是不起作用，正常执行函数
+* call/apply的 this 传递 null 时。函数体内的 this 会指向默认的宿主对象，在浏览器中则是window：
 
-## bind
+### bind
 
 ```js
     const obj = {
@@ -112,43 +96,4 @@ anotherBaz(); // global - because the method anotherBaz() belongs to the global 
     }
     // 直接调用方法，函数的this一直指向对象b
     newSay('hello', 'world');
-```
-
-## 对象中的this
-
-```js
-// 不是说只有函数中才有this这个概念 概念理解有误差
-// 对象里面也有this这个属性，只不过对象中的this和他外面的最接近的作用域(作用域有函数作用域和全局作用域)的this一样 概念理解有误差
-// this是函数的一个参数，是函数的独有的(window中的this为window，在严格模式修正为undefined)。对象并没有自己的this。对象中的this不过只是它所处的函数的this
-const a = {
-      a: this,
-      name: 'xujie',
-      say() {
-        console.log(this);
-      },
-      b: {
-        c: this
-      } 
-    }
-
-    a.say(); // 对象a
-    console.log(this) //window
-    console.log(a.a); //window a对象的最外层的作用域是全局，所以this指向window
-    console.log(a.b.c); //window  c对象的最外层作用域也在全局，所以this也是指向window(尽管b对象定义在a对象内部，但是没有用，对象没有作用域这个概念)
-
-// b对象定义在a对象的say方法里面，因为a的say方法是通过a.say调用的
-// 所以a的say方法中的this指向的是a对象
-// 因为b对象是被定义在say()函数中的，所以b对象中的this于他外面的最接近的作用域相同(也就是say函数)，所以说b对象中的this指向a对象
-     const a = {
-     name: 'a',
-     say() {
-       const b = {
-         name: "b",
-         c: this
-       }
-       console.log(b.c);
-     }
-   }
-
-   a.say()
 ```
