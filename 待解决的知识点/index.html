@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
  * @Description: 
 -->
@@ -13,6 +13,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<script>
+  class Dog {
+    age
+    name = 'class狗'
+    constructor(age) {
+      this.age = age
+    }
+
+    sound() {
+      console.log(this.name)
+    }
+  }
+
+  const dog = new Dog(12)
+
+  function Duck(age) {
+    this.age = age
+    this.name = "原型鸭"
+
+    this.sound = function() {
+      console.log(this.name)
+    }
+    console.log(Duck)
+  }
+
+  const duck = new Duck(20)
+</script>
 
 <script>
 
