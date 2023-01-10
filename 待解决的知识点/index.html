@@ -15,7 +15,18 @@
   </head>
   <script>
 
-  
+name = 'window'
+const obj = {
+  name: 'obj',
+  a: function() {
+    test()
+    function test() {
+      console.log(this.name)  
+    }
+    console.log(this.name)
+  }
+}
+obj.a()
 
   </script>
 </html>
