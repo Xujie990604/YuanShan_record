@@ -41,5 +41,11 @@ public class Employee {
     System.out.println("职位:" + designation);
     System.out.println("薪水:" + salary);
   }
+  
+  public static void main(String[] args) {
+    Employee a = new Employee("sss");
+    a.height = 123;
+    System.out.println(a);
+  }
 }
 

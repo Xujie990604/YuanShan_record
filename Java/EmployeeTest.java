@@ -10,8 +10,7 @@
 public class EmployeeTest {
 
   public static void main(String[] args) {
-    int name;
-    name = 122;
-    System.out.println(name);
+    Employee a = new Employee("sss");
+    System.out.println(a.name);
   }
 }
