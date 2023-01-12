@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-15 20:31:24
  * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\algorithm\index.ts
+ * @FilePath: \HTML-CSS-Javascript-\LeetCode\algorithm\index.ts
  * @Description: 
  */
 

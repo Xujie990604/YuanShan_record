@@ -1,8 +1,8 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-12 20:47:29
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\algorithm\sort.ts
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\LeetCode\algorithm\sort.ts
  * @Description: 排序算法的实现
  */
 
@@ -210,5 +210,41 @@ function partition(array: number[], left: number, right:number, compareFn: compa
   return i;
 }
 
-console.log(quickSort([21,4,89,86,35,74,89,65,84,4,86,95]))
+
+// 顺序搜索，线性搜索
+// 对比函数的类型
+function sequentialSearch(array: number[], value: number , compareFn = defaultCompare) {
+  let result:number
+  result = array.findIndex((item,index) => {
+    if(compareFn(item, value) === compareResult.EQUAL) {
+      return true
+    }
+  })
+  return result;
+}
+
+function lesserOrEquals(num1: number, num2: number, compareFn: compareFnType  ) {
+  const comp = compareFn(num1, num2)
+  return comp === compareResult.SMALLER || compareResult.EQUAL
+}
+
+// 二分搜索(要求被搜索的数据结构已经排序)
+function binarySearch(array: number[], value: number , compareFn = defaultCompare) {
+  let low: number = 1
+  let high:number = array.length - 1
+  while(lesserOrEquals(array[low], array[high], compareFn)) {
+    const mid = Math.floor((low + high) / 2)
+    const element = array[mid]
+    if(compareFn(element, value) === compareResult.BIGGER) {
+      high = mid - 1
+    }else if(compareFn(element, value) === compareResult.SMALLER) {
+      low = mid + 1
+    }else {
+      return mid
+    }
+  }
+  return -1
+}
+
+console.log(binarySearch([1,2,3,4,5,6,7,8,9], 4))
 

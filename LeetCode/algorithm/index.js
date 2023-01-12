@@ -1,29 +1,40 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-15 20:31:24
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\algorithm\index.ts
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\LeetCode\algorithm\index.ts
  * @Description:
  */
 // tsc --target es6 index.ts 这样编译的ts代码能认识ES6的语法
-// Lettcode_1
-function twoSum(array, target) {
-    // 定义一个 map，通过映射表的特点使用O(1)效率查找目标值
-    const map = new Map();
-    const resultArray = [];
-    // 将数组中的值放进 map 中(数组的值当做 map 的键，数组的下标值当做 map 的值)
-    array.forEach((value, index) => map.set(value, index));
-    const { length } = array;
-    for (let index = 0; index < length; index++) {
-        // 数组第 i 个值对应的目标数值
-        const targetValue = target - array[index];
-        //如果 map 中有目标值(且目标值与第i个值不是同一个)，将两个值的下标放进 resultArray 
-        if (map.has(targetValue) && map.get(targetValue) !== index) {
-            resultArray.push(index);
-            resultArray.push(map.get(targetValue));
-            break;
-        }
+// 对比结果的枚举类型
+var compareResult;
+(function (compareResult) {
+    compareResult[compareResult["BIGGER"] = 0] = "BIGGER";
+    compareResult[compareResult["SMALLER"] = 1] = "SMALLER";
+    compareResult[compareResult["EQUAL"] = 2] = "EQUAL";
+})(compareResult || (compareResult = {}));
+// 对比函数
+const defaultCompare = function (num1, num2) {
+    if (num1 > num2) {
+        return compareResult.BIGGER;
     }
-    return resultArray;
+    else if (num1 < num2) {
+        return compareResult.SMALLER;
+    }
+    else {
+        return compareResult.EQUAL;
+    }
+};
+const DOES_NOT_EXIST = -1;
+// 顺序搜索，线性搜索
+// 对比函数的类型
+function sequentialSearch(array, value, equals = defaultCompare) {
+    let result;
+    result = array.findIndex((item, index) => {
+        if (equals(item, value) === compareResult.EQUAL) {
+            return true;
+        }
+    });
+    return result;
 }
-console.log(twoSum([2, 7, 11, 15], 9));
+console.log(sequentialSearch([1, 2, 3, 4, 5], 2));
