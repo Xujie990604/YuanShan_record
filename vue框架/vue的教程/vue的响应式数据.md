@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-10-17 11:49:48
+ * @LastEditTime: 2023-01-15 15:33:07
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -63,7 +63,7 @@ this.$delete(this.error,'phone');
 * Object 在 getter 中收集依赖，在 setter 中触发依赖
 
 ```js
-1。外部需要通过 watcher 来读取数据，在 watcher 中会读取一下 data 中的数据，然后触发了响应式的 get 方法。在 get 的时候将 watcher 添加到 data 的依赖数组 dep 中(完成依赖收集)
+1。外部需要通过 watcher 来读取数据，在 watcher 中会读取一下 data 中的数据，然后触发了响应式数据的 get 方法。在 get 的时候将 watcher 添加到响应式属性的依赖数组 dep 中(完成依赖收集)(一个属性通过props传递给子组件不会导致多一个watcher,watch这个属性会多加一个watcher,computed中用到这个属性会多加一个watcher)
 2. 在改变 data 中数据的值时，触发响应式的 set 方法。在 set 中通过 dep 的 notice 去循环的触发 watcher 上面的 update 方法。 update 方法中可以执行用户传进来的 callback 回调函数来执行用户想要的操作
     // 定义一个 dep 类，专门用来管理依赖
     class Dep {
@@ -95,7 +95,7 @@ this.$delete(this.error,'phone');
       }
     }
 
-    // 收集的依赖是一个什么东西，起一个名字叫做 watcher(每一个 Vue 实例，对应着一个 渲染watcher)
+    // 收集的依赖是一个什么东西，起一个名字叫做 watcher(每一个 Vue 实例，对应着一个 渲染watcher?渲染watcher好像不是响应式收集的watcher)
     // watcher 是一个中介的角色
     // 外界通过 watcher 来读取数据, watcher 中 读取数据前将自身赋值给 window.target , 然后读取数据，使得自身当做依赖被收集
     // 数据发生变化时，触发 setter ，在 setter 中通知 watcher，然后 watcher 在通知给外界 
@@ -192,6 +192,7 @@ this.$delete(this.error,'phone');
 ```
 
 * Array 在 getter 中收集依赖，在拦截器中触发依赖
+* Object.defineProperty 是有监控数组下标变化的能力的，为什么Vue2没有采用 Object.defineProperty 拦截器的方式来监听数组变化而是采用了重写部分数组方法的形式主要是为了性能考虑。一般对象存储的信息不会很多。但是数组经常用来存储大量信息，监听大量数组会耗费性能。
 
 ```js
     const arrayProto = Array.prototype

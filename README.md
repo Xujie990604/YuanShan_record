@@ -42,6 +42,11 @@
 * B站- codeWhy- 2019 Vue.js全套教程
 * 《深入浅出 Vue.js》
 
-## 数据结构与算法
+## 计算机知识体系
 
 * 《JavaScript 数据结构与算法》
+* 《JavaScript 设计模式与开发实践》
+
+## Java
+
+* 菜鸟教程
