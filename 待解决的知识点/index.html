@@ -13,7 +13,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <script>
-    let a =new Array(4).fill('xujie')
+  <body>
+    
+      <script>
+    // 用来存储副作用的桶
+    const subs = new Set()
+    // 原始的数据
+    const obj = {
+      name: 'xujie'
+    }
+    // 将原始数据的读写进行代理拦截
+    const myObj = new Proxy(obj, {
+      // 拦截读取的操作
+      get(target, key) {
+        // 将副作用函数存入桶中
+        subs.add(effect)
+        return target[key]
+      },
+      // 拦截设置属性的操作
+      set(target, key, newVal) {
+        target[key] = newVal
+        // 执行桶中的所有函数
+        subs.forEach(cb => cb())
+        return true
+      }
+    })
+
+    // 副作用函数
+    function effect() {
+      document.body.innerText = myObj.name
+    }
+
+    // 执行副作用函数，触发属性的读取,将当前副作用函数添加到桶中
+    effect()
+
+    // 两秒后进行数据的更新
+    setTimeout(() => {
+      myObj.name = 'xiaohan'
+    }, 2000)
   </script>
+  </body>
 </html>

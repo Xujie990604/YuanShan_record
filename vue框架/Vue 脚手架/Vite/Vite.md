@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-12-25 18:51:07
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue 脚手架\Vite\Vite.md
  * @Description: 
 -->
@@ -19,4 +19,3 @@
 
 * 使用 GO 语言编写，可以直接转换成机器代码。
 * 能够充分利用CPU多核的运算
-*
