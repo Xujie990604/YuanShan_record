@@ -12,21 +12,21 @@
 ## HTML + CSS
 
 * 菜鸟教程
-* B站- 渡一教育- HTML + CSS入门宝典
 * MDN
-* 《精通CSS》
+* B站- 渡一教育- HTML + CSS入门宝典
 * 渡一教育- HTML5 + CSS3教程
+* 《精通CSS》
 
 ## JavaScript
 
 * B站- 渡一教育- JavaScript 入门宝典
-* 腾讯课堂- 米修在线- JavaScript 30个实战项目彻底掌握原生JS
+* 腾讯课堂- 米修在线 - JavaScript 30个实战项目彻底掌握原生JS
 * 《JavaScript DOM 编程艺术》第二版
 * 《JavaScript 高级程序设计》第三版
 * 《JavaScript 忍者秘籍》第二版
 * 《ES6 标准入门》阮一峰
 
-## HTTP计算机网络
+## 计算机网络
 
 * B站- 计算机网络微课堂- 湖科大教书匠
 * 《图解HTTP》
