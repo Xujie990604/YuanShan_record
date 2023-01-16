@@ -1,9 +1,9 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-09-26 23:50:22
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\计算属性和watch函数.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditTime: 2023-01-16 20:35:28
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\计算属性和watch函数.md
  * @Description: 
 -->
 # vue的计算属性
@@ -11,14 +11,16 @@
 ## computed
 
 * 减少模板中表达式的使用
-* 当计算属性在模板中使用，并且计算属性的依赖值(只要是在computed中出现过的，哪怕return的时候和这个值无关)发生改变的时候就会触发他的更改(调用的是getter函数)。如果不发生变化，使用的就是缓存的属性值
+* 当计算属性在模板中使用，并且计算属性的依赖值(只要是在 computed 中出现过的，哪怕 return 的时候和这个值无关)发生改变的时候就会触发他的更改(调用的是 getter 函数)。如果不发生变化，使用的就是缓存的属性值
+* computed 中使用 dirty 来标识是否需要重新计算
+* computed 中使用 value 变量缓存上一次计算结果的值，如果连续调用同一个计算属性会返回缓存的值
 * 计算属性其实本质就是一个对象，只不过省略使用的话可以写成一个函数。所以使用计算属性的时候不需要加括号。
-* 计算属性中的getter函数要求是没有副作用的(就是函数里面不能改变数据，在使用eslint的情况下在getter中改变已有属性会报错)
+* 计算属性中的 getter 函数要求是没有副作用的(就是函数里面不能改变数据，在使用 eslint 的情况下在 getter 中改变已有属性会报错)
 
 ## 计算属性和v-model配合使用
 
-* 计算属性如果想要和v-model配合使用的话，就必须同时具有get和set
-* 由于绑定了v-model，改变input数据时，就会触发input事件不断的给计算属性赋值，这时就会不断的调用计算属性的set方法。
+* 计算属性如果想要和 v-model 配合使用的话，就必须同时具有 get 和 set
+* 由于绑定了v-model，改变 input 数据时，就会触发 input 事件不断的给计算属性赋值，这时就会不断的调用计算属性的 set 方法。
 
 ### 基本数据类型和v-model配合使用
 
