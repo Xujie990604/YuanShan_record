@@ -12,6 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      div {
+        color: red;
+        height: 30px;
+      }
+    </style>
   </head>
   <body>
    <div id='container'>container</div>
@@ -21,35 +27,24 @@
       let d = document.createElement('div')
         d.innerText='new'
         container.appendChild(d)
-        function add() {
-          console.log('ss')
-        }
-        add()
-        for(let i = 0; i < 10; i++) {
+        for(let i = 0; i < 3; i++) {
           const div = document.createElement('div')
-          div.innerText = 'xujie'
+          div.innerText = `xujie${i}`
           container.appendChild(div)
         }
     }
 
     test1()
-
-    function test2() {
-       for(let i = 0; i < 10; i++) {
-          const div = document.createElement('div')
-          div.innerText = 'xiaohan'
-          container.appendChild(div)
-        }
-    }
+    test1()
+    // console.log(container.offsetLeft)
 
     setTimeout(() => {
-      test2()
-    },1000)
+      const a = document.createElement('a')
+      a.innerText = '1234'
+      container.appendChild(a)
+    }, 100);
 
     
-        
-
-        
         
         
   </script>

@@ -38,46 +38,6 @@
 * 多个设置了async属性的脚本并不会按照出现的先后顺序进行执行，因此保证多个异步脚本之间互不依赖很重要。
 * 异步脚本一定会在页面的load事件前面前执行。可能会在DOMContentLoaded事件触发之前或者之后触发。
 
-#### 按需加载js的方法
-
-* 给script标签一个scr时会进行下载而不进行解析
-* 当script标签被append到页面中时，才会执行刚才加载的js文件
-
-```javascript
- <script type="text/javascript">
-        function loadScript(url, callback) {
-            var script = document.createElement('script');
-            script.type = "text/javascript";
-            if (script.readyState) {
-                script.onreadystatechange = function () {
-                    if (script.readyState == "compete" || script.readyState == "loaded") {
-                        //针对IE进行 IE会有一个状态码(script的状态码和document的状态码不是同一个东西)状态码改变时会触发onreadystatechange函数 当变成compete 或者loaded时，说明已经文档已经加载完成
-                        callback();
-                    }
-                }
-            } else {
-                //script文件下载完的时候会触发load事件 Safari chrome firefox opera 兼容
-                script.onload = function () {
-                    callback();
-                }
-            }
-            //以防js文件的下载完成在事件的绑定之前，导致onreadystatechange事件没办法执行。下载语句写到事件绑定后，事件一定会在下载完之前被绑定。
-            //只是给一个src的话不会被执行，但是会被下载(异步的下载)，只有在appendChild()方法之后才会被执行
-            script.src = url;
-            document.head.appendChild(script);
-        }
-
-        loadScript("tools.js", function () {
-            a();
-        });
-        //执行这个执行语句时，这个函数的本体还没有完全被js识别。js只是把loadScript的函数名识别了一下。(函数的定义和函数的执行的区别)
-        // 因为咱们要使用的a() 是被定义在tools.js里的。 如果不使用匿名函数的话所以会报错。
-        // 同样， 参数是一个匿名函数， 读取参数时， 只是看到参数是一个函数， 具体内容不会看。 等真正要使用参数时。
-        // js文件已将下载完了。 就能够识别了。
-    </script>
-
-```
-
 ## 推荐使用外部链式的方式来引入js文件
 
 ## 文档模式
