@@ -2,7 +2,7 @@
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:40
  * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2023-01-16 19:49:22
+ * @LastEditTime: 2023-01-18 10:47:44
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\vue的响应式数据.md
  * @Description:
 -->
@@ -11,11 +11,31 @@
 * 由于 Vue 会在实例初始化的时候对 property 进行 getter/setter 转化。所以只有在一开始就存在 data 中的数据才是响应式的。(比如在组件的created, beforeCreate钩子函数中为组件添加一个属性，这个数据不是响应式的数据)(所有需要响应式的值都要在 data 中声明，即使它目前是一个空值，也要占上位子)
 * 尽量不要在 beforeCreate 钩子函数中定义变量值 1.只在 beforeCreate 定义属性不在 data 中定义属性则该属性不是响应式的 2.在 beforeCreate 中定义属性又在 data 中定义属性的话会被覆盖。
 * 对于已经创建的实例，Vue 不允许动态的添加 根级别的响应式 property `this.$set(object, 'key', value)` 也就是说这个 object 参数，不能是 this._data 及以上更高级别的数据
-* Vue 中一个状态所绑定的依赖是一个组件，状态发生变化之后会通知到组件，组件内部再使用虚拟DOM进行对比。
-  
-## 数组
+* Vue 中一个状态所绑定的依赖是一个组件，状态发生变化之后会通知到组件，组件内部再使用虚拟 DOM 进行对比。
+* Vue 的编译器将模板语法编译成的 render 函数中包含变量。render 函数执行得到的 VNode 中不存在变量，而是会被替换成变量所对应的值。在初次渲染成功之后，组件中的 data 发生变化，不需要再重新编译(因为对象与的 DOM 的映射关系早已经在模板中声明的描述过了)。在组件 data 发生变化之后只需要重新执行 render 函数，在 render 函数执行时会根据最新的 data 生成新的 VNode
+* 每一组件都有自己的render watcher，它控制着当前组件的视图更新，但是并不会掌管ChildComponent的更新(props传递给子组件的时候，保存到了子组件的_props上，子组件组件初始化阶段，会对props响应式处理，子组件对props的访问，props就拥有了子组件的render watcher（副作用函数收集到了自己的dep中）。父组件重新render的时候，重新计算子组件的props，触发了props的setting，所以子组件就重新render了。
 
-* vue在构造函数new Vue()时，就通过 Object.defineProperty 中的 getter 和 setter 这两个方法，完成了对数据的绑定。所以直接通过vm.arr[1] = 'aa'的方法，无法修改值去触发 vue 中视图的更新，必须还得通过 Object.defineProperty 的方法去改变，而 Vue.$set() 就封装了 js 底层的 Object.defineProperty 方法。
+## watcher
+
+* Vue 中的 watcher 主要分为三种,这三种 watcher 都是使用 class Watcher 实现的
+
+1. 每个 Vue 组件都有一个渲染 watcher
+2. 计算属性对应着一个 watcher(计算属性的 watcher 中有个 dirty 属性用来标识计算属性是否需要重新计算)
+3. watch 对应着一个 watcher
+
+## 观察者模式
+
+* 观察者模式是一种处理一对多关系的通知机制
+
+1. Observer(被 observer 处理的 data 是被观察者)(被观察者不需要关注观察者的具体行为，职责相对单一，只需要及时通知就可以了): 这里的主要工作是递归地监听对象上的所有属性，在属性值改变的时候，触发相应的 Watcher
+2. Watcher(观察者借助抽象来实现不同的行为): 当监听的数据值修改时，执行相应的回调函数(回调函数可能是Vue自身的视图更新，也可能是用户自定义的回调函数)
+3. Dep(观察者模式中的事件总线): 链接 Observer 和 Watcher 的桥梁，每一个 Observer 对应一个 Dep，它内部维护一个数组，保存与该 Observer 相关的 Watcher
+
+## Vue响应式数据的缺陷
+
+### 数组
+
+* vue 在构造函数 new Vue() 时，就通过 Object.defineProperty 中的 getter 和 setter 这两个方法，完成了对数据的绑定。所以直接通过vm.arr[1] = 'aa'的方法，无法修改值去触发 vue 中视图的更新，必须还得通过 Object.defineProperty 的方法去改变，而 Vue.$set() 就封装了 js 底层的 Object.defineProperty 方法。
 
 ```js
 // 数组中使用 $set 方法实际上就是 Vue 将操作转化为使用 splice 方法去做
@@ -29,25 +49,25 @@ this.$delete(要修改的数组，索引值)
 this.$set(this.lists, 0)
 ```
 
-### 会触发响应式
+#### 会触发响应式
 
 * push()pop()shift()unshift()splice()sort()reverse()称为变更方法，会触发视图更新
 * 这些方法会触发 Vue 的数据响应式，是因为 Vue 在原方法的基础上进行加工。
 
-### 不会触发响应式
+#### 不会触发响应式
 
 * filter(),concat(),slice()非变更方法，并不会丢弃原数组重新进行渲染
 * 数组长度的变化是非响应式的， `arr.length = 4`
 * 通过索引来直接修改数组中的数据也是非响应式的 `arr[2] = 'xujie'`
 
-## 对象
+### 对象
 
-### 对象不会触发响应式的情况
+#### 对象不会触发响应式的情况
 
 * 由于 Object.defineProperty 自身的缺陷，在一个对象中添加一个新属性，使用 delete 删除一个属性的时候不会触发响应式。
 * Object.defineProperty 只能追踪一个属性是否被更改
 
-### Vue.set(object, 'key', 'value')
+#### Vue.set(object, 'key', 'value')
 
 * 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性
 
@@ -55,16 +75,18 @@ this.$set(this.lists, 0)
 // 对象上使用 $set 方法，实际上就是 Vue 手动去调用响应式的方法，手动的将新增的属性变成响应式的
 this.$set(this.error,'phone','手机号不能为空');
 // 对象上使用 $delete 方法，实际上就是 Vue 手动的去触发依赖，通知所有使用到该对象的组件去重新渲染
-this.$delete(this.error,'phone');
+this.$delete(this.error, 'phone');
 ```
 
 ## Vue的响应式原理
 
 * Object 在 getter 中收集依赖，在 setter 中触发依赖
 
+* 页面初始化时： Observer 类会附加到每一个 object 上。递归的调用 defineReactive 函数将每一个属性都通过 Object.defineProperty() 进行数据拦截。在读取数据时会收集依赖，在修改数据后会触发依赖。每一个属性都会拥有一个独立的 Dep 实例
+* 页面使用数据时：读取数据时会实例化一个 Watcher,在 new Watcher 的过程中会将 watcher 实例赋值给全局的变量(方便 dep 去收集)。然后默认读取一下该属性(读取该属性会触发依赖收集，从而将 watcher 实例放到响应式属性的 dep 中)
+* 改变数据后: 改变数据会触发依赖执行，执行当前响应式属性的 dep 数组中的所有 watcher 的 update 方法(update 的回调函数 可能是执行组件的 render 函数，也可以是执行用户自定义的回调函数)
+
 ```js
-1。外部需要通过 watcher 来读取数据，在 watcher 中会读取一下 data 中的数据，然后触发了响应式数据的 get 方法。在 get 的时候将 watcher 添加到响应式属性的依赖数组 dep 中(完成依赖收集)(一个属性通过props传递给子组件不会导致多一个 watcher, watch 这个属性会多加一个 watcher,computed 中用到这个属性会多加一个 watcher)
-2. 在改变 data 中数据的值时，触发响应式的 set 方法。在 set 中通过 dep 的 notice 去循环的触发 watcher 上面的 update 方法。 update 方法中可以执行用户传进来的 callback 回调函数来执行用户想要的操作
     // 定义一个 dep 类，专门用来管理依赖
     class Dep {
       constructor() {
@@ -95,10 +117,9 @@ this.$delete(this.error,'phone');
       }
     }
 
-    // 收集的依赖是一个什么东西，起一个名字叫做 watcher(每一个 Vue 实例，对应着一个 渲染watcher?渲染 watcher 好像不是响应式收集的 watcher)
-    // watcher 是一个中介的角色
+    // 收集的依赖是一个什么东西，起一个名字叫做 watcher
     // 外界通过 watcher 来读取数据, watcher 中 读取数据前将自身赋值给 window.target , 然后读取数据，使得自身当做依赖被收集
-    // 数据发生变化时，触发 setter ，在 setter 中通知 watcher，然后 watcher 在通知给外界 
+    // 数据发生变化时，触发 setter ，在 setter 中通知 watcher，然后 watcher 执行对应的回调函数
     class Watcher {
       // vm 是 引用类型数据(Object, Arr)
       // expOrFn 是需要响应式处理的那个属性 (key值)
@@ -125,16 +146,6 @@ this.$delete(this.error,'phone');
         const oldValue = this.value;
         this.value = this.get()
         this.cb.call(this.vm, this.value, oldValue)
-      }
-    }
-
-    // remove 函数用来在数组中移除指定的数据,并将移除的数据当作函数的返回值
-    function remove(arr, item) {
-      if (arr.length) {
-        const index = arr.indexOf(item);
-        if (index > -1) {
-          return arr.splice(index, 1);
-        }
       }
     }
 
@@ -191,8 +202,8 @@ this.$delete(this.error,'phone');
     }
 ```
 
-* Array 在 getter 中收集依赖，在拦截器中触发依赖
-* Object.defineProperty 是有监控数组下标变化的能力的，为什么Vue2没有采用 Object.defineProperty 拦截器的方式来监听数组变化而是采用了重写部分数组方法的形式主要是为了性能考虑。一般对象存储的信息不会很多。但是数组经常用来存储大量信息，监听大量数组会耗费性能。
+* Array 在 getter 中收集依赖，在拦截器(拦截器也是就重写的方法)中触发依赖
+* Object.defineProperty 是有监控数组下标变化的能力的，为什么Vue2没有采用 Object.defineProperty 拦截器的方式来监听数组变化而是采用了重写部分数组方法的形式主要是为了性能考虑。想要把数组下标值全部变成响应式的就需要给每一个下标都要添加一个 Object.defineProperty 监听器，会增加内存的消耗。数组相对于对象来说一般长度会更长，无疑会更加大内存的压力，并且基于业务场景考量数组的使用大多数是遍历，很少会有单独修改下标值的场景。
 
 ```js
     const arrayProto = Array.prototype

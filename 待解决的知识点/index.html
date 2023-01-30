@@ -12,92 +12,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      div {
+        color: red;
+        height: 30px;
+      }
+    </style>
   </head>
   <body>
+   <div id='container'>container</div>
     
-      <script>
-    // 用来存储副作用的桶
-    const subs = new WeakMap()
-
-    // 原始的数据
-    const obj = {
-      name: 'xujie'
+  <script>
+    function test1 () {
+      let d = document.createElement('div')
+        d.innerText='new'
+        container.appendChild(d)
+        for(let i = 0; i < 3; i++) {
+          const div = document.createElement('div')
+          div.innerText = `xujie${i}`
+          container.appendChild(div)
+        }
     }
 
-    // 将原始数据的读写进行代理拦截
-    const myObj = new Proxy(obj, {
-      // 拦截读取的操作
-      get(target, key) {
-        // 将当前被激活的副作用函数添加到对应 target[key] 的桶中
-        track(target, key)
-        // 返回属性值
-        return target[key]
-      },
-      // 拦截设置属性的操作
-      set(target, key, newVal) {
-        // 设置属性值
-        target[key] = newVal
-        // 将对应 target[key] 值桶中的所有副作用函数拿出来，并执行
-        trigger(target, key, newVal)
-        return true
-      }
-    })
+    test1()
+    test1()
+    // console.log(container.offsetLeft)
 
-    // 将当前被激活的副作用函数添加到对应 target[key] 的桶中
-    function track(target, key) {
-      // 如果没有 activeEffect 直接 return
-      if(!activeEffect) return target[key]
-      // 根据 target 从桶中取得 depsMap,(depsMap 是一个 Map 类型)
-      let depsMap = subs.get(target)
-      // 如果不存在 depsMap，那么新建一个 Map 并与 target 关联
-      if(!depsMap) {
-        subs.set(target, (depsMap = new Map()))
-      }
-      // 在根据 key 从 depsMap 中取得 deps,(它是一个 Set 类型)
-      // deps 中存储着所有与当前 key 相关联的副作用函数：effects
-      let deps = depsMap.get(key)
-      if(!deps) {
-        depsMap.set(key, (deps = new Set()))
-      }
-      // 将当前被激活的副作用函数添加到对应 key 值的桶中
-      deps.add(activeEffect)
-    }
-    // 将对应 target[key] 值桶中的所有副作用函数拿出来，并执行
-    function trigger(target, key, newVal) {
-      // 根据 target 从桶中取得 depsMap,(depsMap 是一个 Map 类型)
-      const depsMap = subs.get(target)
-      // 如果不存在 depsMap, 则直接返回
-      if(!depsMap) return true
-      // 根据 key 得到所有的 effects,(它是一个 Set 类型)
-      // 里面存储着当前 key 值的所有副作用函数
-      const effects = depsMap.get(key)
-      // 执行所有的副作用函数
-      effects && effects.forEach(fn => fn());
-    }
-    
-    // 全局变量用来存储当前被激活的副作用函数
-    let activeEffect
-    // 用来注册副作用函数
-    function effect(fn) {
-      // 存储匿名副作用函数
-      activeEffect = fn
-      // 执行匿名副作用函数
-      fn()
-    }
-
-    // 执行副作用函数，触发属性的读取,将当前副作用函数添加到桶中
-    // 相当于在 Vue 页面中使用响应式数据
-    effect(() => {
-      console.log('effect run')
-      document.body.innerText = myObj.name
-    })
-
-    // 两秒后进行数据的更新
-    // 类似于开发者在操作响应式数据
     setTimeout(() => {
-      myObj.name = 'xiaohan'
-    }, 2000)
+      const a = document.createElement('a')
+      a.innerText = '1234'
+      container.appendChild(a)
+    }, 100);
 
+    
+        
+        
   </script>
   </body>
 </html>
