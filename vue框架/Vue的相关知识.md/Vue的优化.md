@@ -1,3 +1,10 @@
+<!--
+ * @Author: x09898 coder_xujie@163.com
+ * @Date: 2022-05-09 20:54:40
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的相关知识.md\Vue的优化.md
+ * @Description: 
+-->
 # 优化
 
 ## Vue的优化
@@ -22,7 +29,7 @@
 * 减少http的请求
 * webpack等前端工程化打包工具， 为了减少http的请求数量。将多个css和js文件合并为一个文件。
 * 采用合理的结构，css文件放在头部，js文件放在底部。避免css的加载受到js加载的影响。
-* 减少重排，重绘。 1. 改变样式的时候尽量使用class类名的切换(一次性更改多条css属性)而不是多次使用style操作样式。 2. 实现元素的动画时，设置position属性为absolute或者fixed。这样动画的执行不会影响其他元素。
+* 减少重排，重绘。 1. 改变样式的时候尽量使用class类名的切换(一次性更改多条css属性)而不是多次使用style 操作样式。 2. 实现元素的动画时，设置position属性为absolute或者fixed。这样动画的执行不会影响其他元素。
 * 使用字体图标来代替图片图标， 字体图标的文件更小且不会失真。
 * 压缩文件 使用webpack的插件进行js，html，css的压缩。还有就是在请求头中加入gzip(目前最流行和最有效的压缩方法)标识来开启gzip压缩方式。
 * 使用事件委托，一个事件处理程序就能管理一个类型的所有事件。节省内存。
