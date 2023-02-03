@@ -28,6 +28,30 @@ let b = 0.15
 if(a + b == 0.3) {
   console.log('xxx')
 }
+    function test1 () {
+      let d = document.createElement('div')
+        d.innerText='new'
+        container.appendChild(d)
+        for(let i = 0; i < 3; i++) {
+          const div = document.createElement('div')
+          div.innerText = `xujie${i}`
+          container.appendChild(div)
+        }
+    }
+
+  
+    test1()
+    // console.log(container.offsetLeft)
+
+    setTimeout(() => {
+      const a = document.createElement('a')
+      a.innerText = '1234'
+      container.appendChild(a)
+    }, 100);
+
+    
+        
+        
   </script>
   </body>
 </html>
