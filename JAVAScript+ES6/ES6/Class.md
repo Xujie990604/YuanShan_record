@@ -1,9 +1,9 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-08-15 15:20:39
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\ES6\Class.md
- * @Description: Class的用法
+ * @Description: Class 的用法
 -->
 # Class
 
@@ -23,7 +23,6 @@ class Point {
         this.b = y;
       }
 
-      
       // 类的所有方法都是定义在 prototype 属性上
       // 用类的实例调用方法，其实就是调用 prototype 上的方法
       toString() {
@@ -31,17 +30,15 @@ class Point {
       }
 
       // set/get 访问器
+      // 调用的时候像属性一样 Point.length = 6
       set length(a) {
         this.a = a
       }
 
-      // 调用的时候像属性一样 Point.length = 6
-
+      // 调用的时候像属性一样 Point.length
       get length() {
         return this.a.length
       }
-
-      // 调用的时候像属性一样 Point.length
 
       // 属性前面加上 static 关键字代表这是一个静态属性
       // 静态属性不会存在于通过 new 生成的实例中
@@ -87,8 +84,6 @@ class Foo {
   }
 }
 
-
-
 // 使用extend关键字实现继承
 class Bar extends Foo {
   constructor() {
@@ -107,5 +102,5 @@ class Bar extends Foo {
   }
 }
 
-    const bar = new Bar();  // 控制台会打印 1 2 因为子类实例构建的同时，会调用super()执行一次父类的构造
+const bar = new Bar();  // 控制台会打印 1 2 因为子类实例构建的同时，会调用super()执行一次父类的构造
 ```

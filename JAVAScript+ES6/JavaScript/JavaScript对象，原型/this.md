@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:22
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript对象，原型\this.md
  * @Description: 
 -->
@@ -99,6 +99,6 @@ obj.a()
     newSay('hello', 'world');
 ```
 
-## NEW绑定: 在构造函数中
+## new 绑定: 在构造函数中
 
 * 使用 new 调用构造函数时，构造函数中的 this，指代的是这个新的实例(新对象)

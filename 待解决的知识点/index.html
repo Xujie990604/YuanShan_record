@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
  * @Description: 
 -->
@@ -22,21 +22,48 @@
   <body>
     
   <script>
-    // Person.prototype.country = 'china'
-    // function Person() {
-    //   this.name = 'xujie'
-    //   this.age = 18
-    //   this.say = function() {
-    //     console.log(`${this.name}-${this.age}`)
-    //   }
-    // }
+    Person.prototype.country = 'china'
+    function Person() {
+      this.name = 'xujie'
+      this.age = 18
+      this.say = function() {
+        console.log(`${this.name}-${this.age}`)
+      }
+    }
 
-    // const person = new Person()
-    // for(let key in person) {
-    //   console.log(key)
-    // }
+    const person = new Person()
+    Object.defineProperty(person, 'name', {
+        configurable: true,
+        enumerable: false,
+        writable: true,
+        value: 'xiaohan'
+    })
 
-    const reg = /^\w{5}$/
+
+
+   class Student {
+
+    qwer = {
+      name: 'xujie'
+    }
+    constructor(name, age) {
+      this.name = name
+      this.age = age
+    }
+    qw = 'ed'
+
+    ad() {
+    this.#say()
+  }
+
+    #height = 180
+
+    #say() {
+      console.log(this.name, this.#height)
+    }
+  }
+
+  const s = new Student('xujie', 19)
   </script>
   </body>
 </html>
