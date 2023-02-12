@@ -1,14 +1,14 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-05-25 23:06:32
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2022-12-26 16:26:40
+ * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditTime: 2023-02-12 10:20:12
  * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue 脚手架\VueCli\VueCli基础.md
  * @Description:
 -->
 # VueCli基础
 
-* Vue CLI(cli 命令行简写)使用了一套基于插件的架构，如果查阅一个新创建项目的package.json 就会发现依赖都是以 @vue/cli-plugin-开头的
+* Vue CLI(cli 命令行简写)使用了一套基于插件的架构，如果查阅一个新创建项目的 package.json 就会发现依赖都是以 @vue/cli-plugin-开头的
 * 在一个 Vue CLI 项目中，@vue/cli-service 安装了一个名为 vue-cli-service 的命令
 
 ## vue命令

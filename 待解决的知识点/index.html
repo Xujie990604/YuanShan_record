@@ -22,48 +22,10 @@
   <body>
     
   <script>
-    Person.prototype.country = 'china'
-    function Person() {
-      this.name = 'xujie'
-      this.age = 18
-      this.say = function() {
-        console.log(`${this.name}-${this.age}`)
-      }
+    for(var i = 0; i < 4; i++) {
+      setTimeout(() => {
+      console.log(i)})
     }
-
-    const person = new Person()
-    Object.defineProperty(person, 'name', {
-        configurable: true,
-        enumerable: false,
-        writable: true,
-        value: 'xiaohan'
-    })
-
-
-
-   class Student {
-
-    qwer = {
-      name: 'xujie'
-    }
-    constructor(name, age) {
-      this.name = name
-      this.age = age
-    }
-    qw = 'ed'
-
-    ad() {
-    this.#say()
-  }
-
-    #height = 180
-
-    #say() {
-      console.log(this.name, this.#height)
-    }
-  }
-
-  const s = new Student('xujie', 19)
   </script>
   </body>
 </html>
