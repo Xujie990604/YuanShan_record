@@ -12,8 +12,8 @@
 
 * 对象的状态不受外界的影响，只有异步结果可以决定当前是哪一种状态。任何其他的操作都无法改变。
 * 一旦状态改变就不会再变。任何时候都会得到这个结果。
-* promise对象只会有两种可能，从pending到resolved，从pending到rejected
-* 无法取消promise，一旦创建就立即执行。如果不设置回调函数，promise内部的错误不会反映到外部
+* promise 对象只会有两种可能，从 pending 到 resolved，从 pending 到 rejected
+* 无法取消 promise，一旦创建就立即执行。如果不设置回调函数，promise 内部的错误不会反映到外部
 
 ## resolve 和 reject
 
@@ -29,13 +29,13 @@ new Promise((resolve, reject) => {
 ```
 
 * 这两个回调函数(resolve reject)直接执行的话，是同步的函数，但是这两个回调函数里面的参数(包括成功的值和错误的理由)的**抛出**就是异步的过程了。
-* Promise.then()才是微任务的异步任务注册函数，then里面的回调函数是被放置到消息队列中的消息。
-* 如果Promise对象的结果没有被改变，即使碰到了p.then()方法，也不会注册微任务
+* Promise.then() 才是微任务的异步任务注册函数，then 里面的回调函数是被放置到消息队列中的消息。
+* 如果 Promise 对象的结果没有被改变，即使碰到了 p.then() 方法，也不会注册微任务
 
 ### Promise.resolve()
 
 * ```new Promise ((resolve, reject) => { resolve()}) === Promise.resolve()```
-* 会实例化一个Promise并将状态转化为resolved
+* 会实例化一个 Promise 并将状态转化为 resolved
 * 可以包装任何非期约值，包括错误对象。并将其转化为以解决的期约
 
 ```js
@@ -44,7 +44,7 @@ new Promise((resolve, reject) => {
 }) //Promise <resolved> :Error:xujie
 ```
 
-* 如果参数是一个期约的话， 那么外面的Promise.resolve()就相当于一个空包装
+* 如果参数是一个期约的话， 那么外面的 Promise.resolve() 就相当于一个空包装
 * 是一个幂等的方法
 
 ```js
@@ -55,8 +55,8 @@ setTimeout(console.log, 0, p === Promise.resolve(Promise.resolve(p))) //true
 
 ### Promise.reject()
 
-* 实例化一个Promise拒绝的期约， 并抛出一个错误。 (这个错误不能通过try catch捕获, 只能通过异步的处理程序catch或者then来捕获)(因为拒绝期约的错误并没有抛到同步代码的线程里面， 而是通过浏览器的异步消息队列来处理的)
-* Promise.reject()没有实现和Promise.resolve()一样的幂等逻辑，如果一个期约被当做参数，那么这个被传入的期约就会变成参数。
+* 实例化一个 Promise 拒绝的期约， 并抛出一个错误。 (这个错误不能通过 try catch 捕获, 只能通过异步的处理程序 catch 或者 then 来捕获)(因为拒绝期约的错误并没有抛到同步代码的线程里面， 而是通过浏览器的异步消息队列来处理的)
+* Promise.reject() 没有实现和 Promise.resolve() 一样的幂等逻辑，如果一个期约被当做参数，那么这个被传入的期约就会变成参数。
 
 ```js
 let p = Promise.resolve(3) 
@@ -67,14 +67,14 @@ Promise.reject(p) //这个Promise.resolve(3) 会成为错误的理由，而不�
 
 ### Promise.prototype.then()
 
-* 其实then方法可以提供两个回调函数，第一个在上面的执行器promise resolve时执行回调，第二个在上面的执行器promise reject时执行回调(重要)
-* then期待的参数是函数， 任何非函数的参数都会被静默处理。
+* 其实 then 方法可以提供两个回调函数，第一个在上面的执行器 promise resolve 时执行回调，第二个在上面的执行器 promise reject 时执行回调(重要)
+* then 期待的参数是函数, 任何非函数的参数都会被静默处理。
 
-* p.then的返回值是一个**新的Promise实例**(p代指上面的执行器Promise)，then的返回值的值根据和p的执行状态的对应的then中的回调有关(也就是说如果p resolve，那么then的返回值就和then中的第一个回调有关， 如果p reject，那么then的返回值就和then中的第二个返回值有关)。
+* p.then 的返回值是一个 **新的Promise实例** (p 代指上面的执行器 Promise)，then 的返回值的值根据和 p 的执行状态的对应的 then 中的回调有关(也就是说如果 p resolve，那么 then 的返回值就和then 中的第一个回调有关， 如果 p reject，那么 then 的返回值就和 then 中的第二个返回值有关)。
 
-1. 如果then中第一个回调函数被定义，且有返回值那么就把这个返回值通过Promise.resolve()包装，然后then的返回值就等于这个被包装过的值
-2. 如果then中的第一个回调函数被定义，但是没有返回值，那么then的返回值就是undefined经过Promise.resolve()包装
-3. 如果then的中的第一个回调函数没有被定义， 那么then的返回值就是上面的p的解决之后的值。
+1. 如果 then 中第一个回调函数被定义，且有返回值那么就把这个返回值通过 Promise.resolve() 包装，然后 then 的返回值就等于这个被包装过的值
+2. 如果 then 中的第一个回调函数被定义，但是没有返回值，那么 then 的返回值就是 undefined 经过Promise.resolve() 包装
+3. 如果 then 的中的第一个回调函数没有被定义， 那么 then 的返回值就是上面的 p 的解决之后的值。
 
 ```js
 new Promise((resolve,reject) => {
@@ -141,14 +141,14 @@ new Promise((resolve,reject) => {
 ### 期约连锁
 
 * 可以使用连缀方法的调用的形式
-* 实现的原理主要是then，catch，finally处理程序的返回值都是一个Promise。
+* 实现的原理主要是 then，catch，finally 处理程序的返回值都是一个 Promise。
 * 链式调用后面的内容需要等前一个调用执行完才会执行。
 
 ### 期约合成
 
 #### Promise.all([p, p])
 
-* Promise.all()静态方法会在一组期约全部解决之后再解决， 返回**一个新期约**
+* Promise.all() 静态方法会在一组期约全部解决之后再解决， 返回 **一个新期约**
 
 ```js
 let p = Promise.all([Promise.resolve("xujie"), Promise.resolve("xiaohan")]) //新期约的值是一个数组，["xujie", "xiaohan"]
@@ -171,15 +171,15 @@ Promise.all([
 })
 ```
 
-* 有一个包含的期约待定，则合成的期约也待定。一个包含的期约拒绝，则合成的期约也拒绝(第一个拒绝的理由会成为合成期约的拒绝理由),
-* all和race传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then的第二个参数或者后面的catch捕获；但并不会影响数组中其它的异步任务的执行。
-* 如果所有期约都成功解决， 合成期约的值就是包含期约解决值的数组。
+* 有一个包含的期约待定，则合成的期约也待定。一个包含的期约拒绝，则合成的期约也拒绝(第一个拒绝的理由会成为合成期约的拒绝理由, 不等待其他 Promise 解决)
+* all 和 race 传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then 的第二个参数或者后面的 catch 捕获；但并不会影响数组中其它的异步任务的执行。
+* 如果所有期约都成功解决，合成期约的值就是包含期约解决值的数组。
 
 #### Promise.race([p, p])
 
 * 返回一个包装期约，是一组集合中最先解决或者拒绝的期约的镜像。
-* 不区别解决和拒绝，只要是第一个落定的期约，Promise.race()就会包装其解决值或者拒绝理由并返回新期约
-* all和race传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then的第二个参数或者后面的catch捕获；但并不会影响数组中其它的异步任务的执行。
+* 不区别解决和拒绝，只要是第一个落定的期约，Promise.race() 就会包装其解决值或者拒绝理由并返回新期约
+* all 和 race 传入的数组中如果有会抛出异常的异步任务，那么只有最先抛出的错误会被捕获，并且是被then的第二个参数或者后面的 catch 捕获；但并不会影响数组中其它的异步任务的执行。
 * 多个期约解决，按照顺序来决定第一个
 
 ```js

@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:11:00
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\index.html
  * @Description: 
 -->
@@ -22,10 +22,27 @@
   <body>
     
   <script>
-    for(var i = 0; i < 4; i++) {
-      setTimeout(() => {
-      console.log(i)})
-    }
+    let a = Promise.all([
+      new Promise((resolve) => {
+        console.log('第一个成功了')
+        resolve('1 s')
+      }), 
+      new Promise((resolve,reject) => {
+        console.log('第二个失败了')
+        reject('2 f')
+      }),
+      new Promise((resolve) => {
+        console.log('第三个成功了')
+        resolve('3 s')
+      })
+    ])
+
+    a.then(() => {
+      console.log('all s')
+    })
+    .catch(() => {
+      console.log('all catch')
+    })
   </script>
   </body>
 </html>
