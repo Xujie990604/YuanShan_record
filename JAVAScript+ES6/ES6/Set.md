@@ -48,5 +48,6 @@ for(let key of set) {
   console.log(key)
 }
 // ... 内部使用的也是 for of。可以直接对 Set 进行 ... 运算
+// 通过 [] 和 ... 将 Set 结果转化为数组
 console.log([...set])
 ```
