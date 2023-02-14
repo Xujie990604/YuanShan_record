@@ -116,10 +116,10 @@ let map = new Map(Object.entries(obj))
 * WeakMap 和 Map 类似，都是用于生成键值对
 * WeakMap 对 key 是弱引用，不影响垃圾回收器的工作。据这个特性可知，一旦 key 被垃圾回收器回收，那么对应的键和值就访问不到了。所以 WeakMap 经常用于存储那些只有当 key 所引用的对象存在时(没有被回收)才有价值的信息
 
-### 和Map的区别
+### 和 Map 的区别
 
 * WeakMap 只接受对象作为键名(null除外)
-* WeakMap的键名所指向的对象，不计入垃圾回收机制的引用数。(weakMap 结构有助于防止内存泄漏)
+* WeakMap 的键名所指向的对象，不计入垃圾回收机制的引用数。(weakMap 结构有助于防止内存泄漏)
 
 ### 方法
 
