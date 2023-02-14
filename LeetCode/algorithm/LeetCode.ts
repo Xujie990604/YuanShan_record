@@ -1,12 +1,14 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-15 20:31:24
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\LeetCode\algorithm\index.ts
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\LeetCode\algorithm\LeetCode.ts
  * @Description: 
  */
 
-// tsc --target es6 index.ts 这样编译的ts代码能认识ES6的语法
+// tsc --target es6 leetCode.ts 这样编译的ts代码能认识ES6的语法
+
+
 // LeetCode_001
 function twoSum(array: number[], target: number) {
   // 定义一个 map，通过映射表的特点使用O(1)效率查找目标值
@@ -19,13 +21,11 @@ function twoSum(array: number[], target: number) {
     // 数组第 i 个值对应的目标数值
     const targetValue = target - array[index]
     //如果 map 中有目标值(且目标值与第i个值不是同一个)，将两个值的下标放进 resultArray 
-    if(map.has(targetValue) && map.get(targetValue)! !== index) {
-      resultArray.push(index)
-      resultArray.push(map.get(targetValue)!)
-      break
+    if(map.has(targetValue) && map.get(targetValue) !== index) {
+      resultArray.push(index, map.get(targetValue)!)
+      return resultArray
     }
   }
-  return resultArray
 }
 
 console.log(twoSum([2,7,11,15], 9))

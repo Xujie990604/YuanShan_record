@@ -22,27 +22,15 @@
   <body>
     
   <script>
-    let a = Promise.all([
-      new Promise((resolve) => {
-        console.log('第一个成功了')
-        resolve('1 s')
-      }), 
-      new Promise((resolve,reject) => {
-        console.log('第二个失败了')
-        reject('2 f')
-      }),
-      new Promise((resolve) => {
-        console.log('第三个成功了')
-        resolve('3 s')
-      })
-    ])
+    Object.prototype.aaa = 'da'
+  const a = {
+    name: 'xujie'
+  }
 
-    a.then(() => {
-      console.log('all s')
-    })
-    .catch(() => {
-      console.log('all catch')
-    })
+  for(let key in a) {
+    console.log(key)
+  }
+  console.log(Object.values(a))
   </script>
   </body>
 </html>
