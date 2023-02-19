@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-15 11:40:30
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\dataStructore.md
  * @Description: 
 -->
@@ -14,7 +14,10 @@
 
 ## 数据结构(人为定位的数据之间逻辑关系)
 
-* 栈，队列，树等数据结构既能使用 顺序存储结构来定义，又能使用链式存储结构来定义(采用不一样的物理结构，在不同种运算时的效率也会不同)
+* 栈，队列，树等数据结构既能使用 顺序存储结构来存储数据，又能使用链式存储结构来存储数据(采用不一样的物理结构进行数据存储，在不同种运算时的效率也会不同)
+  
+1. 线性数据结构：数组，链表，栈，队列
+2. 非线性数据结构：树，图
 
 ## JavaScript 的 array 和 Object
 

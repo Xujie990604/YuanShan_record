@@ -1,8 +1,8 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-10 08:51:48
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\待解决的知识点\Javascript 小知识点.md
+ * @LastEditors: xujie 1607526161@qq.com
+ * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript零散知识点\Javascript 小知识点.md
  * @Description: JS涉及到的一些零散知识点
 -->
 # javascript零散知识点
@@ -89,7 +89,26 @@ var renderMap = function( map ){
 
 ## jq如何实现链式调用
 
-* 方法的最后return this。
+* 方法的最后return this
+* 前提是变量和方法属于同一个对象
+
+```js
+  function Person() {
+    this.name = 'xujie'
+    this.height = 18
+  }
+  Person.prototype.say = function() {
+    console.log('我的名字是' + this.name)
+    return this
+  }
+  Person.prototype.jump = function() {
+    console.log('我的身高是' + this.name)
+    return this
+  }
+  const person = new Person()
+  // 实现链式调用
+  person.say().jump()
+```
 
 ## for in 循环 专门用来遍历对象
 
