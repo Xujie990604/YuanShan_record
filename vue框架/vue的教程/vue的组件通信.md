@@ -6,13 +6,13 @@
 
 #### props 传递数据
 
-* 如果子组件声明了，父组件却没有传值过来的话，值为undefined
+* 如果子组件声明了，父组件却没有传值过来的话，值为 undefined
 * Vue 中采用的是单向数据流的形式。1.父组件中 props 的更新会自动流入到子组件中 2.不推荐在子组件中修改父组件传过来的值。(无论是引用类型还是基本数据类型)
 * 如果子组件想要在自己内部修改 props 的值，可以使用 data 接收一下，然后进行修改
 * 如果子组件就是想要改变父组件 Props 的值，需要使用提交事件的方式
 
 ```js
-// 父组件将本页面的name变量传递给自组件。子组件接受值的时候需要使用s-name的小驼峰版本sName接收
+// 父组件将本页面的 name 变量传递给自组件。子组件接受值的时候需要使用s-name 的小驼峰版本 sName 接收
 <view-first  :s-name="name" :s-message="message" ></view-first>
 
 // 如果想把整个对象传递给子组件，下面这两种写法等价
@@ -45,10 +45,10 @@ props: {
   },
 ```
 
-#### 父组件传值了，但是子组件没有在props中声明
+#### 父组件传值了，但是子组件没有在 props 中声明
 
-* 如果父组件传递了一个值，但是子组件却没有在 props 中声明，那么这个属性就会作为子组件的根元素 DOM 上的attribute(一般来说父组件传递的 attribute 会覆盖子组件中的 attribute ，但是class和style除外，它俩会把父子组件上的内容合并)
-* 实例上的 this.$attrs 里面包含了，父组件传了值，但是子组件中没有用 props 声明的属性。(这个在组件多层传值的时候使用很方便，具体使用看官网)
+* 如果父组件传递了一个值，但是子组件却没有在 props 中声明，那么这个属性就会作为子组件的根元素 DOM 上的 attribute(一般来说父组件传递的 attribute 会覆盖子组件中的 attribute ，但是 class 和 style 除外，它俩会把父子组件上的内容合并)
+* 实例上的 this.$attrs 里面包含了，父组件传了值，但是子组件中没有用 props 声明的属性
 
 ### 子传父
 
@@ -64,9 +64,9 @@ props: {
 <view-first  @a-click="fClick($event)" ></view-first>
 // 父组件中事件处理函数的定义
 fClick(data) {
-      console.log(data)  //这个data是子组件传递过来的参数
-      console.log(event) //这个event是事件处理函数中的event事件对象
-    //   在自定义事件中，事件对象不再能通过声明$event或者默认是第一个参数的形式得到了。只能通过在函数体中直接使用event变量的方式来获取event事件对象。
+      console.log(data)  //这个 data 是子组件传递过来的参数
+      console.log(event) //这个 event 是事件处理函数中的 event 事件对象
+    //   在自定义事件中，事件对象不再能通过声明 $event 或者默认是第一个参数的形式得到了。只能通过在函数体中直接使用 event 变量的方式来获取 event 事件对象。
     }
 ```
 
@@ -112,7 +112,7 @@ fClick(data) {
 
 * 可以用来子组件和普通的 DOM 元素上
 * 如果给子组件添加上的话，可以通过 refs 来直接使用子组件的属性和方法。
-* Vue中的组件和 DOM 对象不一样，有时候想要使用使用一个组件的属性(例如offsetTop)可是组件并没有offsetTop属性，需要使用 this.$refs.组件.$el 来获取组件中根元素的DOM对象。
+* Vue 中的组件和 DOM 对象不一样，有时候想要使用使用一个组件的属性(例如 offsetTop )可是组件并没有offsetTop 属性，需要使用 this.$refs.组件.$el 来获取组件中根元素的 DOM 对象。
 
 ## 非父子组件通信
 
