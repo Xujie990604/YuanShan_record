@@ -10,7 +10,7 @@
 ## 定义形式
 
 ```css
-/* 原来我一直以为常量只能定义在在:root上,其实不是的，可以定义在任何的元素上。并且有作用域,通常定义在:root上因为他是根元素 */
+/* 原来一直以为常量只能定义在在:root上,其实不是的，可以定义在任何的元素上。并且有作用域,通常定义在:root上因为他是根元素 */
 :root {
     <!-- 定义常量的时候必须要以--符号开头 -->
     --normal-height: 20px;
@@ -25,22 +25,13 @@ div {
 }
 ```
 
-## :root 和 html标签
+## :root 和 html 标签
 
-* css 的设计并不只是为了应用在 html上
+* css 的设计并不只是为了应用在 html 上
 * :root 在 css 中的意思是根元素。在 html 文档中代表的就是 html 标签。但是在其他文档中就不一定了。
 
-## 在css中改变常量
+## 在 css 中改变常量
 
 * 因为常量不只是定义在 :root 伪元素,也可以定义在文档中的其他子节点中。
 * 所以常量也和其他的 css 属性一样，具有层叠性和继承性。
 * 可以实现局部的变量的更改。(其中 animate.css 中就需要使用到这个特性)
-
-## 在js中改变常量
-
-```js
-// document.documentElement获取的就是html标签
-// 可以在html上设置自定义属性
-// 也就是可以理解为css中的常量差不多就是 html DOM 的属性
-document.documentElement.style.setProperty("--animate-duration", '5s')
-```
