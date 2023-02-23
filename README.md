@@ -23,8 +23,10 @@
 * 腾讯课堂- 米修在线 - JavaScript 30个实战项目彻底掌握原生JS
 * 《JavaScript DOM 编程艺术》第二版
 * 《JavaScript 高级程序设计》第三版
+* 《JavaScript 高级程序设计》第四版
 * 《JavaScript 忍者秘籍》第二版
 * 《ES6 标准入门》阮一峰
+* 《JavaScript语言精粹》
 
 ## 计算机网络
 
@@ -41,6 +43,7 @@
 * 腾讯课堂- 米修在线- 还原饿了么订餐app 1 2 3 4
 * B站- codeWhy- 2019 Vue.js全套教程
 * 《深入浅出 Vue.js》
+* B站- codeWhy - Vue3 + TS
 
 ## 计算机知识体系
 
