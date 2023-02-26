@@ -20,46 +20,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      :root {
-        --normal-height: 20px;
+      .box {
+        position: relative;
+        top: 0px;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        animation: move 3s linear infinite;
       }
-      div {
-        color: red;
-        height: 30px;
+
+      @keyframes move {
+        0% {
+          top: 0;
+        }
+        50% {
+          top: 100px;
+        }
+        100% {
+          top: 300px;
+        }
       }
+
     </style>
   </head>
   <body>
+    <div class="box"></div>
     
   <script>
-  Object.prototype.aaa = 'da'
-    const a = {
-      name: 'xujie'
-    }
-
-    function fb(number) {
-      if(number === 0 || number === 1) {
-        return 1
-      } 
-      return fb(number - 1) + fb(number - 2)
-    }
-
-    const fibonacci = function () {
-      const list = [1, 1]
-      return function(n) {
-        let result = list[n]
-        if(result === undefined) {
-          result=  arguments.callee(n - 1) + arguments.callee(n - 2)
-          list[n] = result
-        }
-        return result
-      }
-      return fb
-    }();
-
-
-    
-
   </script>
   </body>
 </html>
