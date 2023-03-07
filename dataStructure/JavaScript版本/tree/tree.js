@@ -1,7 +1,7 @@
 /*
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-12-15 14:35:21
- * @LastEditors: xujie 1607526161@qq.com
+ * @LastEditors: x09898 coder_xujie@163.com
  * @FilePath: \HTML-CSS-Javascript-\dataStructure\tree\tree.js
  * @Description: 
  */
@@ -41,19 +41,19 @@ class BinarySearchTree {
     }
   }
 
-  // 把结点插入正确的位置
+  // 把结点插入正确的位置(基于二叉排序树)
   insertNode(node, key) {
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
-      if (node.left == null) { 
-        node.left = new Node(key); //
+      if (node.left == null) {
+        node.left = new Node(key);
       } else {
-        this.insertNode(node.left, key); // {7}
+        this.insertNode(node.left, key);
       }
     } else {
-      if (node.right == null) { // {8}
-        node.right = new Node(key); // {9}
+      if (node.right == null) {
+        node.right = new Node(key);
       } else {
-        this.insertNode(node.right, key); // {10}
+        this.insertNode(node.right, key);
       }
     }
   }
