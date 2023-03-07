@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .action{
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      animation: move 3s  infinite linear;
+    }
+
+    @keyframes move{
+      0% {
+        width: 200px;
+        top: 0;
+      }
+
+      50%{
+        width: 300px;
+        top: 80px;
+      }
+
+      100%{
+        width: 100px;
+        top: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="action"></div>
+
+  <script>
+
+  </script>
+  
+</body>
+</html>
