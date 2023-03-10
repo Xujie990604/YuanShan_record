@@ -85,6 +85,7 @@ Object.defineProperty(Vue.prototype, '$router', {
   ::v-deep.son {
     ...
   }
+  
 }
 /* 使用::v-deep{ } 语法时可以前面没有父选择器 */
 ::v-deep {

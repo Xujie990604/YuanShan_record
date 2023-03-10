@@ -5,10 +5,22 @@
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS基础.md
  * @Description: 
 -->
-# TS 的一些特性
+# TypeScript 基础
 
-* javaScript不会在编码的过程中报告错误，只会在实际执行的时候报告错误。TypeScript解决了这个痛点
-* JavaScript缺失类型的概念
+## 什么是 TypeScript
+
+* TypeScript 是一门静态类型语言，编译类型语言
+* TypeScript 是 JavaScript 的超集(兼容 JavaScript 的所有特性)
+
+## 为什么要使用 TypeScript
+
+1. JS 缺失类型的概念，TS 在 JS 的基础上增加了类型的概念保证程序的健壮性
+2. 在开发时能够拥有更好的开发体验。使用 TS 后，IDE 可以做到自动提示，自动填充等功能。
+3. 能够提前发现错误，错误代码在编译时期就会报错，而不用非得等到代码已经跑起来。
+  
+## TypeScript 的特点
+
+* JavaScript 不会在编码的过程中报告错误，只会在实际执行的时候报告错误。TypeScript 解决了这个痛点
 * TS 的核心原则之一就是对值所具有的结构进行类型检查
 
 ## TS中的擦除
