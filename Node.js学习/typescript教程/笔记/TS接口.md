@@ -2,12 +2,72 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-10-11 17:02:51
  * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\笔记\TS接口.md
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS接口.md
  * @Description: 
 -->
 # TS接口
 
-* interface 和 type 的最主要区别是 interface 可以重复定义相同名字的接口，并且这个接口会在之前的基础上进行合并而不是覆盖，type 无法定义相同的类型别名
+## type 和 interface 的对比
+
+### 相同点
+
+* 都可以用来定义对象，并且支持 1. 可选参数 2. readonly
+
+```ts
+interface a {
+  name?: string,
+  readonly age: number
+}
+
+type b = {
+  name?: string,
+  readonly age: number
+}
+```
+
+* 都可以用来定义函数类型
+
+```ts
+interface a {
+  (name: string,age:number):void
+}
+
+type b = (name: string, age:number) => void
+```
+
+* 都可以实现继承
+
+```ts
+1. interface 使用 extends 实现继承
+2. type 使用 &(交叉类型) 实现继承
+```
+
+### 不同点
+
+* type 能够声明基本类型 & 联合类型 & 元组类型
+
+```ts
+type a = string | number
+type b = [number, string]
+```
+
+* interface 可以重复定义相同名字的接口，并且这个接口会在之前的基础上进行合并而不是覆盖，type 定义相同的类型别名会爆错
+
+```ts
+interface a {
+  name: string
+}
+interface a {
+  age: number
+}
+
+type b  = {
+  name: string
+}
+type b = {
+  age: number
+}
+```
 
 ## 接口的使用
 
@@ -54,7 +114,7 @@ interface Point {
 }
 ```
 
-### class 实现接口
+### class 实现 interface
 
 ```ts
 // 定义一个接口

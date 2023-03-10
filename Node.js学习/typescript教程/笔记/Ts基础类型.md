@@ -2,22 +2,22 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:10:59
  * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\笔记\Ts基础类型.md
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\Ts基础类型.md
  * @Description: 
 -->
 # TypeScript
 
-* :string 代表的是Ts中的字符串类型
-* :String 代表的是JS中的字符串包装类类型
+* :string 代表的是 TS 中的字符串类型
+* :String 代表的是 JS 中的字符串包装类类型
 
 ## 类型推断
 
-* 就算是在定义值的时候你没有手动的定义类型，系统也会根据第一次的赋值类型来规范数据，首次赋值为string之后，就不能在复制number类型了(类型推断)
+* 就算是在定义值的时候你没有手动的定义类型，系统也会根据第一次的赋值类型来规范数据，首次赋值为 string 之后，就不能在复制 number 类型了
 
 ## 类型断言
 
 * 适用于你比 Typescript 更加了解某个值的详情
-* 把一个比较宽泛的类型转成一个更加具体的类型
+* 把一个比较 `宽泛` 的类型转成一个更加 `具体` 的类型
 
 ```ts
 // 尖括号语法
@@ -80,7 +80,8 @@ let n: null = null
 
 ## any
 
-* 在你不确定变量的指定类型的时候，使用 any 来取消类型检查。
+* 在你不确定变量的指定类型的时候，使用 any 来取消类型检查。any 是类型系统的顶级类型
+* any 类型可以接收任何类型，也可以赋值给任何类型
 * 和 object 类型的区别在于，尽管你能给 object(必须是大写的O)类型赋任何值，但是你不能调用对应的方法。any 支持调用对应的方法。
 
 ```ts
@@ -106,8 +107,7 @@ list[1]  //xujie
 
 ### unknown
 
-* unknown 类型只能赋值给 any 和 unknown 类型
-* any 类型可以赋值给任何类型
+* unknown 类型能接受任何类型(unknown 也是类型系统的顶级类型)
 
 ### void
 
@@ -139,7 +139,7 @@ const b = arr[0] // TS 会推断出来 b 是个 string 类型
 
 ### 枚举类型
 
-是js标准数据类型的一个补充。使用枚举类型可以为一组数值赋予友好的名字，下标值默认从零开始，也可以自己手动赋值。
+是 JS 标准数据类型的一个补充。使用枚举类型可以为一组数值赋予友好的名字，下标值默认从 `零` 开始，也可以自己手动赋值。
 
 ```ts
 // 定义一组常量

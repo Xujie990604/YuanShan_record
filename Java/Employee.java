@@ -6,7 +6,7 @@
  * @Description: 
  */
 
-// import java.io.*;
+
 
 public class Employee {
   String name;
@@ -44,7 +44,6 @@ public class Employee {
   
   public static void main(String[] args) {
     Employee a = new Employee("sss");
-    a.height = 123;
     System.out.println(a);
   }
 }

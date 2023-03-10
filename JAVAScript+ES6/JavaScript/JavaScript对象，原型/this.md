@@ -1,7 +1,7 @@
 <!--
  * @Author: x09898 coder_xujie@163.com
  * @Date: 2022-05-09 20:54:22
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript对象，原型\this.md
  * @Description: 
 -->
@@ -25,7 +25,7 @@
 ## 默认绑定: 作为普通函数被调用
 
 * this 指向的是全局对象
-* 非严格模式下，全局中的函数的 this 指向 window， 严格模式下，全局中的函数的 this 指向undefined。
+* 非严格模式下，全局中的函数的 this 指向 window， 严格模式下，全局中的函数的 this 指向 undefined。
 
 ```javascript
 var foo = {
@@ -66,7 +66,7 @@ obj.a()
 * 改变 this 指向(修正 this 的指向)
 * obj1.call(obj2, a, b, c)。实现用别人的方法来完成自己的功能。
 * apply(obj,[a, b, c])的区别就是传递参数时的不同
-* call/apply的 this 传递 null 时。函数体内的 this 会指向默认的宿主对象，在浏览器中则是window：
+* call/apply的 this 传递 null 时。函数体内的 this 会指向默认的宿主对象，在浏览器中则是 window
 
 ### bind
 
@@ -86,7 +86,7 @@ obj.a()
     newSay();
 ```
 
-### bind使用call实现
+### bind 使用 call 实现
 
 ```js
     const obj = {

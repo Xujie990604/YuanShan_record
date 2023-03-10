@@ -2,23 +2,23 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:10:59
  * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\笔记\Ts函数.md
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\Ts函数.md
  * @Description: 
 -->
-# Ts函数
+# TS函数
 
 ## 函数的参数类型和返回值类型定义
 
 ```ts
 // 函数声明(这种方式相当于给函数的参数，返回值单独添加上类型注解)
-// Ts 能根据 return 语句来判断返回值的类型，因此我们一般省略函数返回值类型
+// TS 能根据 return 语句来判断返回值的类型，因此我们一般省略函数返回值类型
 function add(a: number, b: number): number {
     return a + b;
 }
 add(2,5);
 
 // 函数表达式(这种方式相当于给一个函数添加上了一个类型注解)
-// (a: number, b: number) => number 这个叫函数类型，必须有返回值类型，没有返回值填写void 函数类型中的参数列表名字不用和函数定义的参数名字一一对应，类型能对应上就行。
+// (a: number, b: number) => number 这个叫函数类型，必须有返回值类型，没有返回值填写 void 函数类型中的参数列表名字不用和函数定义的参数名字一一对应，类型能对应上就行。
 let add: (a: number, b: number) => number = function (x: number, y: number): number {
     return x + y;
 }
@@ -85,7 +85,7 @@ function fullName(firstName: string, ...restName: string[]): string {
     return firstName + " " + restName.join(" ");
 }
 
-// 在函数类型上定义时也会用到...a这个符号
+// 在函数类型上定义时也会用到 ...a 这个符号
 let fullNameFun: (x: string, ...y: string[]) => string = fullName;
 
 fullNameFun("xu", "jie", "han");
