@@ -13,9 +13,9 @@
 
 ## Vite的服务器
 
-* Vite搭建本地服务器使用的是 Connect
+* Vite 搭建本地服务器使用的是 Connect
 
 ## ESBuild
 
 * 使用 GO 语言编写，可以直接转换成机器代码。
-* 能够充分利用CPU多核的运算
+* 能够充分利用 CPU 多核的运算
