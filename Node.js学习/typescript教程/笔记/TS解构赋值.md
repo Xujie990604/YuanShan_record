@@ -2,14 +2,14 @@
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-04-22 13:10:59
  * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\typescript教程\笔记\TS解构赋值.md
+ * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS解构赋值.md
  * @Description: 
 -->
 # Ts变量声明
 
 ## let const
 
-* 尽量使用ES6的新的声明变量的语法 let 和 const
+* 尽量使用 ES6 的新的声明变量的语法 let 和 const
 
 ### 解构赋值
 
@@ -42,7 +42,7 @@ console.log(first, second);
 
 ```ts
 function f({a, b = 0} = { a: "xujie" }):void {
-    console.log(a, b);
+  console.log(a, b);
 }
 f({ a: '9' }); //ok 传入参数覆盖了函数定义时的默认值 因为解构赋值获取参数且b参数有默认值，所以传参时没有b属性不报错
 f({}) //error 传入参数覆盖了函数定义时候的默认值，且参数中没有a属性，所以报错

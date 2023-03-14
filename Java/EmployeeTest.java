@@ -5,7 +5,6 @@
  * @FilePath: \HTML-CSS-Javascript-\Java\EmployeeTest.java
  * @Description: 
  */
-// import java.io.*;
 
 public class EmployeeTest {
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2022-12-11 16:35:17
- * @LastEditors: x09898 coder_xujie@163.com
+ * @LastEditors: xujie 1607526161@qq.com
  * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS基础.md
  * @Description: 
 -->
@@ -48,4 +48,10 @@ test({
 
 ## 类型声明
 
-* 在 .d.ts 文件中做类型的声明
+* 在 .d.ts 文件中做类型的声明，在文件中声明了变量，模块，interface，type 等之后，在其他地方不需要导入就可以直接使用，并且有语法提示
+* declare 关键字: 用于类型声明
+
+## 命名空间
+
+* 任何包含顶级 `import` 和 `export` 的文件都被当成是一个模块
+* 命名空间解决了标识符的可见范围
