@@ -22,7 +22,7 @@ type b = {
 
 ```ts
 interface a {
-  (name: string,age:number):void
+  (name: string, age:number):void
 }
 
 type b = (name: string, age:number) => void
