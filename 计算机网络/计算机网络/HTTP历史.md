@@ -1,17 +1,4 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2023-02-20 22:33:32
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\计算机网络\计算机网络\HTTP历史.md
- * @Description: 
--->
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2023-02-20 22:33:32
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\计算机网络\计算机网络\HTTP历史.md
- * @Description: 
--->
+
 # HTTP 历史
 
 ## HTTP 0.9

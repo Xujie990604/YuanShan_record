@@ -25,7 +25,7 @@
 
 * copy-webpack-plugin 在webpack 进行打包时，直接将某个文件复制过去
 
-* EsLint 很严格的 js 代码规范-
+* EsLint 很严格的 js 代码规范
 
 ### loader
 
