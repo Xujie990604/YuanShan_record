@@ -1,8 +1,8 @@
 <!--
  * @Author: xujie 1607526161@qq.com
  * @Date: 2023-03-11 00:09:11
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\Vue3\Vue3和Vue2的区别.md
+ * @LastEditors: x09898 coder_xujie@163.com
+ * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\Vue3\Vue3和Vue2的区别.md
  * @Description: 
 -->
 # 对比
@@ -17,6 +17,15 @@
 ## 书写方式对比
 
 * Vue3 支持两种代码组合方式，选项式和组合式
+
+### 选项式
+
+* 以组件实例为中心(this), 类似于面向对象的写法
+
+### 组合式
+
+* 可以使用通过导入的 API 函数来描述组件逻辑
+* `<script setup>` 中的代码直接在函数作用域(setup函数作用域)内定义响应式状态变量(所以变量，方法之间互相调用不需要借用 this )，组合式写法的模板会被编译成一个内联函数，这个内联函数和 `<script setup>` 中的代码位于同一作用域。所以模板中可以直接使用变量
 
 ## 组合式 api 的优点
 
