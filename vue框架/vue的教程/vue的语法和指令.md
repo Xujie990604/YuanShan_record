@@ -36,8 +36,8 @@
 
 ## v-cloak
 
-* 这是一个属性，添加到DOM上，具有这个属性的DOM不会被解析，只有Vue代码执行完毕之后才会对具有v-clock属性的DOM进行解析(v-cloak属性在vue代码执行前会存在，vue代码执行完毕之后v-clock会被去除)
-* 通过css的属性选择器来给具有这个属性的DOM设置display：none;(在vue代码没有执行前v-clock属性存在，但是因为设置了display:none; Vue代码执行前DOM不会被渲染，等到vue代码执行完成v-clock属性消失后DOM才会被渲染。)这样的话就可以解决画面闪烁的问题(适用于使用script引入vue的场景)
+* 这是一个属性，添加到 DOM 上，具有这个属性的 DOM 不会被解析，只有 Vue 代码执行完毕之后才会对具有 v-clock 属性的 DOM 进行解析(v-cloak 属性在 vue 代码执行前会存在，vue 代码执行完毕之后v-clock 会被去除)
+* 通过 css 的属性选择器来给具有这个属性的 DOM 设置 display：none;(在 vue 代码没有执行前v-clock 属性存在，但是因为设置了 display:none; Vue 代码执行前 DOM 不会被渲染，等到 vue 代码执行完成 v-clock 属性消失后 DOM 才会被渲染。)这样的话就可以解决画面闪烁的问题(适用于使用script 引入 vue 的场景)
 
 ## 属性绑定v-bind
 

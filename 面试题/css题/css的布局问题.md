@@ -32,7 +32,7 @@
 
 ### 三列布局
 
-* 两侧absolute，定宽。中间的两侧加上定宽的大小的margin-left和margin-right
+* 两侧 absolute，定宽。中间的两侧加上定宽的大小的 margin-left 和 margin-right
 * 使用flex，两侧flex: 0 0 200px; 中间flex: 1 1 auto;
-* 使用浮动,只需要把中间的的DOM放在后面就可以了。两侧的分别左右浮动。
+* 使用浮动,只需要把中间的的 DOM 放在后面就可以了。两侧的分别左右浮动。
 * 双飞翼布局和双飞翼布局

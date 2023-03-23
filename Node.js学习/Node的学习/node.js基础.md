@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\Node的学习\node.js基础.md
- * @Description: node介绍
--->
 # 初识node
 
 * node 是一个基于 Chrome V8 引擎的 JS 的运行环境
@@ -17,6 +10,5 @@
 
 ## node 中运行 JS 代码
 
-* node xx.js 切换到 js 所在的目录中，执行代码
-* 在一个空目录下使用 npm init -y 命令会在当前目录下初始化包管理配置文件
-* process.argv 中存储这我们执行 node 命令时传入的参数
+* node xx.js 切换到 JS 所在的目录中，执行代码
+* process.argv 中存储着我们执行 node 命令时传入的参数

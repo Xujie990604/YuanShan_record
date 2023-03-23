@@ -100,8 +100,6 @@ function Vue() {
 
 ### Vue.mixin
 
-* 安装Vue.js插件。如果插件是一个对象，必须提供install方法。如果插件是一个函数，它会被作为install方法。调用install方法时，会将Vue作为参数传入。install方法被同一个插件多次调用时，插件也只会被安装一次
-
 ### Vue.compile
 
 * 编译模板字符串并返回包含渲染函数的对象

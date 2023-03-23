@@ -1,11 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:58
- * @LastEditors: xujie 1607526161@qq.com
- * @LastEditTime: 2022-07-14 12:06:06
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\MySql的使用\MYSQL基础.md
- * @Description: 数据库学习
--->
 # MYSQL
 
 * 关系型数据库
