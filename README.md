@@ -36,6 +36,7 @@
 ## Node.js
 
 * B站- 黑马程序员- Node.js基础入门
+* 《深入浅出 Node.js》
 
 ## Vue框架
 
