@@ -12,3 +12,17 @@
 
 * node xx.js 切换到 JS 所在的目录中，执行代码
 * process.argv 中存储着我们执行 node 命令时传入的参数
+
+## nodemon插件
+
+* 使用 nodemon 命令来代替node命令来启动项目
+* 项目会在代码有更新的时候自动重启项目
+
+## jsonwebtoken插件
+
+* 用于在服务端生成 Token 字符串
+
+## express-jwt插件
+
+* 用于将 Token 字符串还原成 JSON 对象
+
