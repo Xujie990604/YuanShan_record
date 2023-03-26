@@ -7,8 +7,3 @@
 ## node中的js运行环境
 
 ![node中的js运行环境](img/0001.png)
-
-## node 中运行 JS 代码
-
-* node xx.js 切换到 JS 所在的目录中，执行代码
-* process.argv 中存储着我们执行 node 命令时传入的参数
