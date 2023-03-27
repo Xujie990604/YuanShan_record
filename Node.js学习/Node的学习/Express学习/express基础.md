@@ -50,3 +50,11 @@ app.get('/user/:id', (req, res) => {
     res.send(req.params)
 })
 ```
+
+## 覆盖 express API
+
+1. 全局的原型 express.response express.request
+2. 特定应用程序的原型 app.response  app.request
+
+* 可以通过原型来自定义一些属性，方法。或者覆盖原来的属性方法
+* req.baseUrl req.originalUrl 等方法是在当前请求-响应周期上动态分配的，因此使用原型的方式无法修改
