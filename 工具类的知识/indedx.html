@@ -14,44 +14,7 @@
 
   <script>
 
-    const array = [12, 5, 34, 567, 98, 78, 67, 12, 45]
-
-
-    function quick(array, left, right) {
-      if(right - left > 1) {
-        index = quickCore(array, left, right)
-        if(left < index - 1) {
-          quick(array, left, index - 1)
-        }
-        if(index < right) {
-          quick(array, index, right)
-        }
-      }
-    }
-
-    function quickCore(array, left, right) {
-      const middle = array[Math.floor((left + right) / 2)]
-      while(left <= right) {
-        while(array[left] <= middle) {
-          left++
-        }
-
-        while(array[right] >= middle) {
-          right--
-        }
-
-        if(left <= right) {
-          const temp = array[left]
-          array[left] = array[right]
-          array[left] = temp
-          left++
-          right--
-        }
-      }
-      return left
-    }
-
   </script>
-  
+
 </body>
 </html>
