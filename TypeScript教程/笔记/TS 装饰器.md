@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2023-03-10 23:14:07
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS 装饰器.md
- * @Description: 
--->
 # TS 装饰器
 
 * 使用 @expression 的形式， expression 求值后必须是一个函数，它会在运行时被调用，被装饰的声明信息作为参数调用
