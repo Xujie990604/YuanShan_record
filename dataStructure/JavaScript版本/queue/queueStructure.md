@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-11-20 22:50:10
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\queue\queueStructure.md
- * @Description: 数据结构队列
--->
 # 队列
 
 ## 特点

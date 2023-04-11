@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\README.md
- * @Description: 个人学习笔记涉及到的参考资料
--->
 # 介绍
 
 * 一个前端程序员的成长笔记
@@ -41,7 +34,7 @@
 ## Vue框架
 
 * Vue.js 官方文档
-* 腾讯课堂- 米修在线- 还原饿了么订餐app 1 2 3 4
+* 腾讯课堂- 米修在线- 还原饿了么订餐 app 1 2 3 4
 * B站- codeWhy- 2019 Vue.js全套教程
 * 《深入浅出 Vue.js》
 * B站- codeWhy - Vue3 + TS

@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\webpack学习\笔记\PluginAndLoader.md
- * @Description: 
--->
 # plugin 插件
 
 ## 插件的定义
