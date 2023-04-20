@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\webpack学习\笔记\PluginAndLoader.md
- * @Description: 
--->
 # plugin 插件
 
 ## 插件的定义
@@ -19,11 +12,11 @@
 
 * 打包 html  的插件，html-webpack-plugin，发布网站时，只发布 dist 文件夹，但是默认的 webpack 的配置下。dist 文件中缺少 index.html 文件，需要使用插件来让 index.html 进入到 dist 文件夹中。并且自动将打包生成的 js 文件引入到 index.html 文件中
 
-* 压缩js的插件。uglifyjs-webpack-plugin， 压缩 js 文件
+* 压缩 js 的插件。uglifyjs-webpack-plugin， 压缩 js 文件
 
 * cleanWebpackPlugin 打包文件时，会自动删除之前的包在生成新的包
 
-* copy-webpack-plugin 在webpack 进行打包时，直接将某个文件复制过去
+* copy-webpack-plugin 在 webpack 进行打包时，直接将某个文件复制过去
 
 * EsLint 很严格的 js 代码规范
 
@@ -37,11 +30,15 @@
 * less-loader， 需要使用 less-loader 进行文件的加载，less 进行文件的转化从 less 转化为 css 文件
 
 * 图片，file-loader
-* url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64的URI.然后图片可以和其他资源放在一个请求中，减少对服务器的压力
+* url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
 
 * ES6 转化的 loader。babel-loader babel-core babel-preset-es2015，这三个包都需要安装。
 
 * vue-loader(vue加载) 和 vue-template-compiler(vue模板编译)
+
+### babel
+
+* 作用
 
 ## postCSS
 
