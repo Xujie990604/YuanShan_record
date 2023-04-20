@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2023-01-07 17:47:18
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\Java\Java.md
- * @Description: Java基础概念
--->
 # Java
 
 # 类

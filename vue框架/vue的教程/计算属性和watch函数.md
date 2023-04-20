@@ -1,11 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:40
- * @LastEditors: x09898 coder_xujie@163.com
- * @LastEditTime: 2023-01-16 20:35:28
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\Vue的教程\计算属性和watch函数.md
- * @Description: 
--->
 # vue的计算属性
 
 ## computed

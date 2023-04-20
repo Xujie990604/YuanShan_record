@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:58
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\HTML+CSS\CSS部分\网页的布局\Flex布局.md
- * @Description: 
--->
 # 弹性盒子布局
 
 ## 容器的属性

@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-11-27 22:46:14
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\linkedList\linkList.md
- * @Description: 
--->
 # 链表
 
 ## 单链表
