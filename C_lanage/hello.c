@@ -4,8 +4,12 @@ int main()
 {
   int a, b, sum;
   printf("input two int nums\n");
-  scanf("%d,%d", &a, &b);
-  sum = a + b;
-  printf("%d+%d=%d\n", a, b, sum);
+  if (scanf("%d %d\n", &a, &b) == 2) {
+    printf("uuu %d and %d", a, b);
+  } 
+  else {
+    printf("rrr");
+  }
+  printf("DDDD");
   return 0;
 }

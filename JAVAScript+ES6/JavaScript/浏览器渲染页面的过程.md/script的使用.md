@@ -27,7 +27,8 @@
 
 ### 动态引入的标签
 
-* 将 async 设置为 false 之后，为什么 动态引入的 JS 文件执行时间会那么晚是因为 defer 的效果。还是说 mui 的下载太慢了(下载慢也就是意味着执行时间晚)，影响了后面 JS 文件的执行。这个 mui 是否可以使用动态引入的方式来优化一下
+* 使用 `document.createElement` 创建的 `script` 标签，默认 `async = true defer = false`
+* 即使把 `async` 和 `defer` 都设置为 `false`。 动态创建的标签也不会像写在 `HTML` 文件中的 `script` 标签(下载和执行都是同步的)一样。动态创建的 `script` 下载过程一定是异步(无法变成同步)
 
 ## ```<noscript>```
 
