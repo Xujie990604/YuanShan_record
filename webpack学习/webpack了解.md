@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\webpack学习\笔记\webpack了解.md
- * @Description: 
--->
 # 基础使用
 
 * 是一个现代的 javascript 应用的静态(打包完成的文件是静态资源)模块(支持模块化开发)打包工具
@@ -25,11 +18,6 @@
 
 * 他们只是一系列的任务，压缩，转化。
 * 并不涉及到模块化的概念，不会处理模块化之间的依赖
-
-## 项目的入口
-
-* 默认整个项目的入口是 main.js 文件(入口文件和出口文件都可以通过配置文件修改)。然后 webpack 会根据 main.js 中引用的依赖去加载依赖。
-* webpack 在打包的时候只会找入口文件。main.js，所以想要 css 最终被打包的话，需要在 main.js 中引入 css
 
 ## 使用
 
