@@ -47,3 +47,62 @@
 ## Java
 
 * 菜鸟教程
+
+```
+// 按需加载语言文件并对页面进行一定的初始化
+function initLang() {
+  var langPath; // 语言文件路径
+  var type;     // 语言类型
+  var langName; // 语言文件对象名称
+  switch (localStorage.currentLan) {
+    case "1":
+      type = "zh";
+      langPath = "../lang/zh_strings.js";
+      langName = "langZh"
+      break;
+    case "2":
+      type = "en";
+      langPath = "../lang/en_strings.js";
+      langName = "langEn"
+      break;
+    default:
+      switch (localStorage.defaultLan) {
+        case "1":
+          type = "zh";
+          langPath = "../lang/zh_strings.js";
+          langName = "langZh"
+          break;
+        case "2":
+          type = "en";
+          langPath = "../lang/en_strings.js";
+          langName = "langEn"
+          break;
+        default:
+          type = "en";
+          langPath = "../lang/en_strings.js";
+          langName = "langEn"
+          break;
+      }
+  }
+  // 按需加载 JS 语言文件
+  $("#langScript").replaceWith('<script src=' + langPath + '><\/script>')
+  console.log('加载语言文件的路径', '<script src=' + langPath + '><\/script>');
+  var langData = window[langName]
+  console.log('加载的语言文件', langData);
+
+  $("[data-text]").each(function () {
+    var $this = $(this);
+    var name = $this.attr("data-text");
+    $this.html(langData[name]);
+  })
+  $("[data-placeholder]").each(function () {
+    var $this = $(this);
+    var name = $this.attr("data-placeholder");
+    $this.attr("placeholder", langData[name]);
+  })
+  var langMap = {};
+  langMap.type = type;
+  langMap.lang = langData;
+  return langMap;
+}
+```

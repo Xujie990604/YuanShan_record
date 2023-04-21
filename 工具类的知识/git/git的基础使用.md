@@ -83,8 +83,8 @@
 
 ### git checkout -b dev
 
-* 创建dev分支并切换到dev分支，相当于两个指令
-* git branch dev是创建dev分支(创建分支的意思就是基于主分支创建一个副本用来进行改动，和svn相比节省了一次拷贝的步骤)
+* 创建 dev 分支并切换到 dev 分支，相当于两个指令
+* git branch dev 是创建 dev 分支(创建分支的意思就是基于主分支创建一个副本用来进行改动，和svn 相比节省了一次拷贝的步骤)(TODO：是基于当前分支还是基于 master 分支)
 * git switch dev 是切换到dev分支
 
 ### git branch

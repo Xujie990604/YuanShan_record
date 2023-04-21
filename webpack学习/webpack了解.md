@@ -35,8 +35,13 @@
 
 * npm init 生成 package.json 文件
 * npm init -y 一键生成 package.json 文件(不需要手动输入一些信息)
+
 * 局部安装 webpack 的话目录下会生成 node_modules 文件
 * node_modules 文件下的 bin 目录包含了可以使用的指令, 同时拥有全局和局部的 webpack,想要使用局部的 webpack 时，需要到本地目录中执行 webpack node_modules/.bin/webpack。 想要直接使用局部 webpack 打包，可以使用 npx webpack 指令
 * 在项目的 package.json 的 scripts 中执行的命令时会自动使用局部的插件
-* 打包时，webpack 默认会把 src/index.js 当作入口文件
-* webpacK 打包时会默认使用 webpack.config.js 配置文件中的配置项，想要指定配置文件 webpack --config xxx.config.js
+
+* webpack 是开箱即用的，可以不使用任何配置文件进行打包。但是webpack 默认会把 src/index.js 当作入口文件, dist/main.js 当做出口，生产环境默认压缩。(一般情况下项目是需要定义一个配置文件进行能力的扩展的)
+* 不指定配置文件 webpacK 打包时会默认使用 webpack.config.js 配置文件中的配置项，想要指定配置文件 webpack --config xxx.config.js，可以使用 --merge 命令来合并配置文件。配置文件导出的是函数时，可以在命令行中添加环境参数(配置文件会接收到)
+* 命令行参数的优先级，高于配置文件的参数优先级
+
+* npx webpack --analyze 来分析 bundle
