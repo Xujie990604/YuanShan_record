@@ -28,8 +28,45 @@
 * node_modules 文件下的 bin 目录包含了可以使用的指令, 同时拥有全局和局部的 webpack,想要使用局部的 webpack 时，需要到本地目录中执行 webpack node_modules/.bin/webpack。 想要直接使用局部 webpack 打包，可以使用 npx webpack 指令
 * 在项目的 package.json 的 scripts 中执行的命令时会自动使用局部的插件
 
-* webpack 是开箱即用的，可以不使用任何配置文件进行打包。但是webpack 默认会把 src/index.js 当作入口文件, dist/main.js 当做出口，生产环境默认压缩。(一般情况下项目是需要定义一个配置文件进行能力的扩展的)
+* npx webpack --analyze 来分析 bundle
+
+## 配置
+
+* webpack 是开箱即用的，可以不使用任何配置文件进行打包。但是 webpack 默认会把 src/index.js 当作入口文件, dist/main.js 当做出口，生产环境默认压缩。(一般情况下项目是需要定义一个配置文件进行能力的扩展的)
 * 不指定配置文件 webpacK 打包时会默认使用 webpack.config.js 配置文件中的配置项，想要指定配置文件 webpack --config xxx.config.js，可以使用 --merge 命令来合并配置文件。配置文件导出的是函数时，可以在命令行中添加环境参数(配置文件会接收到)
 * 命令行参数的优先级，高于配置文件的参数优先级
 
-* npx webpack --analyze 来分析 bundle
+## webpack cli
+
+`"build": "webpack --config wk.config.js"`
+
+* 在执行 npm run build 时，会使用 webpack cli 来处理命令行中的参数，并通过参数构建 compiler 对象，然后对代码进行打包(webpack cli 对于打包不是必须的，因为可以使用默认参数打包)。
+* 通常在执行 webpack 时会添加一些额外参数(入口，出口，指定配置文件....)
+
+```js
+// 命令行参数除了显式的 --config wk.config.js 还会有一个固定的参数
+[
+  'E:\nodejs\node.exe',
+  'D:\webpack\node_modules\webpack\bin\webpack.js',
+  '--config',
+  'wk.config.js'
+]
+```
+
+* webpack cli 会提供一些方便的命令，例如 npx webpack init, 初始化一个 webpack 文件。并且会询问很多事项(像 Vue cli 一样 )
+
+## 环境的区分
+
+* 如果 webpack 配置文件的导出内容为函数的话，函数的参数为默认传进入环境变量
+
+### 本地环境
+
+1. 更快的构建速度
+2. 打印 debug 信息
+3. 热更新功能
+4. 需要 sourcemap
+
+### 生产环境
+
+1. 更小的体积
+2. 对代码进行分割

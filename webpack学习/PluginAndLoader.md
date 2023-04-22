@@ -4,9 +4,7 @@
 
 * 对于 webpack 现有功能的扩展，比如打包优化，文件压缩。
 
-## 常见的插件
-
-### plugin
+## plugin
 
 * 版权插件的使用 BannerPlugin 这个插件是 webpack 自带的
 
@@ -20,11 +18,13 @@
 
 * EsLint 很严格的 js 代码规范
 
-### loader
+## loader
+
+* webpack 默认支持处理 js 和 json 文件，其他类型的处理不了，需要借助 loader 来进行处理
 
 * 将高级的 Es6 转化为 es5，typescript 转化为 ES5 代码，scss 转化为 less，.vue 转化为 js 文件等。webpack 本身并不能做到的，需要借助 loader 扩展。
 
-* css-loader 是用来加载 css。
+* css-loader   是用来加载 css。
 * style-loader 是用来解析 css，把 css 渲染到 DOM 上
 
 * less-loader， 需要使用 less-loader 进行文件的加载，less 进行文件的转化从 less 转化为 css 文件
