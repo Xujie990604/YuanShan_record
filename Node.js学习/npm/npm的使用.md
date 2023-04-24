@@ -51,4 +51,4 @@
 ## npx 指令
 
 * npx 让调用项目内部模块的命令简单起来。npx 的原理很简单，就是运行的时候，会到 node_modules/.bin 路径和环境变量 $PATH 里面，检查命令是否存在(webpack5.2.0 以上版本支持)
-* 避免全局安装模块，`npx create-react-app my-react-ap` npx 将 create-react-app 下载到一个临时目录，使用以后再删除。所以，以后再次执行上面的命令，会重新下载 create-react-app
+* 避免全局安装模块，`npx create-react-app my-react-app` npx 将 create-react-app 下载到一个临时目录，使用以后再删除。所以，以后再次执行上面的命令，会重新下载 create-react-app
