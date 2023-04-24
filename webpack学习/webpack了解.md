@@ -70,3 +70,13 @@
 
 1. 更小的体积
 2. 对代码进行分割
+
+## 资源模块的使用
+
+* webpack 5 之前需要加载 file-loader 和 url-loader 来处理图片资源
+* webpack 5 新增了资源模块，允许使用资源文件(字体，图标)而无需额外 loader
+  
+1. asset/resource 将资源分割为单独的文件，并导出 url，类似之前的 file-loader 的功能.
+2. asset/inline 将资源导出为 dataUrl 的形式，类似之前的 url-loader 的小于 limit 参数时功能.
+3. asset/source 将资源导出为源码（source code）. 类似的 raw-loader 功能.
+4. asset 会根据文件大小来选择使用哪种类型，当文件小于 8 KB（默认） 的时候会使用 asset/inline，否则会使用 asset/resource
