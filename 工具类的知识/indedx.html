@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +10,22 @@
 
   </style>
 </head>
+
 <body>
   <div class="content"></div>
   <script>
-    const a = 'ddd'
-    console.log(a.d.x);
+    const url1 = 'https://ezcloud.unview.com/openpai/user/account'
+    const url2 = 'https://ucs.unview.com:8090/openpai/user/account'
+
+    const api = "/openpai/user/account"
+
+    const reg = new RegExp("/openpai/user/account$")
+    const reg2 = /\/openpai\/user\/account$/
+
+    console.log(reg2.test(url1))
+    console.log(reg2.test(url2))
   </script>
+
 </body>
+
 </html>
