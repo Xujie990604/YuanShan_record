@@ -1,19 +1,8 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-09-19 21:20:28
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Vue框架\vue的教程\Vue3\Vue3的介绍.md
- * @Description: 
--->
 # Vue3的介绍
 
 ## 单文件组件
 
-<<<<<<< HEAD
-* 单文件组件(.vue 文件)英文缩写 SFC
-=======
 * 单文件组件(.vue文件)英文缩写 SFC
->>>>>>> bbca50dcec23077c73b7d71cdeec68572e035f90
 * 单文件组件中会有一个组件的逻辑，模板，样式
 
 ## 应用实例
