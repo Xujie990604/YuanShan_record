@@ -7,23 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
+    .light-green {
+      line-height: 30xp;
+      border: none;
+      background-color: #58A14F;
+    }
+
+    .light-green:hover {
+      background-color: #91EFE1;
+    }
+
+    .light-green:active {
+      background-color: #19C8AD;
+    }
   </style>
 </head>
 
 <body>
-  <div class="content"></div>
+  <span class="light-green">按钮</span>
+
   <script>
-    const url1 = 'https://ezcloud.unview.com/openpai/user/account'
-    const url2 = 'https://ucs.unview.com:8090/openpai/user/account'
-
-    const api = "/openpai/user/account"
-
-    const reg = new RegExp("/openpai/user/account$")
-    const reg2 = /\/openpai\/user\/account$/
-
-    console.log(reg2.test(url1))
-    console.log(reg2.test(url2))
+    /**
+     * @description: 计算两数之和
+     * @param { number } num1 第一个数 
+     * @param { number } num2 第二个数 
+     * @returns { number } 两数之和
+     */
+    export function addNumber(num1, num2) {
+      return num1 + num2;
+    }
   </script>
 
 </body>
