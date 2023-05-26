@@ -36,15 +36,8 @@ const objAttrs = {
 - 在 Vue 中 js 表达式可以被使用在以下场景中
 
 1. 在文本插值中
-
-# 在任何 Vue 指令(以 v-开头的 attribute)attribute 的值中
-
-## JS 表达式
-
-- 在 Vue 中 js 表达式可以被使用在以下场景中
-
-1. 在文本插值中
 2. 在任何 Vue 指令(以 v-开头的 attribute)attribute 的值中
+3. JS 表达式
 
 ```js
 {{ OK ? 'YES': "NO" }}
@@ -70,8 +63,6 @@ const objAttrs = {
 
 - Vue 能够跟踪对响应式对象属性的访问与更改操作(对 Proxy 的更改和访问会被 Vue 跟踪到， 对 raw 的更改和访问不会被 Vue 跟踪到)
 - 在 Vue3 中，状态都是默认深层响应式的
-
-> > > > > > > 0e76c84d22ef2ebcf25e2f6746cfb21aaa834a60
 
 ```js
 // reactive() 返回的是一个原始对象的 Proxy
@@ -105,8 +96,6 @@ console.log(proxy.nested === raw); // false
 ```
 
 ### reactive()
-
-<<<<<<< HEAD
 
 - 仅对对象类型有效(对象，数组，Set，Map)等。(string, number, boolean)等类型无效
 - Proxy 是基于属性的访问进行响应式跟踪的。所以只能对引用类型进行跟踪。
