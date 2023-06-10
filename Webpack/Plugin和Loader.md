@@ -6,12 +6,16 @@
 
 ### 常见 plugin
 
-- 版权插件的使用 `BannerPlugin` 这个插件是 webpack 自带的
-- 打包 html 的插件，`html-webpack-plugin`，发布网站时，只发布 dist 文件夹，但是默认的 webpack 的配置下。dist 文件中缺少 index.html 文件，需要使用插件来让 index.html 进入到 dist 文件夹中。并且自动将打包生成的 js 文件引入到 index.html 文件中
-- 压缩 js 的插件。`uglifyjs-webpack-plugin`， 压缩 js 文件
-- `cleanWebpackPlugin` 打包文件时，会自动删除之前的包在生成新的包
-- `copy-webpack-plugin` 在 webpack 进行打包时，直接将某个文件复制过去
-- `EsLint` 很严格的 JS 代码规范
+1. htmlWebpackPlugin 自动生成 HTML 模板并且引入资源文件
+2. CleanWebpackPlugin 打包之前清除之前的文件
+3. miniCssExtractPlugin 把 CSS 以外链文件的形式引入 HTML 中
+4. copyWebpackPlugin 复制指定文件夹到 dist 目录中
+5. speed-measure-webpack-plugin 查看 webpack 的构建费时情况
+6. webpack-bundle-analyzer 查看打包文件的体积大小
+7. optimize-css-assets-webpack-plugin 压缩 CSS
+8. terser-webpack-plugin 压缩 JS(webpack 默认开启)
+9. purgecss-webpack-plugin 清除无用的 CSS
+10. `EsLint` 很严格的 JS 代码规范
 
 ## 二，loader
 
@@ -19,13 +23,16 @@
 
 ### 常见 loader
 
-- css-loader 是用来加载 css。
-- style-loader 是用来解析 css，把 css 渲染到 DOM 上
-- less-loader， 需要使用 less-loader 进行文件的加载，less 进行文件的转化从 less 转化为 css 文件
-- 图片，file-loader
-- url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
-- ES6 转化的 loader。babel-loader babel-core babel-preset-es2015，这三个包都需要安装。
-- vue-loader(vue 加载) 和 vue-template-compiler(vue 模板编译)
+1. style-loader 把 css 语句写入 style 标签中，然后插入到 html 页面里
+2. css-loader 识别 CSS 语法
+3. style-loader 是用来解析 css，把 css 渲染到 DOM 上
+4. postcss-loader 识别 postcss 语法
+5. sass-loader 识别 scss 语法
+6. babel-loader 识别 ES6+ 语法并转移成兼容指定浏览器的 JS 代码
+7. cache-loader 缓存一些性能开销较大的 loader 的处理结果
+8. thread-loader 开启多进程打包优化
+9. url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
+10. vue-loader(vue 加载) 和 vue-template-compiler(vue 模板编译)
 
 ### babel
 
