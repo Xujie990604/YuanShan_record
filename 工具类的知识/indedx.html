@@ -8,35 +8,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    .light-green {
-      line-height: 30xp;
-      border: none;
-      background-color: #58A14F;
-    }
-
-    .light-green:hover {
-      background-color: #91EFE1;
-    }
-
-    .light-green:active {
-      background-color: #19C8AD;
-    }
   </style>
 </head>
 
 
 <body>
-  <div class="content">
-    服务器测试
-  </div>
   <script>
-    c = 'ddd'
-    console.log(a.d.x);
+    async function init(param) {
+      if (param) {
+        await Promise.resolve(1)
+      } else {
+        await Promise.reject(0)
+      }
+    }
+
+    init(1)
+      .then(res => {
+        console.log('res', res);
+      }).catch(err => {
+        console.log('err', err);
+      })
   </script>
 </body>
 
