@@ -21,13 +21,21 @@
         await Promise.reject(0)
       }
     }
-
     init(1)
       .then(res => {
-        console.log('res', res);
+        console.log(res)
       }).catch(err => {
-        console.log('err', err);
+        console.log(err)
       })
+
+    function add(num1, num2) {
+      return num1 + num2
+    }
+
+    function multiplication(num1, num2) {
+      return num1 * num2
+    }
+
   </script>
 </body>
 
