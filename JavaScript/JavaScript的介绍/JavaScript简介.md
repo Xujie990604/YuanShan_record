@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:58
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript的历史\JavaScript简介.md
- * @Description: JavaScript语言的特性
--->
 # JavaScript简介
 
 ## ECMAScript

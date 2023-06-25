@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:11:00
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\工具类的知识\VScode编辑器的使用\markdown.md
- * @Description: 
--->
 # Markdown 语法的使用
 
 ## 标题

@@ -8,42 +8,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    li {
+      list-style: none;
+    }
+
+    .content {
+      position: relative;
+      height: 400px;
+    }
+
+    .circle {
+      position: absolute;
+      left: 200px;
+      height: 400px;
+      width: 400px;
+      border-radius: 200px;
+      background-color: yellow;
+      z-index: 2;
+    }
+
+    .line {
+      position: absolute;
+      top: 100px;
+      height: 200px;
+      width: 100%;
+      background-color: #eee;
+      z-index: 1;
+    }
   </style>
 </head>
 
 
 <body>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <div class="content">
+    <div class="circle"></div>
+    <div class="line"></div>
+  </div>
+
   <script>
-    async function init(param) {
-      if (param) {
-        await Promise.resolve(1)
-      } else {
-        await Promise.reject(0)
-      }
-    }
-    init(1)
-      .then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
-      })
-
-    function add(num1, num2) {
-      return num1 + num2
-    }
-
-    function multiplication(num1, num2) {
-      return num1 * num2
-    }
-
-    // 这是我新加的一个注释
 
   </script>
 </body>
 
 
 </html>
-
-d
 
 </html>

@@ -1,10 +1,3 @@
-/*
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-12-14 11:02:09
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\map\map.js
- * @Description: 
- */
 /**
  * @description: 将字典的 key 转化为 String 类型的函数
  * @param {*} item 传入的 key 值

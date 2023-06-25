@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-12-14 15:12:19
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\HashMap\HashMap.md
- * @Description: 
--->
 # 散列表(又名哈希表)
 
 * !!! 由于JS根本无法操作内存地址。所以 JS 实现散列表的代码仅仅是用来解释原理。实现的不是真正的散列表。

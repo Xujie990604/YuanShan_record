@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:21
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\HTML+CSS\CSS部分\CSS知识块\CSS选择器.md
- * @Description: CSS中的各类选择器
--->
 # css选择器
 
 * 有效且结构良好的文档是添加样式的基础

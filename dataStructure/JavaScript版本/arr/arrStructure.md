@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-10-17 20:21:48
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\arr\arrStructure.md
- * @Description: 
--->
 # 数组的数据结构讲解
 
 ## 创建和初始化数组

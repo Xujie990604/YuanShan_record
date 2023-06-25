@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-12-15 11:40:30
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\dataStructore.md
- * @Description: 
--->
 # 数据结构
 
 ## 物理结构(数据在内存中的存储结构)
