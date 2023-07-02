@@ -1,13 +1,3 @@
-/*
- * @Author: xujie 1607526161@qq.com
- * @Date: 2023-01-07 18:09:36
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Java\Employee.java
- * @Description: 
- */
-
-
-
 public class Employee {
   String name;
   int age;
