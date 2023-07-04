@@ -1,10 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\Ts基础类型.md
- * @Description: 
--->
 # TypeScript
 
 * :string 代表的是 TS 中的字符串类型

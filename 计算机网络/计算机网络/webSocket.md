@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2023-01-16 16:02:04
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\计算机网络\计算机网络\webSocket.md
- * @Description: 
--->
 # WebSocket
 
 * WebSocket 协议运行在 TCP 协议之上，与 HTTP 协议同属于应用层网络数据传输协议。WebSocket 相比于 HTTP 协议最大的特点是: 允许服务端主动向客户端推送数据(从而解决 HTTP 协议实现中客户端只能通过轮询方式获取服务端推送数据造成的资源消耗和消息延时等问题)

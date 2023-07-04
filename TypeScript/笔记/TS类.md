@@ -1,11 +1,3 @@
-
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-10-11 17:28:14
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\TS类.md
- * @Description: 
--->
 # TS 类
 
 * 三大特性: 继承，封装，多态

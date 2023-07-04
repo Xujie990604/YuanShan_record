@@ -1,11 +1,3 @@
-<!--
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-04-22 13:10:59
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\Node.js学习\TypeScript教程\笔记\Ts函数.md
- * @Description:
--->
-
 # TS 函数
 
 ## 函数的参数类型和返回值类型定义
