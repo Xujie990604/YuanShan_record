@@ -1,9 +1,9 @@
 # 组件通信
 
-## 父子组件通信
+## 一、父子组件通信
 
-* 单向数据流：
-  
+> 单向数据流概念：
+
 1. 父组件中的 props 更新会自动的流入子组件中
 2. 不可以在子组件中直接修改父组件传过来的值(无论是基本类型还是引用类型)
 3. 优点：组件数据变化的来源入口只有一处，便于数据变化流程的理解(eg:多个子组件依赖同一个父组件的数据，在其中一个子组件中修改数据会引起其他所有组件的变化, 对于其他子组件来说很难找到数据的变化来源于哪里)
@@ -27,7 +27,7 @@
 
 ![Vue报错](./img/组件通信/修改props.png)
 
-虽然在子组件中修改父组件传过来的引用类型数据不会报错，但是不推荐这种写法。
+> 虽然在子组件中修改父组件传过来的引用类型数据不会报错，但是不推荐这种写法。
 
 ```js
 // 需要在自组件内修改父组件传进来的值
@@ -45,9 +45,9 @@ props: {
 }
 ```
 
-### props 和 $emit()
+### 1.1 props 和 $emit()
 
-* 通过 props 来向子组件传递数据，通过 $emit() 来向父组件提交事件修改数据
+> 通过 props 来向子组件传递数据，通过 $emit() 来向父组件提交事件修改数据
 
 ```js
 // 传递数据&监听事件
@@ -64,7 +64,8 @@ methods: {
 </div>
 ```
 
-* 通过 props 传递了数据，但是子组件没有通过 props 声明
+> 通过 props 传递了数据，但是子组件没有通过 props 声明
+> 子组件没有显式接受的数据会被当做子组件根节点的 attribute 属性
 
 ```js
 // 父组件向子组件传递数据
@@ -90,9 +91,7 @@ props: {
 
 ![接受部分props](./img/组件通信/接收部分props.png)
 
-子组件没有显式接受的数据会被当做子组件根节点的 attribute 属性
-
-* 使用 $attrs 和 $listeners实现多层透传
+> 使用 `$attrs` 和 `$listeners` 实现多层透传(Vue2 语法)
 
 ```js
 // 父组件通过 props 传递数据，并且监听孙组件提交的事件
@@ -124,13 +123,74 @@ props: {
 
 ![属性&事件透传](./img/组件通信/属性&事件透传.png)
 
+> 仅使用 `$attrs` 来实现透传(Vue3 语法)
+
+1. 去掉了 `$listeners` API 属性和事件都会通过 `$attrs` 来传递
+2. 由于 Vue3 支持碎片(一个组件可以多个根元素)所以在子组件不仅一个根元素时，需要开发者手动控制 `$attrs` 数据的走向
+3. 通过 `defineProps` `defineEmits` 方式声明过的属性或变量不会再向下传递，因为已经在路径上被当前组件消费过了
+
+```js
+// 父组件中向子组件传值
+<homeAttrsSon :foo="foo" :bar="bar" @sun-click="handleSunClick"></homeAttrsSon>
+
+// 子组件中通过 `defineProps` 消费 bar 属性
+// 剩下的属性 foo 和 事件 onSunClick 继续向下传递
+<div class="home-son">
+  <span>子组件中消费了 bar: {{ props.bar }}</span>
+</div>
+{/* 使用 $attrs 将剩余值和事件继续传递 */}
+<homeAttrsSun v-bind="$attrs"></homeAttrsSun>
+// 子组件中消费 bar
+const props = defineProps<{
+  bar: string
+}>()
+
+
+// 孙组件最终消费 foo 属性 和 事件 onSunClick
+<div @click="$emit('sun-click')">
+  foo: {{ foo }}
+</div>
+// 消费属性 foo
+defineProps<{ foo: string }>()
+// 消费事件 onSunClick
+defineEmits<{
+  (e: 'sun-click'): void
+}>()
+```
+
+> 依赖注入 (Vue3 语法)
+
+1. 依赖注入更加方便跨组件传值
+2. 依赖注入不仅可以用来跨组件传值，还可以用来声明全局变量
+
+```js
+// 在 父组件中 provide
+// 数据
+const injectInfo: IInjectInfo = reactive({
+  name: "xujie",
+  height: 170,
+});
+// 数据对应的改变事件
+const updateInjectInfo: IUpdateInjectInfo = function (value = 1) {
+  injectInfo.height += value;
+};
+// 传递时，数据和更新数据的事件一起传过去
+provide(injectInfoKey, {
+  injectInfo,
+  updateInjectInfo,
+});
+
+// 在子组件中注入数据和更新数据的事件
+const { injectInfo, updateInjectInfo } = inject(injectInfoKey);
+```
+
 ### 双向数据绑定
 
 #### v-model
 
-* 双向绑定并没有违背单向数据流。v-model 本质上是一个语法糖，同时使用了两个指令
+- 双向绑定并没有违背单向数据流。v-model 本质上是一个语法糖，同时使用了两个指令
 
-1. :value="value"  
+1. :value="value"
 2. @input="value = $event"
 
 ```js
@@ -160,7 +220,7 @@ props: {
 #### .sync 修饰符
 
 ```js
-// 父组件使用 sync 修饰符 
+// 父组件使用 sync 修饰符
 <test-view-page :visible.sync="isShow"></test-view-page>
 // 父组件不使用 sync 修饰符
 <test-view-page :visible="isShow" @update:visible = "visible = $event"></test-view-page>
@@ -194,17 +254,17 @@ props: {
 
 ### 事件总线
 
-* 使用事件总线来实现跨组件之间的通信
+- 使用事件总线来实现跨组件之间的通信
 
 ```js
 // 在 Vue 原型上添加一个属性
-Vue.prototype.$bus = new Vue()
+Vue.prototype.$bus = new Vue();
 
 // 在提交事件的组件内提交事件
-this.$bus.$emit('itemImageLoad',index);
+this.$bus.$emit("itemImageLoad", index);
 
 // 在处理事件的组件内监听事件
-this.$bus.$on('itemImageLoad',(index) => {
+this.$bus.$on("itemImageLoad", (index) => {
   console.log(index);
 });
 ```
@@ -216,11 +276,11 @@ this.$bus.$on('itemImageLoad',(index) => {
 
 ### Vuex
 
-* 官方推荐在 Vue2 生态中需要使用的插件
+- 官方推荐在 Vue2 生态中需要使用的插件
 
 ## 扩展
 
-* 把父组件中的函数当做变量传递给子组件调用
+- 把父组件中的函数当做变量传递给子组件调用
 
 ```js
 // 父组件内通过 props 传值给子组件S
