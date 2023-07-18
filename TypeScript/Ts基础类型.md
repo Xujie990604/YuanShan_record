@@ -24,27 +24,48 @@ let someValue1: any = "this is a string";
 let strLength1: number = (someValue1 as string).length;
 ```
 
-## 非空类型断言
+## TS 中的符号
+
+### `?.` 可选链
 
 ```ts
-// message 是可选参数
-function print(message?: string) {
-  // 如果不加 ！ TS 代码是无法编译通过的，因为 message 可能为空
-  // 加上 ！ 相当于告诉 TS 编译器我保证 message 不会是空的，所以编译器才不报错
-  console.log(message!.length)
-  // 可以使用 可选链 的语法完善代码(ES6语法)
-  // 如果 message 有值的话执行这行代码，否则会停止表达式的执行
-   console.log(message?.length)
+// 可选链是为了避免冗余的前置检验
+// 不使用可选链
+if(user && user.info && user.info.name) {
+  console.log(user.info.name)
 }
 ```
 
-## 类型别名
+```ts
+// 使用可选链
+// TS 在尝试访问 user.info.name 之前会先检查 user 是否为 null 或者 undefined
+// TS 在尝试访问 user.info.name 之前会先检查 user.info 是否为 null 或者 undefined
+// 如果上一级的属性不存在，那么表达式的返回值为 undefined
+user?.info?.name
+```
+
+### `??` 空值合并运算符
 
 ```ts
-// 给这个类型添加一个别名，方便复用
-type ModeType = number | string
-let a: ModeType
-let b: ModeType
+// ?? 属于高级的 ||
+
+const user = { number: 10 }
+
+// 只有当 user.number 为 null 或者 undefined 的时候才会返回 '暂无数据'
+user.number ??  '暂无数据'    
+// 当 user.number 为 false 类型(undefined, null, false, 0, '')时就会返回 '暂无数据'
+// 所有的 false 类型都会返回 '暂无数据'，有时候会出现意料之外的行为
+user.number || '暂无数据'
+```
+
+### `!` 非空断言
+
+```ts
+let user: undefined | { number: 1 } = xxxx
+// ! 能够缩小 TS 的类型检查范围
+// 这会告诉编辑器 user 不会是 undefined 或者 null
+// 但是也仅仅是骗过了编辑器而已，如果 user 实际值为 undefined 则程序运行起来之后照样会报错
+console.log(user!.number)
 ```
 
 ## 基础类型
