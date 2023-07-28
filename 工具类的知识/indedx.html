@@ -14,128 +14,14 @@
 
 
 <body>
+  <canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;"></canvas>
   <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script>
-    // 创建五子棋盘
-    const board = []; // 存储棋盘状态
-    const ROWS = 15; // 棋盘行数
-    const COLS = 15; // 棋盘列数
-
-    function createBoard() {
-      for (let row = 0; row < ROWS; row++) {
-        board[row] = [];
-        for (let col = 0; col < COLS; col++) {
-          board[row][col] = 0; // 0表示空格
-        }
-      }
-    }
-
-    // 绘制棋盘
-    function drawBoard() {
-      const boardElement = document.getElementById('board');
-      boardElement.innerHTML = '';
-
-      for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-          const cell = document.createElement('div');
-          cell.className = 'cell';
-          cell.dataset.row = row;
-          cell.dataset.col = col;
-
-          if (board[row][col] === 1) {
-            cell.classList.add('black');
-          } else if (board[row][col] === 2) {
-            cell.classList.add('white');
-          }
-
-          cell.addEventListener('click', handleCellClick);
-          boardElement.appendChild(cell);
-        }
-      }
-    }
-
-    // 处理点击事件
-    function handleCellClick(event) {
-      const row = parseInt(event.target.dataset.row);
-      const col = parseInt(event.target.dataset.col);
-
-      if (board[row][col] !== 0) {
-        return; // 如果该位置已有棋子，则不执行操作
-      }
-
-      const currentPlayer = getNextPlayer();
-
-      board[row][col] = currentPlayer;
-      drawBoard();
-
-      if (checkWin(row, col, currentPlayer)) {
-        alert('游戏结束，玩家 ' + currentPlayer + ' 获胜！');
-        createBoard();
-        drawBoard();
-        return;
-      }
-    }
-
-    // 获取下一个玩家
-    function getNextPlayer() {
-      let blackCount = 0;
-      let whiteCount = 0;
-
-      for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-          if (board[row][col] === 1) {
-            blackCount++;
-          } else if (board[row][col] === 2) {
-            whiteCount++;
-          }
-        }
-      }
-
-      return blackCount > whiteCount ? 2 : 1;
-    }
-
-    // 判断是否获胜
-    function checkWin(row, col, player) {
-      const directions = [
-        [0, 1], [1, 0], [1, 1], [-1, 1] // 横、竖、斜上、斜下四个方向
-      ];
-
-      for (let i = 0; i < directions.length; i++) {
-        let count = 1; // 连续棋子计数
-
-        for (let j = 1; j < 5; j++) {
-          const newRow = row + directions[i][0] * j;
-          const newCol = col + directions[i][1] * j;
-
-          if (newRow < 0 || newRow >= ROWS || newCol < 0 || newCol >= COLS || board[newRow][newCol] !== player) {
-            break;
-          }
-
-          count++;
-        }
-
-        for (let j = 1; j < 5; j++) {
-          const newRow = row - directions[i][0] * j;
-          const newCol = col - directions[i][1] * j;
-
-          if (newRow < 0 || newRow >= ROWS || newCol < 0 || newCol >= COLS || board[newRow][newCol] !== player) {
-            break;
-          }
-
-          count++;
-        }
-
-        if (count >= 5) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    createBoard();
-    drawBoard();
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 0, 150, 75);
 
 
   </script>
