@@ -8,7 +8,7 @@
 
 ## AOP 切面编程
 
-* 一个请求会经过 controller service repository 三个地方，如果想要调用链路中加入一些通用的逻辑(日志记录，权限控制，异常处理)。直接加载 controller 中可以实现，但是不优雅，因为这些通用的逻辑会侵入业务层。
+* 一个请求会经过 controller service repository 三个地方，如果想要调用链路中加入一些通用的逻辑(日志记录，权限控制，异常处理)。直接加在 controller 中可以实现，但是不优雅，因为这些通用的逻辑会侵入业务层。
 * 在调用 controller 之前和之后加入通过的逻辑，这个横向的扩展点就叫切面，这种透明的加入一些切面逻辑的编程方式叫做 `AOP 面向切面编程`
 * Nest 中实现 AOP 的方式： middleware(中间件) Guard(守卫) Pipe(管道) Inteceptor(拦截器) ExceptionFilter(异常过滤)
 * `请求 -> 中间件 -> 守卫 -> (路由前)拦截器 -> 管道 -> 路由处理程序 -> (路由后)拦截器 -> 异常过滤(如果有异常) -> 响应`
@@ -117,7 +117,7 @@ const b3 = new B(mo)
 
 * TS 的语法，实际上就是将对被装饰主体进行操作(添加属性，方法...)使得被装饰主题能够很简单的拥有一类功能
 
-```ts
+```js
 // 自定义一个 GET 方法
 const Get = (url:string) => {
   return (target, key, descriptor) => {
