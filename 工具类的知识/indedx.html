@@ -18,26 +18,7 @@
   <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script>
-
-    initDate()
-
-    function testPromise() {
-      let a =  new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve()
-        }, 2000)
-      })
-
-      return a.then(() =>  {
-        code =  '这是 code 码'
-        return code
-      })
-    }
-
-    async function initDate() {
-      const sss =  await testPromise();
-      console.log(sss);
-    }
+    
 
   </script>
 </body>
