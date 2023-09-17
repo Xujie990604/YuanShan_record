@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:21
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\DOM\Dom的增删改查.md
- * @Description: 借用 DOM API 来动态的修改 DOM
--->
 # DOM的结构进行修改
 
 ## 动态创建标记

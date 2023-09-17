@@ -6,16 +6,17 @@
 * ECMAScript 定义的只是这门语言的基础(规定了语言的语法，类型，语句，关键字，保留字，操作符，对象)，在此基础上可以构建更加完善的脚本语言。
 * WEB 浏览器只是 ECMAScript 实现的宿主环境之一，宿主环境提供基本的 ECMAScript 的实现，同时也会提供扩展，例如 DOM，BOM。其他的宿主环境还有(node)
 
-## JavaScript语言的特点
+## JavaScript 语言的特点
 
 1. 解释语言
 2. 单线程
 3. ECMA标准 JS 原生也称为 ECMAScript。三大核心：ECMAScript + DOM + BOM（后两个由浏览器提供）
 
-### js是弱处理性语言
+### js是弱类型语言
 
 1. case 里的数据类型完全可以不一样（和其他强类型语言不一样）
-2. 数组内的数据类型可以是完全不同的数据类型 var arr = [1, 2, "abd", undefined]
+2. JS 中的变量可以随意进行赋值
+3. 数组内的数据类型可以是完全不同的数据类型 var arr = [1, 2, "abd", undefined]
 
 ### 函数一等公民
 

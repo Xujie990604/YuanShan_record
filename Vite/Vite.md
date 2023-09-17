@@ -4,7 +4,7 @@
 * 打包阶段: 构建指令服务器
 * Vite 是依赖于 Node 的
 
-## Vite的服务器
+## Vite 的服务器
 
 * Vite 搭建本地服务器使用的是 Connect
 

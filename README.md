@@ -1,13 +1,11 @@
 # 介绍
 
-- 一个前端程序员的成长笔记
-
 ## HTML + CSS
 
 - 菜鸟教程
 - MDN
-- B 站- 渡一教育- HTML + CSS 入门宝典
-- 渡一教育- HTML5 + CSS3 教程
+- B 站 - 渡一教育 - HTML + CSS 入门宝典
+- 渡一教育 - HTML5 + CSS3 教程
 - 《精通 CSS》
 
 ## JavaScript
@@ -23,19 +21,19 @@
 
 ## 计算机网络
 
-- B 站- 计算机网络微课堂- 湖科大教书匠
+- B 站 - 计算机网络微课堂 - 湖科大教书匠
 - 《图解 HTTP》
 
 ## Node.js
 
-- B 站- 黑马程序员 - Node.js 基础入门
+- B 站 - 黑马程序员 - Node.js 基础入门
 - node - codeWhy - node
 - 《深入浅出 Node.js》
 
 ## Vue 框架
 
 - Vue.js(2 & 3) 官方文档
-- 腾讯课堂- 米修在线 - 还原饿了么订餐 app 1 2 3 4
+- 腾讯课堂 - 米修在线 - 还原饿了么订餐 app 1 2 3 4
 - B 站 - codeWhy - 2019 Vue.js 全套教程
 - 《深入浅出 Vue.js》
 - codeWhy - Vue3 + TS 项目实战

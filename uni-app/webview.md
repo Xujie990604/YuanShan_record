@@ -1,7 +1,8 @@
 # Webview 的介绍
 
-* uni-app 自带 JS 引擎(在 Web 平台，逻辑层和渲染层都运行在统一的 WebView 中，但是在小程序和 APP 端，渲染层和逻辑层被分开了)(所以使用 uni-app 编写的 APP 代码只需要注意 CSS 属性的兼容性)(因为这个导致 uni-app 编写的代码在小程序和 APP 中运行时不能调用 document window 等对象)
-* 小程序由于自带一个很大的 WebView, 所以小程序端不存在浏览器兼容问题。
+* uni-app 自带 JS 引擎(在 Web 平台，逻辑层和渲染层都运行在统一的 WebView 中，但是在小程序和 APP 端，渲染层和逻辑层被分开了(为了更好的性能))(因为这个导致 uni-app 编写的代码在小程序和 APP 中运行时不能调用 document window 等对象)(APP 端可以引入 renderJS 来实现对 DOM Window 对象的操作)
+* 小程序 端由于自带一个很大的 WebView, 所以小程序端不存在 CSS 的浏览器兼容问题。
+* APP 端的页面使用手机自带的 WebView 进行渲染，所以需要额外注意 APP 端的 CSS 属性浏览器兼容问题。
 * APP 端的 nvue 页面不存在浏览器的兼容问题，它自带一个统一的原生渲染引擎，不依赖 WebView
 
 * Webview 是一个基于 (webkit 内核) 的 组件，可以解析 DOM 元素，进行 HTML 页面的展示。它和浏览器展示页面的原理是相同的。

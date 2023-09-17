@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:21
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\DOM\DOM api 操作样式.md
- * @Description: 哪些 DOM 的 API 可以用来修改页面的样式
--->
 # CSS-DOM
 
 ## 浏览器里面的网页其实是由以下三层信息构成的一个共同体

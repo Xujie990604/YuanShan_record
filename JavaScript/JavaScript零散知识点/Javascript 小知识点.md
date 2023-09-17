@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-10 08:51:48
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\JavaScript零散知识点\Javascript 小知识点.md
- * @Description: JS涉及到的一些零散知识点
--->
 # javascript零散知识点
 
 * Number.toFixed(number) 四舍五入的截取number位小数
