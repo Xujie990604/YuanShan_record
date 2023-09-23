@@ -43,7 +43,7 @@ delete from 指定表名称 where 列名='值' ;
 
 ```sql
 -- 得到的数据先按照status降序排序，在按照username升序排序
-select * from user order by status DESC, username asc;
+select * from user order by status DESC, username ASC;
 ```
 
 ### 聚合函数: 将数据表中的数据看成一组进行操作
