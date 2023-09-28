@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-radio>.mui-table-view-cell.mui-selected .mui-navigate-right:after {
+				content: '\e442';
+			}
+			
+			.mui-table-view-radio>.mui-table-view-cell .mui-navigate-right:after {
+				font-weight: 200;
+			}
+			
+			.mode-style {
+				font-size: 16px;
+				color: #333;
+			}
+			
+			.mode-detail-style {
+				font-size: 14px;
+				color: rgba(51, 51, 51, 0.4);
+			}
+			
+			.mui-table-view-radio>.mui-table-view-cell {
+				height: 100%;
+			}
+			
+			.mui-table-view-radio>.mui-table-view-cell .mui-navigate-right:after {
+				content: '\e411';
+			}
+
+      .select-model:not(.select-model:last-child) .mui-table-view-cell:last-child::after {
+        height: 1px;
+      }
+
+      .select-model:last-child .mui-table-view-cell:last-child::after {
+        height: 0;
+      }
+			
+			#customModeList .mui-table-view-cell .mui-navigate-right:after {
+				font-family: "iconfont"!important;
+				right: 15px!important;
+				content: '\e610'!important;
+				color: #c5c5c5!important;
+				font-size: 12px;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_linkageMode">&nbsp;</h1>
+			<a id="save" class="mui-icon iconfont icon-save mui-pull-right mui-hidden"></a>
+		</header>
+		<div class="mui-content">
+			<div id="EZView-content">
+				<ul id="LightModeList" class="mui-table-view mui-table-view-radio">
+					<li id="dayNightMode" class="mui-table-view-cell mui-hidden" data-mode="1">
+						<div class="mode-style mui-navigate-right" data-text="WEB_DayNight">
+							&nbsp;
+						</div>
+					</li>
+					<div id="dayNightModeList" class="mui-hidden select-model">
+						<li id="dayMode" class="mui-table-view-cell">
+							<span data-text="WEB_dayTime" class="mainStyle padding-left-15">&nbsp;</span>
+							<div id="dayModeSwitch" class="mui-switch mui-switch-mini">
+								<div class="mui-switch-handle" id="dayModeSwitchCircle"></div>
+							</div>
+						</li>
+						<li id="nightMode" class="mui-table-view-cell">
+							<span data-text="WEB_nightTime" class="mainStyle padding-left-15">&nbsp;</span>
+							<div id="nightModeSwitch" class="mui-switch mui-switch-mini">
+								<div class="mui-switch-handle" id="nightModeSwitchCircle"></div>
+							</div>
+						</li>
+					</div>
+					<li id="custmoMode" class="mui-table-view-cell" data-mode="0">
+						<div class="mode-style mui-navigate-right" data-text="WEB_CustomMode">
+							&nbsp;
+						</div>
+					</li>
+					<div id="customModeList" class="mui-hidden select-model">
+						<li id="customTypeStarTimeItem0" data-type="0" class="mui-table-view-cell StarTimeItem">
+							<a id="customTypeStarTimeArea0" class="mui-navigate-right">
+								<span id="customTypeTimeStepVal0" class="mui-badge">00:00:00-00:00:00</span>
+								<span data-text="WEB_Period1" class="padding-left-15">&nbsp;</span>
+							</a>
+						</li>
+						<li id="customTypeStarTimeItem1" data-type="1" class="mui-table-view-cell StarTimeItem">
+							<a id="customTypeStarTimeArea1" class="mui-navigate-right">
+								<span id="customTypeTimeStepVal1" class="mui-badge">00:00:00-00:00:00</span>
+								<span data-text="WEB_Period2" class="padding-left-15">&nbsp;</span>
+							</a>
+						</li>
+						<li id="customTypeStarTimeItem2" data-type="2" class="mui-table-view-cell StarTimeItem">
+							<a id="customTypeStarTimeArea2" class="mui-navigate-right">
+								<span id="customTypeTimeStepVal2" class="mui-badge">00:00:00-00:00:00</span>
+								<span data-text="WEB_Period3" class="padding-left-15">&nbsp;</span>
+							</a>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/JavaScriptEZAPP.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js "></script>
+    <script id="langScript"></script>
+		<script>
+			var langTip;
+			var self;
+			var AlarmLAPI;
+			checkType(localStorage.AppType); //加载特定样式
+			var CheckTimeServiceData = {}; //获取报警联动计划信息
+			var AlarmAudioList; //报警音选择列表
+			var AudioChecked = 0; //灯光告警是否选中
+			var AudioCheckedID = 0; //灯光告警选中ID
+			var AudioCustomCheckedarr = []; //报警音选择列表名称
+			var AudioDayNightCheckedarr = []; //日夜模式报警音选择列表名称	
+			var AudioFile; //报警音接口
+			var date = { //初始化起止时间
+				startHour: 0,
+				startMin: 0,
+				startSec: 0,
+				endHour: 0,
+				endMin: 0,
+				endSec: 0
+			};
+			var AudioStartArr = [],
+				AudioEndArr = [];
+			var LightStartArr = [],
+				LightEndArr = [];
+			var StarTimeItem = document.querySelectorAll(".StarTimeItem");
+			var AudioTimeSectionInfo = {
+				Enabled: 1,
+				Begin: "00:00:00",
+				End: "00:00:00",
+				AudioActParamInfo: {
+					AudioFileID: 0,
+					WarnCount: 3,
+					AudioVolume: 255
+				}
+			};
+			var LightTimeSectionInfo = {
+				Enabled: 1,
+				Begin: "00:00:00",
+				End: "00:00:00"
+			};
+			var Day = {
+				ID: -1,
+				Num: 0,
+				TimeSectionInfos: []
+			};
+			var configData = {
+				Num: 2,
+				Actions: [{
+					Enabled: 1,
+					ActID: 28,
+					ActParam: {
+						TimeMode: 0,
+						AudioCustomInfo: {
+							Num: 7,
+							Days: []
+						},
+						AudioDayNightInfo: {
+							Num: 7,
+							Days: []
+						}
+					}
+				}, {
+					Enabled: 1,
+					ActID: 29,
+					ActParam: {
+						TimeMode: 1,
+						LightCustomInfo: {
+							LightActParamInfo: {
+								Interval: 10,
+								Luminance: 50
+							},
+							LightWeekPlanInfo: {
+								Num: 7,
+								Days: []
+							}
+						},
+						LightDayNightInfo: {
+							LightActParamInfo: {
+								Interval: 10,
+								Luminance: 50
+							},
+							LightDayNightPlanInfo: {
+								Num: 7,
+								Days: []
+							}
+						}
+					}
+				}]
+			};
+
+			var audioDayNight = {
+				AudioDayInfo: {
+					AudioActParamInfo: {
+						AudioFileID: 0,
+						WarnCount: 3,
+						AudioVolume: 255
+					},
+					Enabled: 0
+				},
+				AudioNightInfo: {
+					AudioActParamInfo: {
+						AudioFileID: 0,
+						WarnCount: 3,
+						AudioVolume: 255
+					},
+					Enabled: 0
+				},
+				ID: -1
+			};
+
+			var lightDayNight = {
+				LightDayInfo: {
+					Enabled: 0
+				},
+				LightNightInfo: {
+					Enabled: 0
+				},
+				ID: -1
+			};
+			var saveData;
+			var devOrgData;
+			var devAudioInfo;
+			var devLightInfo;
+			var backCheckData; //返回校验数据
+			var saveOrg;
+			var SupportLinkageDayNightMode = 0; //支持日夜模式
+			var ActID;
+			var setDayAlarmConfirm = true; //声音开关状态变化时是否调接口提交
+			var setNightAlarmConfirm = true; //灯光开关状态变化时是否调接口提交
+			checkType(localStorage.AppType); //加载特定样式
+			var curIndex = 0;
+			var audioCurNode;
+			var sendMode;
+			var supportAudioAlarm;
+			var supportLightAlarm;
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			dsBridgeFuncSyn.dismiss();
+			setTimeout(function() {
+				initPage();
+				initEvent();
+			}, 500);
+
+			function initPage() {
+				var Url = "web/newPages/settings_DeepAlarmRe.html";
+				var self = dsBridgeFuncSyn.getWebParam(Url);
+				self = JSON.parse(self);
+				SupportLinkageDayNightMode = self.SupportLinkageDayNightMode;
+				saveData = self.saveData;
+				devOrgData = self.devOrgData;
+				configData = self.configData;
+				ActID = self.ActID;
+				AlarmLAPI = self.AlarmLAPI;
+				supportAudioAlarm = self.supportAudioAlarm;
+				supportLightAlarm = self.supportLightAlarm;
+				if(SupportLinkageDayNightMode == 1) {
+					var initAudioDayNight;
+					var initAudioCustom;
+					if(ActID == 0) {
+						initAudioDayNight = configData.Actions[0].ActParam.AudioDayNightInfo.Days[0].AudioDayInfo.Enabled;
+						initAudioCustom = configData.Actions[0].ActParam.AudioDayNightInfo.Days[0].AudioNightInfo.Enabled;
+					} else {
+						initAudioDayNight = configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[0].LightDayInfo.Enabled;
+						initAudioCustom = configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[0].LightNightInfo.Enabled;
+					}
+
+					$("#dayNightMode").removeClass("mui-hidden");
+					document.getElementById("dayModeSwitch").style.zIndex = 20;
+					document.getElementById("dayModeSwitch").style.visibility = "visible";
+					setDayAlarmConfirm = false;
+					setSwitchStatus("dayModeSwitch", initAudioDayNight);
+					setDayAlarmConfirm = true;
+					var dayModeSwitch = document.getElementById("dayModeSwitch").classList.contains("mui-active");
+					if(dayModeSwitch) {
+						document.getElementById("dayModeSwitchCircle").style.transform = 'translate(16px, 0px)';
+					}
+					document.getElementById("nightModeSwitch").style.zIndex = 20;
+					document.getElementById("nightModeSwitch").style.visibility = "visible";
+					setNightAlarmConfirm = false;
+					setSwitchStatus("nightModeSwitch", initAudioCustom);
+					setNightAlarmConfirm = true;
+					var nightModeSwitch = document.getElementById("nightModeSwitch").classList.contains("mui-active");
+					if(nightModeSwitch) {
+						document.getElementById("nightModeSwitchCircle").style.transform = 'translate(16px, 0px)';
+					}
+				}
+				//0是自定义模式
+				setMode(configData.Actions[ActID].ActParam.TimeMode);
+				initData();
+			}
+
+			function initData() {
+				initPageTime();
+			}
+
+			/*
+			 * 白天开关
+			 */
+			document.getElementById("dayModeSwitch").addEventListener("toggle", function(event) {
+				if(event.detail.isActive && setDayAlarmConfirm) {
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					if(ActID == 0) {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[0].ActParam.AudioDayNightInfo.Days[i].AudioDayInfo.Enabled = 1;
+						}
+					} else {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[i].LightDayInfo.Enabled = 1;
+						}
+					}
+
+					var sendDataON = getDevSendData();
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(AlarmLAPI, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							updateData();
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							configData = JSON.parse(JSON.stringify(saveOrg));
+							setDayAlarmConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#dayModeSwitch").switch().toggle();
+							}, 200);
+						}
+					}, sendDataON);
+				} else if(!event.detail.isActive && setDayAlarmConfirm) {
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					if(ActID == 0) {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[0].ActParam.AudioDayNightInfo.Days[i].AudioDayInfo.Enabled = 0;
+						}
+					} else {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[i].LightDayInfo.Enabled = 0;
+						}
+					}
+					var sendDataOFF = getDevSendData();
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(AlarmLAPI, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							updateData();
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							configData = JSON.parse(JSON.stringify(saveOrg));
+							setDayAlarmConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#dayModeSwitch").switch().toggle();
+							}, 300);
+						}
+					}, sendDataOFF);
+				} else {
+					setDayAlarmConfirm = true;
+				};
+			});
+
+			/*
+			 * 监听声音检测开关
+			 */
+			document.getElementById("nightModeSwitch").addEventListener("toggle", function(event) {
+				if(event.detail.isActive && setNightAlarmConfirm) {
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					if(ActID == 0) {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[0].ActParam.AudioDayNightInfo.Days[i].AudioNightInfo.Enabled = 1;
+						}
+					} else {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[i].LightNightInfo.Enabled = 1;
+						}
+					}
+
+					var sendDataON = getDevSendData();
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(AlarmLAPI, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							updateData();
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							configData = JSON.parse(JSON.stringify(saveOrg));
+							setNightAlarmConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#nightModeSwitch").switch().toggle();
+							}, 200);
+						}
+					}, sendDataON);
+				} else if(!event.detail.isActive && setNightAlarmConfirm) {
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					if(ActID == 0) {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[0].ActParam.AudioDayNightInfo.Days[i].AudioNightInfo.Enabled = 0;
+						}
+					} else {
+						for(var i = 0; i < configData.Actions[0].ActParam.AudioDayNightInfo.Num; i++) {
+							configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo.Days[i].LightNightInfo.Enabled = 0;
+						}
+					}
+					var sendDataOFF = getDevSendData();
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(AlarmLAPI, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							updateData();
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							configData = JSON.parse(JSON.stringify(saveOrg));
+							setNightAlarmConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#nightModeSwitch").switch().toggle();
+							}, 300);
+						}
+					}, sendDataOFF);
+				} else {
+					setNightAlarmConfirm = true;
+				};
+			});
+
+			function initEvent() {
+				var list = document.querySelector('.mui-table-view.mui-table-view-radio');
+				list.addEventListener('selected', function(e) {
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					configData.Actions[ActID].ActParam.TimeMode = Number(e.detail.el.getAttribute("data-mode"));
+					sendMode = configData.Actions[ActID].ActParam.TimeMode;
+					dsBridgeFuncSyn.showLoading();
+					if(localStorage.deviceType == "0") {
+						save();
+					} else {
+						savachl();
+					}
+				});
+				StarTimeItem.forEach(function(v) { // 获取检测时间弹框及配置检测时间
+					v.addEventListener('tap', function(event) {
+						var type = this.getAttribute("data-type");
+						getTimeFrame(StarTimeItem, Number(type));
+					})
+				});
+			}
+
+			function initPageTime() {
+				var audiotime = configData.Actions[0].ActParam.AudioCustomInfo.Days[0].TimeSectionInfos;
+				var lighttime = configData.Actions[1].ActParam.LightCustomInfo.LightWeekPlanInfo.Days[0].TimeSectionInfos;
+				var actTime;
+				if(ActID == 0) {
+					actTime = audiotime;
+				} else {
+					actTime = lighttime;
+				}
+				setTimeInNode(actTime, ActID);
+			};
+
+			function setTimeInNode(data, type) {
+				var nodeName;
+				var startArr;
+				var endArr;
+				if(type == 0) {
+					nodeName = "customTypeTimeStepVal";
+					startArr = AudioStartArr;
+					endArr = AudioEndArr;
+				} else {
+					nodeName = "customTypeTimeStepVal";
+					startArr = LightStartArr;
+					endArr = LightEndArr;
+				}
+				for(var i = 0; i < 3; i++) {
+					var el = document.getElementById(nodeName + i);
+					el.innerText = data[i].Begin + "-" + data[i].End;
+					startArr[i] = data[i].Begin;
+					endArr[i] = data[i].End;
+
+				}
+			}
+
+			/**
+			 * 报警音列表初始化
+			 */
+			function initAlarmAudio() {
+				SendAjax(AudioFile, 'get', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						updateData();
+						if(SupportLinkageDayNightMode) {
+							$("#alarmType0").removeClass("mui-hidden");
+							$("#alarmType1").removeClass("mui-hidden");
+						}
+						$("#deepAlarmTip").removeClass("mui-hidden");
+						$("#save").removeClass("mui-hidden");
+						initSaveData();
+						initPlanCheckSwitch(); //初始化联动计划
+						mui('.mui-scroll-wrapper').scroll();
+						AlarmAudioList = data.FileInfoList;
+						AudioChecked = AlarmAudioList[0].FileName;
+						if(SupportLinkageDayNightMode) {
+							for(var i = 0; i < 2; i++) {
+								if(i == 0) {
+									var nameID = devAudioInfo.AudioDayNightInfo.Days[0].AudioDayInfo.AudioActParamInfo.AudioFileID;
+									for(var j = 0; j < AlarmAudioList.length; j++) {
+										if(AlarmAudioList[j].ID == nameID) {
+											AudioDayNightCheckedarr[0] = AlarmAudioList[j].FileName;
+										}
+									}
+								} else {
+									var nameID = devAudioInfo.AudioDayNightInfo.Days[0].AudioNightInfo.AudioActParamInfo.AudioFileID;
+									for(var j = 0; j < AlarmAudioList.length; j++) {
+										if(AlarmAudioList[j].ID == nameID) {
+											AudioDayNightCheckedarr[1] = AlarmAudioList[j].FileName;
+										}
+									}
+								}
+								document.getElementById('DayNightselectAudioStepVal' + i).innerText = AudioDayNightCheckedarr[i];
+							}
+						}
+						for(var i = 0; i < 3; i++) {
+							for(var j = 0; j < AlarmAudioList.length; j++) {
+								if(devAudioInfo.AudioCustomInfo.Num > 0 && devAudioInfo.AudioCustomInfo.Days[0].Num > 0 && devAudioInfo.AudioCustomInfo.Days[0].TimeSectionInfos[i]) {
+									var nameID = devAudioInfo.AudioCustomInfo.Days[0].TimeSectionInfos[i].AudioActParamInfo.AudioFileID;
+									if(AlarmAudioList[j].ID == nameID) {
+										AudioCustomCheckedarr[i] = AlarmAudioList[j].FileName;
+									}
+								} else {
+									AudioCustomCheckedarr[i] = AlarmAudioList[0].FileName;
+								}
+							}
+							document.getElementById('customTypeselectAudioStepVal' + i).innerText = AudioCustomCheckedarr[i];
+						}
+						getAudioAlarmList(AlarmAudioList);
+						mui('#selectAudioList a').each(function(index, El) {
+							if(El.innerText.trim() == AudioChecked) {
+								El.parentNode.classList.add('mui-selected');
+							}
+						});
+						initEvent();
+						backCheckData = JSON.parse(JSON.stringify(configData));
+					} else {
+						$("#EZView-content").addClass("mui-hidden");
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						dsBridgeFuncSyn.dismiss();
+					}
+				})
+			}
+
+			/**
+			 * 报警音选择弹框
+			 * @param {Object} event
+			 * @param {Object} type
+			 */
+			function getSelectedAlarm(event, type) {
+
+				mui('#selectAudio').popover('toggle');
+				mui('#selectAudioList a').each(function(index, El) {
+					El.parentNode.classList.remove('mui-selected');
+					if(El.innerText.trim() == AudioCheckedarr[i]) {
+						El.parentNode.classList.add('mui-selected');
+					}
+				});
+
+			}
+
+			/*
+			 * 获取告警音列表
+			 */
+			function getAudioAlarmList(data) { // 报警音列表在页面中显示
+				var selectAudioListItem = document.getElementById('selectAudioListItem');
+				if(data.length <= 5) {
+					selectAudioListItem.style.height = 50 * data.length + "px";
+				} else {
+					selectAudioListItem.style.height = 50 * 5 + "px";
+				}
+				var selectAudioList = document.getElementById('selectAudioList');
+				for(var i = 0; i < data.length; i++) {
+					var item = document.createElement('li');
+					item.className = 'mui-table-view-cell installType';
+					item.innerHTML = '<a class="mui-navigate-right" data-id=' + data[i].ID + ' data-value=' + i + '>&nbsp;' + data[i].FileName + '</a>';
+					selectAudioList.appendChild(item);
+				}
+			}
+
+			/**
+			 * 灯光报警显示开启或关闭
+			 * @param {Object} value
+			 * @param {Object} i
+			 */
+			function getLightAlarm(type, value, i) {
+				setSwitchStatus(type + "LightAlarmSwitch" + i, value);
+				if(document.getElementById(type + "LightAlarmSwitch" + i).classList.contains("mui-active")) {
+					document.getElementById(type + "LightAlarmCircle" + i).style.transform = 'translate(16px, 0px)';
+				}
+				document.getElementById(type + "LightAlarmSwitch" + i).style.zIndex = 20;
+				document.getElementById(type + "LightAlarmSwitch" + i).style.visibility = "visible";
+
+			}
+
+			/**
+			 * 声音报警显示开启或关闭
+			 * @param {Object} value
+			 * @param {Object} i
+			 */
+			function getAudioAlarm(type, value, i) {
+				setSwitchStatus(type + "AudioAlarmSwitch" + i, value);
+				if(document.getElementById(type + "AudioAlarmSwitch" + i).classList.contains("mui-active")) {
+					document.getElementById(type + "AudioAlarmCircle" + i).style.transform = 'translate(16px, 0px)';
+					//					document.getElementById().
+					$("#" + type + "selectAudioItem" + i).removeClass("mui-hidden");
+				}
+				document.getElementById(type + "AudioAlarmSwitch" + i).style.zIndex = 20;
+				document.getElementById(type + "AudioAlarmSwitch" + i).style.visibility = "visible";
+			}
+
+			function add0(num) {
+				var str = "";
+				if(num < 10) {
+					str = str + "0" + num;
+				} else {
+					str = str + num;
+				}
+				return str;
+			}
+
+			/**
+			 * 检测时间
+			 * @param {Object} type
+			 */
+			function getTimeFrame(starTimeItem, type) {
+				var typeName = "customType";
+				starTimeItem.forEach(function(v) { // 获取起止时间
+					if(type == v.getAttribute("data-type")) {
+						var startType = v.children[typeName + "StarTimeArea" + type].children[typeName + "TimeStepVal" + type].innerText.split("-")[0];
+						var endType = v.children[typeName + "StarTimeArea" + type].children[typeName + "TimeStepVal" + type].innerText.split("-")[1];
+						date = transterTime(startType, endType);
+					}
+				});
+				if(date.startHour == "24" && date.startMin == "00" && date.startSec == "00" && //开始时间和结束时间为24:00:00时，改为00:00:00
+					date.endHour == "24" && date.endMin == "00" && date.endSec == "00") {
+					date = {
+						startHour: 0,
+						startMin: 0,
+						startSec: 0,
+						endHour: 0,
+						endMin: 0,
+						endSec: 0
+					}
+				}
+				dsBridgeFuncAsyn.showDate('hdate', JSON.stringify(date), function(result) {
+					var result = JSON.parse(result);
+					if(result.statusCode == "1") return;
+					var resultObj = JSON.parse(result.param);
+					var begin = add0(resultObj.startHour) + ":" + add0(resultObj.startMin) + ":" + add0(resultObj.startSec);
+					var end = add0(resultObj.endHour) + ":" + add0(resultObj.endMin) + ":" + add0(resultObj.endSec);
+					if(begin == end) {
+						showToast(langTip["WEB_dialog_time_edit"]);
+						return;
+					}
+					var isExit = jugdgeTime(begin, end, type, typeName); //判断时间是否重叠 false没有重叠，可以设置时间，true无法设置时间
+					if(isExit) {
+						showToast(langTip["WEB_time_tip"]);
+						return;
+					}
+
+					saveOrg = JSON.parse(JSON.stringify(configData));
+					var AudioInfo = configData.Actions[0].ActParam.AudioCustomInfo;
+					var LightInfo = configData.Actions[1].ActParam.LightCustomInfo;
+					for(var z = 0; z < 7; z++) {
+						if(ActID == 0) {
+							AudioInfo.Days[z].TimeSectionInfos[type].Begin = begin;
+							AudioInfo.Days[z].TimeSectionInfos[type].End = end;
+						} else {
+							LightInfo.LightWeekPlanInfo.Days[z].TimeSectionInfos[type].Begin = begin;
+							LightInfo.LightWeekPlanInfo.Days[z].TimeSectionInfos[type].End = end;
+						}
+					}
+
+					var sendData = getDevSendData();
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(AlarmLAPI, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							updateData();
+							showToast(langTip["WEB_api_error_succeeded"]);
+							starTimeItem.forEach(function(v) {
+								if(type == v.getAttribute("data-type")) {
+									v.children[typeName + "StarTimeArea" + type].children[typeName + "TimeStepVal" + type].innerText = begin + "-" + end;
+									if(ActID == 0) {
+										AudioStartArr[type] = begin;
+										AudioEndArr[type] = end;
+									} else {
+										LightStartArr[type] = begin;
+										LightEndArr[type] = end;
+									}
+								}
+							});
+						} else {
+							configData = JSON.parse(JSON.stringify(saveOrg));
+							setDayAlarmConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#dayModeSwitch").switch().toggle();
+							}, 200);
+						}
+					}, sendData);
+				}, function(result) {;
+				});
+			}
+
+			/**
+			 * 时间赋值
+			 * @param {Object} startTime
+			 * @param {Object} endTime
+			 */
+			function transterTime(startTime, endTime) {
+				var start = startTime.split(":").map(function(v) {
+					return Number(v)
+				})
+				var end = endTime.split(":").map(function(v) {
+					return Number(v)
+				})
+				date = {
+					startHour: start[0],
+					startMin: start[1],
+					startSec: start[2],
+					endHour: end[0],
+					endMin: end[1],
+					endSec: end[2]
+				}
+				return date
+			}
+
+			/**
+			 * 检测时间区段判断
+			 * @param {Object} begin
+			 * @param {Object} end
+			 * @param {Object} type
+			 */
+			function jugdgeTime(begin, end, type, typeName) {
+				var s;
+				var e
+				if(ActID == 0) {
+					s = deepCopy(AudioStartArr);
+					e = deepCopy(AudioEndArr);
+				} else {
+					s = deepCopy(LightStartArr);
+					e = deepCopy(LightEndArr);
+				}
+				for(var i = 0; i < 3; i++) {
+					if(type == i) {
+						s[i] = begin;
+						e[i] = end;
+					}
+				}
+				var checkTime = [];
+				for(var i = 0; i < s.length; i++) {
+					checkTime.push({
+						begin: s[i],
+						end: e[i]
+					})
+				}
+				var isSame = false;
+				var campareList = [];
+				for(var j = 0; j < checkTime.length; j++) {
+					var beginStramp = new Date('2020/01/01 ' + checkTime[j].begin).getTime();
+					var endStramp = new Date('2020/01/01 ' + checkTime[j].end).getTime();
+					for(var i = 0; i < campareList.length; i++) {
+						var timeTam = new Date('2020/01/01 00:00:00').getTime();
+						if(beginStramp == timeTam && endStramp == timeTam) {
+							break;
+						}
+						if((campareList[i].beginStramp <= beginStramp && beginStramp < campareList[i].endStramp) ||
+							(campareList[i].beginStramp < endStramp && endStramp < campareList[i].endStramp) ||
+							(beginStramp <= campareList[i].beginStramp && campareList[i].beginStramp < endStramp) ||
+							(beginStramp < campareList[i].endStramp && campareList[i].endStramp < endStramp)) {
+							isSame = true;
+							return true;
+							break;
+						}
+					}
+					if(isSame) {
+						break;
+					}
+					campareList.push({
+						beginStramp: beginStramp,
+						endStramp: endStramp
+					});
+				}
+			}
+
+			/**
+			 * 自定义灯光告警按钮
+			 * @param {Object} event
+			 * @param {Object} type
+			 */
+			function LightSwitch(event, type) {
+				var LightInfo = configData.Actions[1].ActParam.LightCustomInfo;
+				if(event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						LightInfo.LightWeekPlanInfo.Days[z].TimeSectionInfos[type].Enabled = 1;
+					}
+				} else if(!event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						LightInfo.LightWeekPlanInfo.Days[z].TimeSectionInfos[type].Enabled = 0;
+					}
+				}
+			}
+			/**
+			 * 日夜灯光告警按钮
+			 * @param {Object} event
+			 * @param {Object} type
+			 */
+			function DayNigitLightSwitch(event, type) {
+				var LightInfo = configData.Actions[1].ActParam.LightDayNightInfo.LightDayNightPlanInfo;
+				var actInfo;
+				if(event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						if(type == 0) {
+							actInfo = LightInfo.Days[z].LightDayInfo;
+						} else {
+							actInfo = LightInfo.Days[z].LightNightInfo;
+						}
+						actInfo.Enabled = 1;
+					}
+				} else if(!event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						if(type == 0) {
+							actInfo = LightInfo.Days[z].LightDayInfo;
+						} else {
+							actInfo = LightInfo.Days[z].LightNightInfo;
+						}
+						actInfo.Enabled = 0;
+					}
+				}
+			}
+
+			/**
+			 * 自定义声音告警按钮
+			 * @param {Object} event
+			 * @param {Object} type
+			 */
+			function AudioSwitch(event, type) {
+				var AudioInfo = configData.Actions[0].ActParam.AudioCustomInfo;
+				if(event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						AudioInfo.Days[z].TimeSectionInfos[type].Enabled = 1;
+					}
+					document.getElementById("customTypeselectAudioItem" + type).classList.remove("mui-hidden");
+				} else if(!event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						AudioInfo.Days[z].TimeSectionInfos[type].Enabled = 0;
+					}
+					document.getElementById("customTypeselectAudioItem" + type).classList.add("mui-hidden");
+				}
+			}
+
+			/**
+			 * 日夜声音告警按钮
+			 * @param {Object} event
+			 * @param {Object} type
+			 */
+			function DayNightAudioSwitch(event, type) {
+				var AudioInfo = configData.Actions[0].ActParam.AudioDayNightInfo;
+				var actInfo;
+				if(event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						if(type == 0) {
+							actInfo = AudioInfo.Days[z].AudioDayInfo;
+						} else {
+							actInfo = AudioInfo.Days[z].AudioNightInfo;
+						}
+						actInfo.Enabled = 1;
+					}
+					document.getElementById("DayNightselectAudioItem" + type).classList.remove("mui-hidden");
+				} else if(!event.detail.isActive) {
+					for(var z = 0; z < 7; z++) {
+						if(type == 0) {
+							actInfo = AudioInfo.Days[z].AudioDayInfo;
+						} else {
+							actInfo = AudioInfo.Days[z].AudioNightInfo;
+						}
+						actInfo.Enabled = 0;
+					}
+					document.getElementById("DayNightselectAudioItem" + type).classList.add("mui-hidden");
+				}
+			}
+
+			/*
+			 * 通道保存报警联动计划
+			 */
+			function savachl() {
+				dsBridgeFuncSyn.showLoading();
+				var sendData = getNVRChannelsendData();
+				SendAjax(AlarmLAPI, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						updateData();
+						if(sendMode == 0) {
+							$("#customModeList").removeClass("mui-hidden");
+							$("#dayNightModeList").addClass("mui-hidden");
+						} else {
+							$("#dayNightModeList").removeClass("mui-hidden");
+							$("#customModeList").addClass("mui-hidden");
+						}
+						showToast(langTip["WEB_api_error_succeeded"], code);
+					} else {
+						configData = JSON.parse(JSON.stringify(saveOrg));
+						//1是自定义模式
+						setMode(configData.Actions[ActID].ActParam.TimeMode);
+
+						showToast(langTip["WEB_api_error_operation_fails"], code);
+					}
+				}, sendData);
+			}
+
+			/*
+			 * 保存IPC告警音配置
+			 */
+			function save() {
+				dsBridgeFuncSyn.showLoading();
+				var sendData = getIPCsendData();
+
+				SendAjax(AlarmLAPI, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						updateData();
+						if(sendMode == 0) {
+							$("#customModeList").removeClass("mui-hidden");
+							$("#dayNightModeList").addClass("mui-hidden");
+						} else {
+							$("#dayNightModeList").removeClass("mui-hidden");
+							$("#customModeList").addClass("mui-hidden");
+						}
+						showToast(langTip["WEB_api_error_succeeded"], code);
+					} else {
+						configData = JSON.parse(JSON.stringify(saveOrg));
+						//0是自定义模式
+						setMode(configData.Actions[ActID].ActParam.TimeMode);
+
+						showToast(langTip["WEB_api_error_operation_fails"], code);
+					}
+				}, sendData);
+			}
+
+			function getIPCsendData() {
+				var sendData = JSON.parse(JSON.stringify(devOrgData));
+				var AudioFirst = true;
+				var LightFirst = true;
+				var AudioDayNightFirst = true;
+				var LightDayNightFirst = true;
+				var AudioInfo = configData.Actions[0].ActParam.AudioCustomInfo;
+				var LightInfo = configData.Actions[1].ActParam.LightCustomInfo;
+				for(var i = 0; i < sendData.Num; i++) {
+					if(sendData.Actions[i].ActID == 28) {
+						var sendAudioInfo = sendData.Actions[i].ActParam.AudioCustomInfo;
+						var sendAudioDayNightInfo = sendData.Actions[i].ActParam.AudioDayNightInfo;
+						var AudioDayNightInfo = configData.Actions[0].ActParam.AudioDayNightInfo;
+						if(sendAudioDayNightInfo) {
+							AudioDayNightFirst = false;
+						}
+						if(sendAudioInfo) {
+							AudioFirst = false;
+						}
+						sendData.Actions[i].ActParam.TimeMode = configData.Actions[0].ActParam.TimeMode;
+						sendData.Actions[i].Enabled = configData.Actions[0].Enabled;
+						for(var m = 0; m < 7; m++) {
+							var numberOfcycles = sendAudioInfo.Days[m].Num < 3 ? 3 : sendAudioInfo.Days[m].Num;
+							var orangeNum = sendAudioInfo.Days[m].Num;
+							for(var n = 0; n < numberOfcycles; n++) {
+								if(n < 3) {
+									AudioInfo.Days[m].TimeSectionInfos[n].Enabled = 1;
+									if(n < orangeNum) {
+										sendAudioInfo.Days[m].TimeSectionInfos[n].AudioActParamInfo.AudioFileID = AudioInfo.Days[m].TimeSectionInfos[n].AudioActParamInfo.AudioFileID;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].Enabled = AudioInfo.Days[m].TimeSectionInfos[n].Enabled;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].Begin = AudioInfo.Days[m].TimeSectionInfos[n].Begin;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].End = AudioInfo.Days[m].TimeSectionInfos[n].End;
+									} else {
+										if(!sendAudioInfo.Days[m].TimeSectionInfos) {
+											sendAudioInfo.Days[m].TimeSectionInfos = [];
+
+										}
+										sendAudioInfo.Days[m].Num++;
+										sendAudioInfo.Days[m].TimeSectionInfos.push(AudioInfo.Days[m].TimeSectionInfos[n]);
+									}
+								} else {
+									sendAudioInfo.Days[m].TimeSectionInfos[n].Begin = "00:00:00";
+									sendAudioInfo.Days[m].TimeSectionInfos[n].End = "00:00:00";
+								}
+							}
+							//获取日夜模式其他配置原数据
+							if(!AudioDayNightFirst) {
+								sendAudioDayNightInfo.Days[m].AudioDayInfo.Enabled = AudioDayNightInfo.Days[m].AudioDayInfo.Enabled;
+								sendAudioDayNightInfo.Days[m].AudioNightInfo.Enabled = AudioDayNightInfo.Days[m].AudioNightInfo.Enabled;
+								sendAudioDayNightInfo.Days[m].AudioDayInfo.AudioActParamInfo.AudioFileID = AudioDayNightInfo.Days[m].AudioDayInfo.AudioActParamInfo.AudioFileID;
+								sendAudioDayNightInfo.Days[m].AudioNightInfo.AudioActParamInfo.AudioFileID = AudioDayNightInfo.Days[m].AudioNightInfo.AudioActParamInfo.AudioFileID;
+							}
+						}
+						if(AudioDayNightFirst) {
+							sendData.Actions[i].ActParam.AudioDayNightInfo = configData.Actions[0].ActParam.AudioDayNightInfo;
+						}
+					}
+					if(sendData.Actions[i].ActID == 29) {
+						var sendLightInfo = sendData.Actions[i].ActParam.LightCustomInfo;
+						var sendLightDayNightInfo = sendData.Actions[i].ActParam.LightDayNightInfo;
+						var LightDayNightInfo = configData.Actions[1].ActParam.LightDayNightInfo;
+						if(sendLightDayNightInfo) {
+							LightDayNightFirst = false;
+						}
+						if(sendLightInfo) {
+							LightFirst = false;
+						}
+						sendData.Actions[i].ActParam.TimeMode = configData.Actions[1].ActParam.TimeMode;
+						sendData.Actions[i].Enabled = configData.Actions[1].Enabled;
+						for(var m = 0; m < 7; m++) {
+							var numberOfcycles = sendLightInfo.LightWeekPlanInfo.Days[m].Num < 3 ? 3 : sendLightInfo.LightWeekPlanInfo.Days[m].Num;
+							var orangeNum = sendLightInfo.LightWeekPlanInfo.Days[m].Num;
+							for(var n = 0; n < numberOfcycles; n++) {
+								if(n < 3) {
+									LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled = 1;
+									if(n < orangeNum) {
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End;
+									} else {
+										if(!sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos) {
+											sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos = [];
+
+										}
+										sendLightInfo.LightWeekPlanInfo.Days[m].Num++;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos.push(LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n]);
+									}
+								} else {
+									sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin = "00:00:00";
+									sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End = "00:00:00";
+								}
+							}
+							//获取日夜模式其他配置原数据
+							if(!LightDayNightFirst) {
+								sendLightDayNightInfo.LightDayNightPlanInfo.Days[m].LightDayInfo.Enabled = LightDayNightInfo.LightDayNightPlanInfo.Days[m].LightDayInfo.Enabled;
+								sendLightDayNightInfo.LightDayNightPlanInfo.Days[m].LightNightInfo.Enabled = LightDayNightInfo.LightDayNightPlanInfo.Days[m].LightNightInfo.Enabled;
+							}
+						}
+						if(LightDayNightFirst) {
+							sendData.Actions[i].ActParam.LightDayNightInfo = configData.Actions[1].ActParam.LightDayNightInfo;
+						}
+					}
+				}
+				if(AudioFirst && supportAudioAlarm) {
+					var AudioInfo = configData.Actions[0].ActParam.AudioCustomInfo;
+					for(var z = 1; z < 8; z++) {
+						var DayData1 = JSON.parse(JSON.stringify(Day));
+						DayData1.ID = z;
+						var TimeSectionInfosData1 = JSON.parse(JSON.stringify(AudioTimeSectionInfo));
+						DayData1.Num++;
+						DayData1.TimeSectionInfos.push(TimeSectionInfosData1);
+						AudioInfo.Days.push(DayData1);
+					}
+					sendData.Actions.push(configData.Actions[0]);
+					sendData.Num++;
+				}
+				if(LightFirst && supportLightAlarm) {
+					var LightInfo = configData.Actions[1].ActParam.LightCustomInfo;
+					for(var z = 1; z < 8; z++) {
+						var DayData2 = JSON.parse(JSON.stringify(Day));
+						DayData2.ID = z;
+						var TimeSectionInfosData2 = JSON.parse(JSON.stringify(LightTimeSectionInfo));
+						DayData2.Num++;
+						DayData2.TimeSectionInfos.push(TimeSectionInfosData2);
+						LightInfo.LightWeekPlanInfo.Days.push(DayData2);
+					}
+					sendData.Actions.push(configData.Actions[1]);
+					sendData.Num++;
+				}
+				for(var i = 0; i < sendData.Num; i++) {
+					if(sendData.Actions[i].ActID == 28) {
+						if(SupportLinkageDayNightMode != 1) {
+							delete sendData.Actions[i].ActParam.AudioDayNightInfo;
+						}
+					}
+					if(sendData.Actions[i].ActID == 29) {
+						if(SupportLinkageDayNightMode != 1) {
+							delete sendData.Actions[i].ActParam.LightDayNightInfo;
+						}
+					}
+				}
+				return sendData;
+			}
+
+			function getNVRChannelsendData() {
+				var sendData = JSON.parse(JSON.stringify(devOrgData));
+				var AudioFirst = true;
+				var LightFirst = true;
+				var AudioDayNightFirst = true;
+				var LightDayNightFirst = true;
+				var AudioInfo = configData.Actions[0].ActParam.AudioCustomInfo;
+				var LightInfo = configData.Actions[1].ActParam.LightCustomInfo;
+				for(var i = 0; i < sendData.Num; i++) {
+					if(sendData.Actions[i].ActID == 28) {
+						var sendAudioInfo = sendData.Actions[i].ActParam.AudioCustomInfo;
+						var sendAudioDayNightInfo = sendData.Actions[i].ActParam.AudioDayNightInfo;
+						var AudioDayNightInfo = configData.Actions[0].ActParam.AudioDayNightInfo;
+						if(sendAudioDayNightInfo) {
+							AudioDayNightFirst = false;
+						}
+						if(sendAudioInfo) {
+							AudioFirst = false;
+						}
+						sendData.Actions[i].ActParam.TimeMode = configData.Actions[0].ActParam.TimeMode;
+						sendData.Actions[i].Enabled = configData.Actions[0].Enabled;
+						sendAudioInfo.Days.Num = 8;
+						for(var m = 0; m < 7; m++) {
+							var numberOfcycles = sendAudioInfo.Days[m].Num < 3 ? 3 : sendAudioInfo.Days[m].Num;
+							var orangeNum = sendAudioInfo.Days[m].Num;
+							for(var n = 0; n < numberOfcycles; n++) {
+								if(n < 3) {
+									AudioInfo.Days[m].TimeSectionInfos[n].Enabled = 1;
+									if(n < orangeNum) {
+										sendAudioInfo.Days[m].TimeSectionInfos[n].AudioActParamInfo.AudioFileID = AudioInfo.Days[m].TimeSectionInfos[n].AudioActParamInfo.AudioFileID;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].Enabled = AudioInfo.Days[m].TimeSectionInfos[n].Enabled;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].Begin = AudioInfo.Days[m].TimeSectionInfos[n].Begin;
+										sendAudioInfo.Days[m].TimeSectionInfos[n].End = AudioInfo.Days[m].TimeSectionInfos[n].End;
+									} else {
+										if(!sendAudioInfo.Days[m].TimeSectionInfos) {
+											sendAudioInfo.Days[m].TimeSectionInfos = [];
+
+										}
+										sendAudioInfo.Days[m].Num++;
+										sendAudioInfo.Days[m].TimeSectionInfos.push(AudioInfo.Days[m].TimeSectionInfos[n]);
+									}
+								} else {
+									sendAudioInfo.Days[m].TimeSectionInfos[n].Begin = "00:00:00";
+									sendAudioInfo.Days[m].TimeSectionInfos[n].End = "00:00:00";
+								}
+							}
+							if(!AudioDayNightFirst) {
+								sendAudioDayNightInfo.Days[m].AudioDayInfo.Enabled = AudioDayNightInfo.Days[m].AudioDayInfo.Enabled;
+								sendAudioDayNightInfo.Days[m].AudioNightInfo.Enabled = AudioDayNightInfo.Days[m].AudioNightInfo.Enabled;
+								sendAudioDayNightInfo.Days[m].AudioDayInfo.AudioActParamInfo.AudioFileID = AudioDayNightInfo.Days[m].AudioDayInfo.AudioActParamInfo.AudioFileID;
+								sendAudioDayNightInfo.Days[m].AudioNightInfo.AudioActParamInfo.AudioFileID = AudioDayNightInfo.Days[m].AudioNightInfo.AudioActParamInfo.AudioFileID;
+							}
+						}
+						if(AudioDayNightFirst) {
+							sendData.Actions[i].ActParam.AudioDayNightInfo = configData.Actions[0].ActParam.AudioDayNightInfo;
+						}
+					}
+					if(sendData.Actions[i].ActID == 29) {
+						var sendLightInfo = sendData.Actions[i].ActParam.LightCustomInfo;
+						var sendLightDayNightInfo = sendData.Actions[i].ActParam.LightDayNightInfo;
+						var LightDayNightInfo = configData.Actions[1].ActParam.LightDayNightInfo;
+						if(sendLightDayNightInfo) {
+							LightDayNightFirst = false;
+						}
+						if(sendLightInfo) {
+							LightFirst = false;
+						}
+						sendData.Actions[i].ActParam.TimeMode = configData.Actions[1].ActParam.TimeMode;
+						sendData.Actions[i].Enabled = configData.Actions[1].Enabled;
+						sendAudioInfo.Days.Num = 8;
+						for(var m = 0; m < 7; m++) {
+							var numberOfcycles = sendLightInfo.LightWeekPlanInfo.Days[m].Num < 3 ? 3 : sendLightInfo.LightWeekPlanInfo.Days[m].Num;
+							var orangeNum = sendLightInfo.LightWeekPlanInfo.Days[m].Num;
+							for(var n = 0; n < numberOfcycles; n++) {
+								if(n < 3) {
+									LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled = 1;									
+									if(n < orangeNum) {
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Enabled;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End = LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End;
+									} else {
+										if(!sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos) {
+											sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos = [];
+
+										}
+										sendLightInfo.LightWeekPlanInfo.Days[m].Num++;
+										sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos.push(LightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n]);
+									}
+								} else {
+									sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].Begin = "00:00:00";
+									sendLightInfo.LightWeekPlanInfo.Days[m].TimeSectionInfos[n].End = "00:00:00";
+								}
+							}
+							if(!LightDayNightFirst) {
+								sendLightDayNightInfo.LightDayNightPlanInfo.Days[m].LightDayInfo.Enabled = LightDayNightInfo.LightDayNightPlanInfo.Days[m].LightDayInfo.Enabled;
+								sendLightDayNightInfo.LightDayNightPlanInfo.Days[m].LightNightInfo.Enabled = LightDayNightInfo.LightDayNightPlanInfo.Days[m].LightNightInfo.Enabled;
+							}
+						}
+						if(LightDayNightFirst) {
+							sendData.Actions[i].ActParam.LightDayNightInfo = configData.Actions[1].ActParam.LightDayNightInfo;
+						}
+					}
+				}
+				if(AudioFirst && supportAudioAlarm) {
+					sendData.Actions.push(configData.Actions[0]);
+					sendData.Num++;
+				}
+				if(LightFirst && supportLightAlarm) {
+					sendData.Actions.push(configData.Actions[1]);
+					sendData.Num++;
+				}
+				for(var i = 0; i < sendData.Num; i++) {
+					if(sendData.Actions[i].ActID == 28) {
+						if(SupportLinkageDayNightMode != 1) {
+							delete sendData.Actions[i].ActParam.AudioDayNightInfo;
+						}
+					}
+					if(sendData.Actions[i].ActID == 29) {
+						if(SupportLinkageDayNightMode != 1) {
+							delete sendData.Actions[i].ActParam.LightDayNightInfo;
+						}
+					}
+				}
+				return sendData;
+			}
+
+			function getDevSendData() {
+				if(localStorage.deviceType == "0") {
+					return getIPCsendData();
+				} else {
+					return getNVRChannelsendData();
+				}
+			}
+
+			function setMode(mode) {
+				if(mode == 0) {
+					$("#custmoMode").addClass("mui-selected");
+					$("#customModeList").removeClass("mui-hidden");
+					$("#dayNightMode").removeClass("mui-selected");
+					$("#dayNightModeList").addClass("mui-hidden");
+				} else {
+					$("#dayNightMode").addClass("mui-selected");
+					$("#dayNightModeList").removeClass("mui-hidden");
+					$("#custmoMode").removeClass("mui-selected");
+					$("#customModeList").addClass("mui-hidden");
+				}
+			}
+
+			function updateData() {
+				var data = {
+					configData: configData,
+					ActID: ActID
+				}
+				dsBridgeFuncSyn.sendDataToReport("updateConfigData", JSON.stringify(data));
+			}
+		</script>
+	</body>
+
+</html>

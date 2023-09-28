@@ -1,0 +1,129 @@
+/*暗黑模式*/
+
+.mui-bar {
+    background-color: #ffffff;
+}
+
+.mui-title {
+    color: #333333;
+}
+
+.mui-table-view {
+    background-color: #ffffff;
+}
+
+.mui-content {
+    background-color: #efeff4;
+}
+
+.mui-table-view-cell {
+    color: #333333;
+}
+
+
+/*点击变灰色高亮*/
+
+.mui-table-view-cell.mui-active,
+.mui-table-view-cell a.mui-navigate-right.mui-active,
+.mui-table-view-cell>a:not(.mui-btn).mui-active {
+    background-color: #eeeeee;
+}
+
+body {
+    background-color: #EFEFF4 !important;
+}
+.mui-popover.mui-popover-action {
+    background-color: #ffffff !important;
+}
+
+.mui-table-view-cell:after,
+.mui-table-view:after,
+.mui-table-view:before,
+.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after,
+.mui-input-group .mui-input-row:after,
+.mui-input-group:after,
+.mui-input-group:before {
+    background-color: #c8c7cc;
+}
+
+
+/*弹出框样式*/
+
+.mui-btn,
+.mui-input-group,
+.mui-popover .mui-table-view,
+.mui-table-view-radio {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/*音量控制*/
+
+.rangeDiv {
+    margin-top: 100px;
+    background-color: #efeff4;
+    overflow: hidden;
+    padding: 0 20px;
+    color: #000000;
+}
+
+.mui-input-range .mui-tooltip {
+    background-color: #efeff4;
+}
+/*SD卡状态*/
+.ui-infocontain{
+	background-color: #ffffff;
+}
+
+.ui-status-textbox{
+	background-color: #f3f3f3;
+}
+/*报警音导入*/
+.addBtn{
+	background-color: #ffffff;
+	color:#000000;
+}
+
+/*注销账户页面*/
+.ui-p1 {
+	margin-top: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #000000;
+}			
+
+.ui-wite {
+	background-color: #efeff4 !important;
+	color: #000000;
+}
+
+.ui-placeholder-full {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #ffffff;
+}
+
+.mui-input-row{
+	background-color:#ffffff;
+	color: #000000;
+}
+
+.ui-wite .mui-input-row:last-child{
+	background-color:#ffffff;
+}
+
+input[type='text'] {
+	margin-bottom: 0;
+	padding: 10px 15px;
+	-webkit-user-select: text;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 0;
+	outline: none;
+	-webkit-appearance: none;
+	height: 45px;
+	background-color: #ffffff;
+}
+

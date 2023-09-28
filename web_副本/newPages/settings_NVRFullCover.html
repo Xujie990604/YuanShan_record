@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.private-title {
+				height: 18px;
+				line-height: 30px;
+				font-size: 12px;
+				color: #999999;
+				padding-left: 17px;
+			}
+			
+			.private-settings-img {
+				width: 24px;
+			}
+			
+			.mui-row .mui-table-view-cell {
+				text-align: center;
+				font-size: 12px;
+			}
+			
+			.imgTitles {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_Full_Coverage">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-hidden" id="NVRFull">
+				<li id="FullCoverItem" class="mui-table-view-cell ">
+					<span data-text="WEB_Full_Coverage" class="mainStyle">&nbsp;</span>
+					<div id="FullCoverSwitch" class="mui-switch mui-switch-mini">
+						<div class="mui-switch-handle"></div>
+					</div>
+					<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js"></script>
+    <script id="langScript"></script>
+		<script>
+			var langTip;
+			var getAlarmMsg = false; //是否开启满覆盖
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				document.getElementById("FullCoverSwitch").addEventListener("toggle", function(event) {
+					FullCoverSwitch(event); //满覆盖开关事件处理
+				});
+			}
+
+			function initData() {
+				initFullCover();
+			}
+
+			function initEvent() {
+
+			}
+
+			/*
+			 * 调接口获取初始数据
+			 */
+			function initFullCover() {
+				SendAjax(LAPI.FullCover, 'get', function(code, data) {
+					if(code == 0) {
+						$("#NVRFull").removeClass("mui-hidden");
+						document.getElementById("FullCoverSwitch").style.zIndex = 20;
+						document.getElementById("FullCoverSwitch").style.visibility = "visible";
+						FullCoverConfirm = false;
+						setSwitchStatus("FullCoverSwitch", data.StoreStrategy ? 0 : 1);
+						FullCoverConfirm = true;
+						dsBridgeFuncSyn.dismiss();
+					} else {
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						dsBridgeFuncSyn.dismiss();
+					}
+				});
+			}
+
+			function FullCoverSwitch(event) {
+				if(event.detail.isActive && FullCoverConfirm) {
+					var sendDataON = {
+						StoreStrategy: 0
+					};
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.FullCover, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+							FullCoverConfirm = false;
+							setTimeout(function() {
+								mui("#FullCoverSwitch").switch().toggle();
+							}, 300);
+						}
+					}, sendDataON);
+
+				} else if(!event.detail.isActive && FullCoverConfirm) {
+					var sendDataOFF = {
+						StoreStrategy: 1
+					};
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.FullCover, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+							FullCoverConfirm = false;
+							setTimeout(function() {
+								mui("#FullCoverSwitch").switch().toggle();
+							}, 300);
+						}
+					}, sendDataOFF);
+				} else {
+					FullCoverConfirm = true;
+				};
+			}
+		</script>
+	</body>
+
+</html>

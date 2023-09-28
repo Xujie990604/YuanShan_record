@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* 基础色 start*/
+
+$white:#ffffff; //白色
+$black:#000000; //黑色
+
+/*基础色 end*/
+
+$theme:#4d97e4; //主题色
+$image:'../../images/motionDetection0'; //图片路径
+$image1:'../../images/ezView'; //特殊图片路径
+
+/*文本颜色start*/
+
+$text-highlight:$theme; //高亮字体色
+$text-main:#424242; //正文字体色
+$text-remark:#707070; //备注字体色
+$text-gray:#b2b2b2; //灰显字体色
+$text-input-placeholder:#c2c2c2; //输入框提示字体色
+
+/*文本颜色 end*/
+
+
+/* 背景颜色start*/
+$bgclor-main:#f2f3f7;//界面背景色
+$bgclor-piece:#f8fbfe;//分割块背景色
+$bgclor-float-block:#ffffff;//浮块背景色
+$bgclor-halving-line:#dee2ed;//分割线颜色
+/*背景颜色 end*/
+
+/* 按钮背景颜色start*/
+
+$btn-display:#e6e6e6;//标准按钮灰显状态
+$btn-primary:$theme;//标准按钮普通状态
+$btn-active:#397abe;//标准按钮按下状态
+
+/*按钮背景颜色 end*/

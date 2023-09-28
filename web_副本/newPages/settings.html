@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.private-title {
+				height: 18px;
+				line-height: 30px;
+				font-size: 12px;
+				color: #999999;
+				padding-left: 17px;
+			}
+			
+			.private-settings-img {
+				width: 24px;
+			}
+			
+			.mui-row .mui-table-view-cell {
+				text-align: center;
+				font-size: 12px;
+			}
+			
+			.imgTitles {
+				width: 100%;
+			}
+			
+			.wifiImg {
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				width: 22px;
+			}
+			
+			.redPoint {
+				height: 5px;
+				width: 5px;
+				border-radius: 20px;
+				background-color: #ff0000;
+				position: absolute;
+				right: 10px;
+				top: 5px;
+			}
+			
+			.non-first ul {
+				margin-top: 0px;
+			}
+			
+			.mui-row .mui-table-view-cell:after,
+			.mui-table-view:after,
+			.mui-table-view:before {
+				background-color: #ffffff!important;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.custom-right-tip {
+				display: block;
+				width: 50%;
+				text-align: right;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.custom-left-icon {
+				position: absolute;
+				left: 15px;
+				top: 16px;
+				width: 24px;
+				z-index: 100;
+			}
+			
+			.mui-table-view-cell .custom-left-icon+a {
+				padding-left: 44px;
+			}
+			/*.left-text-right-swtich {
+				padding-left: 28px;
+			}*/
+			
+			#deviceName {
+				font-size: 17px;
+				color: #333333;
+				width: 90%;
+				height: 21px;
+				font-weight: bold;
+			}
+			
+			.mui-table-view {
+				margin-top: 12px;
+				margin-left: 16px;
+				margin-right: 16px;
+				border-radius: 8px;
+			}
+			
+			.mui-table-view-cell {
+				padding: 18px 15px;
+			}
+			
+			.mui-table-view .mui-table-view-cell {
+				height: 56px;
+			}
+			
+			.mui-table-view-cell:after {
+				right: 15px;
+				left: 15px;
+				background-color: #c8c7cc80;
+			}
+			
+			.left-text-right-swtich {
+				position: absolute;
+				top: 50%;
+				width: 77%;
+    		white-space: nowrap;
+    		text-overflow: ellipsis;
+    		overflow: hidden;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.mui-table-view:before {
+				height: 0px;
+			}
+			
+			.mui-table-view:after {
+				height: 0px;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				margin: -18px -15px;
+			}
+			
+			.custom-dev-icon {
+				position: absolute;
+				width: 65px;
+				top: 10px;
+				z-index: 100;
+				margin-left: -8px;
+			}
+			
+			.mui-table-view-cell .custom-dev-icon+a {
+				padding-left: 75px;
+			}
+			.title-with-tip{
+				width: 90%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_Config">&nbsp;</h1>
+		</header>
+		<div class="mui-content mui-hidden" id="mui-content">
+			<ul class="mui-table-view" id="devInfoUl">
+				<li class="mui-table-view-cell mui-hidden" id="settings_DeviceDetails" style="height: 84px;">
+					<img src="../images/appConfig/IPC3x.png" id="deviceLogo" alt="" class="custom-dev-icon" />
+					<a class="mui-navigate-right" style="height: 84px;">
+						<div style="margin-top: 7px;">
+							<div id="deviceName" class="private-ellipsis">&nbsp;</div>
+							<div data-text="WEB_deviceInfo" style="font-size: 14px;color: rgba(51,51,51,0.4);margin-top: 3px;">&nbsp;</div>
+						</div>
+						<span class="mui-badge"></span>
+					</a>
+					<div id="redPoint" class="redPoint mui-hidden"></div>
+				</li>
+				<li class="mui-table-view-cell mui-hidden" id="wifiConfig">
+					<img src="../images/appConfig/wifi0.png" id="wifiImg" alt="" class="custom-left-icon" />
+					<a class="">
+						<span data-text="WEB_wifiConfig">&nbsp;</span>
+						<span class="mui-badge private-ellipsis custom-right-tip" id="wifiName">&nbsp;</span>
+					</a>
+				</li>
+			</ul>
+			<!------------------------------------消息提醒------------------------------------>
+			<div class="private-title mui-hidden" id="messageDiv">
+				<span data-text="WEB_messageAlert">&nbsp;</span>
+			</div>
+			<ul class="mui-table-view mui-hidden" id="messageUl">
+				<!--接受告警消息-->
+				<li class="mui-table-view-cell mui-hidden" id="alarmMsg">
+					<!--<img src="../images/appConfig/alarm_audio_setting.png" alt="" class="custom-left-icon" />-->
+					<span class="left-text-right-swtich" data-text="WEB_receiveAlarmMessage">&nbsp;</span>
+					<div id="alarmMsgSwitch" class="mui-switch mui-switch-mini">
+						<div class="mui-switch-handle" id="alarmMsgSwitchCircle"></div>
+					</div>
+				</li>
+				<!--门铃呼叫提醒-->
+				<li class="mui-table-view-cell mui-hidden" id="alarmDoor">
+					<!--<img src="../images/appConfig/alarmDoor.png" alt="" class="custom-left-icon" />-->
+					<span class="left-text-right-swtich" data-text="WEB_receiveDoorbellAlarm">&nbsp;</span>
+					<div id="alarmDoorSwitch" class="mui-switch mui-switch-mini">
+						<div class="mui-switch-handle" id="alarmDoorSwitchCircle"></div>
+					</div>
+				</li>
+			</ul>
+			<div class="private-title mui-hidden" id="DeviceDiv">
+				<span data-text="WEB_deviceConfig">&nbsp;</span>
+			</div>
+			<ul class="mui-table-view mui-hidden" id="DeviceUl">
+				<!--分享设备-->
+				<li class="mui-table-view-cell mui-hidden" id="devShare">
+					<!--<img src="../images/appConfig/share.png" alt="" class="custom-left-icon" />-->
+					<a class="mui-navigate-right" data-text="WEB_deviceShare">
+						&nbsp;
+					</a>
+				</li>
+			</ul>
+			<div id="WebConfig">
+				<!--报警配置-->
+				<div class="private-title mui-hidden" id="alarmConfigDiv">
+					<span data-text="WEB_AlarmSetting">&nbsp;</span>
+				</div>
+				<ul class="mui-table-view mui-hidden" id="alarmConfigUl">
+					<!--报警撤防-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_ShieldLinkage">
+						<!--<img src="../images/appConfig/ShieldLinkage.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_alarmRevoke">
+							&nbsp;
+						</a>
+					</li>
+					<!--批量报警撤防-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_ShieldLinkageBatch">
+						<!--<img src="../images/appConfig/ShieldLinkage.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_alarmRevoke">
+							&nbsp;
+						</a>
+					</li>
+					<!--自定义报警音-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_alarm_audio_setting">
+						<!--<img src="../images/appConfig/alarm_audio_setting.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_alarm_audio_setting">
+							&nbsp;
+						</a>
+					</li>
+					<!--通用检测-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_generalDetection">
+						<!--<img src="../images/appConfig/generalConfig.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_generalDetection">
+							&nbsp;
+						</a>
+					</li>
+					<!--智能检测-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_IntelligentDetection">
+						<!--<img src="../images/appConfig/IntelligentDetection.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_IntelligentDetection">
+							&nbsp;
+						</a>
+					</li>
+					<!--门磁管理-->
+					<!--<li class="mui-table-view-cell mui-hidden" id="settings_doorLock">
+						<a class="mui-navigate-right" data-text="WEB_doorMagnetismManagement">
+							&nbsp;
+						</a>
+					</li>-->
+				</ul>
+				<!--相关设置-->
+				
+				<div class="private-title mui-hidden" id="generalConfigDiv">
+					<span data-text="WEB_RelatedSettings">&nbsp;</span>
+				</div>
+				<ul class="mui-table-view mui-hidden" id="generalConfigUl">
+					<li class="mui-table-view-cell mui-hidden" id="settings_PowerConsumptionMode">
+						<a class="mui-navigate-right" data-text="WEB_PowerConsumptionMode">
+							&nbsp;
+						</a>
+					</li>
+					<!--图像配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_Image" style="height: 76px;">
+						<!--<img src="../images/appConfig/ImageConfig.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" style="height: 76px;">
+							<div class="title-with-tip">
+								<div class="private-ellipsis" data-text="WEB_image_setting">&nbsp;</div>
+								<div data-text="WEB_ImageTip" class="private-ellipsis" style="font-size: 14px;color: rgba(51,51,51,0.4);margin-top: 3px;">&nbsp;</div>
+							</div>
+							<span class="mui-badge"></span>
+						</a>
+					</li>
+					<!--视频配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_Video">
+						<!--<img src="../images/appConfig/videoConfig.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_videoConfig">
+							&nbsp;
+						</a>
+					</li>
+					<!--音频配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_Audio">
+						<!--<img src="../images/appConfig/AudioConfig.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_soundAndMic">
+							&nbsp;
+						</a>
+					</li>
+					<!--OSD配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_OSD">
+						<!--<img src="../images/appConfig/osd.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_OSD_config">
+							&nbsp;
+						</a>
+					</li>
+					<!--云台配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_PTZ">
+						<!--<img src="../images/appConfig/PTZConfig.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_PTZConfig">
+							&nbsp;
+						</a>
+					</li>
+					<!--存储配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_storageConfig">
+						<!--<img src="../images/appConfig/storage.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_storageConfig">
+							&nbsp;
+						</a>
+					</li>
+					<!--人脸/车牌导入-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_FaceLicensePlateImport">
+						<!--<img src="../images/appConfig/storage.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_ImportFaceLicense">
+							&nbsp;
+						</a>
+					</li>
+					<!--诊断-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_diagnosis">
+						<!--<img src="../images/appConfig/storage.png" alt="" class="custom-left-icon" />-->
+						<a class="mui-navigate-right" data-text="WEB_Diagnosis">
+							&nbsp;
+						</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/loadCss.js"></script>
+		<script id="langScript"></script>
+		<script>
+			// Native跳转进入web页面后先获取设备+云账号所有信息（原启动参数）
+			var argsObj = dsBridgeFuncSyn.getAllInfo();
+			dsBridgeFuncSyn.printH5Log("Z --- 字符串" + argsObj);
+			var argsObj = JSON.parse(argsObj);
+			getNativeInfo(argsObj);
+		</script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script>
+			/**********具体功能参数初始化*********/
+			var langTip;
+			var isShowDeviceDiv = false; // 是否显示设备操作
+			var isShowMessageDiv = false; // 是否显示消息提醒
+			var setAlarmMsgSwitchConfirm = true; //接受告警消息开关状态变化时是否调接口提交
+			var setAlarmDoorSwitchConfirm = true; //门铃开关状态变化时是否调接口提交
+			var wifiName = document.getElementById("wifiName");
+			var deviceName = document.getElementById("deviceName");
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData();
+			initEvent();
+			/**********具体功能方法封装*********/
+
+			function initPage() {
+				setTimeout(function() {
+					dsBridgeFuncSyn.dismiss();
+				}, 300)
+				document.getElementById("mui-content").classList.remove("mui-hidden");
+				/*******************************************Native模块*******************************************/
+				if(localStorage.AppType == "1" || localStorage.AppType == "2" || localStorage.AppType == "3" || localStorage.AppType == "4") { // 目前仅智U支持Native模块
+					$(".mui-content>.mui-table-view:first-child").css("margin-top", "12px");
+					document.getElementById("settings_DeviceDetails").classList.remove("mui-hidden");
+					deviceName.innerText = localStorage.deviceName;
+					//初始化告警消息开关
+					if(localStorage.deviceAlarmSwitch != "2") { //"2"不支持该功能
+						document.getElementById("alarmMsgSwitch").style.zIndex = 20;
+						document.getElementById("alarmMsgSwitch").style.visibility = "visible";
+						setAlarmMsgSwitchConfirm = false;
+						setSwitchStatus("alarmMsgSwitch", localStorage.deviceAlarmSwitch);
+						setAlarmMsgSwitchConfirm = true;
+						var setAlarmMsgSwitchActive = document.getElementById("alarmMsgSwitch").classList.contains("mui-active");
+						if(setAlarmMsgSwitchActive) {
+							document.getElementById("alarmMsgSwitchCircle").style.transform = 'translate(16px, 0px)';
+						}
+						document.getElementById("messageDiv").classList.remove("mui-hidden");
+						document.getElementById("messageUl").classList.remove("mui-hidden");
+						document.getElementById("alarmMsg").classList.remove("mui-hidden");
+						isShowMessageDiv = true;
+						/*
+						 *  监听消息告警开关
+						 */
+						document.getElementById("alarmMsgSwitch").addEventListener("toggle", function(event) {
+							if(event.detail.isActive && setAlarmMsgSwitchConfirm) {
+								var sendData = "1";
+								dsBridgeFuncAsyn.doFunction(2, sendData, function(result) {
+									var result = JSON.parse(result);
+									if(result.statusCode != 0) {
+										setAlarmMsgSwitchConfirm = false;
+										setTimeout(function() {
+											mui("#alarmMsgSwitch").switch().toggle();
+										}, 200)
+									}
+								});
+							} else if(!event.detail.isActive && setAlarmMsgSwitchConfirm) {
+								var sendData = "0";
+								dsBridgeFuncAsyn.doFunction(2, sendData, function(result) {
+									var result = JSON.parse(result);
+									if(result.statusCode != 0) {
+										setAlarmMsgSwitchConfirm = false;
+										setTimeout(function() {
+											mui("#alarmMsgSwitch").switch().toggle();
+										}, 200)
+									}
+								});
+							} else {
+								setAlarmMsgSwitchConfirm = true;
+							}
+						})
+					} else {
+						$("#alarmMsg").remove();
+					}
+
+					//初始化门铃呼叫提醒开关
+					if(localStorage.doorbellCallSwitch != "2") { //"2"不支持该功能
+						document.getElementById("alarmDoorSwitch").style.zIndex = 20;
+						document.getElementById("alarmDoorSwitch").style.visibility = "visible";
+						setAlarmDoorSwitchConfirm = false;
+						setSwitchStatus("alarmDoorSwitch", localStorage.doorbellCallSwitch);
+						setAlarmDoorSwitchConfirm = true;
+						var setDoorbellSwitchActive = document.getElementById("alarmDoorSwitch").classList.contains("mui-active")
+						if(setDoorbellSwitchActive) {
+							document.getElementById("alarmDoorSwitchCircle").style.transform = 'translate(16px, 0px)';
+						}
+						document.getElementById("messageDiv").classList.remove("mui-hidden");
+						document.getElementById("messageUl").classList.remove("mui-hidden");
+						document.getElementById("alarmDoor").classList.remove("mui-hidden");
+						isShowMessageDiv = true;
+						/*
+						 *  监听门铃开关事件
+						 */
+						document.getElementById("alarmDoorSwitch").addEventListener("toggle", function(event) {
+							if(event.detail.isActive && setAlarmDoorSwitchConfirm) {
+								var sendData = "1";
+								dsBridgeFuncAsyn.doFunction(3, sendData, function(result) {
+									var result = JSON.parse(result);
+									if(result.statusCode != 0) {
+										setAlarmDoorSwitchConfirm = false;
+										setTimeout(function() {
+											mui("#alarmDoorSwitch").switch().toggle();
+										}, 200)
+									}
+								});
+
+							} else if(!event.detail.isActive && setAlarmDoorSwitchConfirm) {
+								var sendData = "0";
+								dsBridgeFuncAsyn.doFunction(3, sendData, function(result) {
+									var result = JSON.parse(result);
+									if(result.statusCode != 0) {
+										setAlarmDoorSwitchConfirm = false;
+										setTimeout(function() {
+											mui("#alarmDoorSwitch").switch().toggle();
+										}, 200)
+									}
+								});
+							} else {
+								setAlarmDoorSwitchConfirm = true;
+							}
+						})
+					} else {
+						$("#alarmDoor").remove();
+					}
+
+					//初始化wifi网络：wifiConfig 不为空时显示该配置
+					if(localStorage.wifiName != "" && localStorage.channelId == "0") {
+						var wifiSrc = "";
+						document.getElementById("wifiConfig").classList.remove("mui-hidden");
+						wifiName.innerText = localStorage.wifiName;
+						if(localStorage.deviceOs == "true" && localStorage.isNetConnect == "1") { // 设备云端在线
+							wifiSrc = checkWifiSiginal(localStorage.wifiValue)
+						} else {
+							wifiSrc = "../images/appConfig/wifi0.png";
+						}
+						document.getElementById("wifiImg").src = wifiSrc;
+					} else {
+						$("#wifiConfig").remove();
+					}
+
+					//分享设备：devShare 分享的设备/通道，不支持；免注册不支持
+					if(localStorage.isSupportShare == "0") { //分享定制参数（isSupportShare），1支持，0不支持
+
+					} else {
+						if(localStorage.isShare != "1" && localStorage.isNoAccount != "1" && !(localStorage.deviceType == "0" && localStorage.channelId != "0" && localStorage.isMultiChannelIPC == "1")) {
+							document.getElementById("devShare").classList.remove("mui-hidden");
+							isShowDeviceDiv = true;
+						}
+					}
+
+					if(isShowDeviceDiv) { // 有设备操作模块功能支持是显示，反之隐藏
+						document.getElementById("DeviceDiv").classList.remove("mui-hidden");
+						document.getElementById("DeviceUl").classList.remove("mui-hidden");
+					}
+
+					//更多
+					if(localStorage.isSupportRemoteConfig != "0" && !(localStorage.deviceType == "0" && localStorage.channelId != "0" && localStorage.isMultiChannelIPC == "1")) {
+						document.getElementById("settings_diagnosis").classList.remove("mui-hidden");
+					}
+
+					if(isShowMessageDiv) { // 有消息提醒模块功能支持是显示，反之隐藏
+						document.getElementById("messageDiv").classList.remove("mui-hidden");
+						document.getElementById("messageUl").classList.remove("mui-hidden");
+					}
+
+					// 设备版本红点：VMS、免注册不显示；其他都显示，版本数值有就填上
+					if(localStorage.isNoAccount == "1" || localStorage.deviceType == "2") {
+
+					} else { //设备在线且有新版本时显示红点
+						if(localStorage.hasNewVersion == "1" && localStorage.deviceStatus == "1") {
+							document.getElementById("redPoint").classList.remove("mui-hidden");
+						}
+					}
+				}
+
+				//人脸导入：importFace 通道、分享、VMS不支持；deviceFr：1 支持
+				if((localStorage.deviceType == "1" && localStorage.channelId != "0") || localStorage.isShare == "1" || localStorage.deviceType == "2") {
+
+				} else {
+					if(localStorage.deviceFr == "1") {
+						document.getElementById("settings_FaceLicensePlateImport").classList.remove("mui-hidden");
+					}
+				}
+
+				//车牌导入：importLicense 通道、分享、VMS不支持；deviceVr：1 支持
+				if((localStorage.deviceType == "1" && localStorage.channelId != "0") || localStorage.isShare == "1" || localStorage.deviceType == "2") {
+
+				} else {
+					if(localStorage.deviceVr == "1") {
+						document.getElementById("settings_FaceLicensePlateImport").classList.remove("mui-hidden");
+					}
+				}
+
+				/*******************************************远程配置模块*******************************************/
+
+				//设备图标为IPClogo还是NVRlogo
+				var imgSrc = "";
+				if((localStorage.deviceType == "1" && localStorage.channelId == "0") || (localStorage.deviceType == "2"&& localStorage.channelId == "0")) {
+					imgSrc = "../images/appConfig/NVR3x.png";
+				} else {
+					imgSrc = "../images/appConfig/IPC3x.png";
+				}
+
+				document.getElementById("deviceLogo").src = imgSrc;
+
+				//分享设备、免注册设备不支持远程配置
+				if(localStorage.isSupportRemoteConfig == "0") {
+					document.getElementById("WebConfig").classList.add("mui-hidden");
+				}
+				/************************IPC配置************************/
+				if(localStorage.deviceType == "0" && localStorage.channelId == "0") {
+					//判断是否支持门磁
+					//					if(Number(localStorage.isDomestic) && localStorage.LocalOrCloud == "1" && Number(localStorage.isSupportDoorLock) == 1) {
+					//						document.getElementById("settings_doorLock").classList.remove("mui-hidden");
+					//					}
+					/*********************************通用配置********************************/
+					document.getElementById("generalConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+					// 支持音频配置
+					document.getElementById("settings_Audio").classList.remove("mui-hidden");
+					// 支持功耗模式
+					document.getElementById("settings_PowerConsumptionMode").classList.remove("mui-hidden");
+
+					//单通道IPC支持
+					if(localStorage.isMultiChannelIPC != "1") {
+						// 支持图像配置
+						document.getElementById("settings_Image").classList.remove("mui-hidden");
+						// 支持视频配置
+						document.getElementById("settings_Video").classList.remove("mui-hidden");
+						// 支持OSD配置
+						document.getElementById("settings_OSD").classList.remove("mui-hidden");
+						// 支持云台配置
+						document.getElementById("settings_PTZ").classList.remove("mui-hidden");
+
+						//支持存储配置
+						document.getElementById("settings_storageConfig").classList.remove("mui-hidden");
+
+					}
+
+					/*******************************报警配置***********************************/
+					document.getElementById("alarmConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("alarmConfigUl").classList.remove("mui-hidden");
+
+					//单通道IPC支持
+					if(localStorage.isMultiChannelIPC == "0") {
+						// 支持通用检测
+						document.getElementById("settings_generalDetection").classList.remove("mui-hidden");
+						// 支持智能检测
+						document.getElementById("settings_IntelligentDetection").classList.remove("mui-hidden");
+					}
+					// 支持报警撤防
+					document.getElementById("settings_ShieldLinkage").classList.remove("mui-hidden");
+					// 判断是否支持报警音导入功能
+					if(Number(localStorage.isSupportAlarmAudio)) {
+						document.getElementById("settings_alarm_audio_setting").classList.remove("mui-hidden");
+					}
+
+				}
+
+				/************************NVR配置************************/
+				if(localStorage.deviceType == "1" && localStorage.channelId == "0") {
+					/*********************************通用配置********************************/
+					document.getElementById("generalConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+
+					/*******************************报警配置***********************************/
+					document.getElementById("alarmConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("alarmConfigUl").classList.remove("mui-hidden");
+					//支持报警撤防
+					document.getElementById("settings_ShieldLinkageBatch").classList.remove("mui-hidden");
+
+					//支持存储配置
+					document.getElementById("settings_storageConfig").classList.remove("mui-hidden");
+				}
+
+				/************************NVR通道配置************************/
+				if(localStorage.deviceType == "1" && localStorage.channelId != "0") {
+					//判断是否支持门磁
+					//					if(Number(localStorage.isDomestic) && localStorage.LocalOrCloud == "1" && Number(localStorage.isSupportDoorLock) == 1) {
+					//						document.getElementById("settings_doorLock").classList.remove("mui-hidden");
+					//					}
+					/*********************************通用配置********************************/
+					document.getElementById("generalConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+
+					// 支持图像配置
+					document.getElementById("settings_Image").classList.remove("mui-hidden");
+					// 支持音频配置
+					document.getElementById("settings_Audio").classList.remove("mui-hidden");
+					/*******************************报警配置***********************************/
+					document.getElementById("alarmConfigDiv").classList.remove("mui-hidden");
+					document.getElementById("alarmConfigUl").classList.remove("mui-hidden");
+					// 支持通用检测
+					document.getElementById("settings_generalDetection").classList.remove("mui-hidden");
+					// 支持智能检测
+					document.getElementById("settings_IntelligentDetection").classList.remove("mui-hidden");
+					// 判断是否支持报警音导入功能
+					if(Number(localStorage.isSupportAlarmAudio)) {
+						document.getElementById("settings_alarm_audio_setting").classList.remove("mui-hidden");
+					}
+
+					//支持存储配置
+					document.getElementById("settings_storageConfig").classList.remove("mui-hidden");
+				}
+
+				/************************IPC通道配置************************/
+				if(localStorage.deviceType == "0" && localStorage.channelId != "0") {
+					if(localStorage.isMultiChannelIPC == "1") {
+						/*********************************通用配置********************************/
+						document.getElementById("generalConfigDiv").classList.remove("mui-hidden");
+						document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+
+						// 支持图像配置
+						document.getElementById("settings_Image").classList.remove("mui-hidden");
+						// 支持视频配置
+						document.getElementById("settings_Video").classList.remove("mui-hidden");
+						// 支持OSD配置
+						document.getElementById("settings_OSD").classList.remove("mui-hidden");
+						// 支持云台配置
+						document.getElementById("settings_PTZ").classList.remove("mui-hidden");
+						/*******************************报警配置***********************************/
+						document.getElementById("alarmConfigDiv").classList.remove("mui-hidden");
+						document.getElementById("alarmConfigUl").classList.remove("mui-hidden");
+						// 支持通用检测
+						document.getElementById("settings_generalDetection").classList.remove("mui-hidden");
+						// 支持智能检测
+						document.getElementById("settings_IntelligentDetection").classList.remove("mui-hidden");
+						//支持存储配置
+						document.getElementById("settings_storageConfig").classList.remove("mui-hidden");
+
+					}
+				}
+			}
+
+			function initData() {
+
+			}
+
+			function initEvent() {
+
+				/************************初始化跳转原生侧功能页面事件************************/
+				document.getElementById("devShare").addEventListener('tap', function() {
+					//跳转到原生分享设备功能页面
+					dsBridgeFuncSyn.goToFunctionPage(7);
+				});
+
+				/************************初始化跳转web侧功能页面事件************************/
+				document.getElementById("settings_DeviceDetails").addEventListener('tap', function() {
+					if(localStorage.deviceType == "0" && localStorage.channelId != "0" && localStorage.isMultiChannelIPC == "1") {
+						showToast(langTip["WEB_supported"]);
+					} else {
+						jumpToPage("settings_DeviceDetails");
+					}
+				});				
+				//功耗模式
+				document.getElementById("settings_PowerConsumptionMode").addEventListener('tap', function() {
+					jumpToWebPage("settings_PowerConsumptionMode");
+				});
+
+				// 图像配置
+				document.getElementById("settings_Image").addEventListener('tap', function() {
+          jumpToWebPage("settings_ImageConfig");
+				});
+				// 视频配置
+				document.getElementById("settings_Video").addEventListener('tap', function() {
+					jumpToWebPage("capability_Video");
+				});
+				// 音频配置
+				document.getElementById("settings_Audio").addEventListener('tap', function() {
+					jumpToWebPage("settings_Audio");
+				});
+				// OSD配置
+				document.getElementById("settings_OSD").addEventListener('tap', function() {
+					jumpToWebPage("settings_OSD");
+				});
+				// 云台配置
+				document.getElementById("settings_PTZ").addEventListener('tap', function() {
+					jumpToWebPage("capability_PTZ");
+				});
+				// 通用配置
+				document.getElementById("settings_generalDetection").addEventListener('tap', function() {
+					jumpToWebPage("capability_GeneralDetection");
+				});
+				// 智能配置
+				document.getElementById("settings_IntelligentDetection").addEventListener('tap', function() {
+					jumpToWebPage("capability_IntelligentDetection");
+				});
+				// 报警撤防
+				document.getElementById("settings_ShieldLinkage").addEventListener('tap', function() {
+					jumpToWebPage("settings_ShieldLinkage");
+				});
+
+				// 批量报警撤防
+				document.getElementById("settings_ShieldLinkageBatch").addEventListener('tap', function() {
+					jumpToWebPage("settings_ShieldLinkageBatch");
+				});
+				// 自定义报警音
+
+				document.getElementById("settings_alarm_audio_setting").addEventListener('tap', function() {
+					jumpToWebPage("settings_AudioLists");
+				});
+
+				//存储配置
+				document.getElementById("settings_storageConfig").addEventListener('tap', function() {
+					//IPC直接跳转到SD卡界面
+					if(localStorage.deviceType == "0") {
+						jumpToWebPage("settings_SDCardNew");
+					} else if(localStorage.deviceType == "1" && localStorage.channelId != "0") {
+						// NVR通道录像计划
+						jumpToWebPage("settings_VideoPlan");
+
+					} else {
+						jumpToWebPage("capability_StrogeConfig");
+					}
+				});
+
+				//车牌人脸导入跳转
+				document.getElementById("settings_FaceLicensePlateImport").addEventListener('tap', function() {
+					jumpToWebPage("settings_FaceLicensePlateImport");
+				});
+
+				//诊断
+				document.getElementById("settings_diagnosis").addEventListener('tap', function() {
+					jumpToWebPage("capability_More");
+				});
+
+			}
+
+			function checkChannel() {
+				var id = "";
+				//NVR通道的运动检测实现与IPC不同，此处做了区分
+				if(localStorage.deviceType == "1" && localStorage.channelId != "0") {
+					id = "settings_MotionChannel";
+				} else if(localStorage.deviceType == "0") {
+					id = "settings_Motion";
+				}
+				jumpToWebPage(id);
+			}
+
+			/**
+			 * 跳转至配置详情页
+			 * @param {Object} id 功能页面id
+			 */
+			function jumpToPage(id) {
+				var Url = "web/newPages/" + id + ".html";
+				dsBridgeFuncSyn.pageTo(Url, "");
+			}
+
+			/**
+			 * 重启设备
+			 */
+			function restart() {
+				var btnArray = [langTip["WEB_cancel"], langTip["WEB_button_ok"]];
+				mui.confirm(langTip["WEB_reboot_confirm"], langTip["WEB_dialog_title_notify"], btnArray, function(e) {
+					if(e.index == 1) {
+						dsBridgeFuncSyn.showLoading();
+						SendAjax(LAPI.Reboot, 'put', function(code, data) {
+							dsBridgeFuncSyn.dismiss();
+							if(code == 0) {
+								showToast(langTip["WEB_cloud_upgrade_rebooting"]);
+								dsBridgeFuncSyn.deviceOffLine();
+							} else {
+								showToast(langTip["WEB_search_device_is_added_failed"] + "(" + code + ")", code);
+							}
+						});
+					}
+				}, 'div');
+			}
+
+			function checkWifiSiginal(wifiValue) {
+				var wifiSrc = "";
+				if(wifiValue == 0) {
+					wifiSrc = "../images/appConfig/wifi0.png";
+				} else if(wifiValue > 0 && wifiValue <= 25) {
+					wifiSrc = "../images/appConfig/wifi1.png";
+				} else if(wifiValue > 25 && wifiValue <= 50) {
+					wifiSrc = "../images/appConfig/wifi2.png";
+				} else if(wifiValue > 50 && wifiValue <= 75) {
+					wifiSrc = "../images/appConfig/wifi3.png";
+				} else if(wifiValue > 75 && wifiValue < 100) {
+					wifiSrc = "../images/appConfig/wifi4.png";
+				} else {
+					wifiSrc = "../images/appConfig/wifi5.png";
+				}
+				return wifiSrc;
+			}
+		</script>
+	</body>
+
+</html>

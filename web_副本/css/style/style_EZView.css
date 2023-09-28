@@ -1,0 +1,203 @@
+@charset "UTF-8";
+/* 基础色 start*/
+/*基础色 end*/
+/*文本颜色start*/
+/*文本颜色 end*/
+/* 背景颜色start*/
+/*背景颜色 end*/
+/* 按钮背景颜色start*/
+/*按钮背景颜色 end*/
+header a {
+  color: #ffffff;
+}
+
+.mui-bar {
+  background-color: #4d97e4;
+}
+
+.mui-navigate-right:after,
+.mui-push-right:after {
+  font-family: "iconfont";
+  right: 15px;
+  content: '\e610';
+  color: #b2b2b2;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mui-title {
+  color: #ffffff;
+}
+
+.mui-table-view:before,
+.mui-table-view-cell:after {
+  background-color: #dee2ed;
+}
+
+#topDiv .ui-js {
+  content: url("../../images/ezView/cancel_sj.png");
+}
+
+.ui-placeholder-imgbox img {
+  content: url("../../images/ezView/placeholder_chart@3x.png");
+  width: 100%;
+}
+
+.mui-table-view-cell .mui-navigate-right > .mui-btn,
+.mui-table-view-cell .mui-navigate-right > .mui-badge,
+.mui-table-view-cell .mui-navigate-right > .mui-switch,
+.mui-table-view-cell .mui-push-left > .mui-btn,
+.mui-table-view-cell .mui-push-left > .mui-badge,
+.mui-table-view-cell .mui-push-left > .mui-switch,
+.mui-table-view-cell .mui-push-right > .mui-btn,
+.mui-table-view-cell .mui-push-right > .mui-badge,
+.mui-table-view-cell .mui-push-right > .mui-switch,
+.mui-table-view-cell > a .mui-navigate-right > .mui-btn,
+.mui-table-view-cell > a .mui-navigate-right > .mui-badge,
+.mui-table-view-cell > a .mui-navigate-right > .mui-switch,
+.mui-table-view-cell > a .mui-push-left > .mui-btn,
+.mui-table-view-cell > a .mui-push-left > .mui-badge,
+.mui-table-view-cell > a .mui-push-left > .mui-switch,
+.mui-table-view-cell > a .mui-push-right > .mui-btn,
+.mui-table-view-cell > a .mui-push-right > .mui-badge,
+.mui-table-view-cell > a .mui-push-right > .mui-switch {
+  color: #707070 !important;
+}
+
+.mui-table-view-cell {
+  color: #424242 !important;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+  margin: 0px;
+  text-align: left;
+  color: #5BD5C7;
+  border-radius: 0px;
+  background-color: #ffffff;
+}
+
+.mui-input-group .mui-input-row.ui-list-titile {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ui-devicereboot {
+  color: #424242 !important;
+}
+
+.mui-table-view-cell .ui-tip {
+  background: transparent !important;
+  color: #4d97e4;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+}
+
+.ui-list-section-title {
+  font-size: 16px;
+  color: #707070;
+  padding-left: 15px;
+  margin-bottom: 5px;
+  margin-top: 9px;
+}
+
+.mui-table-view-radio .mui-navigate-right:after,
+.mui-table-view-radio .mui-push-right:after {
+  font-family: "Muiicons";
+}
+
+.ui-checkbox-half input[type='checkbox']:before {
+  display: block;
+  width: 25px;
+  height: 25px;
+  content: "";
+  color: #4d97e4;
+  background: url("../../images/check_half2.png") no-repeat;
+  background-size: 85% 85%;
+  background-position: center;
+}
+
+.ui-tools-name li {
+  color: #4d97e4;
+}
+
+.ui-iknow .mui-btn, .mui-content .ui-large-btn {
+  color: #4d97e4;
+  border: 1px solid #4d97e4;
+}
+
+.mui-content .ui-large-btn1 {
+  background-color: #4d97e4;
+  color: #ffffff;
+}
+
+.ui-dateok,
+.mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after,
+.mui-radio input[type='radio']:checked:before,
+.mui-checkbox input[type='checkbox']:checked:before {
+  color: #4d97e4;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+  margin: 0px;
+  text-align: left;
+  color: #4d97e4;
+  border-radius: 0px;
+  background-color: #ffffff;
+}
+
+.mui-table-view-cell .ui-tip {
+  background: transparent;
+  color: #4d97e4;
+  width: 90%;
+  height: 100%;
+  text-align: right;
+}
+
+.wapp-side-btn-close {
+  background: url("../../images/motionDetection1/close@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-addedit {
+  background: url("../../images/motionDetection1/motion_draw_normal.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-addedit-select {
+  background: url("../../images/motionDetection1/motion_draw_selected.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit {
+  background: url("../../images/motionDetection1/motion_eraser_norma.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit-select {
+  background: url("../../images/motionDetection1/motion_eraser_selected.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit-disable {
+  background: url("../../images/motionDetection1/motion_eraser_disable@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-del {
+  background: url("../../images/motionDetection1/delete_normal.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-del-disable {
+  background: url("../../images/motionDetection1/delete_disable@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-commit {
+  background: url("../../images/motionDetection1/checked.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+/*# sourceMappingURL=style_EZView.css.map */

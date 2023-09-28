@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <link href="../css/Common.css" rel="stylesheet" />
+  <link href="../css/ListCommon.css" rel="stylesheet" />
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    .addAlarmAudio {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      padding-top: 13px;
+      position: absolute;
+      bottom: 30px;
+    }
+
+    .addBtn {
+      margin-left: 30%;
+      width: 40%;
+      height: 36px;
+      line-height: 37px;
+      border-radius: 50px;
+      color: #ffffff;
+    }
+
+    .alarmAudioLists div {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 15px;
+      top: 13px;
+    }
+
+    .alarmAudioLists div {
+      z-index: 100;
+    }
+
+    .alarmAudioLists div img {
+      width: 100%;
+      opacity: 0.6;
+    }
+
+    .alarmAudioTitle {
+      display: block;
+      height: 34px;
+      line-height: 34px;
+      width: 50%;
+      font-size: 14px;
+      z-index: 10;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /*无音频 占位图*/
+    .noFileImg {
+      position: absolute;
+      top: 30%;
+      width: 60%;
+      left: 20%;
+    }
+
+    .noFileImg img {
+      width: 100%;
+    }
+
+    .noFileImg div {
+      font-size: 14px;
+      text-align: center;
+      color: #333333;
+      opacity: 0.7;
+      margin-top: -20px;
+    }
+
+    /*弹框配置*/
+    .mui-popover.mui-popover-action .mui-table-view {
+      text-align: center;
+    }
+
+    .audioSetListText,
+    .audioSetList {
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      margin: 20px auto;
+      background: -webkit-linear-gradient(left, #18B8B0, #21C7AF);
+      /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(right, #18B8B0, #21C7AF);
+      /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(right, #18B8B0, #21C7AF);
+      /* Firefox 3.6 - 15 */
+      background: linear-gradient(toright, #18B8B0, #21C7AF);
+      /* 标准的语法 */
+    }
+
+    .audioSetList {
+      background: -webkit-linear-gradient(left, #F6A21B, #FDBA37);
+      /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(right, #F6A21B, #FDBA37);
+      /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(right, #F6A21B, #FDBA37);
+      /* Firefox 3.6 - 15 */
+      background: linear-gradient(toright, #F6A21B, #FDBA37);
+      /* 标准的语法 */
+    }
+
+    .mui-col-xs-6 {
+      height: 150px;
+    }
+
+    .mui-col-xs-6>div {
+      width: 100%;
+      height: 150px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+    }
+
+    .audioSetList img,
+    .audioSetListText img {
+      width: 30px;
+      height: 30px;
+      margin-top: 15px;
+    }
+
+    .audioListWords {
+      width: 100%;
+      line-height: 20px;
+      font-size: 12px;
+    }
+
+    .mui-input-group {
+      margin-bottom: 10px;
+    }
+
+    .mui-input-group .mui-input-row {
+      height: 35px;
+    }
+
+    .alarmAudioConfigList .mui-table-view-cell>a:not(.mui-btn) {
+      text-align: left;
+      margin-left: 35px;
+      padding-left: 0; 
+    }
+
+    #alarmAudioConfigList.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after {
+      left: 50px;
+    }
+
+    .audioConfigDiv {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: 15px;
+      top: 16px;
+    }
+
+    .audioConfigDiv img {
+      width: 100%;
+    }
+
+    .mui-input-group .mui-input-row:after,
+    #addAlarmAudioList .mui-input-group:after,
+    #addAlarmAudioList .mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after,
+    #addAlarmAudioList.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after,
+    #addAlarmAudioList .mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell:after {
+      height: 0 !important;
+    }
+
+    .mui-content .mui-table-view:before,
+    .mui-content .mui-table-view:after {
+      height: 0 !important;
+    }
+
+    input[type='text'] {
+      border-radius: 45px !important;
+      background: #cccccc;
+    }
+
+    .edit {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      opacity: 0.5;
+      z-index: 1000;
+    }
+
+    .editDiv {
+      position: absolute;
+      top: 35%;
+      width: 70%;
+      height: 155px;
+      left: 15%;
+      background: #ffffff;
+      border-radius: 13px;
+      text-align: center;
+      z-index: 1001;
+    }
+
+    .editDiv input {
+      width: 80%;
+      margin: 0 auto;
+      height: 34px;
+      line-height: 34px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      opacity: 1;
+      border: none;
+      background: #EEEEEE;
+    }
+
+    .editTitle {
+      height: 62px;
+      line-height: 62px;
+    }
+
+    .bottonDiv {
+      border-top: 1px solid #EEEEEE;
+    }
+
+    .editDiv .bottonDiv span {
+      width: 49%;
+      height: 48px;
+      line-height: 48px;
+      display: inline-block;
+    }
+
+    .editDiv span:first-child {
+      border-right: 1px solid #EEEEEE;
+    }
+
+    .mui-input-row .mui-input-clear~.mui-icon-clear {
+      right: 10%;
+      top: 7px;
+      color: #333333;
+    }
+
+    /*右边箭头尺寸*/
+    .alarmAudioConfigList .mui-navigate-right:after {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .custom-left-tip {
+      display: inline-block;
+      width: 70%;
+      color: #ADADAD;
+      vertical-align: top;
+    }
+
+    .mui-table-view-cell>a:not(.mui-btn) {
+      top: 6px;
+    }
+  </style>
+</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class=" mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_alarm_audio_setting">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+      <!-- 添加报警音按钮 -->
+			<div class="addAlarmAudio mui-hidden" id="addAlarmAudio">
+				<div class="addBtn private-ellipsis" data-text="WEB_addAlarmSound">&nbsp;</div>
+			</div>
+			<div id="EZView-content" class="mui-hidden">
+				<ul class="mui-table-view" id="alarmAudioUl">
+
+				</ul>
+			</div>
+			<div class="noFileImg mui-hidden" id="noFileImg">
+				<img src="../images/audioList/nothing@3x.png" alt="" />
+				<div data-text="WEB_noAlarmSound">&nbsp;</div>
+			</div>
+		</div>
+    <!-- 添加报警音的弹窗 -->
+		<div id="addAlarmAudioList" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownAudioList"></div>
+				<div class="mui-row">
+					<div class="mui-col-xs-6">
+						<div id="audioSetListText">
+							<div class="audioSetListText">
+								<img src="../images/audioList/text_to_speech@3x.png" class="private-settings-img">
+							</div>
+							<div class="private-ellipsis audioListWords" data-text="WEB_textToSpeech">&nbsp;</div>
+						</div>
+					</div>
+					<div class="mui-col-xs-6">
+						<div id="audioSetList">
+							<div class="audioSetList">
+								<img src="../images/audioList/recording@3x.png" class="private-settings-img">
+							</div>
+							<div class="private-ellipsis audioListWords" data-text="WEB_recordSound">&nbsp;</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<button id="cancel" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_cancel">&nbsp;</button>
+		</div>
+
+  <div id="alarmAudioConfigList"
+    class="alarmAudioConfigList mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+    <form class="mui-input-group">
+      <div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownConfigList"></div>
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell" id="alarmAudioEdit">
+          <div class="audioConfigDiv">
+            <img src="../images/audioList/edit@3x.png" alt="" style="width:100%;" />
+          </div>
+          <a class="mui-navigate-right" data-text="WEB_edit">&nbsp;</a>
+        </li>
+        <li class="mui-table-view-cell" id="alarmAudioDel">
+          <div class="audioConfigDiv">
+            <img src="../images/audioList/delete@3x.png" alt="" />
+          </div>
+          <a class="mui-navigate-right" data-text="WEB_delete">&nbsp;</a>
+        </li>
+        <li class="mui-table-view-cell" id="alarmAudioAudition">
+          <div class="audioConfigDiv">
+            <img src="../images/audioList/try_it@3x.png" alt="" />
+          </div>
+          <a class="mui-navigate-right">
+            <span data-text="WEB_audioPlay">&nbsp;</span>
+            <span class="custom-left-tip private-ellipsis" data-text="WEB_listenAudioDevice">&nbsp;</span>
+          </a>
+        </li>
+      </ul>
+    </form>
+    <button id="cancel_edit" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_cancel">&nbsp;</button>
+  </div>
+
+  <div class="edit mui-hidden" id="alarmModal"></div>
+
+  <div class="editDiv mui-hidden" id="alarmEdit">
+    <div class="editTitle" data-text="WEB_edit">&nbsp;</div>
+    <div class="mui-input-row">
+      <input type="text" class="mui-input-clear" id="editInput" />
+    </div>
+    <div class="bottonDiv">
+      <span id="editCancel" data-text="WEB_cancel">&nbsp;</span>
+      <span id="editOK" data-text="WEB_button_ok">&nbsp;</span>
+    </div>
+  </div>
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/loadCss.js "></script>
+  <script id="langScript"></script>
+  <script>
+    var alarmAudioCapabilitiesData = {}; // 报警音能力
+    var audioListData = {}; // 报警音列表
+    var nowAlarmAudioID = ""; // 当前操作的报警音标识
+    var nowParentNode; // 当前操作的报警音父节点
+    var nowAudioName = ""; // 当前操作的报警音名称
+    var nowAudioFormat = ""; // 当前操作的报警音格式
+    var maxNum = ""; // 能力最大报警音数量
+    var nowNum = ""; // 当前设备已有的报警音数量（包括内置报警音）
+    var isSupportRename = false; // 是否支持重命名报警音名称
+    var isSupportAudition = false; // 是否支持报警音试听
+    checkType(localStorage.AppType); //加载特定样式
+    mui.init();
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+    initData();
+    initEvent();
+
+			function initData() {
+				initAlarmAudioCapabilities(); 
+			}
+
+			function initEvent() {
+        // 添加报警音
+        document.getElementById("addAlarmAudio").addEventListener("tap", function () {
+          // 支持 文字转语音 功能
+          if (localStorage.isSupportTextToAudio == "1") {
+            // 当前音频数量（内置+自定义导入）小于能力所支持的最大数量时可以自定义导入
+            if (nowNum < maxNum) {
+              mui('#addAlarmAudioList').popover('toggle');
+            } else {
+              showToast(langTip["WEB_addAlarmAudioTip"]);
+            }
+          } else {
+            // 若不支持文字转语音：点击添加报警音按钮直接进入 录制报警音 页面
+            dsBridgeFuncSyn.goToFunctionPage(15);
+          }
+        });
+        // 取消添加报警音弹框
+        document.getElementById("cancel").addEventListener("tap", function () {
+          mui('#addAlarmAudioList').popover('toggle');
+        })
+        // 文字转语音
+        document.getElementById("audioSetListText").addEventListener("tap", function () {
+          mui('#addAlarmAudioList').popover('toggle');
+          dsBridgeFuncSyn.goToFunctionPage(14);
+        })
+        // 录制报警音
+        document.getElementById("audioSetList").addEventListener("tap", function () {
+          mui('#addAlarmAudioList').popover('toggle');
+          dsBridgeFuncSyn.goToFunctionPage(15);
+        })
+        // 手势操作：向下滑动关闭弹框
+        document.getElementById("swipedownAudioList").addEventListener("swipedown", function () {
+          mui('#addAlarmAudioList').popover('toggle');
+        });
+        // 取消报警音编辑弹框
+        document.getElementById("cancel_edit").addEventListener("tap", function () {
+          mui('#alarmAudioConfigList').popover('toggle');
+        })
+
+      // 报警音名称 编辑
+      document.getElementById("alarmAudioEdit").addEventListener("tap", function () {
+        mui('#alarmAudioConfigList').popover('toggle');
+        nowAudioFormat = checkFileName(nowAudioName);
+        if (("pcm" == nowAudioFormat) || ("mp3" == nowAudioFormat)) {
+          nowAudioName = nowAudioName.substring(0, nowAudioName.length - 4); // TODO:去除文件后缀名.pcm
+        } else if ("g711" == nowAudioFormat) {
+          nowAudioName = nowAudioName.substring(0, nowAudioName.length - 5); // TODO:去除文件后缀名.g711
+        }
+        $("#editInput").val(nowAudioName);
+        $("#alarmEdit").removeClass("mui-hidden");
+        $("#alarmModal").removeClass("mui-hidden");
+      })
+
+      // 报警音名称 编辑 成功
+      document.getElementById("editOK").addEventListener("tap", function () {
+        // 名称相同时直接关闭弹出框，不触发接口下发
+        if (nowAudioName === $("#editInput").val()) {
+          $("#alarmEdit").addClass("mui-hidden");
+          $("#alarmModal").addClass("mui-hidden");
+          nowAudioName = $("#editInput").val() + "." + nowAudioFormat;
+          return;
+        }
+        var sendData = {};
+        sendData.FileName = $("#editInput").val();
+        if (!checkAudioName(sendData.FileName)) {
+          showToast(langTip["WEB_checkAudioName"]);
+          return;
+        }
+        dsBridgeFuncSyn.showLoading();
+        SendAjax(LAPI.modifyAudioFileName + nowAlarmAudioID, "put", function (code, data) {
+          dsBridgeFuncSyn.dismiss();
+          if (code == 0) {
+            $("#alarmEdit").addClass("mui-hidden");
+            $("#alarmModal").addClass("mui-hidden");
+            // 修改名称后加上当前文件名后缀
+            $("#alarmAudioConfig" + nowAlarmAudioID).parent().find("span").text(sendData.FileName + "." + nowAudioFormat);
+            showToast(langTip["WEB_api_error_succeeded"], code);
+            nowAudioName = sendData.FileName + "." + nowAudioFormat;
+          } else {
+            showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+          }
+        }, sendData)
+      })
+
+      // 报警音名称 编辑 失败
+      document.getElementById("editCancel").addEventListener("tap", function () {
+        nowAudioName = nowAudioName + "." + nowAudioFormat;
+        $("#alarmEdit").addClass("mui-hidden");
+        $("#alarmModal").addClass("mui-hidden");
+      })
+
+      // 报警音 删除
+      document.getElementById("alarmAudioDel").addEventListener("tap", function () {
+        mui('#alarmAudioConfigList').popover('toggle');
+        var btnArray = [langTip["WEB_cancel"], langTip["WEB_button_ok"]];
+        mui.confirm(langTip["WEB_delAlarmAudioText"], langTip["WEB_dialog_title_notify"], btnArray, function (e) {
+          if (e.index == 1) {
+            dsBridgeFuncSyn.showLoading();
+            SendAjax(LAPI.delAlarmAudio + nowAlarmAudioID, "delete", function (code, data) {
+              dsBridgeFuncSyn.dismiss();
+              if (code == 0) {
+                var parentDom = document.getElementById("alarmAudioUl");
+                parentDom.removeChild(nowParentNode);
+                var liNum = $("#alarmAudioUl").find("li").length;
+                if (liNum == 0) {
+                  $("#noFileImg").removeClass("mui-hidden");
+                }
+                audioListData.Num = audioListData.Num - 1;
+                nowNum = audioListData.Num;
+              } else {
+                showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+              }
+            })
+          } else {
+
+          }
+        }, "div")
+      })
+
+      // 报警音 试听
+      document.getElementById("alarmAudioAudition").addEventListener("tap", function () {
+        var sendData = {};
+        dsBridgeFuncSyn.showLoading();
+        SendAjax(LAPI.audioFilePlay + nowAlarmAudioID + "/Play", "put", function (code, data) {
+          dsBridgeFuncSyn.dismiss();
+          if (code == 0) {
+            $("#alarmEdit").addClass("mui-hidden");
+            $("#alarmModal").addClass("mui-hidden");
+            showToast(langTip["WEB_api_error_succeeded"], code);
+            mui('#alarmAudioConfigList').popover('toggle');
+          } else {
+            showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+          }
+        }, sendData)
+      })
+
+				// 手势操作：向下滑动关闭弹框
+				document.getElementById("swipedownConfigList").addEventListener("swipedown", function() {
+					mui('#alarmAudioConfigList').popover('toggle');
+				});
+			}
+
+    /**
+     * 获取报警音能力
+     */
+    function initAlarmAudioCapabilities() {
+      SendAjax(LAPI.IPCorChannelCapabilities, "get", function (code, data) {
+        if (code == 0) {
+          alarmAudioCapabilitiesData = deepCopy(data);
+          // 判断设备是否支持自定义报警音导入功能
+          if (alarmAudioCapabilitiesData.AudioFile && alarmAudioCapabilitiesData.AudioFile.MaxNum > 0) {
+            maxNum = alarmAudioCapabilitiesData.AudioFile.MaxNum;
+            // 判断是否支持重命名功能
+            if (alarmAudioCapabilitiesData.AudioFile.SupportRename) {
+              isSupportRename = alarmAudioCapabilitiesData.AudioFile.SupportRename;
+            }
+            // 判断是否支持试音功能
+            if (alarmAudioCapabilitiesData.AudioFile.SupportMaunalPlay) {
+              isSupportAudition = alarmAudioCapabilitiesData.AudioFile.SupportMaunalPlay;
+            }
+            initAudioFile();
+          } else {
+            addBitmap(1, langTip["WEB_unSupported"]);
+            dsBridgeFuncSyn.dismiss();
+          }
+					} else if(code == 4 || code == 8 || code == 1006) {
+          addBitmap(1, langTip["WEB_unSupported"]);
+          dsBridgeFuncSyn.dismiss();
+        } else {
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          addBitmap(0);
+          dsBridgeFuncSyn.dismiss();
+        }
+      })
+    }
+
+    /*
+     * 初始化音频文件
+     */
+    function initAudioFile() {
+      SendAjax(LAPI.AudioFile, "get", function (code, data) {
+        if (code == 0) {
+          $("#alarmAudioUl").empty();
+          mui("#alarmAudioUl").off("tap");
+          $("#addAlarmAudio").removeClass("mui-hidden");
+          audioListData = deepCopy(data);
+          for (var i = 0; i < audioListData.Num; i++) {
+            if (audioListData.FileInfoList[i].InstallType == 1) {
+              var childLi = document.createElement("li");
+              childLi.className = "mui-table-view-cell alarmAudioLists";
+              var childSpan = document.createElement("span");
+              nowAudioName = audioListData.FileInfoList[i].FileName; // 报警音名称
+              childSpan.innerText = nowAudioName;
+              childSpan.className = "alarmAudioTitle";
+              var childDiv = document.createElement("div");
+              childDiv.id = "alarmAudioConfig" + audioListData.FileInfoList[i].ID;
+              var childImg = document.createElement("img");
+              childImg.src = "../images/audioList/more@3x.png";
+              childDiv.appendChild(childImg);
+              childLi.appendChild(childSpan);
+              childLi.appendChild(childDiv);
+              var parentDom = document.getElementById("alarmAudioUl");
+              parentDom.appendChild(childLi);
+            }
+          }
+          mui(".mui-table-view").on("tap", ".mui-table-view-cell div", function () {
+            //获取当前报警音所在Li的id
+            var id = this.getAttribute("id");
+            var that = this;
+            var index = id.substring(16);
+            nowAlarmAudioID = index;
+            nowParentNode = that.parentNode;
+            if (!isSupportAudition) {
+              document.getElementById("alarmAudioAudition").classList.add("mui-hidden");
+            }
+            if (!isSupportRename) {
+              document.getElementById("alarmAudioEdit").classList.add("mui-hidden");
+            }
+
+            var parEl = this.previousElementSibling;
+            nowAudioName = parEl.innerText;
+            mui('#alarmAudioConfigList').popover('toggle');
+          })
+          nowNum = audioListData.Num;
+          $("#EZView-content").removeClass("mui-hidden");
+          var liNum = $("#alarmAudioUl").find("li").length;
+          if (liNum == 0) {
+            $("#noFileImg").removeClass("mui-hidden");
+          } else {
+            $("#noFileImg").addClass("mui-hidden");
+          }
+          dsBridgeFuncSyn.dismiss();
+					} else if(code == 4 || code == 8 || code == 1006) {
+          dsBridgeFuncSyn.dismiss();
+          addBitmap(1, langTip["WEB_unSupported"]);
+        } else {
+          dsBridgeFuncSyn.dismiss();
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          addBitmap(0);
+        }
+      })
+    }
+
+    /******************新增原生App上报Web功能接口******************/
+    //TODO:监听原生侧上报数据
+    dsBridge.register("callWebDoFuncAsyn", function (args) {
+      var webInfo = JSON.parse(args);
+      for (var key in webInfo) {
+        switch (webInfo[key].whichInfo) {
+          case "audioExportStatusCallBack": // 绘图数据发还给运检测配置页面
+            $("#EZView-content").addClass("mui-hidden");
+            $("#noFileImg").addClass("mui-hidden");
+            $("#addAlarmAudio").addClass("mui-hidden");
+            setTimeout(function () {
+              dsBridgeFuncSyn.showLoading();
+              initAudioFile();
+            }, 100);
+            break;
+          case "deviceStatus": // 更新设备在线状态
+            localStorage.deviceStatus = webInfo[key].infoValue;
+            break;
+          case "ip": // 更新ip
+            localStorage.Ip = webInfo[key].infoValue;
+            break;
+          case "port": // 更新port
+            localStorage.Port = webInfo[key].infoValue;
+            break;
+          case "logInfo": //更新登录信息
+            localStorage.logInfo = webInfo[key].infoValue;
+            break;
+          case "deviceName": //更新设备名称
+            var deviceName = document.getElementById("deviceName");
+            break;
+          case "sdkType": //更新SDK类型
+            localStorage.sdkType = webInfo[key].infoValue;
+            break;
+          case "isNetConnect": //更新手机是否联网
+            localStorage.isNetConnect = webInfo[key].infoValue;
+            break;
+          case "hasNewVersion": //是否有新版本
+            localStorage.hasNewVersion = webInfo[key].infoValue;
+            break;
+          case "versionNumber": //当前版本号
+            localStorage.versionNumber = webInfo[key].infoValue;
+            break;
+          case "LocalDeviceUname": //免注册设备用户名更新
+            localStorage.LocalDeviceUname = webInfo[key].infoValue;
+            break;
+          case "deviceOs": //设备云端在线状态 “true”在线，“false”离线
+            localStorage.deviceOs = webInfo[key].infoValue;
+            break;
+          case "updateChannelName": // TODO：通道名称修改成功后，主页同步更新
+            localStorage.deviceName = webInfo[key].infoValue;
+            break;
+						case "workingStatus":
+							localStorage.workingStatus = webInfo[key].infoValue;
+							break;
+						case "channelStatus":
+							localStorage.channelStatus = webInfo[key].infoValue;
+							break;
+          default:
+            break;
+        }
+      }
+    })
+
+    /**
+     * 截取文件后缀名名称
+     * @param {Object} str
+     */
+    function checkFileName(str) {
+      var index = str.lastIndexOf("\.");
+      str = str.substring(index + 1, str.length);
+      return str;
+    }
+
+    /**
+     * 校验自定义报警音是否符合要求
+     * @param {Object} audioName
+     */
+    function checkAudioName(audioName) {
+      var reg = /^([^\/\\:*?\"<>|]{1,20})$/g;
+      if (reg.test(audioName)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <!-- <link href="../css/Common.css" rel="stylesheet" /> -->
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    /* 文本超长省略 */
+    .super-long-omitted {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .mui-table-view::after,
+    .mui-table-view::before {
+      height: 0px !important;
+    }
+
+    /* 设备/通道页签 */
+    .mui-segmented-control {
+      background-color: #fff;
+      border-radius: 8px;
+      border: none;
+      height: 48px;
+      margin-top: 12px;
+      width: 94%;
+      margin-left: 3%;
+    }
+
+    .mui-segmented-control .mui-control-item {
+      color: rgba(17, 31, 44, 0.56);
+      border: none;
+      line-height: 48px;
+    }
+
+    .mui-segmented-control .mui-control-item.mui-active {
+      position: relative;
+      background-color: #fff;
+      color: #111f2c;
+    }
+
+    .mui-segmented-control .mui-control-item.mui-active::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -12px;
+      display: block;
+      content: "";
+      width: 24px;
+      height: 3px;
+      background-color: #50D0C1;
+      border-radius: 3px;
+    }
+
+    /* 设备和通道列表 */
+    .mui-content-padded {
+      width: 93%;
+      margin-left: 3%;
+      margin-bottom: 0;
+    }
+
+    .device-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: space-between;
+      font-size: 14px;
+      height: 56px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .device-select-all-btn {
+      height: 38px;
+      margin-top: 15px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* 设备列表的样式 */
+    #deviceInfoListContent {
+      position: relative;
+    }
+
+    #deviceInfoListUL {
+      background-color: transparent;
+    }
+
+    #deviceInfoListContent .mui-input-row {
+      display: flex;
+      flex-direction: row;
+      background-color: #fff;
+      align-items: center;
+      height: 54px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .device-logo {
+      height: 48px;
+      margin-left: 12px;
+    }
+
+    .device-name {
+      width: 70% !important;
+    }
+
+    .device-checkbox {
+      top: 13px !important;
+    }
+
+    /* 通道的全选按钮 */
+    .channel-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: space-between;
+      font-size: 14px;
+      height: 56px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .channel-select-all-btn {
+      height: 38px;
+      margin-top: 15px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* 通道列表的样式 */
+    #channelsInfoListContent {
+      position: relative;
+    }
+
+    #channelsInfoListContent .mui-table-view {
+      background-color: transparent;
+    }
+
+    /* 通道列表的样式 */
+    .channel-list-card {
+      position: relative;
+      background-color: #fff !important;
+      padding-left: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .channel-list-card::after {
+      height: 0;
+    }
+
+    .channel-list-card a {
+      position: relative;
+      height: 56px;
+      background-color: #fff !important;
+    }
+
+    /* NVR 列表上的全选按钮 */
+    .select-all-btn {
+      position: absolute;
+      top: 13px;
+      right: 0;
+      height: 30px;
+    }
+
+    .channel-list-logo {
+      position: absolute;
+      top: 3px;
+      left: 20px;
+    }
+
+    .NVR-channels-list-name {
+      position: absolute;
+      display: inline-block;
+      width: 60%;
+      top: 20px;
+      left: 85px;
+    }
+
+    .channel-list-card a::after {
+      position: absolute;
+      top: 50%;
+      left: -5px;
+      font-size: 30px;
+    }
+
+    .channel-list-content {
+      padding-left: 20px !important;
+    }
+
+    .NVR-channel-card {
+      display: flex;
+      flex-direction: row;
+      height: 56px;
+    }
+
+    .NVR-channel-name {
+      width: 70%;
+      padding-right: 0 !important;
+    }
+
+    .NVR-channel-checkbox {
+      margin-left: 12px;
+      position: relative;
+      right: 6px !important;
+    }
+
+    #channelsInfoListContent img {
+      height: 48px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 页面标题：管理设备 -->
+  <header class="mui-bar mui-bar-nav">
+    <a id="back" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="">管理设备</h1>
+    <a id="save" class="mui-icon iconfont icon-save mui-pull-right"></a>
+  </header>
+  <div class="mui-content">
+    <div id="EZView-content" class="mui-hidden">
+
+      <!-- 选项卡：设备/通道切换 -->
+      <div class="tab-card">
+        <div id="segmentedControl" class="mui-segmented-control">
+          <a href="#item1" class="mui-control-item ">请选择设备</a>
+          <a href="#item2" class="mui-control-item mui-active">请选择通道</a>
+        </div>
+      </div>
+
+      <div class="mui-content-padded">
+        <!-- 选项卡内容：设备的信息 -->
+        <div id="item1" class="mui-control-content">
+          <div class="device-header">
+            <span class="device-tip">选择你想要的设备</span>
+            <!-- TODO:设备的全选功能还没有实现 -->
+            <div id="deviceSelectAllBtn" class="mui-input-row mui-checkbox device-select-all-btn">
+              <label>全选</label>
+              <input type="checkbox">
+            </div>
+          </div>
+          <div id="deviceInfoListContent">
+            <div class="mui-scroll-wrapper">
+              <div class="mui-scroll">
+                <!-- TODO：设备模版要和最终的DOM结构保持一致，主要是新加的一些属性 -->
+                <ul id="deviceInfoListUL" class="mui-table-view">
+                  <!-- IPC 设备模版 -->
+                  <div class="mui-input-row mui-checkbox device-card-template mui-hidden">
+                    <img class="device-logo" src="../images/appConfig/IPC3x.png">
+                    <label class="device-name super-long-omitted">IPC-001</label>
+                    <input class="device-checkbox" type="checkbox">
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 选项卡内容：通道的信息 -->
+        <div id="item2" class="mui-control-content mui-active">
+          <div class="channel-header">
+            <span class="channel-tip">选择你想要的通道</span>
+            <!-- TODO：通道的全选功能还没有实现 -->
+            <div id="channelSelectAllBtn" class="mui-input-row mui-checkbox channel-select-all-btn">
+              <label>全选</label>
+              <input type="checkbox">
+            </div>
+          </div>
+          <div id="channelsInfoListContent">
+            <div class="mui-scroll-wrapper">
+              <div class="mui-scroll">
+                <!-- TODO：通道的模版要和最终的DOM结构保持一致，主要是一些新加的属性 -->
+                <ul id="channelsInfoListUL" class="mui-table-view">
+
+                  <!-- NVR通道列表模版 -->
+                  <li data-deviceSerial="210898675XXXXXXXXXXXXX1" data-deviceType=1
+                    class="mui-table-view-cell channel-list-card mui-collapse NVR-channels-list-card-template mui-active mui-hidden">
+                    <a class="mui-navigate-right" href="#">
+                      <img class="channel-list-logo" src="../images/appConfig/NVR3x.png">
+                      <span class="NVR-channels-list-name super-long-omitted">NVR-001</span>
+                    </a>
+                    <div class="mui-input-row mui-checkbox select-all-btn">
+                      <label></label>
+                      <input value="NVR001" type="checkbox">
+                    </div>
+                    <div class="mui-collapse-content channel-list-content">
+                      <!-- 分割线 -->
+                      <div class="line"></div>
+                      <!-- 需要把 NVR 通道的 DOM 结构放到这里 -->
+                    </div>
+                  </li>
+
+                  <!-- NVR 通道模板 -->
+                  <div class="mui-input-row mui-checkbox NVR-channel-card NVR-channels-card-template mui-hidden">
+                    <img src="../images/appConfig/IPC3x.png">
+                    <label class="NVR-channel-name super-long-omitted">NVR通道-001</label>
+                    <input class="NVR-channel-checkbox" value="IPC001" type="checkbox">
+                  </div>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/loadCss.js"></script>
+  <script src="../js/batchShareDeviceUtil.js"></script>
+  <script id="langScript"></script>
+  <script>
+    var langTip;
+    checkType(localStorage.AppType); //加载特定样式
+    mui.init();
+    // 获取语言文件
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+
+    var deviceList = [];   // 可选择的设备列表
+    var channelsList = []; // 可选择的通道列表
+
+    var currentMode = ''   // 当前设备管理页面的模式
+
+
+    // 初始化页面
+    initPage()
+    // 初始化数据
+    initData();
+    // 初始化事件
+    initEvent()
+
+
+    function initPage() {
+      mui('.mui-scroll-wrapper').scroll();
+      // 从上一个跳转页面中拿取数据
+      var Url = "web/newPages/manageDevice.html";
+      var self = dsBridgeFuncSyn.getWebParam(Url);
+      if (isMock) {
+        data = {
+          operateType: 'edit-first',
+          userId: 111111
+        }
+      } else {
+        data = JSON.parse(self);
+      }
+
+      currentMode = data.operateType;
+      // 场景：进行批量分享操作，且是首次进入管理设备界面
+      if (currentMode == 'add') {
+        // 通过接口获取总的设备信息列表。当做数据源来使用
+        getDeviceShareableList()
+      } else if (currentMode == 'edit') { // 场景：进行批量分享操作，非首次进入管理设备界面
+        // 将批量分享页面传过来的数据当做数据源来使用
+        deviceList = data.deviceList
+        channelsList = data.channelsList
+        buildShareableDeviceList(deviceList);
+        buildShareableChannelsList(channelsList);
+        $("#EZView-content").removeClass("mui-hidden");
+        getScrollContentHeight();
+        dsBridgeFuncSyn.dismiss()
+      } else if (currentMode == 'edit-first') { // 场景：进行编辑分享操作，首次进入设备管理页面
+        getDeviceShareableList(data.userId)
+      } else if (currentMode == "edit-more") { // 场景：进行编辑分享操作，非首次进入设备管理页面
+        deviceList = data.deviceList
+        channelsList = data.channelsList
+        buildShareableDeviceList(deviceList);
+        buildShareableChannelsList(channelsList);
+        $("#EZView-content").removeClass("mui-hidden");
+        getScrollContentHeight();
+        dsBridgeFuncSyn.dismiss();
+      }
+    }
+
+    function initData() {
+    }
+
+    function initEvent() {
+      // 绑定事件：保存按钮
+      $('#save').on('tap', saveSelect)
+    }
+
+    //  获取可分享的设备列表
+    function getDeviceShareableList(userId) {
+
+      if (userId == undefined) {
+        var sendData = {}
+      } else {
+        var sendData = {
+          shareUserId: userId
+        }
+      }
+
+      CloudSendAjax(localStorage.serverAddress + openAPI.shareableDeviceList, 'post', function (code, message, data) {
+        // TODO:模拟数据
+        if (isMock) {
+          code = 200;
+          data = {
+            shareableDeviceList: [
+              {
+                "deviceSerial": "211111XXXXXXXXXXXXX1",
+                "deviceName": "IPC未被分享",
+                "deviceType": 0,
+                "isShared": 0
+              },
+              {
+                "deviceSerial": "222222XXXXXXXXXXXXX1",
+                "deviceName": "IPC被分享",
+                "deviceType": 0,
+                "isShared": 0
+              },
+              {
+                "deviceSerial": "233333XXXXXXXXXXXXX1",
+                "deviceName": "NVR卧室",
+                "deviceType": 1,
+                "isShared": 0,
+                "channelList": [
+                  {
+                    "channelName": "通道1",
+                    "channelNo": 1,
+                    "isShared": 0
+                  },
+                  {
+                    "channelName": "通道2",
+                    "channelNo": 2,
+                    "isShared": 0
+                  }]
+              },
+              {
+                "deviceSerial": "244444XXXXXXXXXXXXX1",
+                "deviceName": "NVR2在卧室",
+                "deviceType": 1,
+                "isShared": 0,
+                "channelList": [
+                  {
+                    "channelName": "通道3",
+                    "channelNo": 3,
+                    "isShared": 0
+                  },
+                  {
+                    "channelName": "通道4",
+                    "channelNo": 4,
+                    "isShared": 0
+                  }]
+              }
+            ]
+          }
+        }
+
+        if (code == 200) {
+          data.shareableDeviceList.forEach((shareableDevice) => {
+            // 根据设备类型进行区分
+            switch (shareableDevice.deviceType) {
+              case 0:
+                deviceList.push(shareableDevice);
+                break;
+              case 1:
+                if (shareableDevice.channelList && shareableDevice.channelList.length > 0) {
+                  channelsList.push(shareableDevice);
+                }
+                var deviceInfo = {
+                  deviceSerial: shareableDevice.deviceSerial,
+                  deviceName: shareableDevice.deviceName,
+                  deviceType: shareableDevice.deviceType,
+                  isShared: shareableDevice.isShared,
+                }
+                deviceList.push(deviceInfo)
+                break
+              case 6:
+                deviceList.push(shareableDevice);
+                break
+              case 7:
+                deviceList.push(shareableDevice);
+                break;
+              default:
+            }
+          });
+          console.log('deviceList%o', deviceList);
+          console.log('channelsList%o', channelsList);
+          buildShareableDeviceList(deviceList);
+          buildShareableChannelsList(channelsList)
+          dsBridgeFuncSyn.dismiss()
+          $("#EZView-content").removeClass("mui-hidden")
+          getScrollContentHeight();
+        } else {
+          addBitmap(0);
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          dsBridgeFuncSyn.dismiss();
+        }
+      }, sendData)
+    }
+
+    // 生成可分享设备列表
+    function buildShareableDeviceList(deviceList) {
+      var ulDom = $('#deviceInfoListUL');
+      deviceList.forEach((deviceInfo) => {
+        // 克隆模板
+        var deviceTemplate = $('.device-card-template').clone();
+        deviceTemplate.removeClass('device-card-template mui-hidden');
+        var imgUrl = ""
+        switch (deviceInfo.deviceType) {
+          case 0:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          case 1:
+            imgUrl = "../images/appConfig/NVR3x.png"
+            break;
+          case 6:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          case 7:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          default:
+            imgUrl = "../images/appConfig/IPC3x.png"
+        }
+        // 填充值：设备图片信息
+        deviceTemplate.find("img").attr("src", imgUrl)
+        // 填充值：设备名称
+        deviceTemplate.find("label").text(deviceInfo.deviceName)
+        // 添加属性：设备序列号
+        deviceTemplate.find("input").attr("value", deviceInfo.deviceSerial)
+        // 更改属性值：单选框被选中的状态
+        deviceTemplate.find("input").prop("checked", deviceInfo.isShared ? true : false)
+        // 添加事件: 设备卡片单选框的
+        deviceTemplate.find("input").on('change', deviceInfoChange)
+        // 插入列表中
+        ulDom.append(deviceTemplate)
+      })
+    }
+
+      // 获取滚动容器的大小
+      function getScrollContentHeight() {
+        var scrollTop = $('#channelsInfoListContent').offset().top;
+        // 21px 是 body 的 padding-bottom
+        $('#deviceInfoListContent').css("height", "calc(100vh - (" + scrollTop + "px + 21px))");
+        $('#channelsInfoListContent').css("height", "calc(100vh - (" + scrollTop + "px + 21px))");
+      }
+
+
+
+
+    // 生成可分享通道列表
+    // TODO:之前的实现为了从 DOM 上拿值，在 DOM 上加了一些没用的数据，后续需要删除
+    function buildShareableChannelsList(channelsList) {
+      var ulDom = $('#channelsInfoListUL');
+      channelsList.forEach(function (channelsListInfo) {
+        // 克隆模版: 通道列表
+        var channelsListTemplate = $('.NVR-channels-list-card-template').clone();
+        channelsListTemplate.removeClass('NVR-channels-list-card-template mui-hidden');
+        // 填充值：通道所属 NVR 设备的名字
+        channelsListTemplate.find('.NVR-channels-list-name').text(channelsListInfo.deviceName);
+        // 添加属性：NVR 的设备序列号
+        channelsListTemplate.attr("data-deviceSerial", channelsListInfo.deviceSerial)
+        // 绑定事件：全选按钮
+        channelsListTemplate.find('.select-all-btn').on('tap', selectAllChannelsBtn)
+        var selectChannelList = channelsListInfo.channelList.filter(function (channelInfo) {
+          return channelInfo.isShared == 1
+        })
+        // 如果当前 NVR 设备下的所有通道都被选中了，则将 全选按钮设置为选中状态
+        if (selectChannelList.length == channelsListInfo.channelList.length) {
+          // 修改属性值：改变全选按钮的被选中状态
+          channelsListTemplate.find('.select-all-btn input').prop("checked", true)
+        }
+        channelsListInfo.channelList.forEach(function (channelInfo) {
+          var collapseContentDom = channelsListTemplate.find('.mui-collapse-content');
+          // 克隆模版：通道
+          var channelTemplate = $('.NVR-channels-card-template').clone();
+          channelTemplate.removeClass('NVR-channels-card-template mui-hidden');
+          // 填充值：NVR 通道的名字
+          channelTemplate.find(".NVR-channel-name").text(channelInfo.channelName);
+          // 添加属性：通道号
+          channelTemplate.attr("data-channelNo", channelInfo.channelNo)
+          // 更改属性值：单选框被选中的状态
+          channelTemplate.find("input").prop("checked", channelInfo.isShared ? true : false)
+          // 添加事件: 通道卡片单选框状态变更
+          channelTemplate.find("input").on('change', channelInfoChange)
+          // 通道插入通道 List 中
+          collapseContentDom.append(channelTemplate);
+        })
+        ulDom.append(channelsListTemplate);
+      })
+    }
+
+    // 全选按钮
+    function selectAllChannelsBtn() {
+      event.stopPropagation()
+      // 当前被点击 NVR 的序列号
+      var NVRDeviceSerial = $(this).parent().attr("data-deviceSerial");
+      if ($(this).find('input').prop('checked')) {
+        // 取消所有通道的选择
+        // 1. 将 全选 按钮取消勾选
+        $(this).find('input').prop('checked', false)
+        // 2. 将被点击 NVR 下的所有通道 取消勾选
+        $(this).next().find('.mui-input-row').each(function (index) {
+          $(this).find('input').prop("checked", false)
+        })
+        // 3. 将被点击 NVR 对应数据下的所有通道 isShared 改为 0
+        channelsList.forEach(function (channelListInfo) {
+          if (channelListInfo.deviceSerial == NVRDeviceSerial) {
+            channelListInfo.channelList.forEach(function (channelInfo) {
+              channelInfo.isShared = 0;
+            })
+          }
+        })
+      } else {
+        // 全选所有的通道
+        $(this).find('input').prop('checked', true)
+        $(this).next().find('.mui-input-row').each(function (index) {
+          $(this).find('input').prop("checked", true)
+        })
+        channelsList.forEach(function (channelListInfo) {
+          if (channelListInfo.deviceSerial == NVRDeviceSerial) {
+            channelListInfo.channelList.forEach(function (channelInfo) {
+              channelInfo.isShared = 1;
+            })
+          }
+        })
+      }
+    }
+
+    // 事件处理函数：点击设备卡片的单选框，更改数据
+    function deviceInfoChange() {
+      var currentDeviceSerial = $(this).val();
+      var turnToStatus = $(this).prop('checked')
+      deviceList.forEach(function (deviceInfo) {
+        if (deviceInfo.deviceSerial == currentDeviceSerial) {
+          turnToStatus ? deviceInfo.isShared = 1 : deviceInfo.isShared = 0
+        }
+      })
+    }
+
+    // 事件处理函数：点击通道卡片的单选框，更改数据
+    function channelInfoChange() {
+      var liDOM = $(this).parents('li.mui-collapse');
+      var currentDeviceSerial = liDOM.attr("data-deviceSerial")
+      var turnToStatus = $(this).prop('checked')
+      var currentChannelNo = $(this).parent().attr("data-channelNo")
+
+      channelsList.forEach(function (channelListInfo) {
+        if (channelListInfo.deviceSerial == currentDeviceSerial) {
+          channelListInfo.channelList.forEach(function (channelInfo) {
+            if (channelInfo.channelNo == currentChannelNo) {
+              turnToStatus ? channelInfo.isShared = 1 : channelInfo.isShared = 0
+            }
+          })
+          var selectChannelList = channelListInfo.channelList.filter(function (channelInfo) {
+            return channelInfo.isShared == 1
+          })
+          if (selectChannelList.length == channelListInfo.channelList.length) {
+            liDOM.find('.select-all-btn input').prop("checked", true)
+          } else {
+            liDOM.find('.select-all-btn input').prop("checked", false)
+          }
+        }
+      })
+    }
+
+
+
+    // 事件处理函数：将用户选择的数据传送给 批量分享 页面，并跳转回 批量分享 页面
+    function saveSelect() {
+      var param = {
+        deviceList: deviceList,
+        channelsList: channelsList
+      }
+      console.log('设备列表%o', param.deviceList);
+      console.log('通道列表%o', param.channelsList);
+      // 传递数据
+      dsBridgeFuncSyn.sendDataToReport("addSelectDeviceChannels", JSON.stringify(param));
+      // 返回上一个页面
+      dsBridgeFuncSyn.backTo();
+    }
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.private-settings-img {
+				width: 24px;
+			}
+			
+			.mui-row .mui-table-view-cell {
+				text-align: center;
+				font-size: 12px;
+			}
+			
+			.non-first ul {
+				margin-top: 0px;
+			}
+			
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_IntelligentDetection">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row mui-hidden" id="intelligentTop">
+				<!--区域入侵-->
+				<div class="mui-col-xs-3 mui-hidden" id="settings_IntrusionDetection">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="settings_IntrusionDetection_tap">
+							<image src=" ../images/regional_intrusion@3x.png " class="private-settings-img "></image>
+							<div data-text="WEB_intrusionDetection" class="imgTitles private-ellipsis">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
+				<!--越界检测-->
+				<div class="mui-col-xs-3 mui-hidden" id="settings_CrossLineDetection">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="settings_CrossLineDetection_tap">
+							<image src=" ../images/cross_border_detection@3x.png " class="private-settings-img "></image>
+							<div data-text="WEB_crossLineDetection" class="imgTitles private-ellipsis">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
+				<!--进入区域-->
+				<div class="mui-col-xs-3 mui-hidden" id="settings_AccessZone">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="settings_AccessZone_tap">
+							<image src=" ../images/enter_region@3x.png " class="private-settings-img "></image>
+							<div data-text="WEB_enterArea" class="imgTitles private-ellipsis">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
+				<!--离开区域-->
+				<div class="mui-col-xs-3 mui-hidden" id="settings_LeaveZone">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="settings_LeaveZone_tap">
+							<image src=" ../images/out_region@3x.png " class="private-settings-img "></image>
+							<div data-text="WEB_leaveArea" class="imgTitles private-ellipsis">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
+				<!--自动跟踪-->
+				<div class="mui-col-xs-3 mui-hidden" id="settings_Automatic">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" id="settings_Automatic_tap">
+							<image src=" ../images/automatic_tracking.png " class="private-settings-img "></image>
+							<div data-text="WEB_auto_tracking" class="imgTitles private-ellipsis">&nbsp;</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js "></script>
+    <script id="langScript"></script>
+		<script>
+			var isShowNoFunction; //无功能占位图
+			var isSupportNum = 0; //默认支持功能数目
+			var capacityDataObj;
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+
+			initData();
+			initEvent();
+
+
+			function initData() {
+				isShowNoFunction = true;
+				//NVR不支持配置检测功能
+
+				SendAjax(LAPI.SmartCapabilities, 'get', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						//区域入侵
+						capacityDataObj = {
+							capacityData: data
+						};
+						if(data.IntrusionDetection && data.IntrusionDetection.SupportCfg && data.IntrusionDetection.SupportCfg == 1) {
+							isShowNoFunction = false;
+							isSupportNum++;
+							$("#settings_IntrusionDetection").removeClass("mui-hidden");
+						}
+						//越界检测
+						if(data.CrossLineDetection && data.CrossLineDetection.SupportCfg && data.CrossLineDetection.SupportCfg == 1) {
+							isShowNoFunction = false;
+							isSupportNum++;
+							$("#settings_CrossLineDetection").removeClass("mui-hidden");
+						}
+						//进入区域
+						if(data.AccessZone && data.AccessZone.SupportCfg && data.AccessZone.SupportCfg == 1) {
+							isShowNoFunction = false;
+							isSupportNum++;
+							$("#settings_AccessZone").removeClass("mui-hidden");
+						}
+						//离开区域
+						if(data.LeaveZone && data.LeaveZone.SupportCfg && data.LeaveZone.SupportCfg == 1) {
+							isShowNoFunction = false;
+							isSupportNum++;
+							$("#settings_LeaveZone").removeClass("mui-hidden");
+						}
+						//现版本通道不支持自动跟踪功能
+						if(!(localStorage.deviceType == "1" && localStorage.channelId != "0")) {
+							if(data.ObjTrack && data.ObjTrack.IsSupport && data.ObjTrack.IsSupport == 1) {
+								isShowNoFunction = false;
+								isSupportNum++;
+								$("#settings_Automatic").removeClass("mui-hidden");
+							}
+						}
+
+						if(isShowNoFunction) {
+							//TODO:无功能占位图
+							addBitmap(1, langTip["WEB_noConfigAvailable"]);
+						} else {
+							$("#intelligentTop").removeClass("mui-hidden");
+							var par = document.getElementById("intelligentTop");
+							if(isSupportNum <= 4) {
+								for(var i = 0; i < 4 - isSupportNum; i++) {
+									addFirstLine(par);
+								}
+							} else {
+								//最多两行8个，一行4个
+								for(var i = 0; i < 8 - isSupportNum; i++) {
+									addNoFirstLine(par);
+								}
+								$("#settings_Automatic").addClass("non-first");
+							}
+						}
+					} else if(code == 4 || code == 8 || code == 1006) {
+						addBitmap(1, langTip["WEB_unSupported"]);
+					} else {
+						//TODO:加载失败显示加载失败占位图
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+					}
+				})
+			}
+
+			function initEvent() {
+				document.getElementById("settings_IntrusionDetection").addEventListener('tap', function() {
+					jumpToWebPage("settings_IntrusionDetection", JSON.stringify(capacityDataObj));
+				});
+				document.getElementById("settings_CrossLineDetection").addEventListener('tap', function() {
+					jumpToWebPage("settings_CrossLineDetection", JSON.stringify(capacityDataObj));
+				});
+				document.getElementById("settings_AccessZone").addEventListener('tap', function() {
+					jumpToWebPage("settings_AccessZone", JSON.stringify(capacityDataObj));
+				});
+				document.getElementById("settings_LeaveZone").addEventListener('tap', function() {
+					jumpToWebPage("settings_LeaveZone", JSON.stringify(capacityDataObj));
+				});
+				document.getElementById("settings_Automatic").addEventListener('tap', function() {
+					jumpToWebPage("settings_Automatic", JSON.stringify(capacityDataObj));
+				});
+			}
+
+			/*
+			 * @parent父元素
+			 */
+			function addFirstLine(parent) {
+				var div1 = document.createElement("div1");
+				var ul = document.createElement("ul");
+				var li = document.createElement("li");
+				div1.className = "mui-col-xs-3";
+				ul.className = "mui-table-view";
+				li.className = "mui-table-view-cell";
+				ul.appendChild(li);
+				div1.appendChild(ul);
+				parent.appendChild(div1);
+			}
+			/*
+			 * @parent父元素
+			 */
+			function addNoFirstLine(parent) {
+				var div1 = document.createElement("div1");
+				var ul = document.createElement("ul");
+				var li = document.createElement("li");
+				div1.className = "mui-col-xs-3 non-first";
+				ul.className = "mui-table-view ";
+				li.className = "mui-table-view-cell";
+				ul.appendChild(li);
+				div1.appendChild(ul);
+				parent.appendChild(div1);
+
+			}
+		</script>
+	</body>
+
+</html>

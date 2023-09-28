@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_Diagnosis">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-hidden" id="baseUl">
+				<!--导出诊断信息-->
+				<li class="mui-table-view-cell mui-hidden" id="exportDiagnostic">
+					<a class="mui-navigate-right" data-text="WEB_exportDiagnosticInformation">&nbsp;</a>
+				</li>
+				<!--测速-->
+				<li class="mui-table-view-cell mui-hidden" id="speedTest">
+					<a class="mui-navigate-right" data-text="WEB_testNetwork">&nbsp;</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js "></script>
+    <script id="langScript"></script>
+		<script>
+			var isShowNoFunction = false; //无功能占位图
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+
+			initPage();
+			initEvent();
+			dsBridgeFuncSyn.dismiss();
+
+			function initPage() {
+
+				//导出诊断信息：exportDiagnostic 分享设备不支持 ; 分享的设备且支持设备配置权限的支持
+				if(localStorage.isShare != "1" || (localStorage.isShare == "1" && localStorage.isSupportRemoteConfig == "1")) {
+					document.getElementById("exportDiagnostic").classList.remove("mui-hidden");
+					isShowNoFunction = true;
+				}
+
+				//测速：speedTest 通道、分享、免注册、VMS不支持
+				if((localStorage.deviceType == "1" && localStorage.channelId != "0") || localStorage.isShare == "1" || localStorage.isNoAccount == "1" || localStorage.deviceType == "2") {
+					$("#speedTest").remove();
+				} else {
+					document.getElementById("speedTest").classList.remove("mui-hidden");
+					isShowNoFunction = true;
+				}
+				if(isShowNoFunction) {
+					document.getElementById("baseUl").classList.remove("mui-hidden");
+				} else {
+					addBitmap(1, langTip["WEB_unSupported"]);
+				}
+
+			}
+
+
+			function initEvent() {
+				document.getElementById("exportDiagnostic").addEventListener('tap', function() {
+					dsBridgeFuncSyn.goToFunctionPage(9);
+				});
+
+				if(document.getElementById("speedTest")) {
+					document.getElementById("speedTest").addEventListener('tap', function() {
+						dsBridgeFuncSyn.goToFunctionPage(12);
+					});
+				}
+			}
+		</script>
+	</body>
+
+</html>

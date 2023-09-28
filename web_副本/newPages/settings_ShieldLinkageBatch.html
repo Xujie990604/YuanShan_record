@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <link href="../css/Common.css" rel="stylesheet" />
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    .ui-list-titile label {
+      text-align: center;
+    }
+
+    .mui-card .mui-input-group:after {
+      height: 1px;
+    }
+
+    .mui-card {
+      margin: 0;
+      overflow-y: auto;
+      width: 100%;
+      box-shadow: none;
+      position: absolute;
+    }
+
+    #linkageList li {
+      height: auto;
+    }
+
+    #linkageList .mui-input-group .mui-input-row {
+      height: 85px;
+      padding: 11px 15px;
+    }
+
+    #linkageList .mui-input-group .mui-input-row p {
+      margin-bottom: 0;
+    }
+
+    .selIMG {
+      position: absolute;
+      right: 15px;
+      top: 30px;
+    }
+
+    .selIMG {
+      width: 20px;
+      height: 20px !important;
+      padding: 0 !important;
+    }
+
+    .linkageSelected button {
+      position: absolute;
+      right: 10%;
+      left: 10%;
+      bottom: 25px;
+      width: 80%;
+      height: 44px;
+      line-height: 31px;
+      border-radius: 50px !important;
+      color: #FFFFFF;
+    }
+
+    .linkageSelected button span {
+      display: inline-block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .noFileImg {
+      position: absolute;
+      top: 30%;
+      width: 60%;
+      left: 20%;
+    }
+
+    .noFileImg img {
+      width: 100%;
+    }
+
+    .mui-media-body p:first-child {
+      color: #000000;
+    }
+
+    .mui-input-row label {
+      height: 20px;
+      padding: 0;
+    }
+
+    .mui-table-view .revokeTimeOnce,
+    .mui-table-view .revokeTimeOnce .mui-navigate-right {
+      height: 66px;
+    }
+
+    .mui-table-view .revokeTimeOnce .linkageDetailVal {
+      position: absolute;
+      left: 15px;
+      bottom: 5px;
+      color: #999999;
+      font-size: 12px;
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .mui-table-view .revokeTimeOnce .mui-navigate-right:after {
+      top: 33px;
+    }
+
+    .closeConfig {
+      height: 44px;
+      width: 44px;
+      position: absolute;
+      left: -5px;
+      top: 2px;
+      z-index: 1000;
+    }
+
+    .mui-content  #linkageList {
+      margin: 12px 16px;
+      border-radius: 8px;
+      /* 两个 width 是为了向下兼容 */
+      width: 91%;
+      /* calc() 是首选*/
+      width: calc(100% - 32px);
+      
+    }
+  </style>
+</head>
+
+<body>
+  <header class="mui-bar mui-bar-nav">
+    <a id="goBack" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="WEB_alarmRevoke">&nbsp;</h1>
+    <a id="save" class="mui-icon iconfont icon-save mui-pull-right mui-hidden"></a>
+    <a id="closeConfig" class="mui-icon mui-icon-closeempty closeConfig mui-hidden"></a>
+  </header>
+  <div class="mui-content">
+    <div id="batchConfig" style="margin-top:10px;">
+      <!--报警撤防批量操作 列表-->
+      <div id="linkageList" class="mui-card ui-list-container mui-hidden">
+        <div class="mui-scroll-wrapper list-scroll">
+          <div class="mui-scroll mui-input-group" id="linkageListForm">
+            <div class="mui-input-row mui-checkbox">
+              <div class="mui-media-body mui-ellipsis" data-deviceType="NVR">
+                <p class="mui-ellipsis" id="nameNVR">&nbsp;</p>
+                <p class="mui-ellipsis" id="NVRLinkageModeVal">&nbsp;</p>
+                <p class="mui-ellipsis" id="NVRLinkageDetailVal">&nbsp;</p>
+              </div>
+              <img src="../images/shieldLinkage/uncheck.png" alt="" class="selIMG" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="linkageSelected">
+        <button disabled id="linkageSelectedBtn" class="mui-hidden">
+          <span data-text="WEB_alarmRevoke" id="hasSelected">&nbsp;</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NVR 的新设备需要将报警撤防修改成使能按钮的方式 -->
+    <ul class="mui-table-view mui-hidden" id="messageUl">
+      <!--报警撤防的使能开关-->
+      <li class="mui-table-view-cell mui-hidden" id="alarmMsg">
+        <span class="left-text-right-swtich" data-text="WEB_alarmRevoke">&nbsp;</span>
+        <div id="alarmRevokeSwitch" class="mui-switch mui-switch-mini">
+          <div class="mui-switch-handle" id="alarmRevokeSwitchCircle"></div>
+        </div>
+      </li>
+    </ul>
+
+    <div id="configDiv" class="mui-hidden">
+      <!--报警撤防模式设置-->
+      <ul id="alarmRevoke" class="mui-table-view">
+        <li id="alarmRevokeMode" class="mui-table-view-cell">
+          <a href="#setAlarmRevokeMode" class="mui-navigate-right">&nbsp;
+            <span class="mainStyle" data-text="WEB_alarmRevokeMode">&nbsp;</span>
+            <span id="alarmRevokeModeVal" class="mui-badge">&nbsp;</span>
+          </a>
+          <div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+        </li>
+      </ul>
+      <!--临时撤防配置-->
+      <ul id="alarmRevokeOnce" class="mui-table-view mui-hidden">
+        <li id="revokeTimeOnce" class="mui-table-view-cell revokeTimeOnce">
+          <a class="mui-navigate-right" data-text="WEB_revokeTime">&nbsp;</a>
+          <div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+          <div id="linkageDetailVal" class="linkageDetailVal">&nbsp;</div>
+        </li>
+      </ul>
+    </div>
+
+    <!--撤防模式-->
+    <div id="setAlarmRevokeMode" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+      <form class="mui-input-group">
+        <div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownDiv">
+          <label data-text="">&nbsp;</label>
+        </div>
+        <ul id="AlarmRevokeModeList" class="mui-table-view mui-table-view-radio">
+          <li class="mui-table-view-cell installType">
+            <a class="mui-navigate-right" data-value="0" data-text="WEB_noRevoke">&nbsp;</a>
+          </li>
+          <li class="mui-table-view-cell installType">
+            <a class="mui-navigate-right" data-value="1" data-text="WEB_onceRevoke">&nbsp;</a>
+          </li>
+        </ul>
+      </form>
+      <button id="AlarmRevokeModeOk" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_button_ok">&nbsp;</button>
+    </div>
+    <div class="noFileImg mui-hidden" id="noFileImg">
+      <img src="../images/audioList/nothing@3x.png" alt="" />
+    </div>
+
+    <script src="../js/dsbridge.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <script src="../js/libs/jquery-3.4.1.min.js"></script>
+    <script src="../js/libs/sha2.js"></script>
+    <script src="../js/resource.js"></script>
+    <script src="../js/Utils.js"></script>
+    <script src="../js/mui.js"></script>
+    <script src="../js/immersed.js"></script>
+    <script src="../js/customSetting.js"></script>
+    <script src="../js/loadCss.js "></script>
+    <script id="langScript"></script>
+    <script>
+      checkType(localStorage.AppType); //加载特定样式
+      var langTip;
+      var linkageMode = 0; // 撤防模式
+      var linkageOnceBeginTime; // 区间撤防 开始时间
+      var linkageOnceEndTime; // 区间撤防 结束时间
+      var linkageModeData;
+      var sendData;
+
+      var onClickLinkageData; // 一键联动撤防的老数据
+      var onClickLinkageSendData; // 设置一键联动撤防的数据
+      var numSelected = 0;
+      var LinkageNum = 0; // 支持报警撤防的通道数量
+      var isSupportLinkageArr = []; // 支持报警撤防的通道数据
+      var isSupportLinkageChlName = []; // 支持报警撤防的通道名称
+      var hasNVR = false;
+      var hasSelectChlArr = []; // 勾选撤防通道
+      // 初始化临时撤防时间 当天0点0分至第二天0点0分
+      var nowDate = new Date();
+      var nowYear = nowDate.getFullYear();
+      var nowMonth = nowDate.getMonth() + 1;
+      var nowDay = nowDate.getDate();
+      nowDate = new Date(nowYear + "/" + nowMonth + "/" + nowDay);
+      var dateUTCBegin = nowDate.getTime() / 1000;
+      var dateUTCEnd = nowDate.getTime() / 1000 + 86400;
+      var isLoadingFinish = false;
+      strBegin = formDate(dateUTCBegin);
+      strEnd = formDate(dateUTCEnd);
+
+      var setAlarmRevokeSwitchConfirm = true; // 使能开关状态变化时是否调接口提交
+
+      mui.init();
+      var typeLan = initLang();
+      langTip = typeLan.lang;
+      initPage();
+      initData();
+      initEvent();
+
+      function initPage() {
+        document.getElementById("nameNVR").innerHTML = localStorage.deviceName;
+      }
+
+      function initData() {
+        initLinkageCapabilities(); // 初始化 撤防能力
+      }
+
+      function initEvent() {
+        document.getElementById("goBack").addEventListener("tap", function (event) {
+          var closeConfigArr = document.getElementById("closeConfig").className.split(" ");
+          if (closeConfigArr.indexOf("mui-hidden") != -1) {
+            dsBridgeFuncSyn.dismiss();
+            dsBridgeFuncSyn.backTo();
+          } else {
+            dsBridgeFuncSyn.dismiss();
+            document.getElementById("configDiv").classList.add("mui-hidden");
+            document.getElementById("save").classList.add("mui-hidden");
+            document.getElementById("closeConfig").classList.add("mui-hidden");
+            document.getElementById("goBack").classList.remove("mui-hidden");
+            document.getElementById("batchConfig").classList.remove("mui-hidden");
+          }
+          return false;
+        })
+        //撤防模式选择事件
+        document.getElementById("AlarmRevokeModeOk").addEventListener("tap", function () {
+          mui("#AlarmRevokeModeList a").each(function (index, El) {
+            if (El.parentNode.classList.contains("mui-selected")) {
+              linkageMode = El.getAttribute("data-value");
+            }
+          });
+          linkageConfig(linkageMode);
+          var linkageModeText = setModeText(linkageMode);
+          $("#alarmRevokeModeVal").text(linkageModeText);
+          sendData.Mode = Number(linkageMode);
+          mui("#setAlarmRevokeMode").popover("toggle");
+          if (1 == linkageMode) {
+            var strTime = strBegin + " - " + strEnd;
+            document.getElementById("linkageDetailVal").innerHTML = strTime;
+            sendData.ShieldOnceTimeInfo.BeginTime = parseInt(new Date(dateUTCBegin).getTime());
+            sendData.ShieldOnceTimeInfo.EndTime = parseInt(new Date(dateUTCEnd).getTime());
+          }
+        })
+        //针对点击其他地方会隐藏弹窗，故隐藏的时候需确保每次弹窗选中的都是已保存撤防模式
+        document.getElementById("setAlarmRevokeMode").addEventListener("hidden", function (e) {
+          mui("#AlarmRevokeModeList a").each(function (index, El) {
+            if (El.getAttribute("data-value") == linkageMode) {
+              El.parentNode.classList.add("mui-selected");
+            } else {
+              El.parentNode.classList.remove("mui-selected");
+            }
+          });
+        });
+
+        document.getElementById("revokeTimeOnce").addEventListener("tap", function () {
+          setOnceTime();
+        })
+
+        // 勾选NVR或通道进行批量配置
+        mui(".mui-input-group").on("tap", ".mui-input-row", function () {
+          if ("../images/shieldLinkage/uncheck.png" == this.children[1].getAttribute("src")) {
+            // 勾选
+            this.children[1].setAttribute("src", "../images/shieldLinkage/checked.png");
+            if ("NVR" == this.children[0].getAttribute("data-deviceType")) {
+              hasNVR = true;
+            } else {
+              // 勾选通道，加入数组队列
+              hasSelectChlArr.push(this.children[0].getAttribute("data-deviceType"))
+            }
+            numSelected++;
+          } else {
+            // 去勾选
+            this.children[1].setAttribute("src", "../images/shieldLinkage/uncheck.png");
+            if ("NVR" == this.children[0].getAttribute("data-deviceType")) {
+              hasNVR = false;
+            } else {
+              //去勾选通道，从数组中删除
+              hasSelectChlArr.remove(this.children[0].getAttribute("data-deviceType"))
+            }
+            numSelected--;
+          }
+          if (0 != numSelected) {
+            document.getElementById("linkageSelectedBtn").removeAttribute("disabled");
+            document.getElementById("hasSelected").innerHTML = langTip["WEB_alarmRevoke"] + "(" + langTip["WEB_hasSelected"] + numSelected + ")";
+          } else {
+            document.getElementById("linkageSelectedBtn").setAttribute("disabled", "disabled");
+            document.getElementById("hasSelected").innerHTML = langTip["WEB_alarmRevoke"]
+          }
+        })
+
+        // 撤防模式配置
+        document.getElementById("linkageSelectedBtn").addEventListener("tap", function () {
+          document.getElementById("configDiv").classList.remove("mui-hidden");
+          document.getElementById("save").classList.remove("mui-hidden");
+          document.getElementById("closeConfig").classList.remove("mui-hidden");
+          document.getElementById("goBack").classList.add("mui-hidden");
+          document.getElementById("batchConfig").classList.add("mui-hidden");
+        })
+
+        // 保存配置下发
+        document.getElementById("save").addEventListener("tap", function () {
+          dsBridgeFuncSyn.showLoading();
+          if (hasNVR) {
+            SendAjax(LAPI.linkageModeConfigNVR, 'put', function (code, data) {
+              dsBridgeFuncSyn.dismiss();
+              if (code == 0) {
+                linkageModeData = deepCopy(sendData);
+                linkageMode = linkageModeData.Mode;
+                showToast(langTip["WEB_api_error_succeeded"]);
+                var linkageModeText = setModeText(linkageMode); // 显示撤防模式
+                $("#NVRLinkageModeVal").text(linkageModeText);
+                if (1 == linkageMode) { // 区间撤防
+                  linkageOnceBeginTime = linkageModeData.ShieldOnceTimeInfo.BeginTime;
+                  linkageOnceEndTime = linkageModeData.ShieldOnceTimeInfo.EndTime;
+                  // 时间戳转为年月日时分
+                  var strBegin = formDate(linkageOnceBeginTime);
+                  var strEnd = formDate(linkageOnceEndTime);
+                  var strTime = strBegin + "-" + strEnd;
+                  document.getElementById("NVRLinkageDetailVal").innerHTML = strTime;
+                } else {
+                  document.getElementById("NVRLinkageDetailVal").innerHTML = "";
+                }
+              } else {
+                showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+              }
+            }, sendData);
+          }
+          // 通道撤防配置
+          if (0 != hasSelectChlArr.length) {
+            for (var i = 0; i <= hasSelectChlArr.length - 1; i++) {
+              setChannelsConfig(i);
+            }
+          }
+
+          if (!hasNVR && 0 == hasSelectChlArr.length) {
+            dsBridgeFuncSyn.dismiss();
+          }
+
+          document.getElementById("configDiv").classList.add("mui-hidden");
+          document.getElementById("save").classList.add("mui-hidden");
+          document.getElementById("closeConfig").classList.add("mui-hidden");
+          document.getElementById("goBack").classList.remove("mui-hidden");
+          document.getElementById("batchConfig").classList.remove("mui-hidden");
+        })
+
+        // 关闭撤防模式
+        document.getElementById("closeConfig").addEventListener("tap", function () {
+          document.getElementById("configDiv").classList.add("mui-hidden");
+          document.getElementById("save").classList.add("mui-hidden");
+          document.getElementById("closeConfig").classList.add("mui-hidden");
+          document.getElementById("goBack").classList.remove("mui-hidden");
+          document.getElementById("batchConfig").classList.remove("mui-hidden");
+        })
+
+        // 手势操作：向下滑动关闭弹框
+        document.getElementById("swipedownDiv").addEventListener("swipedown", function () {
+          mui('#setAlarmRevokeMode').popover('toggle');
+        });
+
+        // 监听一键联动撤防开关
+        document.getElementById("alarmRevokeSwitch").addEventListener("toggle", function (event) {
+          // 由关闭到打开
+          if (event.detail.isActive && setAlarmRevokeSwitchConfirm) {
+            var sendData = deepCopy(onClickLinkageSendData);
+            sendData.Enabled = 1;
+            dsBridgeFuncSyn.showLoading();
+            SendAjax(LAPI.oneClickLinkageCapable, 'put', function (code, data) {
+              dsBridgeFuncSyn.dismiss();
+              if (code == 0) {
+
+              } else {
+                setTimeout(function () {
+                  mui("#alarmRevokeSwitch").switch().toggle();
+                }, 200)
+              }
+            }, sendData)
+          } else if (!event.detail.isActive && setAlarmRevokeSwitchConfirm) {  // 由关闭切换至打开
+            var sendData = deepCopy(onClickLinkageSendData);
+            // 不撤防
+            sendData.Enabled = 0;
+            dsBridgeFuncSyn.showLoading();
+            SendAjax(LAPI.oneClickLinkageCapable, 'put', function (code, data) {
+              dsBridgeFuncSyn.dismiss();
+              if (code == 0) {
+
+              } else {
+                setTimeout(function () {
+                  mui("#alarmRevokeSwitch").switch().toggle();
+                }, 200)
+              }
+            }, sendData)
+          } else {
+            setAlarmRevokeSwitchConfirm = true;
+          }
+        })
+      }
+
+      /** STEP1
+       * 初始化系统能力 判断NVR是否支持撤防配置
+       */
+      function initLinkageCapabilities() {
+        SendAjax(LAPI.SystemCapabilities, 'get', function (code, data) {
+          if (code == 0) {
+            var LinkageCapabilities = data.SupportShieldLinkage;
+            // 是否支持一键联动撤防能力
+            var oneClickLinkageCapabilities = data["SupportShieldLinkageV1.1"];
+            if (oneClickLinkageCapabilities === 1) {
+              // 一键联动撤防页面初始化
+              initNewNVRLinkageMode()
+            } else if (1 == LinkageCapabilities) {
+              initNVRLinkageMode(); // 初始化NVR撤防模式
+            } else {
+              addBitmap(1, langTip["WEB_unSupported"]);
+              dsBridgeFuncSyn.dismiss();
+            }
+						} else if(code == 4 || code == 8 || code == 1006) {
+            addBitmap(1, langTip["WEB_unSupported"]);
+            dsBridgeFuncSyn.dismiss();
+          } else {
+            showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+            addBitmap(0);
+            dsBridgeFuncSyn.dismiss();
+          }
+        })
+      }
+
+      // 使能按钮方式界面的数据初始化
+      function initNewNVRLinkageMode() {
+        SendAjax(LAPI.oneClickLinkageCapable, 'get', function (code, data) {
+          if (code == 0) {
+            onClickLinkageData = deepCopy(data);
+            onClickLinkageSendData = deepCopy(data);
+            // 设备当前的使能能力
+            var nowEnabled = data.Enabled;
+            $("#messageUl").removeClass("mui-hidden");
+            $("#alarmMsg").removeClass("mui-hidden");
+            document.getElementById("alarmRevokeSwitch").style.zIndex = 20;
+            document.getElementById("alarmRevokeSwitch").style.visibility = "visible";
+            setAlarmRevokeSwitchConfirm = false;
+            // 根据设备能力来初始化 switch 状态
+            setSwitchStatus("alarmRevokeSwitch", nowEnabled)
+            setAlarmRevokeSwitchConfirm = true;
+            var setAlarmRevokeActive = document.getElementById("alarmRevokeSwitch").classList.contains("mui-active");
+            if (setAlarmRevokeActive) {
+              document.getElementById("alarmRevokeSwitchCircle").style.transform = 'translate(16px, 0px)';
+            }
+            dsBridgeFuncSyn.dismiss();
+          } else if (code == 4 || code == 8 || code == 1006) {
+            addBitmap(1, langTip["WEB_unSupported"]);
+            dsBridgeFuncSyn.dismiss();
+          } else {
+            showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+            addBitmap(0);
+            dsBridgeFuncSyn.dismiss();
+          }
+        })
+      }
+
+      /** STEP2
+       * 初始化撤防模式和配置项
+       */
+      function initNVRLinkageMode() {
+        SendAjax(LAPI.linkageModeConfigNVR, 'get', function (code, data) {
+          if (code == 0) {
+            $("#linkageList").removeClass("mui-hidden");
+            $("#linkageSelectedBtn").removeClass("mui-hidden");
+            linkageModeData = deepCopy(data);
+            sendData = deepCopy(data);
+            linkageMode = linkageModeData.Mode;
+            var linkageModeText = setModeText(linkageMode); // 显示撤防模式
+            $("#NVRLinkageModeVal").text(linkageModeText);
+            if (1 == linkageMode) { // 区间撤防
+              linkageOnceBeginTime = linkageModeData.ShieldOnceTimeInfo.BeginTime;
+              linkageOnceEndTime = linkageModeData.ShieldOnceTimeInfo.EndTime;
+              // 时间戳转为年月日时分
+              var strBegin = formDate(linkageOnceBeginTime);
+              var strEnd = formDate(linkageOnceEndTime);
+              var strTime = strBegin + "-" + strEnd;
+              document.getElementById("NVRLinkageDetailVal").innerHTML = strTime;
+            }
+            initLinkageCapabilitiesList(); // 初始化 撤防能力
+						} else if(code == 4 || code == 8 || code == 1006) {
+            addBitmap(1, langTip["WEB_unSupported"]);
+            dsBridgeFuncSyn.dismiss();
+          } else {
+            showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+            addBitmap(0);
+            dsBridgeFuncSyn.dismiss();
+          }
+        })
+      }
+
+      /** STEP3
+       *  批量获取通道撤防能力
+       */
+      function initLinkageCapabilitiesList() {
+        SendAjax(LAPI.SystemCapabilitiesList, 'get', function (code, data) {
+          if (code == 0) {
+            LinkageNum = data.Num; // 通道数量
+            if (LinkageNum > 0) {
+              for (var i = 0; i <= (LinkageNum - 1); i++) {
+                var ChlID = data.SysCapabilitiesList[i].ChannelID;
+                var linkageSupport = data.SysCapabilitiesList[i].SystemCapabilities.SupportShieldLinkage;
+                if (1 == linkageSupport) { // 该通道支持撤防
+                  isSupportLinkageArr.push(ChlID);
+                }
+              }
+              initLinkageModeList(); // 初始化通道撤防模式及数据
+            } else {
+              dsBridgeFuncSyn.dismiss();
+            }
+						} else if(code == 4 || code == 8 || code == 1006) {
+            showToast(langTip["WEB_supported"] + "(" + code + ")", code);
+            dsBridgeFuncSyn.dismiss();
+          } else {
+            showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+            dsBridgeFuncSyn.dismiss();
+          }
+        })
+      }
+
+      /** STEP4
+       * 初始化通道撤防模式及数据
+       */
+      function initLinkageModeList() {
+        // isSupportLinkageArr 支持报警撤防通道的 ID Array
+        if (isSupportLinkageArr.length > 0) {
+          var chlIdStr = isSupportLinkageArr.join(";");
+          // 获取对应通道的通道名称数据
+          var result = dsBridgeFuncSyn.getChannelsName(chlIdStr);
+          isSupportLinkageChlName = result.split(";");
+          for (var j = 0; j < isSupportLinkageArr.length; j++) {
+            getChannelsConfig(j);
+          }
+        } else {
+          dsBridgeFuncSyn.dismiss();
+        }
+        var i = document.getElementById("linkageList").getBoundingClientRect().top;
+        var j = document.getElementById("linkageSelectedBtn").getBoundingClientRect().top; //按钮顶部到页面顶部的距离
+        if (j - i > 85 * (isSupportLinkageArr.length + 1)) {
+          document.getElementById("linkageList").style.height = 85 * (isSupportLinkageArr.length + 1) + "px";
+        } else {
+          document.getElementById("linkageList").style.height = j - i - 15 + "px";
+        }
+        mui('.mui-scroll-wrapper').scroll();
+        isLoadingFinish = true;
+      }
+
+      /**
+       * 获取通道撤防配置
+       * @param {Object} j
+       */
+      function getChannelsConfig(j) {
+        SendAjax("/LAPI/V1.0/Channels/" + isSupportLinkageArr[j] + "/System/ShieldLinkage", 'get', function (code, data) {
+          if (code == 0) {
+            linkageModeData = deepCopy(data);
+            linkageMode = linkageModeData.Mode;
+            var linkageModeText = setModeText(linkageMode); // 显示撤防模式
+            // 动态加载通道撤防列表
+            var childDiv = document.createElement("div");
+            childDiv.className = "mui-input-row mui-checkbox";
+            var childDiv1 = document.createElement("div");
+            childDiv1.className = "mui-media-body mui-ellipsis";
+            childDiv1.setAttribute("data-deviceType", isSupportLinkageArr[j]);
+
+            // 动态加载通道名称
+            var childP0 = document.createElement("p");
+            childP0.className = "mui-ellipsis";
+            childP0.id = "nameChannel" + isSupportLinkageArr[j];
+            childP0.innerHTML = isSupportLinkageChlName[j];
+
+            // 动态加载通道对应的撤防模式
+            var childP1 = document.createElement("p");
+            childP1.className = "mui-ellipsis";
+            childP1.id = "linkageModeVal" + isSupportLinkageArr[j];
+            childP1.innerHTML = linkageModeText;
+
+            // 动态加载通道对应的撤防详情，不撤防时为空
+            var childP2 = document.createElement("p");
+            childP2.className = "mui-ellipsis";
+            childP2.id = "linkageDetailVal" + isSupportLinkageArr[j];
+            if (1 == linkageMode) { // 区间撤防
+              linkageOnceBeginTime = linkageModeData.ShieldOnceTimeInfo.BeginTime;
+              linkageOnceEndTime = linkageModeData.ShieldOnceTimeInfo.EndTime;
+              // 时间戳转为年月日时分
+              var strBegin = formDate(linkageOnceBeginTime);
+              var strEnd = formDate(linkageOnceEndTime);
+              var strTime = strBegin + "-" + strEnd;
+              childP2.innerHTML = strTime;
+            }
+
+            // 撤防勾选框
+            var childIMG = document.createElement("img");
+            childIMG.className = "selIMG";
+            childIMG.src = "../images/shieldLinkage/uncheck.png";
+            childDiv.appendChild(childDiv1);
+            childDiv.appendChild(childIMG);
+            childDiv1.appendChild(childP0);
+            childDiv1.appendChild(childP1);
+            childDiv1.appendChild(childP2);
+            var parentDom = document.getElementById("linkageListForm");
+            parentDom.appendChild(childDiv);
+						} else if(code == 4 || code == 8 || code == 1006) {
+            showToast(langTip["WEB_supported"] + "(" + code + ")", code);
+          } else {
+            showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+          }
+          if (j == (isSupportLinkageArr.length - 1)) {
+            dsBridgeFuncSyn.dismiss();
+          }
+        })
+      }
+
+      /**
+       * 下发通道撤防配置
+       * @param {Object} j
+       */
+      function setChannelsConfig(i) {
+        SendAjax("/LAPI/V1.0/Channels/" + hasSelectChlArr[i] + "/System/ShieldLinkage", 'put', function (code, data) {
+          if (code == 0) {
+            linkageModeData = deepCopy(sendData);
+            linkageMode = linkageModeData.Mode;
+            showToast(langTip["WEB_api_error_succeeded"]);
+            var linkageModeText = setModeText(linkageMode); // 显示撤防模式
+            $("#linkageModeVal" + hasSelectChlArr[i]).text(linkageModeText);
+            if (1 == linkageMode) { // 区间撤防
+              linkageOnceBeginTime = linkageModeData.ShieldOnceTimeInfo.BeginTime;
+              linkageOnceEndTime = linkageModeData.ShieldOnceTimeInfo.EndTime;
+              // 时间戳转为年月日时分
+              var strBegin = formDate(linkageOnceBeginTime);
+              var strEnd = formDate(linkageOnceEndTime);
+              var strTime = strBegin + "-" + strEnd;
+              document.getElementById("linkageDetailVal" + hasSelectChlArr[i]).innerHTML = strTime;
+            } else {
+              document.getElementById("linkageDetailVal" + hasSelectChlArr[i]).innerHTML = "";
+            }
+          } else {
+            var errorText = langTip["WEB_api_error_operation_fails"] + "(" + code + ")";
+            $("#linkageDetaileVal" + hasSelectChlArr[i]).text(errorText);
+          }
+          if (i == (hasSelectChlArr.length - 1)) {
+            dsBridgeFuncSyn.dismiss();
+          }
+        }, sendData);
+      }
+
+      /**
+       * 设置撤防模式文字转换
+       * @param {Object} mode
+       */
+      function setModeText(mode) { //设置撤防模式文字转换
+        var text = '';
+        if (mode == 0) {
+          text = langTip["WEB_noRevoke"];
+        } else if (mode == 1) {
+          text = langTip["WEB_onceRevoke"];
+        } else if (mode == 2) {
+          text = langTip["WEB_intervalRevoke"];
+        }
+        return text;
+      }
+
+      /**
+       * 切换撤防模式 调整交互显示
+       * @param {Object} linkageMode
+       */
+      function linkageConfig(linkageMode) {
+        if (0 == linkageMode) {
+          document.getElementById("alarmRevokeOnce").classList.add("mui-hidden");
+        } else if (1 == linkageMode) {
+          document.getElementById("alarmRevokeOnce").classList.remove("mui-hidden");
+        }
+      }
+
+      /**
+       * 设置临时撤防参数
+       */
+      function setOnceTime() {
+        var beginArr = CheckDate(strBegin);
+        var endArr = CheckDate(strEnd);
+        var timeData = {};
+        timeData.startYear = beginArr[0];
+        timeData.startMonth = beginArr[1];
+        timeData.startDay = beginArr[2];
+        timeData.startHour = beginArr[3];
+        timeData.startMin = beginArr[4];
+        timeData.endYear = endArr[0];
+        timeData.endMonth = endArr[1];
+        timeData.endDay = endArr[2];
+        timeData.endHour = endArr[3];
+        timeData.endMin = endArr[4];
+        dsBridgeFuncAsyn.showDate("revokeTime", JSON.stringify(timeData), function (result) {
+          var timeObj = JSON.parse(result);
+          if (timeObj.statusCode == 1) {
+            return;
+          }
+          result = JSON.parse(timeObj.param);
+          var start = result.startYear + "/" + add0(result.startMonth) + "/" + add0(result.startDay) + " " + add0(result.startHour) + ":" + add0(result.startMin);
+          var end = result.endYear + "/" + add0(result.endMonth) + "/" + add0(result.endDay) + " " + add0(result.endHour) + ":" + add0(result.endMin);
+          strBegin = start;
+          strEnd = end
+          var strTime = strBegin + " - " + strEnd;
+          document.getElementById("linkageDetailVal").innerHTML = strTime;
+          sendData.ShieldOnceTimeInfo.BeginTime = parseInt(new Date(start).getTime() / 1000);
+          sendData.ShieldOnceTimeInfo.EndTime = parseInt(new Date(end).getTime() / 1000);
+        });
+      }
+
+      /**
+       * 截取日期，返回年月日数组
+       * @param {Object} date
+       */
+      function CheckDate(dateVal) {
+        var dateDetails = dateVal.trim().split(" ")[0];
+        var timeDetails = dateVal.trim().split(" ")[1];
+        var dateArr = dateDetails.split("/");
+        var timeArr = timeDetails.split(":");
+        dateArr.push(timeArr[0]);
+        dateArr.push(timeArr[1]);
+        return dateArr;
+      }
+
+      /**
+       * 查找指定的元素在数组中的位置
+       * @param {Object} val
+       */
+      Array.prototype.indexOf = function (val) {
+        for (var i = 0; i < this.length; i++) {
+          if (this[i] == val) return i;
+        }
+        return -1;
+      };
+
+      /**
+       * 删除指定元素
+       * @param {Object} val
+       */
+      Array.prototype.remove = function (val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+          this.splice(index, 1);
+        }
+      };
+      //修改页面尺寸
+      dsBridge.register("callWebDoBaseFuncAsyn", function (args) {
+        var webInfo = JSON.parse(args);
+        for (var key in webInfo) {
+          switch (webInfo[key].whichInfo) {
+            case "rotation": // 绘图数据发还给运检测配置页面
+              document.documentElement.style.height = webInfo[key].infoValue.screenHeight + "px";
+              document.documentElement.style.width = webInfo[key].infoValue.screenWidth + "px";
+              if (isLoadingFinish) {
+                setTimeout(function () {
+                  var i = document.getElementById("linkageList").getBoundingClientRect().top;
+                  var j = document.getElementById("linkageSelectedBtn").getBoundingClientRect().top; //按钮顶部到页面顶部的距离
+                  if (j - i > 85 * (isSupportLinkageArr.length + 1)) {
+                    document.getElementById("linkageList").style.height = 85 * (isSupportLinkageArr.length + 1) + "px";
+                  } else {
+                    document.getElementById("linkageList").style.height = j - i - 15 + "px";
+                  }
+                  mui('.mui-scroll-wrapper').scroll();
+                }, 200);
+              }
+              break;
+          }
+        }
+      });
+    </script>
+</body>
+
+</html>

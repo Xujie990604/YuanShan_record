@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AACA,cAAc;AAKd,WAAW;AAMX,aAAa;AAQb,YAAY;AAGZ,cAAc;AAMd,YAAY;AAEZ,gBAAgB;AAMhB,cAAc",
+"sources": ["../../sass/Variables_Uniarch.scss"],
+"names": [],
+"file": "Variables_Uniarch.css"
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_alarmLinkage">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<div id="EZView-content" class="mui-hidden">
+				<!--自定义告警联动-->
+				<ul id="setAlarmLinkageCheck" class="mui-table-view ui-siwtchlist">
+					<!--自定义告警联动使能-->
+					<li id="setAlarmLinkage" class="mui-table-view-cell">
+						<span data-text="WEB_alarmLinkage" class="mainStyle">&nbsp;</span>
+						<div id="setAlarmLinkageSwitch" class="mui-switch mui-switch-mini">
+							<div class="mui-switch-handle" id="setAlarmLinkageCircle"></div>
+						</div>
+						<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+					</li>
+					<!--自定义告警联动计划-->
+					<li id="alarmLinkagePlan" class="mui-table-view-cell mui-hidden">
+						<a id="alarmLinkagePlanA" class="mui-navigate-right">&nbsp;
+							<span data-text="WEB_Alarm_plan" class="mainStyle padding-left-15">&nbsp;</span>
+							<span class="mui-badge"></span>
+						</a>
+						<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js"></script>
+    <script id="langScript"></script>
+		<script>
+			var langTip;
+			var AlacrmCheck;
+			var setAlarmLinkageConfirm;
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				isShowNoFunction = true;
+				SendAjax(LAPI.AlarmCapabilities, 'get', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						if(data.SupportCustomAlarmNums && data.SupportCustomAlarmNums > 0) {
+							isShowNoFunction = false;
+							var Map = {
+								deviceSerial: localStorage.devSn20,
+								channelNo: localStorage.channelId,
+								customType: 0
+							};
+							CloudSendAjax("https://" + localStorage.serverAddress + openAPI.GetCustomAlarmEnable, 'post', function(code, message, data) {
+								if(code == 200) {
+									AlacrmCheck = data.enable; // 0：关闭，1：开启
+									if(AlacrmCheck == 1) {
+										mui("#setAlarmLinkageCheck .mui-table-view-cell").each(function(index, El) {
+											if(index != 0) {
+												El.classList.remove('mui-hidden');
+											}
+										});
+									}
+									//初始化区域入侵开关
+									document.getElementById("setAlarmLinkageSwitch").style.zIndex = 20;
+									document.getElementById("setAlarmLinkageSwitch").style.visibility = "visible";
+									setAlarmLinkageConfirm = false;
+									setSwitchStatus("setAlarmLinkageSwitch", AlacrmCheck);
+									setAlarmLinkageConfirm = true;
+									var setIntrusionDetectionActive = document.getElementById("setAlarmLinkageSwitch").classList.contains("mui-active");
+									if(setIntrusionDetectionActive) {
+										document.getElementById("setAlarmLinkageCircle").style.transform = 'translate(16px, 0px)';
+									}
+									$("#EZView-content").removeClass("mui-hidden");
+									dsBridgeFuncSyn.dismiss();
+								} else {
+									dsBridgeFuncSyn.dismiss();
+									addBitmap(0);
+									showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+								}
+							}, Map);
+
+						}
+						if(isShowNoFunction) {
+							//TODO:无功能占位图
+							addBitmap(1, langTip["WEB_unSupported"]);
+						}
+					} else if(code == 4 || code == 8 || code == 1006) {
+						addBitmap(1, langTip["WEB_unSupported"]);
+					} else {
+						//TODO:加载失败显示加载失败占位图
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+					}
+				})
+			}
+
+			function initData() {
+
+			}
+
+			function initEvent() {
+				document.getElementById("alarmLinkagePlanA").addEventListener("tap", function() {
+					var Extras = {
+						AlarmType: 4
+					}
+					jumpToWebPage("settings_DeepAlarm", JSON.stringify(Extras));
+				});
+
+			}
+
+			/*
+			 * 监听区域入侵开关
+			 */
+			document.getElementById("setAlarmLinkageSwitch").addEventListener("toggle", function(event) {
+				if(event.detail.isActive && setAlarmLinkageConfirm) {
+					var sendDataON = {
+						deviceSerial: localStorage.devSn20,
+						channelNo: Number(localStorage.channelId),
+						customType: 0,
+						enable: 1
+					};
+					dsBridgeFuncSyn.showLoading();
+					CloudSendAjax("https://" + localStorage.serverAddress + openAPI.SetCustomAlarmEnable, 'post', function(code, message, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 200) {
+							mui("#setAlarmLinkageCheck .mui-table-view-cell").each(function(index, El) {
+								if(index != 0) {
+									El.classList.remove('mui-hidden');
+								}
+							});
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							setAlarmLinkageConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#setAlarmLinkageSwitch").switch().toggle();
+							}, 200);
+						}
+					}, sendDataON);
+				} else if(!event.detail.isActive && setAlarmLinkageConfirm) {
+					mui("#setAlarmLinkageCheck .mui-table-view-cell").each(function(index, El) {
+						if(index != 0) {
+							El.classList.add('mui-hidden');
+						}
+					});
+					var sendDataOFF = {
+						deviceSerial: localStorage.devSn20,
+						channelNo: localStorage.channelId,
+						customType: 0,
+						enable: 0
+					};
+					dsBridgeFuncSyn.showLoading();
+					CloudSendAjax("https://" + localStorage.serverAddress + openAPI.SetCustomAlarmEnable, 'post', function(code, message, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 200) {
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							setAlarmLinkageConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#setAlarmLinkageSwitch").switch().toggle();
+								mui("#setAlarmLinkageCheck .mui-table-view-cell").each(function(index, El) {
+									if(index != 0) {
+										El.classList.remove('mui-hidden');
+									}
+								});
+							}, 200);
+						}
+					}, sendDataOFF);
+				} else {
+					setAlarmLinkageConfirm = true;
+				};
+			});
+		</script>
+	</body>
+
+</html>

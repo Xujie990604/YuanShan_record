@@ -1,0 +1,1102 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				color: #ffffff;
+				font-size: 15px;
+				overflow: hidden;
+				background-color: #000000;
+			}
+			
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			#drawDiv {
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				overflow: hidden;
+				position: absolute;
+				left: 0;
+				background-color: #000;
+			}
+			
+			#canvas {
+				background-size: 100% 100%;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#drawbtn {
+				width: 50px;
+				height: 100%;
+				position: absolute;
+				right: 0;
+				z-index: 800;
+			}
+			
+			#drawbtn ul {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				justify-content: center;
+				-webkit-justify-content: center;
+			}
+			
+			#drawbtn #motionbtn {
+				background-color: #000000;
+			}
+			
+			.wapp-selected li {
+				text-align: center;
+				height: 54px;
+				padding: 12px 0;
+			}
+			
+			.wapp-selected button {
+				padding: 15px 15px;
+				border: none;
+			}
+			
+			.ui-drawbtn-invisible {
+				visibility: hidden;
+			}
+			
+			.ui-tools-name {
+				width: 200% !important;
+				position: absolute;
+				top: 0;
+				right: 55px;
+			}
+			
+			.ui-tools-name li {
+				line-height: 30px;
+				padding: 12px 0 11px 0;
+				text-align: right;
+				color: #4eb6ff;
+				font-size: 16px;
+			}
+			
+			.ui-toolsname-invisible {
+				visibility: hidden;
+			}
+			
+			.ui-iknow {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				z-index: 10000;
+			}
+			
+			.ui-iknow .mui-btn {
+				color: #4eb6ff;
+				border: 1px solid #4eb6ff;
+				height: 44px;
+				border-radius: 22px;
+				padding: 0 35px;
+				font-size: 16px;
+				position: absolute;
+				left: 35%;
+				bottom: 40px;
+			}
+			
+			#canvasBox1,
+			#canvasBox {
+				margin-top: 30px;
+				margin-left: 50px;
+				margin-right: 50px;
+				background: url("../images/no_photo@3x.png") center center no-repeat;
+				background-size: 100px 80px;
+				background-color: #3D3E41;
+			}
+			
+			#drawback {
+				position: fixed;
+				top: 10px;
+				left: 10px;
+			}
+			
+			.wapp-side-btn-back {
+				background: url('../images/return.png') no-repeat;
+				background-size: 100% 100%;
+			}
+			
+			#drawbtn button {
+				width: 25px;
+				height: 25px;
+				border: 0px;
+				margin-right: 0;
+			}
+			
+			#goBack {
+				width: 28px!important;
+				height: 28px!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="drawbtn" class="ui-drawbtn-invisible">
+			<div id="drawback">
+				<button type="button" id="goBack" class="wapp-side-btn-back"></button>
+			</div>
+			<ul id="motionbtn" class="wapp-selected">
+				<li><button type="button" id="motionaddedit" class="wapp-side-btn-addedit"></button></li>
+				<li><button type="button" id="motiondeledit" class="wapp-side-btn-deledit"></button></li>
+				<li><button type="button" id="motionclear" class="wapp-side-btn-del"></button></li>
+				<li><button type="button" id="motioncommit" class="wapp-side-btn-commit"></button></li>
+			</ul>
+			<ul id="toolsname" class="wapp-selected ui-tools-name ui-toolsname-invisible">
+				<li data-text="WEB_web_drawarea_draw">&nbsp;</li>
+				<li data-text="WEB_web_drawarea_erasure">&nbsp;</li>
+				<li data-text="WEB_web_drawarea_clear">&nbsp;</li>
+				<li data-text="WEB_web_drawarea_saveclose">&nbsp;</li>
+			</ul>
+		</div>
+		<div id="drawDiv">
+			<div id="canvasBox" style="display: none"><canvas id="canvas" width="" height=""></canvas></div>
+			<div id="canvasBox1" style="display: none"><canvas id="canvas1" width="" height=""></canvas></div>
+		</div>
+		<div id="iknowbox" class="ui-iknow mui-hidden">
+			<button id="iknow" class="mui-btn mui-btn-outlined" data-text="WEB_temporary_password_i_know">&nbsp;</button>
+		</div>
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<!--<script src="../js/immersed.js"></script>-->
+		<!--<script src="../js/customSetting.js"></script>-->
+    <script id="langScript"></script>
+		<script type="text/javascript">
+			var langTip;
+			var startX = 0;
+			var startY = 0;
+			var handStartX = 8;
+			var handStartY = 6;
+			var handxNow = 8;
+			var handyNow = 6;
+			var GridIsEmpty = true;
+			var snapshotStorageShedule = {};
+			var drawDiv = document.getElementById("drawDiv");
+			var canvasBox = document.getElementById("canvasBox");
+			var canvasBox1 = document.getElementById("canvasBox1");
+			var drawbtn = document.getElementById("drawbtn");
+			var toolsname = document.getElementById("toolsname");
+			var iknow;
+			var iknowbox;
+			var paramH;
+			//事件类型
+			var configType = "motionImg";
+			var currentDevID = "";
+			var currentID = 0;
+			var cfgExObj = {};
+			//侧边栏功能按钮
+			var motionaddedit;
+			var motiondeledit;
+			var motionclear;
+			//canvas画图相关参数
+			var canvas;
+			var context;
+			var canvas1;
+			var context1;
+			var ratio; //缩放倍数
+			//动检配置相关的数据
+			var map_mo = [];
+			var widthN = 22; //宽轴网格数
+			var heightN = 18; //竖轴网格数
+			var canvasWidth;
+			var canvasHeight;
+			var lenW; //单元格宽度
+			var lenH; //单元格高度
+			var area_mo = []; //存储画图对象
+			var str_mo = ''; //八位数组组成的字符串
+			var str_moBak = "";
+			var station_mo = 1; //绘图状态 0代表删除，1代表绘图
+			var jsonMap_mo = {
+				'Enabled': 1,
+				'Sensitivity': 75,
+				'Grid': ''
+			};
+			//base64
+			var base64encodechars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+			var base64decodechars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);
+			var self;
+			var parentW;
+			var GridData;
+			var imgHand = new Image();
+			imgHand.src = "../images/hand2.png";
+			var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+			var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+			var myReq;
+			var imgSrc = ""; //获取第一帧图返回数据
+			var imgTimeout = false; //获取第一帧图是否超10秒
+			var initDrawFlag = false;
+			drawDiv = document.getElementById("drawDiv");
+			drawbtn = document.getElementById("drawbtn");
+			toolsname = document.getElementById("toolsname");
+			iknow = document.getElementById("iknow");
+			iknowbox = document.getElementById("iknowbox");
+			//侧边栏功能按钮
+			motionaddedit = document.getElementById("motionaddedit");
+			motiondeledit = document.getElementById("motiondeledit");
+			motionclear = document.getElementById("motionclear");
+			//canvas画图相关参数
+			canvas = document.getElementById("canvas");
+			context = canvas.getContext("2d");
+			canvas1 = document.getElementById("canvas1");
+			context1 = canvas1.getContext("2d");
+			ratio = getPixelRatio(context);
+			checkType(localStorage.AppType); //加载特定样式
+			// 根据样式判断
+			if(localStorage.AppType == "1" || localStorage.AppType == "3") {
+				document.getElementById("iknow").classList.add("ezlive-iknowbtn");
+				var lilen = document.getElementById("toolsname").getElementsByTagName("li");
+				for(var i = 0; i < lilen.length; i++) {
+					lilen[i].style.color = '#50d0c1';
+				}
+			} else if(localStorage.AppType == "2") {
+				document.getElementById("iknow").classList.add("ezlive-iknowbtn");
+				var lilen = document.getElementById("toolsname").getElementsByTagName("li");
+				for(var i = 0; i < lilen.length; i++) {
+					lilen[i].style.color = '#53BDD5';
+				}
+			}
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				var Url = "web/newPages/settings_MotionArea.html";
+				var self = dsBridgeFuncSyn.getWebParam(Url);
+				self = JSON.parse(self);
+				GridData = self.GridData;
+			}
+
+			function initData() {
+				currentDevID = localStorage.getItem("devID");
+				jsonMap_mo["Enabled"] = GridData["Enabled"];
+				jsonMap_mo["Sensitivity"] = GridData["Sensitivity"];
+				jsonMap_mo["Grid"] = GridData["Grid"];
+				map_mo = decodeData(GridData["Grid"]); //画图数组
+				for(var i = 0; i < map_mo.length; i++) {
+					str_mo += padd(map_mo[i].toString(2));
+				}
+				if(str_mo.length < 396) {
+					var num = 396 - str_mo.length;
+					str_mo += (new Array(num + 1)).join('0');
+				}
+				str_moBak = str_mo;
+				//绘图侧边栏工具条状态控制
+				mui('#motionbtn').on('tap', 'button', function() {
+					if(this.id == "motionaddedit") {
+						station_mo = 1;
+					} else if(this.id == "motiondeledit") {
+						if(!GridIsEmpty) {
+							station_mo = 0;
+						}
+					} else if(this.id == "motionclear") {
+						if(!GridIsEmpty) {
+							station_mo = 1;
+						}
+						str_mo = '';
+						map_mo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //画图数组
+						for(var i = 0; i < map_mo.length; i++) {
+							str_mo += padd(map_mo[i].toString(2));
+						}
+						//清空
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						//重绘
+						drawObj();
+					} else if(this.id == "motioncommit") {
+						saveCommit();
+					} else if(this.id == "goBack") {
+						if(str_moBak == str_mo) {
+							dsBridgeFuncAsyn.setScreenRotation("0", function() {
+								dsBridgeFuncSyn.backTo();
+							});
+						} else {
+							var btnArray = [langTip["WEB_cancel"], langTip["WEB_password_confirm_modify"]];
+							var str = langTip["WEB_confirm_save"];
+							if(str.indexOf("?") != -1) {
+								str = str.substr(0, str.indexOf("?") + 1);
+							}
+							mui.confirm(str, langTip["WEB_dialog_title_notify"], btnArray, function(e) {
+								if(e.index == 1) {
+									saveCommit();
+								} else {
+									dsBridgeFuncAsyn.setScreenRotation("0", function() {
+										dsBridgeFuncSyn.backTo();
+									});
+								}
+							}, 'div');
+						}
+					}
+					changeMotionBtnStatus(station_mo);
+				});
+
+				//				dsBridgeFuncAsyn.setScreenRotation("1", function() {
+
+				setTimeout(doTask, 500);
+				//				});
+
+			}
+
+			function doTask() {
+				canvasWidth = drawDiv.offsetWidth - 50 - 50;
+				canvasHeight = drawDiv.offsetHeight - 60;
+				if((canvasWidth - canvasHeight) < 100) {
+					setTimeout(doTask, 200);
+					return;
+				}
+				canvas.style.width = canvasWidth + 'px';
+				canvas.style.height = canvasHeight + 'px';
+				canvasBox.style.height = canvasHeight + 'px';
+				canvasBox.style.width = canvasWidth + 'px';
+				canvas.width = canvasWidth * ratio;
+				canvas.height = canvasHeight * ratio;
+				canvas1.style.width = canvasWidth + 'px';
+				canvas1.style.height = canvasHeight + 'px';
+				canvasBox1.style.height = canvasHeight + 'px';
+				canvasBox1.style.width = canvasWidth + 'px';
+				canvas1.width = canvasWidth * ratio;
+				canvas1.height = canvasHeight * ratio;
+				lenW = (canvasWidth / widthN) * ratio; //单元格宽度
+				lenH = ((canvasHeight) / heightN) * ratio; //单元格高度
+				if(localStorage.drawAreaFirst == "0") {
+					drawbtn.classList.remove("ui-drawbtn-invisible");
+					canvasBox.style.display = "block";
+					initDrawAreas();
+				} else {
+					localStorage.drawAreaFirst = "0";
+					canvasBox1.style.display = "block";
+					indicatorShow();
+				}
+			}
+
+			function initEvent() {
+				iknow.addEventListener("click", indicatorHide, false);
+			}
+
+			function timeoutDo() {
+				if(imgSrc == "") {
+					imgTimeout = true;
+					drawbtn.classList.remove("ui-drawbtn-invisible");
+					drawObj();
+					canvas.addEventListener("click", onClickEvent, false);
+					canvas.addEventListener("touchstart", drawLineEvent, false);
+					canvas.addEventListener("touchmove", drawLineEvent, false);
+					canvas.addEventListener("touchend", drawLineEvent, false);
+				}
+			}
+
+			function initDrawAreas() {
+				str_mo = '';
+				map_mo = decodeData(GridData["Grid"]); //画图数组
+				for(var i = 0; i < map_mo.length; i++) {
+					str_mo += padd(map_mo[i].toString(2));
+				}
+				if(str_mo.length < 396) {
+					var num = 396 - str_mo.length;
+					str_mo += (new Array(num + 1)).join('0');
+				}
+				str_moBak = str_mo;
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				context.globalAlpha = 1;
+				setTimeout(function() {
+					dsBridgeFuncSyn.dismiss();
+					if(!initDrawFlag) {
+						timeoutDo();
+					}
+				}, 10000);
+
+				dsBridgeFuncAsyn.getFirstImg(function(path) {
+					dsBridgeFuncSyn.dismiss();
+					var data = JSON.parse(path);
+					if(imgTimeout) return;
+					imgSrc = data.param;
+					if(data.statusCode == "0") {
+						canvas.style.backgroundImage = 'url(' + imgSrc + ')';
+					}
+					drawbtn.classList.remove("ui-drawbtn-invisible");
+					drawObj();
+					initDrawFlag = true;
+					canvas.addEventListener("click", onClickEvent, false);
+					canvas.addEventListener("touchstart", drawLineEvent, false);
+					canvas.addEventListener("touchmove", drawLineEvent, false);
+					canvas.addEventListener("touchend", drawLineEvent, false);
+				});
+				changeMotionBtnStatus(station_mo);
+			}
+
+			function drawObj() {
+				area_mo = [];
+				GridIsEmpty = true;
+				for(var i = 0; i < heightN; i++) {
+					for(var j = 0; j < widthN; j++) {
+						var gridObj = {
+							x: j,
+							y: i,
+							show: Number(str_mo[i * widthN + j])
+						}
+						area_mo.push(gridObj);
+					}
+				}
+				//设置矩形的线宽，颜色及填充颜色和透明度
+				if(canvasBox.style.display == 'none') {
+					context1.lineWidth = 1 * ratio;
+					context1.strokeStyle = '#000000';
+					context1.fillStyle = '#4eb6ff';
+					context1.globalAlpha = 0.45;
+				} else {
+					context.lineWidth = 1 * ratio;
+					context.strokeStyle = '#000000';
+					context.fillStyle = '#4eb6ff';
+					context.globalAlpha = 0.45;
+				}
+				if(localStorage.AppType == '1' || localStorage.AppType == '3') {
+					context.fillStyle = '#50d0c1';
+					context1.fillStyle = '#50d0c1';
+				} else if(localStorage.AppType == '2') {
+					context.fillStyle = '#53BDD5';
+					context1.fillStyle = '#53BDD5';
+				}
+				for(var i = 0; i < area_mo.length; i++) {
+					var x = (area_mo[i].x) * lenW;
+					var y = (area_mo[i].y) * lenH;
+					if(area_mo[i].show) {
+						GridIsEmpty = false;
+						if(canvasBox.style.display == 'none') {
+							context1.fillRect(x, y, lenW, lenH);
+							context1.strokeRect(x, y, lenW, lenH);
+						} else {
+							context.fillRect(x, y, lenW, lenH);
+							context.strokeRect(x, y, lenW, lenH);
+						}
+					} else {
+						canvasBox.style.display == 'none' ? context1.strokeRect(x, y, lenW, lenH) : context.strokeRect(x, y, lenW, lenH);
+					}
+				}
+				if(GridIsEmpty) {
+					if(localStorage.drawAreaFirst == "0") {
+						motiondeledit.classList.add("wapp-side-btn-deledit-disable");
+						motionclear.classList.add("wapp-side-btn-del-disable");
+					}
+				} else {
+					motiondeledit.classList.remove("wapp-side-btn-deledit-disable");
+					motionclear.classList.remove("wapp-side-btn-del-disable");
+				}
+			}
+
+			function saveCommit() {
+				if(configType == "motionImg") {
+					change10(str_mo);
+					jsonMap_mo["Grid"] = encodeData(map_mo);
+					var motionMap = {};
+					motionMap.Enabled = jsonMap_mo.Enabled;
+					motionMap.Sensitivity = jsonMap_mo.Sensitivity;
+					motionMap.Grid = jsonMap_mo.Grid;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.DetectionAreas, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							str_moBak = str_mo;
+							var param = {
+								Grid_Bak: motionMap.Grid
+							}
+							dsBridgeFuncSyn.sendDataToReport("updateGrid", JSON.stringify(param));
+							drawbtn.classList.add("ui-drawbtn-invisible");
+							dsBridgeFuncAsyn.setScreenRotation("0", function() {
+								dsBridgeFuncSyn.backTo();
+								showToast(langTip["WEB_logcat_save_successful"]);
+							});
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+						}
+					}, motionMap);
+				}
+
+			}
+
+			/**
+			 * canvas绘图相关的函数
+			 * @param {Object} event
+			 */
+			function drawLineEvent(event) {
+				var touchPoint = event.touches[0];
+				var xPosition = touchPoint.clientX - 50;
+				var yPosition = touchPoint.clientY - 30;
+				//canvas.width-1 减一个像素兼容ios
+				if(xPosition < 0 || xPosition > canvas.width - 1 ||
+					yPosition < 0 || yPosition > canvas.height) {
+					return;
+				}
+				switch(event.type) {
+					case "touchstart":
+						startX = xPosition;
+						startY = yPosition;
+						break;
+					case "touchmove":
+					case "touchend":
+						if(configType == "motionImg") {
+							drawRect(event);
+						}
+						break;
+				}
+			}
+
+			/**
+			 * 点击事件处理函数
+			 * @param {Object} event
+			 */
+			function onClickEvent(event) {
+				if(configType == "motionImg") {
+					moClick(event);
+				}
+			}
+
+			/**
+			 * 单元格点击
+			 * @param {Object} event
+			 */
+			function moClick(event) {
+				var xPosition = event.clientX - 50;
+				var yPosition = event.clientY - 30;
+				var x1 = xPosition * ratio;
+				var y1 = yPosition * ratio;
+				var x = Math.floor(x1 / lenW);
+				var y = Math.floor(y1 / lenH);
+				var index = y * widthN + x;
+				var value = str_mo.substr(index, 1);
+				value = station_mo;
+				str_mo = str_mo.slice(0, index) + value + str_mo.slice((index + 1), 396) + "0000";
+				change10(str_mo);
+				//清空
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				//重画
+				drawObj();
+			}
+
+			/**
+			 * 绘制移动路线上单元格
+			 * @param {Object} event
+			 */
+			function moTouchMove(event) {
+				var touchPoint = event.touches[0];
+				var xPosition = touchPoint.clientX - 50;
+				var yPosition = touchPoint.clientY - 30;
+				var x1 = xPosition * ratio;
+				var y1 = yPosition * ratio;
+				//				var x1 = event.touches[0].clientX * ratio;
+				//				var y1 = event.touches[0].clientY * ratio;
+				var x = Math.floor(x1 / lenW);
+				var y = Math.floor(y1 / lenH);
+				var index = y * widthN + x;
+				var value = str_mo.substr(index, 1); //当前点是否已经绘制1为已绘制,0为未绘制
+				value = station_mo;
+				str_mo = str_mo.slice(0, index) + value + str_mo.slice((index + 1), 396) + "0000";
+				change10(str_mo);
+				//清空
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				//重画
+				drawObj();
+			}
+
+			/**
+			 * 绘制矩形框内单元格
+			 * @param {Object} event
+			 */
+			function drawRect(event) {
+				var touchPoint = event.touches[0];
+				var xPosition = touchPoint.clientX - 50;
+				var yPosition = touchPoint.clientY - 30;
+				var x1 = xPosition * ratio;
+				var y1 = yPosition * ratio;
+				var x = Math.floor(x1 / lenW);
+				var y = Math.floor(y1 / lenH);
+				var startx = Math.floor(startX * ratio / lenW);
+				var starty = Math.floor(startY * ratio / lenH);
+				var signX = x - startx > 0 ? 1 : -1;
+				var signY = y - starty > 0 ? 1 : -1;
+				var offsetX = Math.abs(x - startx);
+				var offsetY = Math.abs(y - starty);
+				var nowX = 0;
+				var nowY = 0;
+				var index = 0;
+				for(var i = 0; i < offsetX + 1; i++) {
+					for(var j = 0; j < offsetY + 1; j++) {
+						nowX = startx + i * signX;
+						nowY = starty + j * signY;
+						if(nowX > widthN - 1) {
+							nowX = widthN - 1;
+						}
+						if(nowY > heightN - 1) {
+							nowY = heightN - 1;
+						}
+						index = nowY * widthN + nowX;
+						str_mo = str_mo.slice(0, index) + station_mo + str_mo.slice((index + 1), 396) + "0000";
+						change10(str_mo);
+					}
+				}
+				//清空
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				//重画
+				drawObj();
+			}
+
+			/**
+			 * 补足8位2进制
+			 * @param {Object} str
+			 */
+			function padd(str) {
+				if(typeof str !== 'string') {
+					str = str.toString();
+				}
+				var res = '';
+				for(var i = 0; i < 8 - str.length; i++) {
+					res += '0';
+				}
+				return res + str;
+			}
+
+			/**
+			 * 2进制转为10进制
+			 * @param {Object} str
+			 */
+			function change10(str) {
+				map_mo = [];
+				for(var i = 0; i < str.length / 8; i++) {
+					map_mo.push(parseInt(str.substr(i * 8, 8), 2))
+				}
+			}
+
+			/**
+			 * base64编码
+			 * @param {Object} str
+			 */
+			function encode(str) {
+				var out, i, len;
+				var c1, c2, c3;
+				len = str.length;
+				i = 0;
+				out = "";
+				while(i < len) {
+					c1 = str.charCodeAt(i++) & 0xff;
+					if(i == len) {
+						out += this.base64encodechars.charAt(c1 >> 2);
+						out += this.base64encodechars.charAt((c1 & 0x3) << 4);
+						out += "==";
+						break;
+					}
+					c2 = str.charCodeAt(i++);
+					if(i == len) {
+						out += this.base64encodechars.charAt(c1 >> 2);
+						out += this.base64encodechars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xf0) >> 4));
+						out += this.base64encodechars.charAt((c2 & 0xf) << 2);
+						out += "=";
+						break;
+					}
+					c3 = str.charCodeAt(i++);
+					out += this.base64encodechars.charAt(c1 >> 2);
+					out += this.base64encodechars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xf0) >> 4));
+					out += this.base64encodechars.charAt(((c2 & 0xf) << 2) | ((c3 & 0xc0) >> 6));
+					out += this.base64encodechars.charAt(c3 & 0x3f);
+				}
+				return out;
+			}
+
+			/**
+			 * base64解码
+			 * @param {Object} str
+			 */
+			function decode(str) {
+				var c1, c2, c3, c4;
+				var i, len, out;
+
+				len = str.length;
+
+				i = 0;
+				out = "";
+				while(i < len) {
+
+					do {
+						c1 = this.base64decodechars[str.charCodeAt(i++) & 0xff];
+					} while (i < len && c1 == -1);
+					if(c1 == -1)
+						break;
+
+					do {
+						c2 = this.base64decodechars[str.charCodeAt(i++) & 0xff];
+					} while (i < len && c2 == -1);
+					if(c2 == -1)
+						break;
+
+					out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));
+
+					do {
+						c3 = str.charCodeAt(i++) & 0xff;
+						if(c3 == 61)
+							return out;
+						c3 = this.base64decodechars[c3];
+					} while (i < len && c3 == -1);
+					if(c3 == -1)
+						break;
+
+					out += String.fromCharCode(((c2 & 0xf) << 4) | ((c3 & 0x3c) >> 2));
+
+					do {
+						c4 = str.charCodeAt(i++) & 0xff;
+						if(c4 == 61)
+							return out;
+						c4 = this.base64decodechars[c4];
+					} while (i < len && c4 == -1);
+					if(c4 == -1)
+						break;
+					out += String.fromCharCode(((c3 & 0x03) << 6) | c4);
+				}
+				return out;
+			}
+
+			/*
+			 * 紧缩位压缩方法(PackBits)
+			 * @param srcArr 待压缩数组，长度不能超过128
+			 * @returns {Array} 压缩后的数组
+			 */
+			function packbits(srcArr) {
+				var dstArr = [],
+					rdPos, /* 读的位置 */
+					wdPos, /* 写的位置 */
+					rdSrcPos, /* 欲读字串的源位置 */
+					idx = 0,
+					count = 0,
+					maxRunCnt = 0,
+					remainCnt = srcArr.length; /* 剩余需要压缩编码的数量 */
+
+				for(rdSrcPos = 0, wdPos = 0; remainCnt > 0; rdSrcPos = rdPos, remainCnt = remainCnt - count) {
+					// A run cannot be longer than 128 bytes.
+					maxRunCnt = (remainCnt < 128) ? remainCnt : 128;
+					if((remainCnt >= 3) && (srcArr[rdSrcPos + 1] == srcArr[rdSrcPos]) && (srcArr[rdSrcPos + 2] == srcArr[rdSrcPos])) {
+						// 'run' points to at least three duplicated values.
+						// Step forward until run length limit, end of input,
+						// or a non matching byte:
+						for(rdPos = rdSrcPos + 3, idx = 3;
+							(idx < maxRunCnt) && (srcArr[rdPos] == srcArr[rdSrcPos]); idx++) {
+							++rdPos;
+						}
+
+						/* 这里ulCount不是ulIdx + 1,而是ulIdx,表示连续相同字符的个数 */
+						count = idx;
+
+						// replace this run in output with two bytes:
+						dstArr[wdPos++] = 1 + 256 - count; /* flag byte, which encodes count (129..254) */
+
+						dstArr[wdPos++] = srcArr[rdSrcPos]; /* byte value that is duplicated */
+					} else {
+						// If the input doesn't begin with at least 3 duplicated values,
+						// then copy the input block, up to the run length limit,
+						// end of input, or until we see three duplicated values:
+						for(rdPos = rdSrcPos, idx = 0; idx < maxRunCnt; idx++) {
+							if((remainCnt >= (idx + 3)) && (srcArr[rdPos + 1] == srcArr[rdPos]) && (srcArr[rdPos + 2] == srcArr[rdPos])) {
+								break; // 3 bytes repeated end verbatim run
+							} else {
+								++rdPos;
+							}
+						}
+
+						/* 这里ulIdx根据算法已经保证大于0,否则就进入到该else分支并列的if分支去了 */
+						count = idx;
+						dstArr[wdPos++] = count - 1; /* flag byte, which encodes count (0..127) */
+						dstArr = dstArr.concat(srcArr.slice(rdSrcPos, rdSrcPos + count)); /* followed by the bytes in the run */
+						wdPos += count;
+					}
+				}
+				return dstArr;
+			}
+
+			/*
+			 * 紧缩位压缩方法(PackBits)的解压动作
+			 * @param srcArr
+			 * @returns {Array}
+			 */
+			function unpackbits(srcArr) {
+				var dstArr = [],
+					j,
+					n,
+					ulLen,
+					val,
+					inlen = srcArr.length;
+				for(j = 0; inlen > 1;) {
+					ulLen = srcArr[j++];
+					--inlen;
+
+					if(ulLen != 128) {
+						if(ulLen > 128) {
+							ulLen = 1 + 256 - ulLen;
+							val = srcArr[j++];
+							--inlen;
+							for(n = 0; n < ulLen; n++) {
+								dstArr.push(val);
+							}
+						} else {
+							++ulLen;
+							if(ulLen > inlen)
+								break;
+							dstArr = dstArr.concat(srcArr.slice(j, j + ulLen));
+							j += ulLen;
+							inlen -= ulLen;
+						}
+					}
+				}
+				return dstArr;
+			}
+
+			/**
+			 * 编码
+			 * @param {Object} str
+			 */
+			function encodeData(str) {
+				var retStr = '',
+					strArr = str,
+					index,
+					len;
+				strArr = packbits(strArr);
+				for(index = 0, len = strArr.length; index < len; index++) {
+					retStr += String.fromCharCode(strArr[index]);
+				}
+				return encode(retStr);
+			}
+
+			/**
+			 * 解码
+			 * @param {Object} str
+			 */
+			function decodeData(str) {
+				var strArr = [],
+					index,
+					len;
+
+				str = decode(str);
+				for(index = 0, len = str.length; index < len; index++) {
+					strArr.push(str.charCodeAt(index));
+				}
+				strArr = unpackbits(strArr);
+				return strArr;
+			}
+
+			function changeMotionBtnStatus(isEnable) {
+				motionaddedit.classList.remove("wapp-side-btn-addedit-select");
+				motiondeledit.classList.remove("wapp-side-btn-deledit-select");
+				if(isEnable) {
+					motionaddedit.classList.add("wapp-side-btn-addedit-select");
+				} else {
+					if(!GridIsEmpty) {
+						motiondeledit.classList.add("wapp-side-btn-deledit-select");
+					}
+				}
+			}
+
+			function indicatorShow() {
+				iknowbox.classList.remove("mui-hidden");
+				iknow.style.visibility = "hidden";
+				//调整我知道按钮位置
+				dsBridgeFuncSyn.dismiss();
+				var iknowWidth = iknow.offsetWidth;
+				iknow.style.top = 12 * lenH / ratio + 30 + "px";
+				iknow.style.left = (10.5 * lenW / ratio - iknowWidth / 2) + 50 + "px";
+				setTimeout(function() {
+					drawbtn.classList.remove("ui-drawbtn-invisible");
+					toolsname.classList.remove("ui-toolsname-invisible");
+					iknow.style.visibility = "visible";
+					str_mo = '';
+					map_mo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+					]; //画图数组
+					for(var i = 0; i < map_mo.length; i++) {
+						str_mo += padd(map_mo[i].toString(2));
+					}
+					//清空
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					context1.clearRect(0, 0, canvas1.width, canvas1.height);
+					//重绘
+					drawObj();
+					//执行动画
+					drawFrame();
+					changePoint(handStartX, handStartY);
+				}, 200);
+			}
+
+			function indicatorHide() {
+				clearTimeout(paramH);
+				canvasBox.style.display = 'block';
+				canvasBox1.style.display = 'none';
+				toolsname.classList.add("ui-toolsname-invisible");
+				//清空
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				setTimeout(function() {
+					dsBridgeFuncSyn.showLoading();
+					initDrawAreas();
+					iknowbox.classList.add("mui-hidden");
+				}, 200);
+			}
+
+			function drawDemo(x, y) {
+				drawObj();
+			}
+
+			function drawHand(x, y) {
+				context1.globalAlpha = 1;
+			}
+
+			function getPixelRatio(context) {
+				var backingStore = context.backingStorePixelRatio ||
+					context.webkitBackingStorePixelRatio ||
+					context.mozBackingStorePixelRatio ||
+					context.msBackingStorePixelRatio ||
+					context.oBackingStorePixelRatio ||
+					context.backingStorePixelRatio || 1;
+				return(window.devicePixelRatio || 1) / backingStore;
+			}
+
+			/**
+			 * 绘制文字
+			 */
+			function text() {
+				var txt = langTip["WEB_web_drawarea_demo"];
+				context1.fillStyle = "#ffffff";
+				context1.globalAlpha = 1;
+				var font_size = 18 * ratio;
+				context1.font = font_size + "px simhei";
+				var text_width = context1.measureText(txt).width;
+				context1.fillText(txt, 10.5 * lenW - text_width / 2, 11 * lenH);
+			}
+
+			function drawMask() {
+				context1.globalAlpha = 0.1;
+				context1.fillStyle = "#000000";
+				//黑色区域
+				context1.fillRect(0, 0, 22 * lenW, 4 * lenH);
+				context1.fillRect(0, 4 * lenH, 7 * lenW, 5 * lenH);
+				context1.fillRect(14 * lenW, 4 * lenH, 8 * lenW, 5 * lenH);
+				context1.fillRect(0, 9 * lenH, 22 * lenW, 9 * lenH);
+				//白色区域
+				context1.globalAlpha = 0.5;
+				context1.fillStyle = "#ffffff";
+				context1.fillRect(7 * lenW, 4 * lenH, 7 * lenW, 5 * lenH);
+				context1.fillStyle = '#4eb6ff';
+				if(localStorage.AppType == '1' || localStorage.AppType == '3') {
+					context1.fillStyle = '#50d0c1';
+				} else if(localStorage.AppType == '2') {
+					context1.fillStyle = '#53BDD5';
+				}
+				context1.globalAlpha = 0.45;
+				context1.fillRect(8 * lenW, 5 * lenH, lenW, lenH);
+				//     改为图片
+				drawPlaceholder();
+			}
+			var imgLoaded = false;
+
+			function drawPlaceholder() {
+				//绘图片
+				var img = new Image();
+				img.src = "../images/handguide.png";
+				if(!imgLoaded) {
+					img.onload = function() {
+						context1.drawImage(img, 8 * lenW, 5 * lenH + (lenH / 2), 102 * ratio, 59 * ratio);
+						imgLoaded = true;
+					}
+				} else {
+					context1.drawImage(img, 8 * lenW, 5 * lenH + (lenH / 2), 102 * ratio, 59 * ratio);
+				}
+			}
+
+			function changePoint(x, y) {
+				if(x < handStartX + 4.2) {
+					paramH = setTimeout(function() {
+						handxNow = x + 0.2;
+						handyNow = y + 0.1;
+						changePoint(handxNow, handyNow);
+					}, 80);
+				} else {
+					str_mo = '';
+					map_mo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+					]; //画图数组
+					for(var i = 0; i < map_mo.length; i++) {
+						str_mo += padd(map_mo[i].toString(2));
+					}
+					handxNow = handStartX;
+					handyNow = handStartY;
+					changePoint(handxNow, handyNow);
+				}
+			}
+
+			function drawFrame() {
+				//清空
+				context1.clearRect(0, 0, canvas1.width, canvas1.height);
+				//重绘
+				drawMask();
+				drawDemo(handxNow, handyNow);
+				text();
+				drawHand(handxNow, handyNow);
+			}
+
+			//绘图相关工具条，按钮
+			mui('#drawback').on('tap', 'button', function() {
+				if(this.id == "goBack") {
+					if(str_moBak == str_mo) {
+						// TODO：取消webview全屏
+						dsBridgeFuncAsyn.setScreenRotation("0", function() {
+							dsBridgeFuncSyn.backTo();
+						});
+					} else {
+						var btnArray = [langTip["WEB_cancel"], langTip["WEB_password_confirm_modify"]];
+						var str = langTip["WEB_confirm_save"];
+						if(str.indexOf("?") != -1) {
+							str = str.substr(0, str.indexOf("?") + 1);
+						}
+						mui.confirm(str, langTip["WEB_dialog_title_notify"], btnArray, function(e) {
+							if(e.index == 1) {
+								saveCommit();
+							} else {
+								// TODO：取消webview全屏
+								dsBridgeFuncAsyn.setScreenRotation("0", function() {
+									dsBridgeFuncSyn.backTo();
+								});
+							}
+						}, 'div');
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

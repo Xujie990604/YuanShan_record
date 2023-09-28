@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_device_manager_WideDynamic_setting">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<div id="EZView-content" class="mui-hidden">
+				<!--宽动态-->
+				<ul id='dynamic-content' class="mui-table-view">
+					<li id="setWideDynamic" class="mui-table-view-cell">
+						<span data-text="WEB_device_manager_WideDynamic_setting">&nbsp;</span>
+						<div id="setWideDynamicSwitch" class="mui-switch mui-switch-mini">
+							<div class="mui-switch-handle" id="setWideDynamicCircle"></div>
+						</div>
+						<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+					</li>
+				</ul>
+			</div>
+			<script src="../js/dsbridge.min.js"></script>
+			<script src="../js/common.js"></script>
+			<script src="../js/libs/md5.js"></script>
+			<script src="../js/libs/jquery-3.4.1.min.js"></script>
+			<script src="../js/libs/sha2.js"></script>
+			<script src="../js/resource.js"></script>
+			<script src="../js/Utils.js"></script>
+			<script src="../js/mui.js"></script>
+			<script src="../js/immersed.js"></script>
+			<script src="../js/customSetting.js"></script>
+			<script src="../js/loadCss.js"></script>
+      <script id="langScript"></script>
+			<script>
+				var langTip;
+				checkType(localStorage.AppType); //加载特定样式
+				//宽动态配置
+				var setWideDynamicConfirm = true; //宽动态开关状态变化时是否调接口提交
+				var WideDynamicServiceData;
+				var WideDynamicCheck;
+				mui.init();
+        // 获取语言文件
+				var typeLan = initLang();
+				langTip = typeLan.lang;
+
+        // 初始化数据
+				initData();
+        
+				function initData() {
+					//发请求获取宽动态数据初始化
+					initWideDynamicData();
+				}
+
+				/*
+				 * 发请求获取宽动态配置数据初始化
+				 */
+				function initWideDynamicData() {
+					SendAjax(LAPI.WideDynamic, 'get', function(code, data) {
+						if(code == 0) {
+							$("#EZView-content").removeClass("mui-hidden");
+							WideDynamicServiceData = deepCopy(data);
+							WideDynamicCheck = data.WideDynamic.Mode; // 0：关闭，1/2：开启
+							if(WideDynamicCheck == 2) {
+								WideDynamicCheck == 1;
+							}
+							document.getElementById("setWideDynamicSwitch").style.zIndex = 20;
+							document.getElementById("setWideDynamicSwitch").style.visibility = "visible";
+							setWideDynamicConfirm = false;
+							setSwitchStatus("setWideDynamicSwitch", WideDynamicCheck)
+							setWideDynamicConfirm = true;
+							var setWideDynamicActive = document.getElementById("setWideDynamicSwitch").classList.contains("mui-active")
+							if(setWideDynamicActive) {
+								document.getElementById("setWideDynamicCircle").style.transform = 'translate(16px, 0px)';
+							}
+							dsBridgeFuncSyn.dismiss();
+						} else {
+							//数据获取失败的处理
+							addBitmap(0);
+							showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+							dsBridgeFuncSyn.dismiss();
+						}
+					})
+				}
+				/*
+				 *  监听宽动态开关
+				 */
+				document.getElementById("setWideDynamicSwitch").addEventListener('toggle', function(event) {
+					if(event.detail.isActive && setWideDynamicConfirm) {
+						var sendDataON = deepCopy(WideDynamicServiceData);
+						sendDataON.WideDynamic.Mode = 1;
+						dsBridgeFuncSyn.showLoading();
+						SendAjax(LAPI.WideDynamic, 'put', function(code, data, responseCode) {
+							dsBridgeFuncSyn.dismiss();
+							if(code == 0) {
+
+							} else {
+								setWideDynamicConfirm = false
+								if(responseCode == 7) {
+									// langTip["WEB_limited"]
+								   showToast(langTip["WEB_limited"]);
+								} else {
+								   showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+								}
+								setTimeout(function() {
+									mui("#setWideDynamicSwitch").switch().toggle()
+								}, 200)
+							}
+						}, sendDataON)
+					} else if(!event.detail.isActive && setWideDynamicConfirm) {
+						var sendDataOFF = deepCopy(WideDynamicServiceData);
+						sendDataOFF.WideDynamic.Mode = 0;
+						dsBridgeFuncSyn.showLoading();
+						SendAjax(LAPI.WideDynamic, 'put', function(code, data) {
+							dsBridgeFuncSyn.dismiss();
+							if(code == 0) {
+
+							} else {
+								setWideDynamicConfirm = false;
+								showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+								setTimeout(function() {
+									mui("#setWideDynamicSwitch").switch().toggle();
+								}, 200)
+							}
+						}, sendDataOFF)
+					} else {
+						setWideDynamicConfirm = true;
+					}
+				})
+			</script>
+	</body>
+
+</html>

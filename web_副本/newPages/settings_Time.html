@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_deviceTime">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-hidden" id="manualConfig">
+				<li class="mui-table-view-cell">
+					<span data-text="WEB_time_hand_set" class="mainStyle">&nbsp;</span>
+				</li>
+				<li id="TimeZoneItem" class="mui-table-view-cell">
+					<a href="#TimeZone" class="mui-navigate-right">&nbsp;
+						<span data-text="WEB_alarm_set_zone" class="mainStyle padding-left-15">&nbsp;</span>
+						<span id="TimeZoneVal" class="mui-badge"></span>
+					</a>
+				</li>
+				<li id="TimeItem" class="mui-table-view-cell">
+					<a id="Time" class="mui-navigate-right">&nbsp;
+						<span data-text="WEB_alarm_setting_time" class="mainStyle padding-left-15">&nbsp;</span>
+						<span id="TimeVal" class="mui-badge"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view ui-siwtchlist mui-hidden" id="reTimeUl">
+				<li class="mui-table-view-cell">
+					<span data-text="WEB_time_auto_set" class="mainStyle">&nbsp;</span>
+				</li>
+				<li id="reTime" class="mui-table-view-cell">
+					<a>
+						<span class="mid-btn mui-ellipsis" data-text="WEB_dst_time">&nbsp;</span>
+					</a>
+				</li>
+			</ul>
+			<ul id="SummerTime" class="mui-table-view ui-siwtchlist ui-invisible mui-hidden">
+				<li id="SummerTimeItem" class="mui-table-view-cell">
+					<span data-text="WEB_dst_name" class="mainStyle">&nbsp;</span>
+					<div id="SummerTimeSwitch" class="mui-switch mui-switch-mini">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-hidden">
+					<a id="startTime" class="mui-navigate-right">&nbsp;
+						<span data-text="WEB_dst_begin" class="mainStyle padding-left-15">&nbsp;</span>
+						<span id="startTimeVal" class="mui-badge"></span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-hidden">
+					<a id="endTime" class="mui-navigate-right">&nbsp;
+						<span data-text="WEB_dst_end" class="mainStyle padding-left-15">&nbsp;</span>
+						<span id="endTimeVal" class="mui-badge"></span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-hidden">
+					<a id="offsetTime" class="mui-navigate-right">&nbsp;
+						<span data-text="WEB_dst_offset" class="mainStyle padding-left-15">&nbsp;</span>
+						<span id="offsetTimeVal" class="mui-badge"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="TimeZone" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownDiv">
+					<label data-text="WEB_alarm_set_zone">&nbsp;</label>
+					<span id="closeTimeZone" class="mui-icon mui-icon-closeempty"></span>
+				</div>
+				<div class="ui-list-container" style="height: 300px;">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul id="TimeZoneList" class="mui-table-view mui-table-view-radio">
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-12:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-11:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-10:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-09:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-08:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-07:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-06:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-05:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-04:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-04:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-03:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-03:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-02:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-01:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC-00:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+01:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+02:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+03:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+03:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+04:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+04:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+05:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+05:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+05:45
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+06:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+06:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+07:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+08:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+09:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+09:30
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+10:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+11:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+12:00
+									</a>
+								</li>
+								<li class="mui-table-view-cell">
+									<a class="mui-navigate-right">
+										UTC+13:00
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<button id="TimeZoneOk" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_button_ok">&nbsp;</button>
+		</div>
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/libs/base64.min.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js"></script>
+    <script id="langScript"></script>
+		<script>
+			checkType(localStorage.AppType); //加载特定样式
+			var langTip;
+			var SummerTimeConfirm = true; //夏令时开关状态变化时是否调接口提交
+			var isSummer = false;
+			var Zone = 8;
+			var SummerTimeService; //夏令时设备数据
+			var Time = document.getElementById('Time'),
+				TimeVal = document.getElementById('TimeVal'),
+				TimeZoneVal = document.getElementById('TimeZoneVal'),
+				startTime = document.getElementById('startTime'),
+				endTime = document.getElementById('endTime'),
+				offsetTime = document.getElementById('offsetTime');
+			/*
+			 * 调Lapi获取时间数据并初始化页面数据
+			 */
+			var TimeData = {
+				TimeZone: 'UTC+08:00',
+				DeviceTime: 1544770420,
+				DateFormat: 0,
+				HourFormat: 0
+			};
+			var SummerTimeData = {
+				Enabled: 1,
+				BeginTime: {
+					Month: 1,
+					WeekNum: 1,
+					WeekDay: 1,
+					Hour: 1
+				},
+				EndTime: {
+					Month: 2,
+					WeekNum: 2,
+					WeekDay: 2,
+					Hour: 2
+				},
+				DSTBias: 30,
+			}; //夏令时初始数据
+
+			var TimeZoneChecked = TimeData.TimeZone;
+			var showST = true;
+			var lan;
+			var isGMT = false;
+			var timeZoneList = ["UTC-12:00", "UTC-11:00", "UTC-10:00", "UTC-09:00", "UTC-08:00", "UTC-07:00", "UTC-06:00", "UTC-05:00", "UTC-04:30", "UTC-04:00", "UTC-03:30", "UTC-03:00", "UTC-02:00", "UTC-01:00", "UTC-00:00", "UTC+01:00", "UTC+02:00", "UTC+03:00", "UTC+03:30", "UTC+04:00", "UTC+04:30", "UTC+05:00", "UTC+05:30", "UTC+05:45", "UTC+06:00", "UTC+06:30", "UTC+07:00", "UTC+08:00", "UTC+09:00", "UTC+09:30", "UTC+10:00", "UTC+11:00", "UTC+12:00", "UTC+13:00"];
+
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData(); // 页面参数初始化
+			initEvent();
+
+			function initPage() {
+				// 海外服务器支持夏令时配置  根据App侧提供的isDomestic判断 0：海外， 1：国内
+				if(localStorage.isNoAccount == 1) {
+					if(localStorage.noSignupDevServiceType == 0) {
+						document.getElementById("SummerTime").classList.remove("ui-invisible");
+					}
+				} else {
+					if(0 == localStorage.isDomestic) {
+						document.getElementById("SummerTime").classList.remove("ui-invisible");
+					}
+				}
+			}
+
+			function initData() {
+				//获取夏令时数据
+				SendAjax(LAPI.TimeDst, 'get', function(code, data) {
+					if(code == 0) {
+						SummerTimeService = deepCopy(data);
+						//获取时区时间数据
+						SendAjax(LAPI.SystemTime, 'get', function(code, data) {
+							if(code == 0) {
+								$("#manualConfig").removeClass("mui-hidden");
+								$("#reTimeUl").removeClass("mui-hidden");
+								$("#SummerTime").removeClass("mui-hidden");
+								if(data.TimeZone.indexOf('GMT') > -1) {
+									isGMT = true;
+									TimeData.TimeZone = data.TimeZone.replace('GMT', 'UTC');
+								} else {
+									TimeData.TimeZone = data.TimeZone;
+								}
+								TimeData.DeviceTime = data.DeviceTime;
+								TimeData.DateFormat = data.DateFormat;
+								TimeData.HourFormat = data.HourFormat;
+								TimeZoneChecked = TimeData.TimeZone;
+								Zone = Number(TimeData.TimeZone.substring(3, 6)) + (Number(TimeData.TimeZone.substring(3, 4) + TimeData.TimeZone.substring(7)) / 60);
+
+								//夏令时开关初始化
+								document.getElementById("SummerTimeSwitch").style.zIndex = 20;
+								document.getElementById("SummerTimeSwitch").style.visibility = "visible";
+								SummerTimeConfirm = false;
+								setSwitchStatus("SummerTimeSwitch", SummerTimeService.Enabled ? 1 : 0);
+								SummerTimeConfirm = true;
+								//若夏令时开启则显示配置选项
+								if(SummerTimeService.Enabled == 1) {
+									mui("#SummerTime .mui-table-view-cell").each(function(index, El) {
+										if(index != 0) {
+											El.classList.remove('mui-hidden');
+										}
+									});
+								}
+								//开始时间初始化
+								startTime.children[1].innerText = SummerTimeFormat(deepCopy(SummerTimeService.BeginTime));
+								//结束时间初始化
+								endTime.children[1].innerText = SummerTimeFormat(deepCopy(SummerTimeService.EndTime));
+								//偏移时间初始化
+								offsetTime.children[1].innerText = SummerTimeService.DSTBias + ' ' + langTip["WEB_dst_offset_minute"];
+
+								//初始化时区时间
+								var offset = new Date().getTimezoneOffset() * 60 * 1000;
+								//夏令时处理,夏令时开启并且在夏令时时段内则加上夏令时
+								var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+								if(SummerTimeService.Enabled == 1) {
+									isSummer = isInSunmmer(showTime, deepCopy(SummerTimeService));
+									if(isSummer) {
+										showTime = showTime + SummerTimeService.DSTBias * 60 * 1000;
+									}
+								}
+								var timeStr = stampToTime(showTime);
+								TimeZoneVal.innerText = TimeData.TimeZone;
+								TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+								mui('#TimeZoneList a').each(function(index, El) {
+									if(El.innerText.trim() == TimeZoneChecked) {
+										El.parentNode.classList.add('mui-selected');
+									}
+								});
+								dsBridgeFuncSyn.dismiss();
+							} else {
+								addBitmap(0);
+								showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+								dsBridgeFuncSyn.dismiss();
+
+							}
+						});
+					} else {
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						dsBridgeFuncSyn.dismiss();
+					}
+				});
+				mui('.mui-scroll-wrapper').scroll();
+			}
+
+			function initEvent() {
+				Time.addEventListener('tap', timeEvent); //时间点击事件处理
+				startTime.addEventListener('tap', sDateDo); //夏令时开始时间点击事件
+				endTime.addEventListener('tap', sDateDo); //夏令时结束时间点击事件
+				offsetTime.addEventListener('tap', offsetTimes); //夏令时偏移时间点击事件
+				document.getElementById("SummerTimeSwitch").addEventListener("toggle", function(event) {
+					summerTimeSwitch(event); //监听夏令时开关
+				});
+
+				document.getElementById('TimeZoneList').addEventListener('selected', function(e) {
+					TimeZoneChecked = e.detail.el.innerText.trim(); //时区关闭
+				});
+				document.getElementById('closeTimeZone').addEventListener('tap', function() {
+					mui('#TimeZone').popover('toggle');
+					resetTimeZone();
+				});
+				// 手势操作：向下滑动关闭弹框
+				document.getElementById("swipedownDiv").addEventListener("swipedown", function() {
+					mui('#TimeZone').popover('toggle');
+				});
+				document.getElementById('TimeZoneOk').addEventListener('tap', timeZoneOk); //时区确认点击事件
+				document.getElementById('reTime').addEventListener('tap', reTime); //同步手机时间点击事件
+			}
+
+			function SummerTimeFormat(TimeObj) {
+				var upMonth = ['', langTip["WEB_dst_Jan"], langTip["WEB_dst_Feb"], langTip["WEB_dst_Mar"], langTip["WEB_dst_Apr"], langTip["WEB_dst_May"], langTip["WEB_dst_Jun"], langTip["WEB_dst_Jul"], langTip["WEB_dst_Aug"], langTip["WEB_dst_Sep"], langTip["WEB_dst_Oct"], langTip["WEB_dst_Nov"], langTip["WEB_dst_Dec"]];
+				var upWeekNum = ['', langTip["WEB_dst_first"], langTip["WEB_dst_second"], langTip["WEB_dst_third"], langTip["WEB_dst_fourth"], langTip["WEB_dst_last"]];
+				var upWeekDay = ['', langTip["WEB_dst_Mon"], langTip["WEB_dst_Tue"], langTip["WEB_dst_Wed"], langTip["WEB_dst_Thu"], langTip["WEB_dst_Fri"], langTip["WEB_dst_Sat"], langTip["WEB_dst_SUN"]];
+				var upHour = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+				var str = '';
+				str = upMonth[TimeObj.Month] + ' ' + upWeekNum[TimeObj.WeekNum] + ' ' + upWeekDay[TimeObj.WeekDay] + ' ' + upHour[TimeObj.Hour] + ":00";
+				return str;
+			}
+
+			function timeEvent() {
+				var timeTxt = TimeVal.innerText.trim();
+				if(timeTxt == "") {
+					return;
+				}
+				var tData = timeTxt + ':00';
+				// TODO:调用原生时间控件
+				dsBridgeFuncAsyn.showDate("date", tData, function(result) {
+					var result = JSON.parse(result);
+					if(result.statusCode == "1") return;
+					var sendData = {};
+					var oldTime = parseInt(timeToStamp(tData) / 1000);
+					var newTime = parseInt(timeToStamp(result.param) / 1000);
+					var offset = new Date().getTimezoneOffset() * 60;
+					var showTime = newTime;
+					//如果夏令时开启且在夏令时区间则减掉偏移时间
+					if(SummerTimeService.Enabled == 1) {
+						isSummer = isInSunmmer(newTime * 1000, deepCopy(SummerTimeService));
+						if(isSummer) {
+							showTime = showTime - SummerTimeService.DSTBias * 60;
+						}
+					}
+					var timeStr = stampToTime(newTime * 1000);
+					timeStr = timeStr.substring(0, timeStr.length - 3);
+					if(isGMT) {
+						sendData.TimeZone = TimeData.TimeZone.replace('UTC', 'GMT');
+					} else {
+						sendData.TimeZone = TimeData.TimeZone;
+					}
+					sendData.DeviceTime = showTime - (Zone * 3600 + offset);
+					sendData.DateFormat = TimeData.DateFormat;
+					sendData.HourFormat = TimeData.HourFormat;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.SystemTime, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//赋值给TimeData并更新页面
+							TimeData.DeviceTime = sendData.DeviceTime;
+							TimeVal.innerText = timeStr;
+							//配置成功 知会原生侧
+							//TODO：
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+						}
+					}, sendData);
+
+				});
+			}
+			/*
+			 * 夏令时开始结束时间点击事件
+			 */
+			function sDateDo() {
+				var tDataObj = {};
+				tDataObj.startMonth = SummerTimeService.BeginTime.Month;
+				tDataObj.startWeekInMonth = SummerTimeService.BeginTime.WeekNum;
+				tDataObj.startDayInWeek = SummerTimeService.BeginTime.WeekDay;
+				tDataObj.startHourInDay = SummerTimeService.BeginTime.Hour;
+				tDataObj.endMonth = SummerTimeService.EndTime.Month;
+				tDataObj.endWeekInMonth = SummerTimeService.EndTime.WeekNum;
+				tDataObj.endDayInWeek = SummerTimeService.EndTime.WeekDay;
+				tDataObj.endHourInDay = SummerTimeService.EndTime.Hour;
+				if(tDataObj.startDayInWeek == 7) {
+					tDataObj.startDayInWeek = 0;
+				}
+				if(tDataObj.endDayInWeek == 7) {
+					tDataObj.endDayInWeek = 0;
+				}
+				var tData = JSON.stringify(tDataObj);
+				// TODO:调用原生时间控件
+				dsBridgeFuncAsyn.showDate("sdate", tData, function(result) {
+					var result = JSON.parse(result);
+					if(result.statusCode == "1") return;
+					var resultObj = JSON.parse(result.param);
+					if(resultObj.startMonth == resultObj.endMonth) {
+						showToast(langTip["WEB_dst_time_error_tips"]);
+						return;
+					}
+					if(resultObj.startDayInWeek == 0) {
+						resultObj.startDayInWeek = 7;
+					}
+					if(resultObj.endDayInWeek == 0) {
+						resultObj.endDayInWeek = 7;
+					}
+					var SummerTimeSend = JSON.parse(JSON.stringify(SummerTimeService));
+					SummerTimeSend.BeginTime.Month = resultObj.startMonth;
+					SummerTimeSend.BeginTime.WeekNum = resultObj.startWeekInMonth;
+					SummerTimeSend.BeginTime.WeekDay = resultObj.startDayInWeek;
+					SummerTimeSend.BeginTime.Hour = resultObj.startHourInDay;
+					SummerTimeSend.EndTime.Month = resultObj.endMonth;
+					SummerTimeSend.EndTime.WeekNum = resultObj.endWeekInMonth;
+					SummerTimeSend.EndTime.WeekDay = resultObj.endDayInWeek;
+					SummerTimeSend.EndTime.Hour = resultObj.endHourInDay;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.TimeDst, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//赋值给SummerTimeData并更新页面
+							SummerTimeService.BeginTime.Month = resultObj.startMonth;
+							SummerTimeService.BeginTime.WeekNum = resultObj.startWeekInMonth;
+							SummerTimeService.BeginTime.WeekDay = resultObj.startDayInWeek;
+							SummerTimeService.BeginTime.Hour = resultObj.startHourInDay;
+							SummerTimeService.EndTime.Month = resultObj.endMonth;
+							SummerTimeService.EndTime.WeekNum = resultObj.endWeekInMonth;
+							SummerTimeService.EndTime.WeekDay = resultObj.endDayInWeek;
+							SummerTimeService.EndTime.Hour = resultObj.endHourInDay;
+							startTime.children[1].innerText = SummerTimeFormat(deepCopy(SummerTimeService.BeginTime));
+							endTime.children[1].innerText = SummerTimeFormat(deepCopy(SummerTimeService.EndTime));
+							//判断时间是否在夏令时区间，若在则做修正
+							var offset = new Date().getTimezoneOffset() * 60 * 1000;
+							var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+							isSummer = isInSunmmer(showTime, deepCopy(SummerTimeService));
+							if(isSummer) {
+								showTime = showTime + SummerTimeService.DSTBias * 60 * 1000;
+							}
+							var timeStr = stampToTime(showTime);
+							TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+							//夏令时配置成功 知会原生侧
+							//TODO
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+						}
+					}, SummerTimeSend);
+				}, function(result) {
+					mui.toast(result);
+				});
+			}
+
+			function offsetTimes() {
+				var tData = SummerTimeService.DSTBias.toString();
+				// TODO:调用原生时间控件
+				dsBridgeFuncAsyn.showDate("sdatep", tData, function(result) {
+					result = JSON.parse(result);
+					if(result.statusCode == "1") return;
+					var SummerTimeSend = deepCopy(SummerTimeService);
+					SummerTimeSend.DSTBias = Number(result.param);
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.TimeDst, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//赋值给SummerTimeData并更新页面
+							SummerTimeData.DSTBias = Number(result.param);
+							SummerTimeService.DSTBias = Number(result.param);
+							offsetTime.children[1].innerText = result.param + ' ' + langTip["WEB_dst_offset_minute"];
+							//判断时间是否在夏令时区间，若在则做修正
+							var offset = new Date().getTimezoneOffset() * 60 * 1000;
+							var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+							isSummer = isInSunmmer(showTime, deepCopy(SummerTimeService));
+							if(isSummer) {
+								showTime = showTime + SummerTimeService.DSTBias * 60 * 1000;
+							}
+							var timeStr = stampToTime(showTime);
+							TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+							//夏令时配置成功 知会原生侧
+							//TODO
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+						}
+					}, SummerTimeSend);
+				}, function(result) {
+					mui.toast(result);
+				});
+			}
+
+			function summerTimeSwitch(event) {
+				if(event.detail.isActive && SummerTimeConfirm) {
+					var SummerTimeSendON = JSON.parse(JSON.stringify(SummerTimeService));
+					SummerTimeSendON.Enabled = 1;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.TimeDst, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//赋值给SummerTimeData并更新页面
+							mui("#SummerTime .mui-table-view-cell").each(function(index, El) {
+								if(index != 0) {
+									El.classList.remove('mui-hidden');
+								}
+							});
+							SummerTimeService.Enabled = 1;
+							SummerTimeData.Enabled = 1;
+							//判断时间是否在夏令时区间，若在则做修正
+							var offset = new Date().getTimezoneOffset() * 60 * 1000;
+							var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+							isSummer = isInSunmmer(showTime, deepCopy(SummerTimeService));
+							if(isSummer) {
+								showTime = showTime + SummerTimeService.DSTBias * 60 * 1000;
+							}
+							var timeStr = stampToTime(showTime);
+							TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+							//TODO：夏令时配置成功 知会原生侧
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+							SummerTimeConfirm = false;
+							setTimeout(function() {
+								mui("#SummerTimeSwitch").switch().toggle();
+								mui("#SummerTime .mui-table-view-cell").each(function(index, El) {
+									if(index != 0) {
+										El.classList.add('mui-hidden');
+									}
+								});
+							}, 200);
+						}
+					}, SummerTimeSendON);
+				} else if(!event.detail.isActive && SummerTimeConfirm) {
+					mui("#SummerTime .mui-table-view-cell").each(function(index, El) {
+						if(index != 0) {
+							El.classList.add('mui-hidden');
+						}
+					});
+					var SummerTimeSendOFF = JSON.parse(JSON.stringify(SummerTimeService));
+					SummerTimeSendOFF.Enabled = 0;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.TimeDst, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//赋值给SummerTimeData并更新页面
+							SummerTimeService.Enabled = 0;
+							SummerTimeData.Enabled = 0;
+							//时间修正
+							var offset = new Date().getTimezoneOffset() * 60 * 1000;
+							var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+							var timeStr = stampToTime(showTime);
+							TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+							//TODO：夏令时配置成功 知会原生侧
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+							SummerTimeConfirm = false;
+							setTimeout(function() {
+								mui("#SummerTimeSwitch").switch().toggle();
+								mui("#SummerTime .mui-table-view-cell").each(function(index, El) {
+									if(index != 0) {
+										El.classList.remove('mui-hidden');
+									}
+								});
+							}, 200);
+						}
+					}, SummerTimeSendOFF);
+				} else {
+					SummerTimeConfirm = true;
+				}
+			}
+
+			function resetTimeZone() {
+				mui('#TimeZoneList a').each(function(index, El) {
+					if(El.innerText.trim() == document.getElementById('TimeZoneVal').innerText.trim()) {
+						El.parentNode.classList.add('mui-selected');
+					} else {
+						El.parentNode.classList.remove('mui-selected');
+					}
+				});
+			}
+
+			function timeZoneOk() {
+				mui('#TimeZoneList a').each(function(index, El) {
+					if(El.parentNode.classList.contains('mui-selected')) {
+						TimeZoneChecked = El.innerText;
+					}
+				});
+				//获取当前选择时区对应时间
+				var ZoneOld = Number(TimeData.TimeZone.substring(3, 6)) + (Number(TimeData.TimeZone.substring(3, 4) + TimeData.TimeZone.substring(7)) / 60);
+				var ZoneNew = Number(TimeZoneChecked.substring(3, 6)) + (Number(TimeZoneChecked.substring(3, 4) + TimeZoneChecked.substring(7)) / 60);
+				var ZoneOffset;
+				if(ZoneNew > ZoneOld) {
+					ZoneOffset = ZoneNew - ZoneOld;
+				} else {
+					ZoneOffset = -(ZoneOld - ZoneNew);
+				}
+				//赋值给TimeData
+				var sendData = {};
+				if(isGMT) {
+					sendData.TimeZone = TimeZoneChecked.replace('UTC', 'GMT');
+				} else {
+					sendData.TimeZone = TimeZoneChecked;
+				}
+				sendData.DeviceTime = TimeData.DeviceTime;
+				if(localStorage.deviceType == "1") {
+					sendData.DateFormat = TimeData.DateFormat;
+					sendData.HourFormat = TimeData.HourFormat;
+				};
+				dsBridgeFuncSyn.showLoading();
+				SendAjax(LAPI.SystemTime, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						Zone = ZoneNew;
+						//赋值给TimeData并更新页面
+						TimeData.TimeZone = TimeZoneChecked;
+						TimeData.DeviceTime = TimeData.DeviceTime;
+						document.getElementById('TimeZoneVal').innerText = TimeZoneChecked;
+						//判断夏令时是否开启且时间是否在夏令时区间，若在则做修正
+						var offset = new Date().getTimezoneOffset() * 60 * 1000;
+						var showTime = TimeData.DeviceTime * 1000 + (Zone * 3600000 + offset);
+						//夏令时处理,夏令时开启并且在夏令时时段内则加上夏令时
+						if(SummerTimeService.Enabled == 1) {
+							isSummer = isInSunmmer(showTime, deepCopy(SummerTimeService));
+							if(isSummer) {
+								showTime = showTime + SummerTimeService.DSTBias * 60 * 1000;
+							}
+						}
+						var timeStr = stampToTime(showTime);
+						TimeVal.innerText = timeStr.substring(0, timeStr.length - 3);
+						//TODO:配置成功 知会原生侧
+						dsBridgeFuncSyn.alreadySetTimeCfg();
+					} else {
+						resetTimeZone();
+						showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+					}
+					mui('#TimeZone').popover('toggle');
+				}, sendData);
+			}
+
+			function reTime() {
+				var timeTxt = TimeVal.innerText.trim();
+				if(timeTxt == "") {
+					return;
+				}
+				var sendData = {};
+				//获取时区偏差
+				var zoneOffset = new Date().getTimezoneOffset() / 60;
+				//获取系统的时间毫秒转换成秒
+				var sysTime = parseInt(new Date().getTime() / 1000);
+				//下发设备时间
+				var sendTime = sysTime;
+				//如果夏令时开启且在夏令时区间则减掉偏移时间
+				if(SummerTimeService.Enabled == 1) {
+					isSummer = isInSunmmer(sysTime * 1000, deepCopy(SummerTimeService));
+					if(isSummer) {
+						sendTime = sendTime - SummerTimeService.DSTBias * 60;
+					}
+				}
+				//转化为显示时间
+				var timeStr = stampToTime(sysTime * 1000);
+				timeStr = timeStr.substring(0, timeStr.length - 3);
+				if(isGMT) {
+					sendData.TimeZone = zoneToUTC(zoneOffset).replace('UTC', 'GMT');
+				} else {
+					sendData.TimeZone = zoneToUTC(zoneOffset);
+				}
+				sendData.DeviceTime = sendTime;
+				sendData.DateFormat = TimeData.DateFormat;
+				sendData.HourFormat = TimeData.HourFormat;
+				var checkTimeZone = false;
+				for(var val in timeZoneList) {
+					if(timeZoneList[val] == zoneToUTC(zoneOffset)) {
+						checkTimeZone = true;
+					}
+				}
+				if(checkTimeZone) {
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.SystemTime, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							//更新时区
+							Zone = -zoneOffset;
+							TimeZoneChecked = zoneToUTC(zoneOffset);
+							TimeData.TimeZone = TimeZoneChecked;
+							document.getElementById("TimeZoneVal").innerText = TimeZoneChecked;
+							//赋值给TimeData并更新页面
+							TimeData.DeviceTime = sendData.DeviceTime;
+							TimeVal.innerText = timeStr;
+							//更改选择栏中的数值
+							mui("#TimeZoneList a").each(function(index, El) {
+								if(El.innerText.trim() == TimeZoneChecked.trim()) {
+									El.parentNode.classList.add("mui-selected");
+								} else {
+									El.parentNode.classList.remove("mui-selected");
+								}
+							});
+							showToast(langTip["WEB_api_error_succeeded"], code);
+							//TODO:配置成功 知会原生侧
+							dsBridgeFuncSyn.alreadySetTimeCfg();
+						} else {
+							showToast(langTip["WEB_toast_modify_favoritesname_failed"], code);
+						}
+					}, sendData);
+				} else {
+					showToast(langTip["WEB_not_surppoort_time_zone"]);
+				}
+
+			}
+
+			/**
+			 * 时间差转换成时区格式
+			 * @param {Object} time
+			 */
+			function zoneToUTC(time) {
+				var sign;
+				if(-time > 0) {
+					time = "+" + -time;
+					sign = "+";
+				} else {
+					time = "-" + time;
+					sign = "-";
+				}
+				time = time.toString().substr(1);
+				var arr = time.toString().split(".");
+				arr[1] = "0." + arr[1];
+				arr[0] = arr[0].length < 2 ? "0" + arr[0] : arr[0];
+				var hour = Number(arr[0]) > 0 ? arr[0] : arr[0];
+				var min = arr[1] > 0 ? Number(arr[1]) * 60 : "00";
+				var resultTime = "UTC" + sign + hour + ":" + min;
+				return resultTime;
+			}
+		</script>
+	</body>
+
+</html>
