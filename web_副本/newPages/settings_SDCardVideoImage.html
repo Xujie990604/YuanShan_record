@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_Image_vivid">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<div id="EZView-content" class="mui-hidden">
+				<ul id="ImageVivid" class="mui-table-view ui-siwtchlist">
+					<li id="ImageVividItem" class="mui-table-view-cell">
+						<a href="#ImageVividFrame" class="mui-navigate-right">&nbsp;
+							<span data-text="WEB_Image_vivid" class="mainStyle">&nbsp;</span>
+							<span id="ImageVividVal" class="mui-badge"></span>
+							<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--图像清晰度-->
+		<div id="ImageVividFrame" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownDiv">
+					<label data-text="WEB_Image_vivid">&nbsp;</label>
+					<span id="closeImageVivid" class="mui-icon mui-icon-closeempty"></span>
+				</div>
+				<ul id="ImageVividList" class="mui-table-view mui-table-view-radio">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" data-value=0 data-text="WEB_main_stream">&nbsp;</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" data-value=1 data-text="WEB_Auxiliary_code_stream">&nbsp;</a>
+					</li>
+				</ul>
+			</form>
+			<button id="ImageVividOk" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_button_ok">&nbsp;</button>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js"></script>
+    <script id="langScript"></script>
+		<script>
+			checkType(localStorage.AppType); //加载特定样式
+			// 图像设置
+			var langTip;
+			var ImageVividVal; //补灯光模式取值
+			var ImageVividDom = document.getElementById("ImageVividVal"); //补灯光模式取值
+			var ImageVividData;
+			var sendUrl;
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			var editionFlag = false;
+			//根据设备版本号判断是否支持SD卡新接口
+			var devVersionNumberList = ["GIHOS-B2101.2.3.220905", "GIHOS-B2101.2.2.220810", "GIHOS-B2101.2.1.220802", "GIHOS-B2101.2.0.220713", "GIHOS-B2101.1.5.220712"];
+			if(devVersionNumberList.indexOf(localStorage.versionNumber) == -1) {
+				if(localStorage.sdkVer && (localStorage.versionNumber.indexOf("CIPC-B2303") == -1)) {
+					if(judgeSDkVersion("1.9.0")) {
+						editionFlag = true;
+					}
+				}
+			}
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				if(editionFlag) {
+					sendUrl = LAPI.StoreStrategy;
+				} else {
+					sendUrl = LAPI.Storage;
+				}
+			}
+
+			function initData() {
+				initImageVivid();
+			}
+
+			function initEvent() {
+				document.getElementById('closeImageVivid').addEventListener('tap', function() {
+					mui('#ImageVividFrame').popover('toggle');
+				});
+				document.getElementById('ImageVividFrame').addEventListener('hidden', function(e) {
+					hiddenPopover("ImageVividList", ImageVividVal);
+				});
+				document.getElementById('ImageVividOk').addEventListener('tap', ImageVividOk);
+				// 手势操作：向下滑动关闭弹框
+				document.getElementById("swipedownDiv").addEventListener("swipedown", function() {
+					mui('#ImageVividFrame').popover('toggle');
+				});
+			}
+
+			/**
+			 * 图像设置使能
+			 */
+			function initImageVivid() {
+				SendAjax(sendUrl, 'get', function(code, data) {
+					if(code == 0) {
+						$("#EZView-content").removeClass("mui-hidden");
+						ImageVividData = deepCopy(data);
+						if(editionFlag) {
+							ImageVividVal = ImageVividData.RecordStrategy.PlanStreamType;
+						} else {
+						ImageVividVal = ImageVividData.VideoStorage.PlanStreamID;
+						}
+						if(ImageVividVal == 1) {
+							ImageVividDom.innerText = langTip["WEB_Auxiliary_code_stream"];
+						} else {
+							ImageVividDom.innerText = langTip["WEB_main_stream"];
+						}
+						mui('#ImageVividList a').each(function(index, El) {
+							if(El.innerText.trim() == document.getElementById('ImageVividVal').innerText.trim()) {
+								El.parentNode.classList.add('mui-selected');
+							}
+						});
+					} else {
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						addBitmap(0);
+						dsBridgeFuncSyn.dismiss();
+					}
+					dsBridgeFuncSyn.dismiss();
+				})
+			}
+
+			function ImageVividOk() {
+				var sendData = deepCopy(ImageVividData);
+				var ImageVividChecked;
+				mui('#ImageVividList a').each(function(index, El) {
+					if(El.parentNode.classList.contains('mui-selected')) {
+						ImageVividChecked = El.getAttribute('data-value');
+					}
+				});
+				if(editionFlag) {
+					sendData.RecordStrategy.PlanStreamType = Number(ImageVividChecked);
+					sendData.RecordStrategy.ManualStreamType = Number(ImageVividChecked);
+				} else {
+				sendData.VideoStorage.PlanStreamID = Number(ImageVividChecked);
+				sendData.VideoStorage.ManualStreamID = Number(ImageVividChecked);
+				}
+				dsBridgeFuncSyn.showLoading();
+				SendAjax(sendUrl, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						ImageVividData = deepCopy(sendData);
+						var ImageVividText;
+						if(ImageVividChecked == 1) {
+							ImageVividText = langTip["WEB_Auxiliary_code_stream"];
+						} else {
+							ImageVividText = langTip["WEB_main_stream"];
+						}
+						ImageVividVal = ImageVividChecked;
+						document.getElementById('ImageVividVal').innerText = ImageVividText;
+					} else {
+						if(ImageVividChecked != document.getElementById('ImageVividVal').innerText.trim()) {
+							mui('#ImageVividList a').each(function(index, El) {
+								if(El.innerText.trim() == document.getElementById('ImageVividVal').innerText.trim()) {
+									El.parentNode.classList.add('mui-selected');
+								} else {
+									El.parentNode.classList.remove('mui-selected');
+								}
+							});
+						}
+						showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+					}
+					mui('#ImageVividFrame').popover('toggle');
+				}, sendData);
+			}
+
+			function hiddenPopover(list, checked) {
+				mui('#' + list + ' a').each(function(index, El) {
+					if(El.getAttribute('data-value') == checked) {
+						El.parentNode.classList.add('mui-selected');
+					} else {
+						El.parentNode.classList.remove('mui-selected');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

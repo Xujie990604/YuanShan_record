@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <!-- <link href="../css/Common.css" rel="stylesheet" /> -->
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    .user-info-content {
+      display: flex;
+      flex-direction: row;
+      width: 94%;
+      margin-left: 3%;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 12px;
+    }
+
+    .user-info-content img {
+      height: 48px;
+    }
+
+    .user-info {
+      margin-left: 20px;
+    }
+
+    .tip {
+      margin-top: 20px;
+    }
+
+    /* 设备列表 */
+    #selectDeviceListContent {
+      position: relative;
+      height: 400px;
+    }
+
+
+    /* 通道列表 */
+    #selectChannelListContent {
+      position: relative;
+      height: 400px;
+    }
+
+    .device-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: #fff;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .device-card img {
+      height: 48px;
+    }
+
+    .device-info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+
+    .mui-table-view-cell img {
+      height: 48px;
+    }
+
+    .collapse-btn {
+      position: relative;
+      background-color: #fff;
+    }
+
+    .collapse-btn::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      font-size: 30px;
+    }
+
+    #selectChannelListUL {
+      background-color: transparent;
+    }
+
+    #selectChannelListUL li {
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* 编辑和删除按钮 */
+    .operate-btn-list {
+      position: fixed;
+      bottom: 0;
+      height: 86px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #fff;
+    }
+
+    .operate-btn {
+      border-radius: 22px;
+      height: 44px;
+      width: 42%;
+      font-size: 17px;
+      font-weight: 400;
+      border: 1px solid #50d0c1;
+    }
+
+    .edit-btn {
+      background-color: #50d0c1 !important;
+      color: #fff !important;
+    }
+
+    .cancel-btn {
+      background-color: #fff !important;
+      color: #50d0c1 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 页面标题 -->
+  <header class="mui-bar mui-bar-nav">
+    <a id="back" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="">分享详情</h1>
+  </header>
+  <div class="mui-content">
+    <div id="EZView-content" class="mui-hidden">
+      <!-- 被分享用户的信息 -->
+      <div class="user-info-content">
+        <img src="../images/check_half.png" alt="">
+        <div class="user-info">
+          <div id="userName" class="user-name">coder_xujie@163.com</div>
+          <div id="userRemark" class="remark">备注：仓库专属设备</div>
+        </div>
+      </div>
+      <div class="tip">
+        被分享的设备
+      </div>
+
+      <!-- 列表：被分享给用户的设备详情 -->
+      <div id="userSharedDetailList">
+
+        <!-- 选项卡：设备/通道切换 -->
+        <div class="tab-card">
+          <div id="segmentedControl" class="mui-segmented-control">
+            <a href="#item1" class="mui-control-item ">设备</a>
+            <a href="#item2" class="mui-control-item mui-active">通道</a>
+          </div>
+        </div>
+
+        <div class="mui-content-padded">
+
+          <!-- 选项卡内容：设备的信息 -->
+          <div id="item1" class="mui-control-content ">
+            <div id="selectDeviceListContent">
+              <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+
+                  <div id="selectDeviceList">
+                    <!-- 设备模板 -->
+                    <div class="device-card-template device-card mui-hidden">
+                      <img src="../images/appConfig/IPC3x.png">
+                      <div class="device-info">
+                        <span class="device-name">IPC-001</span>
+                        <span class="device-permissions">实况查看/云台控制/语音对讲/告警消息/录像查看/设备配置</span>
+                        <span class="device-endTime">有效期: 永久</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 选项卡内容：通道的信息 -->
+          <div id="item2" class="mui-control-content mui-active">
+            <div id="selectChannelListContent">
+              <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                  <ul id="selectChannelListUL" class="mui-table-view">
+                    <!-- NVR通道列表模版 -->
+                    <li class="mui-table-view-cell mui-collapse  NVR-channels-list-card-template mui-active mui-hidden">
+                      <a class="mui-navigate-right collapse-btn" href="#">
+                        <img src="../images/appConfig/NVR3x.png">
+                        <span class="NVR-channels-list-name">NVR-001</span>
+                      </a>
+                      <div class="mui-collapse-content">
+                        <!-- 分割线 -->
+                        <div class="line"></div>
+                        <!-- 需要把 NVR 通道的 DOM 结构放到这里 -->
+                      </div>
+                    </li>
+                    <!-- NVR 通道的模板 -->
+                    <div class="NVR-channel-card-template device-card mui-hidden">
+                      <img src="../images/appConfig/IPC3x.png">
+                      <div class="device-info">
+                        <span class="device-name">IPC-001</span>
+                        <span class="device-permissions">实况查看/云台控制/语音对讲/告警消息/录像查看/设备配置</span>
+                        <span class="device-endTime">有效期: 永久</span>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 按钮：编辑和删除按钮 -->
+      <div class="operate-btn-list">
+        <button type="button" id="editBtn" class="mui-btn edit-btn operate-btn">编辑分享</button>
+        <button type="button" id="cancelBtn" class="mui-btn cancel-btn operate-btn">取消分享</button>
+      </div>
+    </div>
+  </div>
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/loadCss.js"></script>
+  <script src="../js/batchShareDeviceUtil.js"></script>
+  <script id="langScript"></script>
+  <script>
+    var langTip;
+    checkType(localStorage.AppType); //加载特定样式
+    mui.init();
+    // 获取语言文件
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+
+    var currentUserID = "" // 当前用户的ID
+
+    // 初始化页面
+    initPage()
+    // 初始化数据
+    initData();
+    // 初始化事件
+    initEvent()
+
+    var selectDeviceInfoList = []  // 被分享的设备列表信息
+    var selectChannelInfoList = [] // 被分享的通道列表信息
+
+
+    function initPage() {
+      // 初始化滚动列表
+      mui('.mui-scroll-wrapper').scroll();
+
+      // 从上一个跳转页面中拿到用户 ID
+      var Url = "web/newPages/batchShareDeviceDetail.html";
+      var self = dsBridgeFuncSyn.getWebParam(Url);
+      // TODO:模拟数据
+      if (isMock) {
+        data = {
+          userId: 111111111111111
+        }
+      } else {
+        data = JSON.parse(self);
+      }
+      currentUserID = data.userId;
+      $("#userName").text(data.userName);
+      $("#userRemark").text(data.remark);
+
+    }
+
+    function initData() {
+      // 根据ID 获取被分享的设备列表
+      // 如果上一个页面是批量分享操作，需要等待一段时间，等待数据库的数据更改完成
+      getDeviceListByUserID()
+    }
+
+    function initEvent() {
+      $('#editBtn').on('tap', editSharedDevice)
+      $('#cancelBtn').on('tap', cancelSharedByID)
+    }
+
+    function editSharedDevice() {
+      // 页面跳转：编辑分享页面
+      var param = {
+        userName: $("#userName").text(),
+        userId: currentUserID,
+        remark: $("#userRemark").text()
+      }
+      dsBridgeFuncSyn.pageTo("web/newPages/batchSharedDeviceEdit.html", JSON.stringify(param));
+    }
+
+    // 根据 ID 取消分享
+    function cancelSharedByID() {
+      var sendData = {
+        shareUserId: currentUserID
+      }
+      dsBridgeFuncSyn.showLoading();
+      CloudSendAjax(localStorage.serverAddress + openAPI.deleteSharedByID, 'post', function (code, message, data) {
+        if (code == 200) {
+          showToast("删除成功")
+          dsBridgeFuncSyn.dismiss();
+          // TODO：进行两次的 back 操作, 有可能只会执行一个 backTo，到时候需要一个标志位。在批量分享页面也去 backTo 一下
+          // 并且提交事件，在分享管理页面去手动刷新页面
+
+          // 如果是从首页点击用户卡片进入的详情页面，则只需要通知首页刷新，然后返回上一个页面就行了
+          // 如果是分享完之后，进入的详情页面。需要通道首页刷新，当前页面返回，但是上一个页面是批量操作页面，也需要让批量操作页面返回
+          dsBridgeFuncSyn.sendDataToReport("deleteShareByID", "");
+          dsBridgeFuncSyn.backTo();
+        } else {
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          dsBridgeFuncSyn.dismiss();
+        }
+      }, sendData)
+    }
+
+
+    // 根据 ID 获取设备信息
+    function getDeviceListByUserID() {
+      var sendData = {
+        shareUserId: currentUserID
+      }
+      CloudSendAjax(localStorage.serverAddress + openAPI.getDeviceListByID, 'post', function (code, message, data) {
+        // TODO:模拟数据
+        if (isMock) {
+          code = 200
+          data = {
+            shareDeviceList: [
+              {
+                "deviceSerial": "211111XXXXXXXXXXXXX1",
+                "deviceName": "IPC设备",
+                "deviceType": 0,
+                "shareChannelList": [
+                  {
+                    "shareId": "1",
+                    "channelName": null,
+                    "channelNo": null,
+                    "endTime": 1575269125,
+                    "permission": "Realplay,Replay,Talk,PtzControl,AlarmPush"
+                  }
+                ]
+              },
+              {
+                "deviceSerial": "222222XXXXXXXXXXXXX2",
+                "deviceName": "NVR下通道",
+                "deviceType": 1,
+                "shareChannelList": [
+                  {
+                    "shareId": "2",
+                    "channelName": "通道1",
+                    "channelNo": 1,
+                    "endTime": 1575269125,
+                    "permission": "Realplay,Replay,Talk,PtzControl,AlarmPush"
+                  },
+                  {
+                    "shareId": "3",
+                    "channelName": "通道2",
+                    "channelNo": 2,
+                    "endTime": 1575288869,
+                    "permission": "Realplay,Replay,Talk"
+                  }
+                ]
+              },
+              {
+                "deviceSerial": "233333XXXXXXXXXXXXX3",
+                "deviceName": "整台NVR及通道",
+                "deviceType": 1,
+                "shareChannelList": [
+                  {
+                    "shareId": "4",
+                    "channelName": null,
+                    "channelNo": null,
+                    "endTime": 1575269125,
+                    "permission": "Realplay,Replay,Talk,PtzControl,AlarmPush,Config"
+                  },
+                  {
+                    "shareId": "5",
+                    "channelName": "通道3",
+                    "channelNo": 3,
+                    "endTime": 1575288869,
+                    "permission": "Realplay,Replay,Talk,PtzControl,AlarmPush"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+        if (code == 200) {
+          data.shareDeviceList.forEach((item) => {
+            // 设备类型为1时，NVR通道和NVR设备的信息都放在一起，需要挑选出来
+            if (item.deviceType == 1) {
+              item.shareChannelList.forEach(function (channelInfo, index) {
+                // NVR 设备信息
+                if (channelInfo.channelNo == null) {
+                  var info = item.shareChannelList.splice(index, 1)
+                  var deviceInfoTmp = deepCopy(item);
+                  deviceInfoTmp.shareChannelList = info
+                  selectDeviceInfoList.push(deviceInfoTmp)
+                }
+              })
+              // 如果余下的数组中还有数据，则说明是NVR通道的数据
+              if (item.shareChannelList.length > 0) {
+                selectChannelInfoList.push(item)
+              }
+            } else {
+              selectDeviceInfoList.push(item)
+            }
+          });
+          console.log('设备列表%o', selectDeviceInfoList);
+          console.log('通道列表%o', selectChannelInfoList);
+          buildSelectDeviceList(selectDeviceInfoList)
+          buildShareableChannelsList(selectChannelInfoList)
+          $('#EZView-content').removeClass('mui-hidden')
+          dsBridgeFuncSyn.dismiss();
+        } else {
+          addBitmap(0);
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          dsBridgeFuncSyn.dismiss();
+        }
+      }, sendData)
+    }
+
+    // 生成设备列表
+    function buildSelectDeviceList(deviceInfoList) {
+       // 避免数据叠加：每次渲染前将之前的生成的 DOM 结构清除
+      $('#selectDeviceList .device-card:not(.mui-hidden)').remove()
+      var ulDom = $('#selectDeviceList');
+      deviceInfoList.forEach((deviceInfo) => {
+        // 克隆模板
+        var deviceTemplate = $('.device-card-template').clone();
+        deviceTemplate.removeClass('device-card-template mui-hidden');
+        var imgUrl = ""
+        // TODO: 后续门铃门禁可能会有自己的专属图标
+        switch (deviceInfo.deviceType) {
+          case 0:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          case 1:
+            imgUrl = "../images/appConfig/NVR3x.png"
+            break;
+          case 6:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          case 7:
+            imgUrl = "../images/appConfig/IPC3x.png"
+            break;
+          default:
+            imgUrl = "../images/appConfig/IPC3x.png"
+        }
+        // 填充值：设备图片信息
+        deviceTemplate.find("img").attr("src", imgUrl)
+        // 填充值：设备名称
+        deviceTemplate.find(".device-name").text(deviceInfo.deviceName)
+        // 填充值：设备权限
+        deviceTemplate.find(".device-permissions").text(changePermissionToText(deviceInfo.shareChannelList[0].permission))
+        // 填充值：分享有效期
+        // TODO：需要把时间戳转换成文字
+        deviceTemplate.find(".device-endTime").text(deviceInfo.shareChannelList[0].endTime)
+        // 插入列表中
+        ulDom.append(deviceTemplate)
+      })
+    }
+
+
+    // 生成通道列表
+    function buildShareableChannelsList(channelInfoList) {
+       // 避免数据叠加：每次渲染前将之前的生成的 DOM 结构清除
+      $('#selectChannelListUL li:not(.mui-hidden)').remove()
+      var ulDom = $("#selectChannelListUL");
+      channelInfoList.forEach(function (channelList) {
+        // 克隆模版: 通道列表
+        var channelsListTemplate = $('.NVR-channels-list-card-template').clone();
+        channelsListTemplate.removeClass('NVR-channels-list-card-template mui-hidden');
+        // 填充值：通道所属 NVR 设备的名字
+        channelsListTemplate.find('.NVR-channels-list-name').text(channelList.deviceName);
+        channelList.shareChannelList.forEach(function (channelInfo) {
+          var collapseContentDom = channelsListTemplate.find('.mui-collapse-content');
+          // 克隆模版：通道
+          var channelTemplate = $('.NVR-channel-card-template').clone();
+          channelTemplate.removeClass('NVR-channel-card-template mui-hidden');
+          // 填充值：NVR 通道的名字
+          channelTemplate.find(".device-name").text(channelInfo.channelName)
+          // 填充值：NVR 通道的权限
+          channelTemplate.find(".device-permissions").text(changePermissionToText(channelInfo.permission))
+          // 填充值：NVR 通道的分享有效期
+          // TODO：需要把时间戳转换成数字
+          channelTemplate.find(".device-endTime").text(channelInfo.endTime)
+          collapseContentDom.append(channelTemplate)
+        })
+        ulDom.append(channelsListTemplate)
+      })
+    }
+    /******************新增原生App上报Web功能接口******************/
+    // 监听原生侧上报数据
+    dsBridge.register("callWebDoFuncAsyn", function (args) {
+      appLog("Web --- args: " + args);
+      var webInfo = JSON.parse(args);
+      for (var key in webInfo) {
+        switch (webInfo[key].whichInfo) {
+          // 编辑完分享记录后，回到设备详情页面，需要重新调用接口，刷新页面 
+          // TODO：间隔两秒的时间，是因为服务端的问题
+          case "editDeviceInfoSuccess":
+            dsBridgeFuncSyn.showLoading();
+              // 在重新渲染页面之前清除之前的数据
+              selectDeviceInfoList = [];
+              selectChannelInfoList = []
+              getDeviceListByUserID()
+            break;
+          case "deviceStatus": // 更新设备在线状态
+            localStorage.deviceStatus = webInfo[key].infoValue;
+            break;
+          case "ip": // 更新ip
+            localStorage.Ip = webInfo[key].infoValue;
+            break;
+          case "port": // 更新port
+            localStorage.Port = webInfo[key].infoValue;
+            break;
+          case "logInfo": //更新登录信息
+            localStorage.logInfo = webInfo[key].infoValue;
+            break;
+          case "deviceName": //更新设备名称
+            var deviceName = document.getElementById("deviceName");
+            break;
+          case "sdkType": //更新SDK类型
+            localStorage.sdkType = webInfo[key].infoValue;
+            break;
+          case "isNetConnect": //更新手机是否联网
+            localStorage.isNetConnect = webInfo[key].infoValue;
+            break;
+          case "hasNewVersion": //是否有新版本
+            localStorage.hasNewVersion = webInfo[key].infoValue;
+            break;
+          case "versionNumber": //当前版本号
+            localStorage.versionNumber = webInfo[key].infoValue;
+            break;
+          case "LocalDeviceUname": //免注册设备用户名更新
+            localStorage.LocalDeviceUname = webInfo[key].infoValue;
+            break;
+          case "deviceOs": //设备云端在线状态 “true”在线，“false”离线
+            localStorage.deviceOs = webInfo[key].infoValue;
+            break;
+          case "updateChannelName": // TODO：通道名称修改成功后，主页同步更新
+            localStorage.deviceName = webInfo[key].infoValue;
+            break;
+          case "workingStatus":
+            localStorage.workingStatus = webInfo[key].infoValue;
+            break;
+          case "channelStatus":
+            localStorage.channelStatus = webInfo[key].infoValue;
+            break;
+          default:
+            break;
+        }
+      }
+    })
+
+
+
+  </script>
+</body>
+
+</html>

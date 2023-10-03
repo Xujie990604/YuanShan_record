@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <link href="../css/Common.css" rel="stylesheet" />
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    .ui-list-titile label {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="mui-bar mui-bar-nav">
+    <a id="back" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="WEB_code_format">&nbsp;</h1>
+  </header>
+  <div class="mui-content">
+    <div id="EZView-content" class="mui-hidden">
+      <!--高清-->
+      <ul id="HDcodeFormat0" class="mui-table-view ui-siwtchlist codeFormat mui-hidden" data-type='0'>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right">
+            <span id="HDcodeFormatVal0" class="mui-badge"></span>
+            <span data-text="WEB_HD_main_stream">&nbsp;</span>
+          </a>
+          <div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+        </li>
+      </ul>
+      <!--标清-->
+      <ul id="HDcodeFormat1" class="mui-table-view ui-siwtchlist codeFormat mui-hidden" data-type='1'>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right">
+            <span id="HDcodeFormatVal1" class="mui-badge"></span>
+            <span data-text="WEB_SD_auxiliary_code_stream">&nbsp;</span>
+          </a>
+          <div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--编码格式-->
+  <div id="HDcodeFormatFrame" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+    <form class="mui-input-group">
+      <div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownDiv">
+        <label id="codeFormatTitle">&nbsp;</label>
+        <span id="closeHDcodeFormat" class="mui-icon mui-icon-closeempty"></span>
+      </div>
+      <ul id="HDcodeFormatList" class="mui-table-view mui-table-view-radio">
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right" data-value=1 data-details="H.264">&nbsp;H.264</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a class="mui-navigate-right" data-value=2 data-details="H.265">&nbsp;H.265</a>
+        </li>
+      </ul>
+    </form>
+    <button id="HDcodeFormatOk" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_button_ok">&nbsp;</button>
+  </div>
+
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/loadCss.js "></script>
+  <script id="langScript"></script>
+  <script>
+    checkType(localStorage.AppType); //加载特定样式
+
+    var langTip;
+    var HDcodeFormatVal;
+    var HDcodeFormatArr;
+    var HDcodeFormatDom = document.getElementById("HDcodeFormatVal");
+    var HDcodeFormatData;
+    var BitRateList = [{
+      BitRate: 128,
+      width: 352,
+      height: 288
+    },
+    {
+      BitRate: 1024,
+      width: 704,
+      height: 288
+    },
+    {
+      BitRate: 1024,
+      width: 640,
+      height: 360
+    },
+    {
+      BitRate: 1024,
+      width: 704,
+      height: 576
+    },
+    {
+      BitRate: 1024,
+      width: 720,
+      height: 576
+    },
+    {
+      BitRate: 1024,
+      width: 720,
+      height: 316
+    },
+    {
+      BitRate: 1024,
+      width: 720,
+      height: 480
+    },
+    {
+      BitRate: 2048,
+      width: 1024,
+      height: 452
+    },
+    {
+      BitRate: 2048,
+      width: 1280,
+      height: 560
+    },
+    {
+      BitRate: 2048,
+      width: 1280,
+      height: 720
+    },
+    {
+      BitRate: 2048,
+      width: 1280,
+      height: 960
+    },
+    {
+      BitRate: 2048,
+      width: 1280,
+      height: 1024
+    },
+    {
+      BitRate: 4096,
+      width: 1600,
+      height: 1200
+    },
+    {
+      BitRate: 4096,
+      width: 1920,
+      height: 832
+    },
+    {
+      BitRate: 4096,
+      width: 1920,
+      height: 1080
+    },
+    {
+      BitRate: 6144,
+      width: 2000,
+      height: 2000
+    },
+    {
+      BitRate: 5120,
+      width: 2000,
+      height: 1500
+    },
+    {
+      BitRate: 5120,
+      width: 2048,
+      height: 1520
+    },
+    {
+      BitRate: 5120,
+      width: 2048,
+      height: 1536
+    },
+    {
+      BitRate: 5120,
+      width: 2304,
+      height: 1296
+    },
+    {
+      BitRate: 6144,
+      width: 2560,
+      height: 1440
+    },
+    {
+      BitRate: 6144,
+      width: 2560,
+      height: 1920
+    },
+    {
+      BitRate: 6144,
+      width: 2560,
+      height: 2048
+    },
+    {
+      BitRate: 6144,
+      width: 2880,
+      height: 1264
+    },
+    {
+      BitRate: 7168,
+      width: 2560,
+      height: 2560
+    },
+    {
+      BitRate: 6144,
+      width: 2592,
+      height: 1520
+    },
+    {
+      BitRate: 6144,
+      width: 2688,
+      height: 1520
+    },
+    {
+      BitRate: 6144,
+      width: 2592,
+      height: 1944
+    },
+    {
+      BitRate: 6144,
+      width: 2592,
+      height: 2048
+    },
+    {
+      BitRate: 6144,
+      width: 2944,
+      height: 1656
+    },
+    {
+      BitRate: 6144,
+      width: 3000,
+      height: 1500
+    },
+    {
+      BitRate: 7168,
+      width: 3000,
+      height: 2000
+    },
+    {
+      BitRate: 8192,
+      width: 3000,
+      height: 3000
+    },
+    {
+      BitRate: 6144,
+      width: 3072,
+      height: 1728
+    },
+    {
+      BitRate: 7168,
+      width: 3072,
+      height: 2048
+    },
+    {
+      BitRate: 8192,
+      width: 3840,
+      height: 2160
+    },
+    {
+      BitRate: 12288,
+      width: 4000,
+      height: 3000
+    },
+    {
+      BitRate: 7168,
+      width: 4096,
+      height: 1800
+    },
+    {
+      BitRate: 12288,
+      width: 5952,
+      height: 2684
+    },
+    {
+      BitRate: 12288,
+      width: 7296,
+      height: 3288
+    },
+    {
+      BitRate: 12288,
+      width: 8192,
+      height: 3840
+    },
+    {
+      BitRate: 12288,
+      width: 8640,
+      height: 3840
+    }
+    ];
+    var IntervalResolutionList = [4096, 5120, 6144, 7168, 8192, 10240, 12288];
+    mui.init();
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+    initPage();
+    initData();
+    initEvent();
+
+    function initPage() {
+
+    }
+
+    function initData() {
+      initHDcodeFormat();
+    }
+
+    function initEvent() {
+      // 关闭底部弹窗事件
+      document.getElementById('closeHDcodeFormat').addEventListener('tap', function () {
+        mui('#HDcodeFormatFrame').popover('toggle');
+      });
+      document.getElementById('HDcodeFormatFrame').addEventListener('hidden', function (e) {
+        // 隐藏上滑弹窗，并且根据当前选中的编码格式，更新上滑弹窗中的被选项（应该是为了解除，切换了选项但是并没有点 OK 这种情况）
+        hiddenPopover("HDcodeFormatList", HDcodeFormatVal);
+      });
+      // 给两个编码格式展示列表添加点击事件
+      document.querySelectorAll(".codeFormat").forEach(function (v) { // 编码格式弹框选择
+        v.addEventListener('tap', function (event) {
+          var type = Number(this.getAttribute("data-type"));
+          // type = 0 为(高清)主码流，type = 1 为(标清)辅码流
+          getCodeFomat(event, type);
+        })
+      });
+      document.getElementById('HDcodeFormatOk').addEventListener('tap', HDcodeFormatOk);
+
+      // 手势操作：向下滑动关闭弹框
+      document.getElementById("swipedownDiv").addEventListener("swipedown", function () {
+        mui('#HDcodeFormatFrame').popover('toggle');
+      });
+    }
+
+    /**
+     * 初始化高清
+     */
+    function initHDcodeFormat() {
+      SendAjax(LAPI.StreamsDetailInfo, 'get', function (code, data) {
+        dsBridgeFuncSyn.dismiss();
+        if (code == 0) {
+          $("#EZView-content").removeClass("mui-hidden");
+          HDcodeFormatData = deepCopy(data);
+          HDcodeFormatArr = HDcodeFormatData.VideoStreamInfos;
+          if (localStorage.dvt == 100) {
+            for (var i = 0; i < HDcodeFormatArr.length; i++) {
+              if (i == 0 || HDcodeFormatArr[i].Enabled == 1) {
+                $("#HDcodeFormat" + i).removeClass("mui-hidden");
+              }
+              if (HDcodeFormatArr[i].ID == i) { //主流
+
+                // 给界面中的编码格式展示框添加文字，当前是 H264 还是 H265
+                if (HDcodeFormatArr[i].VideoEncodeInfo.EncodeFormat == 1) { //H264
+                  $("#HDcodeFormatVal" + i).text("H.264");
+                } else { //H265
+                  $("#HDcodeFormatVal" + i).text("H.265");
+                }
+
+                // 给界面中的编码格式展示框 DOM 添加属性 data-value 目前未知作用
+                // 存储的字段含义为 码率
+                $("#HDcodeFormatVal" + i).attr("data-value", HDcodeFormatArr[i].VideoEncodeInfo.BitRate)
+              }
+              // 根据服务器返回的数值，给界面中的 编码格式展单选框 添加选中状态
+              // 感觉他的实现有问题，明明只有一个 HDcodeFormatList，却要循环两次（并且当前也没有展示这个框）
+              mui('#HDcodeFormatList a').each(function (index, El) {
+                if (El.innerText.trim() == document.getElementById('HDcodeFormatVal' + i).innerText.trim()) {
+                  El.parentNode.classList.add('mui-selected');
+                }
+              });
+            }
+          } else {
+            for (var i = 0; i < HDcodeFormatArr.length; i++) {
+              if (HDcodeFormatArr[i].ID < 2) {
+                if (i == 0 || HDcodeFormatArr[i].Enabled == 1) {
+                  $("#HDcodeFormat" + i).removeClass("mui-hidden");
+                }
+                if (HDcodeFormatArr[i].VideoEncodeInfo.EncodeFormat == 1) { //H264
+                  $("#HDcodeFormatVal" + i).text("H.264");
+                } else if (HDcodeFormatArr[i].VideoEncodeInfo.EncodeFormat == 2) { //H265
+                  $("#HDcodeFormatVal" + i).text("H.265");
+                } else {
+                  $("#HDcodeFormatVal" + i).text("");
+                }
+                $("#HDcodeFormatVal" + i).attr("data-value", HDcodeFormatArr[i].VideoEncodeInfo.BitRate)
+                mui('#HDcodeFormatList a').each(function (index, El) {
+                  if (El.innerText.trim() == document.getElementById('HDcodeFormatVal' + i).innerText.trim()) {
+                    El.parentNode.classList.add('mui-selected');
+                  }
+                });
+              }
+            }
+          }
+        } else {
+          addBitmap(0);
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          dsBridgeFuncSyn.dismiss();
+        }
+      });
+    }
+
+    // 点击 确定 button 对应的事件
+    function HDcodeFormatOk() {
+      // 要发送的整个数据
+      var sendData = deepCopy(HDcodeFormatData);
+      var HDcodeFormatChecked; // 1:264 2:265 当前被选中的编码格式（数字形式）
+      var HDcodeFormatText;    // 当前被选中的文字
+      // 遍历界面中的 编码格式单选框 列表，获取当前选中的编码格式（文字和value）
+      mui('#HDcodeFormatList a').each(function (index, El) {
+        if (El.parentNode.classList.contains('mui-selected')) {
+          HDcodeFormatChecked = El.getAttribute('data-value'); // 1:264 2:265
+          HDcodeFormatText = El.getAttribute('data-details');
+        }
+      });
+
+      // 获取当前选中的是主码流还是辅码流
+      // 0:主码流 1:辅码流
+      // 新界面已经不在需要
+      var dataType = Number(document.getElementById("HDcodeFormatFrame").getAttribute("data-id"));
+      // 要发送的某个码流的数据 （当前打开弹窗的码流类型）
+      var VideoEncodeInfo = sendData.VideoStreamInfos[dataType].VideoEncodeInfo;
+      // 如果当前选中的文字和界面中展示的文字相同，就不需要发送请求了
+      if (HDcodeFormatText == document.getElementById("HDcodeFormatVal" + dataType).innerText.trim()) {
+        mui('#HDcodeFormatFrame').popover('toggle');
+        return
+      }
+      // 门铃设备
+      if (localStorage.dvt == 100) {
+        if (HDcodeFormatChecked == 1) { //H.264
+          VideoEncodeInfo.EncodeFormat = 1;
+          VideoEncodeInfo.BitRate = Number(VideoEncodeInfo.BitRate) * 2;
+        } else if (HDcodeFormatChecked == 2) { //H.265
+          VideoEncodeInfo.EncodeFormat = 2;
+          VideoEncodeInfo.BitRate = Number(VideoEncodeInfo.BitRate) / 2;
+        }
+      } else {
+        // 初始化码率的值 码率可能是固定的值，也可能是通过复杂计算出来的值
+        var sendBitRate = 0;
+        // 当前宽度
+        var curWidth = VideoEncodeInfo.Resolution.Width;
+        // 当前高度
+        var curHeight = VideoEncodeInfo.Resolution.Height;
+        // 当前帧率
+        var curFrameRate = VideoEncodeInfo.FrameRate;
+        // 当前智能编码模式
+        var curSmartEncodeMode = VideoEncodeInfo.SmartEncodeMode;
+        if (curWidth == 352 && curWidth == 288) {
+          if (curFrameRate > 30) {
+            sendBitRate = 256;
+          } else {
+            sendBitRate = 128;
+          }
+        } else {
+          sendBitRate = getH264DefaultBitrate(curWidth, curHeight);
+          if (HDcodeFormatChecked == 1) { //H.264
+            VideoEncodeInfo.EncodeFormat = 1;
+          } else if (HDcodeFormatChecked == 2) { //H.265
+            VideoEncodeInfo.EncodeFormat = 2;
+            sendBitRate = getH265DefaultBitrate(curWidth, curHeight, sendBitRate);
+          }
+          sendBitRate = calculateBitrate(curWidth, curHeight, sendBitRate, curFrameRate, curSmartEncodeMode);
+        }
+        if (sendBitRate == 0) {
+          showToast(langTip["WEB_codeFormat_Tip"]);
+          return;
+        }
+        VideoEncodeInfo.BitRate = sendBitRate;
+      }
+      
+      // 切换下滑弹窗的显隐状态
+      mui('#HDcodeFormatFrame').popover('toggle');
+      // 发接口之前的loading
+      dsBridgeFuncSyn.showLoading();
+      SendAjax(LAPI.StreamsDetailInfo, 'put', function (code, data) {
+        dsBridgeFuncSyn.dismiss();
+        // 接口发送成功之后
+        if (code == 0) {
+          // 更改界面中 展示框的文字
+          // 新界面 不在需要
+          HDcodeFormatData = deepCopy(sendData);
+          document.getElementById('HDcodeFormatVal' + dataType).innerText = HDcodeFormatText;
+        } else {
+          // 接口发送失败
+          // TODO: HDcodeFormatChecked 是数字类型， 后面的是字符串类型，他俩指定不相等
+          if (HDcodeFormatChecked != document.getElementById('HDcodeFormatVal' + dataType).innerText.trim()) {
+            // 将下滑弹窗中的选中状态还原
+            mui('#HDcodeFormatList a').each(function (index, El) {
+              if (El.innerText.trim() == document.getElementById('HDcodeFormatVal' + dataType).innerText.trim()) {
+                El.parentNode.classList.add('mui-selected');
+              } else {
+                El.parentNode.classList.remove('mui-selected');
+              }
+            });
+          }
+          showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+        }
+      }, sendData);
+    }
+
+    // 编码格式选择弹框
+    // 新界面的展示框已经分成两个了，不需要以下代码了
+    function getCodeFomat(event, type) {
+      if (event.target.getAttribute("type") == "button") {
+        return;
+      }
+      var codeFormatTitle;
+      // 根据 type 判断是主码流还是辅码流
+      if (type == 1) {
+        codeFormatTitle = langTip["WEB_SD_auxiliary_code_stream"];
+      } else {
+        codeFormatTitle = langTip["WEB_HD_main_stream"];
+      }
+      // 在下滑弹窗中添加标题
+      document.getElementById("codeFormatTitle").innerText = codeFormatTitle;
+      // 给下滑弹窗提添加 data-id
+      document.getElementById("HDcodeFormatFrame").setAttribute("data-id", type);
+      // 切换下滑弹窗的显隐状态
+      mui('#HDcodeFormatFrame').popover('toggle');
+      // 在显示下滑弹窗的时候，根据 当前码流 的编码格式，设置单选框的选中状态
+      for (var i = 0; i < 2; i++) {
+        if (i == type) {
+          mui('#HDcodeFormatList a').each(function (index, El) {
+            El.parentNode.classList.remove('mui-selected');
+            if (El.innerText.trim() == document.getElementById("HDcodeFormatVal" + i).innerText.trim()) {
+              El.parentNode.classList.add('mui-selected');
+            }
+          });
+        }
+      }
+    }
+
+    // 获取H264默认码率
+    // 保证参数正确的情况下，能够直接复用
+    // 需要将里面用的到的两个全局变量都复制进新页面
+    function getH264DefaultBitrate(width, height) {
+      var H264DefaultCode = 0;
+      for (var i = 0; i < BitRateList.length; i++) {
+        var RWidth = BitRateList[i].width;
+        var RHeight = BitRateList[i].height;
+        if (width == RWidth && height == RHeight) {
+          H264DefaultCode = BitRateList[i].BitRate;
+          return H264DefaultCode;
+        }
+      }
+      var resolutionRatio = width * height;
+      //（720p,1080],H264默认4096
+      //[4096,5120,6144,7168,8192,10240,12288]
+      if (921600 < resolutionRatio && resolutionRatio <= 2500000) {
+        H264DefaultCode = IntervalResolutionList[0];
+      } else if (2500000 < resolutionRatio && resolutionRatio <= 3500000) {
+        H264DefaultCode = IntervalResolutionList[1];
+      } else if (3500000 < resolutionRatio && resolutionRatio <= 5500000) {
+        H264DefaultCode = IntervalResolutionList[2];
+      } else if (5500000 < resolutionRatio && resolutionRatio <= 7500000) {
+        H264DefaultCode = IntervalResolutionList[3];
+      } else if (7500000 < resolutionRatio && resolutionRatio <= 9500000) {
+        H264DefaultCode = IntervalResolutionList[4];
+      } else if (9500000 < resolutionRatio && resolutionRatio <= 11500000) {
+        H264DefaultCode = IntervalResolutionList[5];
+      } else if (resolutionRatio > 11500000) {
+        H264DefaultCode = IntervalResolutionList[6];
+      }
+      return H264DefaultCode;
+    }
+    // 获取H265默认码率
+    // 可以直接复用
+    function getH265DefaultBitrate(width, height, H264Bitrate) {
+      var H265DefaultCode;
+      if (width * height > 3500000) {
+        H265DefaultCode = H264Bitrate * 0.7;
+      } else {
+        H265DefaultCode = H264Bitrate * 0.5;
+      }
+      if (H265DefaultCode % 128 != 0) {
+        H265DefaultCode = Math.floor(H265DefaultCode) + 128 - Math.floor(H265DefaultCode) % 128;
+      }
+      return H265DefaultCode;
+    }
+
+    /**
+     * 计算最终的码率
+     * @param {Object} width
+     * @param {Object} height
+     * @param {Object} defultBitrate
+     * @param {Object} FrameRate
+     * @param {Object} SmartEncodeMode
+     */
+    function calculateBitrate(width, height, defultBitrate, FrameRate, SmartEncodeMode) {
+      var sendBitrateC;
+      if (FrameRate > 30 && FrameRate <= 60) {
+        sendBitrateC = 1.5 * defultBitrate;
+      } else if (FrameRate >= 1 && FrameRate <= 30) {
+        switch (SmartEncodeMode) {
+          //0关闭
+          case 0:
+            sendBitrateC = defultBitrate;
+            break;
+          //1	基础模式
+          case 1:
+            if (width * height <= 5500000) {
+              sendBitrateC = 0.75 * defultBitrate;
+            } else {
+              sendBitrateC = defultBitrate;
+            }
+            break;
+          //2 高级模式
+          case 2:
+            sendBitrateC = 0.5 * defultBitrate;
+            break;
+          default:
+            break;
+        }
+      }
+      if (sendBitrateC % 128 != 0) {
+        sendBitrateC = Math.floor(sendBitrateC) + 128 - Math.floor(sendBitrateC) % 128;
+      }
+      return sendBitrateC;
+    }
+  </script>
+</body>
+
+</html>

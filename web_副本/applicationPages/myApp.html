@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<!--<link href="../css/theme_normal.css" rel="stylesheet" />-->
+		<style>
+			.mui-table-view-cell img {
+				position: absolute;
+				left: 15px;
+				top: 16px;
+				width: 36px;
+				z-index: 100;
+				height: 36px;
+			}
+			
+			.mui-table-view .mui-table-view-cell {
+				height: 68px;
+			}
+			
+			.mui-table-view-cell .custom-left-icon+a {
+				padding-left: 62px;
+				padding-top: 23px;
+				padding-bottom: 23px;
+			}
+			
+			.doorMagnetismName {
+				font-size: 16px;
+				color: #333;
+				width: 90%;
+			}
+			
+			#doorMagnetismList {
+				overflow-y: auto;
+			}
+			
+			.add-APP-style {
+				display: flex;
+				justify-content: space-between;
+				padding-left: 48px;
+				align-items: center;
+				height: 100%;
+			}
+			
+			.icon-add {
+				position: absolute;
+				top: 23px;
+				display: inline-block;
+				right: 15px;
+			}
+			
+			.noTrust .mui-navigate-right:after {
+				font-size: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_myAPP">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-hidden" id="appList">
+				<!--<li class="mui-table-view-cell">
+					<img src="../images/audioList/edit@3x.png" alt="" class="custom-left-icon" />
+					<a class="mui-navigate-right" data-info="objInfo">
+						<div class="doorMagnetismInfo">
+							<div class="doorMagnetismName private-ellipsis">
+								3-2-101
+							</div>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell noTrust">
+					<img src="../images/audioList/edit@3x.png" alt="" class="custom-left-icon" />
+					<a class="mui-navigate-right" data-info="objInfo">
+						<div class="doorMagnetismInfo">
+							<div class="doorMagnetismName private-ellipsis">
+								3-2-101
+							</div>
+						</div>
+						<div class="iconfont icon-add">
+
+						</div>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/loadCss.js "></script>
+		<script id="langScript"></script>
+		<script>
+			// Native跳转进入web页面后先获取设备+云账号所有信息（原启动参数）
+			var argsObj = dsBridgeFuncSyn.getAllInfo();
+			dsBridgeFuncSyn.printH5Log("Z --- 字符串" + argsObj);
+			var argsObj = JSON.parse(argsObj);
+			getNativeInfo(argsObj);
+		</script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script>
+			var total = 0;
+			var totalNum = 0;
+			checkType(localStorage.AppType); //加载特定样式
+			var appList = [];
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				getAPPAuthList(0);
+			}
+
+			function initData() {
+
+			}
+
+			function initEvent() {
+
+			}
+
+			/***
+			 * 
+			 * @param {Number} pageStart 开始页面，第一页为0
+			 * 
+			 */
+
+			function getAPPAuthList(pageStart) {
+				var Map = {
+					pageStart: pageStart,
+					pageSize: 100
+				};
+				CloudSendAjax(localStorage.serverAddress + openAPI.getAppAuthList, 'post', function(code, message, data) {
+					if(code == 200) {
+						if(data.total == 0) {
+							dsBridgeFuncSyn.dismiss();
+							addBitmap(0);
+							return;
+						}
+						totalNum = totalNum + data.appList.length;
+						appList = appList.concat(data.appList);
+						pageStart++;
+						if(data.total > totalNum) {
+							getAPPAuthList(pageStart);
+						} else {
+							getAPPDetailInfo();
+						}
+					} else {
+						dsBridgeFuncSyn.dismiss();
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+					}
+				}, Map);
+			}
+
+			//				<li class="mui-table-view-cell">
+			//					<img src="../images/audioList/edit@3x.png" alt="" class="custom-left-icon" />
+			//					<a class="mui-navigate-right" data-info="objInfo">
+			//						<div class="doorMagnetismInfo">
+			//							<div class="doorMagnetismName private-ellipsis">
+			//								3-2-101
+			//							</div>
+			//						</div>
+			//					</a>
+			//				</li>
+			//				<li class="mui-table-view-cell noTrust">
+			//					<img src="../images/audioList/edit@3x.png" alt="" class="custom-left-icon" />
+			//					<a class="mui-navigate-right" data-info="objInfo">
+			//						<div class="doorMagnetismInfo">
+			//							<div class="doorMagnetismName private-ellipsis">
+			//								3-2-101
+			//							</div>
+			//						</div>
+			//						<div class="iconfont icon-add">
+			//
+			//						</div>
+			//					</a>
+			//				</li>
+
+			function initAPPList() {
+				var parEl = document.getElementById("appList");
+				for(var i = 0; i < appList.length; i++) {
+					var liEl = document.createElement("li");
+					liEl.id = appList[i].appId;
+					liEl.className = appList[i].isAuth == 0 ? "mui-table-view-cell noTrust" : "mui-table-view-cell";
+					var img = document.createElement("img");
+					img.src = appList[i].logoURL;
+					img.className = "custom-left-icon";
+					var aEl = document.createElement("a");
+					aEl.className = "mui-navigate-right";
+					liEl.setAttribute("data-info", JSON.stringify(appList[i]));
+					var nameDivEl = document.createElement("div");
+					nameDivEl.className = "doorMagnetismInfo";
+					var nameInnerDivEl = document.createElement("div");
+					nameInnerDivEl.className = "doorMagnetismName private-ellipsis";
+					nameInnerDivEl.innerText = appList[i].appName;
+					nameDivEl.appendChild(nameInnerDivEl);
+					aEl.appendChild(nameDivEl);
+					if(appList[i].isAuth == 0) {
+						var addDiv = document.createElement("div");
+						addDiv.className = "iconfont icon-add";
+						aEl.appendChild(addDiv);
+					}
+					liEl.appendChild(img);
+					liEl.appendChild(aEl);
+					parEl.appendChild(liEl);
+				}
+				initTapEvent();
+			}
+
+			function initTapEvent() {
+				mui("#appList li").each(function(index, El) {
+					$(El).on("tap", function(e) {
+						console.log(El);
+						var id = "appDetail";
+						var param = El.getAttribute("data-info");
+						console.log(param);
+						var Url = "web/applicationPages/" + id + ".html";
+						dsBridgeFuncSyn.pageTo(Url, param);
+					});
+				});
+				$("#appList").removeClass("mui-hidden");
+				dsBridgeFuncSyn.dismiss();
+			}
+
+			function getAPPDetailInfo() {
+				for(var i = 0; i < appList.length; i++) {
+					var index = i;
+					getJSONData(localStorage.serverAddress + appList[index].appInfoPath, function(data) {
+						dsBridgeFuncSyn.dismiss();
+						appList[index].logoURL = localStorage.serverAddress + data.app.logoURL;
+						appList[index].deviceTypeList = data.deviceTypeList;
+						if(typeLan.type == "zh") {
+							appList[index].appName = data.app.zh.appName;
+							appList[index].appIntroduction = data.app.zh.appIntroduction;
+							appList[index].appPermissionList = data.appPermissionList.zh;
+						} else {
+							appList[index].appName = data.app.en.appName;
+							appList[index].appIntroduction = data.app.en.appIntroduction;
+							appList[index].appPermissionList = data.appPermissionList.en;
+						}
+						total++;
+						if(total == appList.length) {
+							initAPPList();
+							dsBridgeFuncSyn.dismiss();
+						}
+					}, function() {
+						dsBridgeFuncSyn.dismiss();
+						addBitmap(0);
+					});
+				}
+			}
+
+			/******************新增原生App上报Web功能接口******************/
+			//TODO:监听原生侧上报事件
+			dsBridge.register("callWebDoFuncAsyn", function(args) {
+				appLog("Web --- args: " + args);
+				var webInfo = JSON.parse(args);
+				for(var key in webInfo) {
+					switch(webInfo[key].whichInfo) {
+						case "reshApplist": // 绘图数据发还给运检测配置页面
+							var param = JSON.parse(webInfo[key].infoValue);
+							//							HumanGridService = param.HumanGrid_Bak;
+							for(var i = 0; i < appList.length; i++) {
+								if(param.appId == appList[i].appId) {
+									appList[i].isAuth = param.isAuth;
+									//									document.getElementById(appList[i].appId).
+									$("#" + appList[i].appId).removeClass("noTrust");
+									$("#" + appList[i].appId + " .icon-add").addClass("mui-hidden");
+									$("#" + appList[i].appId).attr("data-info", JSON.stringify(appList[i]));
+								}
+							}
+							break;
+						case "isNetConnect": //更新手机是否联网
+							localStorage.isNetConnect = webInfo[key].infoValue;
+							break;
+						default:
+							break;
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

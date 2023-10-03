@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <link href="../css/Common.css" rel="stylesheet" />
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+  </style>
+</head>
+
+<body>
+  <!-- 页面标题- 云台矫正 -->
+  <header class="mui-bar mui-bar-nav">
+    <a id="back" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="WEB_PTZConfig">&nbsp;</h1>
+  </header>
+  <!-- 页面内容区 -->
+  <div class="mui-content">
+    <!-- 页面功能区 -->
+    <div id="baseUI" class="mui-hidden">
+      <div id="settingsPTZ" class="mui-hidden">
+        <!-- 云台矫正功能 -->
+        <div id="PTZContent" class="mui-hidden">
+          <!--自动校正设置-->
+          <ul id="PTZ" class="mui-table-view ui-siwtchlist">
+            <li id="setPTZ" class="mui-table-view-cell">
+              <span data-text="WEB_auto_correct" class="mainStyle">&nbsp;</span>
+              <div id="setPTZSwitch" class="mui-switch mui-switch-mini">
+                <div class="mui-switch-handle" id="setPTZCircle"></div>
+              </div>
+              <div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+            </li>
+            <li id="setPTZItem" class="mui-table-view-cell mui-hidden">
+              <a id="setPTZTime" class="mui-navigate-right">&nbsp;
+                <span data-text="WEB_execution_time" class="mainStyle padding-left-15">&nbsp;</span>
+                <span id="setPTZTimeVal" class="mui-badge"></span>
+              </a>
+            </li>
+          </ul>
+          <!--手动矫正-->
+          <ul class="mui-table-view ui-siwtchlist">
+            <li id="hand_correct" class="mui-table-view-cell">
+              <a>
+                <span class="mid-btn" data-text="WEB_hand_correct">&nbsp;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/loadCss.js "></script>
+  <script id="langScript"></script>
+  <script>
+    checkType(localStorage.AppType); //加载特定样式
+    mui.init();
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+
+
+    var isShowNoFunction;  // 无功能占位图
+
+    // 云台矫正
+    var setPTZConfirm = true; // 云台校正开关状态变化时是否调接口提交
+    var setPTZServiceData; // 云台校正使能服务端数据
+    var setPTZCheck; // 云台校正开关是否开启
+    var setPTZTimeVal = document.getElementById('setPTZTimeVal');
+
+    // 1. 初始化页面显示
+    initPage();
+    // 2. 初始化页面事件
+    initEvent();
+
+    function initPage() {
+      // 1. 初始化页面中的功能展示
+      initShowFunction()
+    }
+
+    function initEvent() {
+      // 1. 监听云台矫正开关状态变化
+      document.getElementById("setPTZSwitch").addEventListener("toggle", handlerPTZSwitchChange)
+      // 2. 监听执行时间选项的 tap 事件
+      document.getElementById("setPTZTime").addEventListener("tap", handlerSetPTZTime);
+      // 3. 手动矫正按钮的 tap 事件
+      document.getElementById("hand_correct").addEventListener('tap', handlerHandCorrect);
+    }
+
+    // 根据设备的云台能力集，初始化功能展示
+    function initShowFunction() {
+      isShowNoFunction = true;
+      // 获取设备的云台能力集
+      SendAjax(LAPI.PTZCapabilities, "get", function (code, data) {
+        dsBridgeFuncSyn.dismiss();
+        if (code == 0) {
+          // 设备支持云台矫正功能
+          if (data.SupportRectify && data.SupportRectify == 1) {
+            isShowNoFunction = false;
+            $("#settingsPTZ").removeClass("mui-hidden");
+            // 初始化云台矫正功能的状态
+            initsetPTZ()
+          }
+
+          if (isShowNoFunction) {
+            //TODO:无功能占位图
+            addBitmap(1, langTip["WEB_noConfigAvailable"]);
+          } else {
+            $("#baseUI").removeClass("mui-hidden");
+          }
+					} else if(code == 4 || code == 8 || code == 1006) {
+          addBitmap(1, langTip["WEB_unSupported"]);
+        } else {
+          //TODO:加载失败显示加载失败占位图
+          addBitmap(0);
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+        }
+      })
+    }
+
+    // 根据服务器的字段，初始化云台矫正功能的状态
+    function initsetPTZ() {
+      SendAjax(LAPI.PTZRectifyCfg, 'get', function (code, data) {
+        dsBridgeFuncSyn.dismiss();
+        if (code == 0) {
+          $("#PTZContent").removeClass("mui-hidden");
+          setPTZServiceData = deepCopy(data);
+          setPTZCheck = data.TimingCfg.Enabled; // 0：关闭，1：开启
+          document.getElementById("setPTZSwitch").style.zIndex = 20;
+          document.getElementById("setPTZSwitch").style.visibility = "visible";
+          setPTZConfirm = false;
+          setSwitchStatus("setPTZSwitch", setPTZCheck);
+          setPTZConfirm = true;
+          // 如果自动矫正是开启状态，则显示执行时间
+          if (setPTZCheck == 1) {
+            mui("#PTZ .mui-table-view-cell").each(function (index, El) {
+              if (index != 0) {
+                El.classList.remove('mui-hidden');
+              }
+            });
+          }
+          // 执行时间展示框中添加时间
+          setPTZTimeVal.innerText = data.TimingCfg.RectifyTime.Hour + ":" + data.TimingCfg.RectifyTime.Minute + ":" + data.TimingCfg.RectifyTime.Second;
+          // 如果使能按钮是被选中状态，则给使能按钮添加样式
+          var setPTZSwitchActive = document.getElementById("setPTZSwitch").classList.contains("mui-active");
+          if (setPTZSwitchActive) {
+            document.getElementById("setPTZCircle").style.transform = 'translate(16px, 0px)';
+          }
+        } else if (code == 4 || code == 8) {
+          addBitmap(1, langTip["WEB_unSupported"]);
+          dsBridgeFuncSyn.dismiss();
+        } else {
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          addBitmap(0);
+          dsBridgeFuncSyn.dismiss();
+        }
+      })
+    }
+
+    // 云台矫正开关状态切换状态事件处理函数
+    function handlerPTZSwitchChange(event) {
+      if (event.detail.isActive && setPTZConfirm) {
+        var sendDataON = deepCopy(setPTZServiceData);
+        sendDataON.TimingCfg.Enabled = 1; // 0：云台校正关闭，1：云台校正开启
+        dsBridgeFuncSyn.showLoading();
+        SendAjax(LAPI.PTZRectifyCfg, 'put', function (code, data) {
+          dsBridgeFuncSyn.dismiss();
+          if (code == 0) {
+            setPTZServiceData.TimingCfg.Enabled = 1;
+            showToast(langTip["WEB_api_error_succeeded"]);
+            mui("#PTZ .mui-table-view-cell").each(function (index, El) {
+              if (index != 0) {
+                El.classList.remove('mui-hidden');
+              }
+            });
+          } else {
+            setPTZConfirm = false;
+            setTimeout(function () {
+              mui("#setPTZSwitch").switch().toggle();
+            }, 200);
+          }
+        }, sendDataON);
+      } else if (!event.detail.isActive && setPTZConfirm) {
+        mui("#PTZ .mui-table-view-cell").each(function (index, El) {
+          if (index != 0) {
+            El.classList.add('mui-hidden');
+          }
+        });
+        var sendDataOFF = deepCopy(setPTZServiceData);
+        sendDataOFF.TimingCfg.Enabled = 0; // 0：云台矫正关闭，1：云台矫正开启
+        dsBridgeFuncSyn.showLoading();
+        SendAjax(LAPI.PTZRectifyCfg, 'put', function (code, data) {
+          dsBridgeFuncSyn.dismiss();
+          if (code == 0) {
+            setPTZServiceData.TimingCfg.Enabled = 0;
+            showToast(langTip["WEB_api_error_succeeded"]);
+          } else {
+            setPTZConfirm = false;
+            setTimeout(function () {
+              mui("#setPTZSwitch").switch().toggle();
+              mui("#PTZ .mui-table-view-cell").each(function (index, El) {
+                if (index != 0) {
+                  El.classList.remove('mui-hidden');
+                }
+              });
+            }, 300);
+          }
+        }, sendDataOFF);
+      } else {
+        setPTZConfirm = true;
+      };
+    }
+
+    // 执行时间的选择时间处理函数
+    function handlerSetPTZTime() {
+      var sendData = deepCopy(setPTZServiceData);
+      var date = setPTZTimeVal.innerText;
+      dsBridgeFuncAsyn.showDate("ptzTime", date, function (result) {
+        var result = JSON.parse(result);
+        if (result.statusCode == "1") return;
+        var resultObj = JSON.parse(result.param);
+        var sendTime = sendData.TimingCfg.RectifyTime;
+        sendTime.Hour = resultObj.Hour + "";
+        sendTime.Minute = resultObj.Minute + "";
+        sendTime.Second = resultObj.Second + "";
+        dsBridgeFuncSyn.showLoading();
+        SendAjax(LAPI.PTZRectifyCfg, 'put', function (code, data) {
+          dsBridgeFuncSyn.dismiss();
+          if (code == 0) {
+            setPTZTimeVal.innerText = resultObj.Hour + ":" + resultObj.Minute + ":" + resultObj.Second;
+            var ServiceSendTime = setPTZServiceData.TimingCfg.RectifyTime;
+            ServiceSendTime.Hour = resultObj.Hour + "";
+            ServiceSendTime.Minute = resultObj.Minute + "";
+            ServiceSendTime.Second = resultObj.Second + "";
+            //配置成功 知会原生侧
+            dsBridgeFuncSyn.alreadySetTimeCfg();
+
+          } else {
+            showToast(langTip["WEB_toast_modify_favoritesname_failed"], code);
+          }
+        }, sendData);
+      });
+    }
+
+    // 手动矫正按钮 tap 事件的处理函数
+    function handlerHandCorrect() {
+      dsBridgeFuncSyn.showLoading();
+      SendAjax(LAPI.PTZRectify, 'put', function (code, data) {
+        dsBridgeFuncSyn.dismiss();
+        if (code == 0) {
+          showToast(langTip["WEB_api_error_succeeded"], code);
+        } else {
+          showToast(langTip["WEB_toast_modify_favoritesname_failed"], code);
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>

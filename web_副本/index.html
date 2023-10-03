@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/Common.css" rel="stylesheet" />
+		<link href="css/theme_normal.css" rel="stylesheet" />
+		<style></style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title">&nbsp;</h1>
+		</header>
+		<script src="js/dsbridge.min.js"></script>
+		<script src="js/common.js"></script>
+		<script>
+			localStorage.statusBarHeight = dsBridge.call("callNativeDoFuncSyn", {
+				type: callNativeDoFuncSyn.getStatusBarHeight
+			})
+
+
+
+
+
+
+
+		</script>
+		<script src="js/immersed.js"></script>
+	</body>
+
+</html>

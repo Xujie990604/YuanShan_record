@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+  <link href="../css/mui.css" rel="stylesheet" />
+  <link href="../css/iconfont.css" rel="stylesheet" />
+  <link href="../css/Common.css" rel="stylesheet" />
+  <link href="../css/theme_normal.css" rel="stylesheet" />
+  <style>
+    /* 顶部搜索框 */
+    #searchInputContent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 56px;
+      background-color: #fff;
+    }
+
+    #searchInputContent .input-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 92%;
+      height: 36px;
+      margin: 0;
+      border-radius: 18px;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .mui-icon-search {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+
+    .input-content input {
+      height: 100%;
+      margin: 0;
+      padding-left: 5px;
+      background-color: transparent;
+      text-align: left;
+    }
+
+    #userInfoListContent {
+      position: relative;
+    }
+
+    #shareRecordText {
+      margin: 10px 0 10px 20px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 400;
+    }
+
+    #userInfoListContent ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    #userInfoListContent li {
+      position: relative;
+      list-style: none;
+      height: 96px;
+      width: 94%;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    #userInfoListContent li a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 100%;
+    }
+
+    #userInfoListContent li img {
+      height: 35px;
+      margin: 0 10px 0 20px;
+    }
+
+    #userInfoListContent li .user-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 400;
+    }
+
+    /* 有分享记录的情况下：批量分享按钮的样式 */
+    #hasUserInfoContent .batch-share-btn-content {
+      position: fixed;
+      bottom: 0;
+      height: 86px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+    }
+
+    #hasUserInfoContent .batch-share-btn {
+      height: 44px;
+      width: 78%;
+      border-radius: 22px !important;
+      background-color: #50d0c1 !important;
+      font-size: 17px;
+      color: #fff !important;
+      font-weight: 400;
+    }
+
+    /* 无分享记录情况下：批量分享按钮的样式 */
+    .no-share-info-btn-content {
+      position: absolute;
+      width: 100%;
+      top: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .no-share-info-btn-content .batch-share-btn {
+      height: 44px;
+      width: 78%;
+      border-radius: 22px !important;
+      background-color: #50d0c1 !important;
+      font-size: 17px;
+      color: #fff !important;
+      font-weight: 400;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 页面标题 -->
+  <header class="mui-bar mui-bar-nav">
+    <a id="back" class="mui-icon iconfont icon-back1"></a>
+    <h1 id="title" class="mui-title" data-text="">分享管理</h1>
+  </header>
+  <div class="mui-content">
+    <div id="EZView-content" class="mui-hidden">
+      <!-- 有分享记录 -->
+      <div id="hasUserInfoContent">
+        <!-- input：搜索框 -->
+        <div id="searchInputContent" class="mui-input-row search-input-content">
+          <div class="input-content">
+            <span class="mui-icon mui-icon-search"></span>
+            <input id="searchInput" type="search" class="mui-input-clear">
+          </div>
+        </div>
+        <!-- 列表：分享用户的列表 -->
+        <div id="userInfoListContent">
+          <!-- 使用 mui 的组件来实现列表滚动 -->
+          <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+              <div id="shareRecordText">分享记录</div>
+              <!-- TODO: 内容要开启超长打点 -->
+              <ul id="userInfoListUL">
+                <!-- 用户卡片模板 -->
+                <li class="user-info-card-template mui-hidden">
+                  <a class="mui-navigate-right">
+                    <!-- TODO: 更换用户的头像 -->
+                    <img src="../images/human_detection.png">
+                    <div class="user-info">
+                      <span>userName(188xxxx8888)</span>
+                      <span>备注：分享的配置</span>
+                      <span>设备：x台</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- 按钮：批量分享按钮 -->
+        <div class="batch-share-btn-content">
+          <button type="button" class="mui-btn batch-share-btn">批量分享</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/dsbridge.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/libs/md5.js"></script>
+  <script src="../js/libs/jquery-3.4.1.min.js"></script>
+  <script src="../js/libs/sha2.js"></script>
+  <script src="../js/resource.js"></script>
+  <script src="../js/Utils.js"></script>
+  <script src="../js/mui.js"></script>
+  <script src="../js/loadCss.js"></script>
+  <script src="../js/batchShareDeviceUtil.js"></script>
+  <script id="langScript"></script>
+  <script>
+    // Native跳转进入web页面后先获取设备+云账号所有信息（原启动参数）
+    var argsObj = dsBridgeFuncSyn.getAllInfo();
+    dsBridgeFuncSyn.printH5Log("Z --- 字符串" + argsObj);
+    var argsObj = JSON.parse(argsObj);
+    getNativeInfo(argsObj);
+  </script>
+  <script src="../js/customSetting.js"></script>
+  <script src="../js/immersed.js"></script>
+  <script>
+
+    var langTip;
+    checkType(localStorage.AppType); //加载特定样式
+    mui.init();
+    // 获取语言文件
+    var typeLan = initLang();
+    langTip = typeLan.lang;
+
+
+    // 初始化页面
+    initPage()
+    // 初始化数据
+    initData();
+    // 初始化事件
+    initEvent()
+
+
+    function initPage() {
+      mui('.mui-scroll-wrapper').scroll();
+      $('#searchInput').attr("placeholder", "搜索...")
+    }
+
+    function initData() {
+      getShareUserList()
+    }
+
+
+    function initEvent() {
+      // 事件绑定：批量分享按钮的 tap 事件
+      $('.batch-share-btn').on('tap', turnToBatchSharePage)
+      // 事件绑定：输入框的 input 事件
+      // TODO:搜索功能待实现，需要到新的界面
+      $('#searchInput').on('tap', turnToSearchUserInfoPage)
+    }
+
+
+    // 获取用户列表
+    // 有参数为条件查询，无参数为获取所有信息
+    function getShareUserList(keyWord) {
+      var sendData = {}
+      if (keyWord != undefined) {
+        sendData.keyWord = keyWord;
+      }
+      CloudSendAjax(localStorage.serverAddress + openAPI.shareUserList, 'post', function (code, message, data) {
+        // TODO：模拟数据
+        if (isMock) {
+          code = 200;
+          data = {
+            shareUserList: [
+              {
+                userId: "355555555555555555",
+                userName: "uniview1",
+                phone: "18730508685",
+                email: "",
+                remark: "仓库的设备",
+                total: 3
+              }
+            ]
+          }
+        }
+
+        if (code == 200) {
+          console.log('执行了请求用户列表数据的函数');
+          // 有分享记录：根据数据生成列表
+          if (data.shareUserList.length > 0) {
+            buildUserInfoList(data.shareUserList);
+            $('#EZView-content').removeClass('mui-hidden');
+            // 设置列表的高度，offset() 只能用在可见元素上，所以不能在页面初始化时设置高度
+            var scrollBottom = $('.batch-share-btn-content').offset().top;
+            var scrollTop = $('#userInfoListContent').offset().top;
+            var scrollHeight = scrollBottom - scrollTop;
+            $('#userInfoListContent').css("height", scrollHeight + "px");
+          } else {
+            // 无分享记录：展示异常占位图
+            addBitmap(2, "暂无分享记录");
+            // 克隆一个批量分享按钮放到，无分享记录提示下面
+            $('.batch-share-btn-content').clone().addClass("no-share-info-btn-content").insertAfter(".full-occupation-bitmap-placeholder");
+            // 事件绑定：新增的批量按钮上添加事件
+            $('.no-share-info-btn-content button').on('tap', turnToBatchSharePage)
+          }
+          dsBridgeFuncSyn.dismiss();
+        } else {
+          addBitmap(0);
+          showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+          dsBridgeFuncSyn.dismiss();
+        }
+      }, sendData)
+    }
+
+
+    // 事件处理函数：跳转到分享详情页面
+    function turnToShareDetailPage() {
+      // 页面跳转：
+      var param = {
+        userId: $(this).attr('data-userId'),
+        userName: $(this).find("span").eq(0).text(),
+        remark: $(this).find("span").eq(1).text()
+      }
+      dsBridgeFuncSyn.pageTo("web/newPages/batchShareDeviceDetail.html", JSON.stringify(param));
+    }
+
+    // 事件处理函数：跳转到批量分享页面
+    function turnToBatchSharePage() {
+      // 页面跳转：跳转到批量分享页面
+      dsBridgeFuncSyn.pageTo("web/newPages/batchShareDeviceOperate.html", "");
+    }
+
+    // 事件处理函数：跳转到搜索分享记录页面
+    function turnToSearchUserInfoPage() {
+      dsBridgeFuncSyn.pageTo("web/newPages/searchUserInfoPage.html", "");
+    }
+
+    /******************新增原生App上报Web功能接口******************/
+    // 监听原生侧上报数据
+    dsBridge.register("callWebDoFuncAsyn", function (args) {
+      appLog("Web --- args: " + args);
+      var webInfo = JSON.parse(args);
+      for (var key in webInfo) {
+        switch (webInfo[key].whichInfo) {
+          // 有分享记录被删除时，通知当前页面进行刷新
+          case "deleteShareByID":
+            // 重新调用接口获取数据，刷新页面
+            getShareUserList();
+            break;
+          // 有分享记录被新建时，通知当前页面进行刷新
+          case "batchShareDeviceSuccess":
+            getShareUserList();
+            break;
+          case "deviceStatus": // 更新设备在线状态
+            localStorage.deviceStatus = webInfo[key].infoValue;
+            break;
+          case "ip": // 更新ip
+            localStorage.Ip = webInfo[key].infoValue;
+            break;
+          case "port": // 更新port
+            localStorage.Port = webInfo[key].infoValue;
+            break;
+          case "logInfo": //更新登录信息
+            localStorage.logInfo = webInfo[key].infoValue;
+            break;
+          case "deviceName": //更新设备名称
+            var deviceName = document.getElementById("deviceName");
+            break;
+          case "sdkType": //更新SDK类型
+            localStorage.sdkType = webInfo[key].infoValue;
+            break;
+          case "isNetConnect": //更新手机是否联网
+            localStorage.isNetConnect = webInfo[key].infoValue;
+            break;
+          case "hasNewVersion": //是否有新版本
+            localStorage.hasNewVersion = webInfo[key].infoValue;
+            break;
+          case "versionNumber": //当前版本号
+            localStorage.versionNumber = webInfo[key].infoValue;
+            break;
+          case "LocalDeviceUname": //免注册设备用户名更新
+            localStorage.LocalDeviceUname = webInfo[key].infoValue;
+            break;
+          case "deviceOs": //设备云端在线状态 “true”在线，“false”离线
+            localStorage.deviceOs = webInfo[key].infoValue;
+            break;
+          case "updateChannelName": // TODO：通道名称修改成功后，主页同步更新
+            localStorage.deviceName = webInfo[key].infoValue;
+            break;
+          case "workingStatus":
+            localStorage.workingStatus = webInfo[key].infoValue;
+            break;
+          case "channelStatus":
+            localStorage.channelStatus = webInfo[key].infoValue;
+            break;
+          default:
+            break;
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

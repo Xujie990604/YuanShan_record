@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-cell .ui-tip {
+				position: absolute;
+				right: 5px;
+				top: 20px;
+				z-index: 100;
+			}
+			/*.installType {
+				text-align: left;
+				background-color: #ffffff;
+			}*/
+			
+			.ui-siwtchlist .mui-table-view-cell:not(:first-child) a {
+				padding-left: 15px;
+			}
+			
+			.selectAudioStepVal {
+				padding-left: 30px;
+			}
+			
+			.over-text {
+				width: 160px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-align: right;
+			}
+			
+			#selectAudioList {
+				padding-left: 0px;
+				margin-top: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_Alarm_plan">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<div id="EZView-content" class="mui-hidden">
+				<ul id="PlanCheck0" class="mui-table-view ui-siwtchlist">
+					<li id="LightAlarmItem0" data-id="0" class="mui-table-view-cell mui-hidden">
+						<span data-text="WEB_light_alarm" class="mainStyle">&nbsp;</span>
+						<div id="LightAlarmSwitch0" class="mui-switch mui-switch-mini LightAlarmSwitch">
+							<div class="mui-switch-handle" id="LightAlarmCircle0"></div>
+						</div>
+						<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+					</li>
+					<li id="AudioAlarmItem0" class="mui-table-view-cell mui-hidden">
+						<span data-text="WEB_audio_alarm" class="mainStyle">&nbsp;</span>
+						<div id="AudioAlarmSwitch0" class="mui-switch mui-switch-mini AudioAlarmSwitch">
+							<div class="mui-switch-handle" id="AudioAlarmCircle0"></div>
+						</div>
+						<div class="loadFailed mui-hidden" data-text="WEB_loadFailed">&nbsp;</div>
+					</li>
+					<li id="selectAudioItem0" class="mui-table-view-cell selectAudioStepVal mui-hidden ">
+						<a href="#selectAudio" class="mui-navigate-right">&nbsp;
+							<span data-text="WEB_alarm_audio_selected" class="mainStyle">&nbsp;</span>
+							<span id="selectAudioStepVal0" class="mui-badge over-text"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="selectAudio" class="mui-popover mui-popover-action mui-popover-bottom ui-radio-list">
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-checkbox ui-list-titile" id="swipedownDiv">
+					<label data-text="WEB_alarm_audio_selected">&nbsp;</label>
+					<span id="closeAudioList" class="mui-icon mui-icon-closeempty"></span>
+				</div>
+				<div id="selectAudioC" class="ui-list-container">
+					<div class="mui-scroll-wrapper">
+						<ul id="selectAudioList" class="mui-scroll mui-table-view-radio">
+						</ul>
+					</div>
+				</div>
+			</form>
+			<button id="selectAudioListOk" class="mui-btn mui-btn-block ui-dateok" data-text="WEB_button_ok">&nbsp;</button>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js "></script>
+    <script id="langScript"></script>
+		<script>
+			var langTip;
+			var Plancheck; //联动计划开关是否开启
+			var alarmCheckConfirm = true; //灯光告警开关状态变化时是否调接口提交
+			var AudioalarmCheckConfirm = true; //声音开关状态变化时是否调接口提交
+			var CheckTimeServiceData = {}; //获取报警联动计划信息
+			var AlarmAudioList; //报警音选择列表
+			var AudioChecked; //灯光告警是否选中
+			var AudioCheckedID; //灯光告警选中ID
+			var AudioCheckedVal; //报警音选择列表名称
+			var AudioFile, //报警音接口
+				lightIsOpen = 0, //0位灯光告警关闭
+				audioIsOpen = 0; //0位声音告警关闭
+			var LightParam = { //灯光报警参数
+				LightTime: 10
+			};
+			var AudioParamObj;
+			var StarTimeItem = document.querySelectorAll(".StarTimeItem");
+			var isSupport = false;
+			checkType(localStorage.AppType); //加载特定样式
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initEvent();
+
+			function initPage() {
+				SendAjax(LAPI.SystemCapabilities, 'get', function(code, data) {
+					if(code == 0) {
+						supportAlarmData = data;
+						if(supportAlarmData.IsSupportedLightAlarm != 0) {
+							$("#LightAlarmItem0").removeClass("mui-hidden");
+							isSupport = true;
+						}
+						if(supportAlarmData.IsSupportedAudioAlarm != 0) {
+							$("#AudioAlarmItem0").removeClass("mui-hidden");
+							isSupport = true;
+						}
+						if(isSupport) {
+							initData();
+						} else {
+							addBitmap(1, langTip["WEB_unSupported"]);
+							dsBridgeFuncSyn.dismiss();
+						}
+					} else {
+						dsBridgeFuncSyn.dismiss();
+						//TODO:加载失败显示加载失败占位图
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+					}
+				});
+			}
+
+			function initData() {
+				if(localStorage.deviceType == "0" && localStorage.isMultiChannelIPC == "0") {
+					AudioFile = LAPI.AudioFile.replace("<ID>", -1);
+				} else {
+					AudioFile = LAPI.AudioFile;
+				}
+				initPlanCheckSwitch(); //初始化联动计划
+				mui('.mui-scroll-wrapper').scroll();
+			}
+
+			function initEvent() {
+				document.getElementById('selectAudioList').addEventListener('selected', function(e) { //报警音列表选择
+					AudioChecked = e.detail.el.innerText.trim();
+					AudioCheckedID = Number(e.detail.el.children[0].getAttribute("data-id"));
+				});
+				document.getElementById('selectAudioListOk').addEventListener('tap', selectAudioListOk); //报警音确定
+				document.getElementById('closeAudioList').addEventListener('tap', closeAudioList); //报警音取消
+				document.getElementById("LightAlarmSwitch0").addEventListener('toggle', function(event) {
+					LightSwitch(event);
+				});
+				document.getElementById("AudioAlarmSwitch0").addEventListener('toggle', function(event) {
+					AudioSwitch(event);
+				});
+
+				// 手势操作：向下滑动关闭弹框
+				document.getElementById("swipedownDiv").addEventListener("swipedown", function() {
+					mui('#selectAudio').popover('toggle');
+				});
+			}
+
+			/**
+			 * 获取联动计划数据
+			 */
+			function initPlanCheckSwitch() {
+				SendAjax(LAPI.HumanLinkageActions, 'get', function(code, data) {
+					if(code == 0) {
+						$("#EZView-content").removeClass("mui-hidden");
+						document.getElementById("LightAlarmSwitch0").style.zIndex = 20;
+						document.getElementById("LightAlarmSwitch0").style.visibility = "visible";
+						document.getElementById("AudioAlarmSwitch0").style.zIndex = 20;
+						document.getElementById("AudioAlarmSwitch0").style.visibility = "visible";
+						Plancheck = data.Enabled;
+						CheckTimeServiceData = deepCopy(data);
+						lightIsOpen = 0;
+						audioIsOpen = 0;
+						if(CheckTimeServiceData.Num > 0) {
+							var ActionsArr = CheckTimeServiceData.Actions;
+							for(var j = 0; j < ActionsArr.length; j++) {
+								if(ActionsArr[j].ActID == 25) { //灯光报警
+									lightIsOpen = 1;
+									LightParam = ActionsArr[j].ActParam;
+								}
+								if(ActionsArr[j].ActID == 24) { //声音报警
+									audioIsOpen = 1;
+									var AudioParam = ActionsArr[j].ActParam;
+									AudioParamObj = {
+										AudioFileID: AudioParam.AudioFileID
+									};
+								}
+							}
+						} else {
+							lightIsOpen = 0;
+							audioIsOpen = 0;
+						}
+						alarmCheckConfirm = false;
+						AudioalarmCheckConfirm = false;
+						getLightAlarm(lightIsOpen); //灯光报警
+						getAudioAlarm(audioIsOpen); //声音报警
+						if(supportAlarmData.IsSupportedAudioAlarm != 0 && audioIsOpen == 1) {
+							document.getElementById("selectAudioItem0").classList.remove("mui-hidden");
+						}
+						alarmCheckConfirm = true;
+						AudioalarmCheckConfirm = true;
+
+						if(supportAlarmData.IsSupportedAudioAlarm != 0) {
+							//初始化报警音列表
+							initAlarmAudio();
+						}else{
+							dsBridgeFuncSyn.dismiss();
+						}
+
+					} else {
+						//数据获取失败的处理
+						addBitmap(0);
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						dsBridgeFuncSyn.dismiss();
+					}
+				});
+			}
+
+			/**
+			 * 报警音列表初始化
+			 */
+			function initAlarmAudio() {
+				SendAjax(AudioFile, 'get', function(code, data) {
+					if(code == 0) {
+						if(data.Num > 0) {
+							AlarmAudioList = data.FileInfoList;
+						} else {
+							AlarmAudioList = [];
+						}
+
+						var Actions = CheckTimeServiceData.Actions;
+						for(var j = 0; j < Actions.length; j++) {
+							if(Actions[j].ActID == 24) {
+								for(var z = 0; z < AlarmAudioList.length; z++) {
+									if(Actions[j].ActParam.AudioFileID == AlarmAudioList[z].ID) {
+										AudioCheckedVal = AlarmAudioList[z].FileName;
+										document.getElementById('selectAudioStepVal0').innerText = AlarmAudioList[z].FileName;
+									}
+								}
+							}
+						}
+						getAudioAlarmList(AlarmAudioList);
+						mui('#selectAudioList a').each(function(index, El) {
+							if(El.innerText.trim() == AudioCheckedVal) {
+								El.parentNode.classList.add('mui-selected');
+							}
+						});
+						dsBridgeFuncSyn.dismiss();
+					} else {
+						$("#PlanCheck0 div.loadFailed").removeClass("mui-hidden");
+						showToast(langTip["WEB_loadFailed"] + "(" + code + ")", code);
+						dsBridgeFuncSyn.dismiss();
+					}
+				})
+			}
+
+			/**
+			 * 报警音列表在页面中显示
+			 * @param {Object} data
+			 */
+			function getAudioAlarmList(data) {
+				var selectAudioList = document.getElementById('selectAudioList');
+				var selectAudioC = document.getElementById('selectAudioC');
+				if(data.length > 5) {
+					selectAudioC.style.height = '300px';
+				} else {
+					selectAudioC.style.height = 48 * data.length + 'px';
+				}
+				for(var i = 0; i < data.length; i++) {
+					var item = document.createElement('li');
+					item.className = 'mui-table-view-cell installType';
+					item.innerHTML = '<a class="mui-navigate-right" data-id=' + data[i].ID + ' data-value=' + i + '>&nbsp;' + data[i].FileName + '</a>';
+					selectAudioList.appendChild(item);
+				}
+			}
+
+			/**
+			 * 报警音确定
+			 */
+			function selectAudioListOk() {
+				mui('#selectAudio').popover('toggle');
+				if(!AudioChecked) {
+					return;
+				}
+				dsBridgeFuncSyn.showLoading();
+				var sendData = deepCopy(CheckTimeServiceData);
+				var Actions = sendData.Actions;
+				for(var i = 0; i < Actions.length; i++) {
+					if(Actions[i].ActID == 24) {
+						Actions[i].ActParam.AudioFileID = AudioCheckedID; //报警音列表中的ID和联动计划声音报警中的ID一致
+					}
+				}
+				SendAjax(LAPI.HumanLinkageActions, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						document.getElementById('selectAudioStepVal0').innerText = AudioChecked;
+						CheckTimeServiceData = sendData;
+					} else {
+						if(AudioChecked != document.getElementById('selectAudioStepVal0').innerText.trim()) {
+							mui('#selectAudioList a').each(function(index, El) {
+								if(El.innerText.trim() == document.getElementById('selectAudioStepVal0').innerText.trim()) {
+									El.parentNode.classList.add('mui-selected');
+								} else {
+									El.parentNode.classList.remove('mui-selected');
+								}
+							});
+						}
+						showToast(langTip["WEB_toast_modify_favoritesname_failed"] + "(" + code + ")", code);
+					}
+				}, sendData);
+			}
+
+			/**
+			 * 报警音确定取消
+			 */
+			function closeAudioList() {
+				mui('#selectAudio').popover('toggle');
+				if(AudioChecked == document.getElementById('selectAudioStepVal0').innerText.trim()) return;
+				mui('#selectAudioList a').each(function(index, El) {
+					if(El.innerText.trim() == document.getElementById('selectAudioStepVal0').innerText.trim()) {
+						El.parentNode.classList.add('mui-selected');
+					} else {
+						El.parentNode.classList.remove('mui-selected');
+					}
+				});
+			}
+
+			/**
+			 * 灯光报警显示开启或关闭
+			 * @param {Object} value
+			 */
+			function getLightAlarm(value) {
+				setSwitchStatus("LightAlarmSwitch0", value);
+			}
+
+			/**
+			 * 声音报警显示开启或关闭
+			 * @param {Object} value
+			 */
+			function getAudioAlarm(value) {
+				setSwitchStatus("AudioAlarmSwitch0", value);
+			}
+
+			/**
+			 * 灯光告警按钮
+			 * @param {Object} event
+			 */
+			function LightSwitch(event) {
+				if(event.detail.isActive && alarmCheckConfirm) {
+					var sendDataON1 = deepCopy(CheckTimeServiceData);
+					var sec = sendDataON1.Actions.some(function(v) {
+						return v.ActID == 25
+					})
+					if(!sec) {
+						sendDataON1.Actions.push({ // 添加ActID=25为开启灯光告警
+							ActID: 25,
+							ActParam: LightParam
+						})
+					}
+					sendDataON1.Num = sendDataON1.Actions.length;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.HumanLinkageActions, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							CheckTimeServiceData = sendDataON1;
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							alarmCheckConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#LightAlarmSwitch0").switch().toggle()
+							}, 200)
+						}
+					}, sendDataON1);
+				} else if(!event.detail.isActive && alarmCheckConfirm) {
+					var sendDataOFF1 = deepCopy(CheckTimeServiceData);
+					for(var j = 0; j < sendDataOFF1.Actions.length; j++) {
+						if(sendDataOFF1.Actions[j].ActID == 25) {
+							sendDataOFF1.Actions.splice(j, 1) // 删除ActID=25关闭启灯光告警
+						}
+					}
+					sendDataOFF1.Num = sendDataOFF1.Actions.length;
+					dsBridgeFuncSyn.showLoading();
+					SendAjax(LAPI.HumanLinkageActions, 'put', function(code, data) {
+						dsBridgeFuncSyn.dismiss();
+						if(code == 0) {
+							CheckTimeServiceData = sendDataOFF1;
+							showToast(langTip["WEB_api_error_succeeded"]);
+						} else {
+							alarmCheckConfirm = false;
+							showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+							setTimeout(function() {
+								mui("#LightAlarmSwitch0").switch().toggle();
+							}, 200)
+						}
+					}, sendDataOFF1);
+				} else {
+					alarmCheckConfirm = true;
+				}
+			}
+
+			/**
+			 * 声音告警按钮
+			 * @param {Object} event
+			 */
+			function AudioSwitch(event) {
+				if(event.detail.isActive && AudioalarmCheckConfirm) {
+					var sendDataON1 = deepCopy(CheckTimeServiceData);
+					var sec = sendDataON1.Actions.some(function(v) {
+						return v.ActID == 24;
+					});
+					if(!sec) {
+						sendDataON1.Actions.push({ // 添加ActID=24开启灯光告警
+							ActID: 24,
+							ActParam: {
+								AudioFileID: 0,
+								WarnCount: 3
+							}
+						})
+					}
+					sendDataON1.Num = sendDataON1.Actions.length;
+					dsBridgeFuncSyn.showLoading();
+					var openSwitch = 1;
+					alarmSwitchAjax(sendDataON1, openSwitch)
+				} else if(!event.detail.isActive && AudioalarmCheckConfirm) {
+					document.getElementById("selectAudioItem0").classList.add("mui-hidden");
+					var sendDataOFF1 = deepCopy(CheckTimeServiceData);
+					for(var j = 0; j < sendDataOFF1.Actions.length; j++) {
+						if(sendDataOFF1.Actions[j].ActID == 24) {
+							sendDataOFF1.Actions.splice(j, 1) // 删除ActID=24关闭灯光告警
+						}
+					}
+					sendDataOFF1.Num = sendDataOFF1.Actions.length;
+					dsBridgeFuncSyn.showLoading();
+					var openSwitch = 2;
+					alarmSwitchAjax(sendDataOFF1, openSwitch)
+				} else {
+					AudioalarmCheckConfirm = true;
+				}
+			}
+
+			/**
+			 * 声音报警请求
+			 * @param {Object} sendData
+			 * @param {Object} openSwitch
+			 */
+			function alarmSwitchAjax(sendData, openSwitch) {
+				SendAjax(LAPI.HumanLinkageActions, 'put', function(code, data) {
+					dsBridgeFuncSyn.dismiss();
+					if(code == 0) {
+						CheckTimeServiceData = sendData;
+						if(openSwitch == 1) { //开启
+							document.getElementById("selectAudioItem0").classList.remove("mui-hidden");
+							document.getElementById("selectAudioStepVal0").innerText = AlarmAudioList[0].FileName;
+							mui('#selectAudioList a').each(function(index, El) {
+								if(El.innerText.trim() == document.getElementById('selectAudioStepVal0').innerText.trim()) {
+									El.parentNode.classList.add('mui-selected');
+								} else {
+									El.parentNode.classList.remove('mui-selected');
+								}
+							});
+						} else {
+							document.getElementById("selectAudioItem0").classList.add("mui-hidden");
+						}
+						showToast(langTip["WEB_api_error_succeeded"]);
+					} else {
+						AudioalarmCheckConfirm = false;
+						showToast(langTip["WEB_api_error_operation_fails"] + "(" + code + ")", code);
+						setTimeout(function() {
+							mui("#AudioAlarmSwitch0").switch().toggle();
+							if(openSwitch == 1) { //开启
+								document.getElementById("selectAudioItem0").classList.add("mui-hidden");
+							} else {
+								document.getElementById("selectAudioItem0").classList.remove("mui-hidden");
+							}
+						}, 200)
+					}
+				}, sendData);
+			}
+		</script>
+	</body>
+
+</html>

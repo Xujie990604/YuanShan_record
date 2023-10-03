@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/iconfont.css" rel="stylesheet" />
+		<link href="../css/Common.css" rel="stylesheet" />
+		<link href="../css/theme_normal.css" rel="stylesheet" />
+		<style>
+			.private-title {
+				height: 18px;
+				line-height: 30px;
+				font-size: 12px;
+				color: #999999;
+				padding-left: 17px;
+			}
+			
+			.private-settings-img {
+				width: 24px;
+			}
+			
+			.mui-row .mui-table-view-cell {
+				text-align: center;
+				font-size: 12px;
+			}
+			
+			.imgTitles {
+				width: 100%;
+			}
+			
+			.redPoint {
+				height: 5px;
+				width: 5px;
+				border-radius: 20px;
+				background-color: #ff0000;
+				position: absolute;
+				right: 10px;
+				top: 5px;
+			}
+			
+			.mui-table-view-cell>.mui-badge {
+				width: 60%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-align: right;
+				padding: 0;
+				margin: 0;
+				height: 43px;
+				line-height: 43px;
+				font-size: 14px;
+				color: #999;
+			}
+			
+			.baseInfo {
+				font-size: 12px;
+				color: rgba(51, 51, 51, 0.4);
+				margin-top: 3px;
+			}
+			
+			.custom-dev-icon {
+				width: 72px;
+				z-index: 100;
+				margin-left: -10px;
+			}
+			
+			.mui-table-view-cell .custom-dev-icon+a {
+				padding-left: 105px;
+			}
+			
+			.baseinfo-deviceName {
+				padding-bottom: 3px;
+				font-weight: bold;
+			}
+			
+			.custom-baseinfo {
+				height: 120px!important;
+				display: flex;
+				align-items: center;
+			}
+			
+			.baseinfo-custom-text {
+				padding-top: 10px;
+				width: calc(100% - 90px);
+				margin-left: 5px;
+			}
+			
+			.center-style {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			.center-style img {
+				height: 30px;
+			}
+			
+			.center-style span {
+				color: #333!important;
+				font-size: 16px;
+				padding-left: 8px;
+			}
+
+			.mui-table-view-cell .mui-navigate-right .accessProtocol{
+				display: inline-block;
+				width: 54%;
+    		white-space: nowrap;
+    		text-overflow: ellipsis;
+    		overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon iconfont icon-back1"></a>
+			<h1 id="title" class="mui-title" data-text="WEB_basicInfo">&nbsp;</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="devInfoUl">
+				<li class="mui-table-view-cell custom-baseinfo" id="settings_DeviceDetails">
+					<img src="../images/appConfig/IPC3x.png" id="deviceLogo" alt="" class="custom-dev-icon" />
+					<div class="baseinfo-custom-text">
+						<div id="baseInfodeviceName" class="baseinfo-deviceName private-ellipsis">&nbsp;</div>
+						<div id="baseInfoSN" class="baseInfo private-ellipsis mui-hidden">&nbsp;</div>
+						<div id="baseInfoModel" class="baseInfo private-ellipsis mui-hidden">&nbsp;</div>
+					</div>
+
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="deviceName">
+					<a class="mui-navigate-right">
+						<span data-text="WEB_deviceName">&nbsp;</span>
+						<span class="mui-badge" id="deviceNameVal">&nbsp;</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-hidden" id="deviceEdition">
+					<a class="mui-navigate-right">
+						<span data-text="WEB_currentVersion">&nbsp;</span>
+						<span class="mui-badge" id="deviceEditionVal">&nbsp;</span>
+					</a>
+					<div id="redPoint" class="redPoint mui-hidden"></div>
+				</li>
+				<li class="mui-table-view-cell mui-hidden" id="accessProtocol">
+					<a class="mui-navigate-right">
+						<span data-text="WEB_accessProtocol" class="accessProtocol">&nbsp;</span>
+						<span class="mui-badge" id="accessProtocolVal">&nbsp;</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-hidden" id="deviceInfos">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<span data-text="WEB_deviceUser">&nbsp;</span>
+						<span class="mui-badge" id="deviceInfosVal">&nbsp;</span>
+					</a>
+				</li>
+			</ul>
+
+			<div id="WebConfig">
+				<ul class="mui-table-view mui-hidden" id="generalConfigUl">
+					<!--时间配置-->
+					<li class="mui-table-view-cell mui-hidden" id="settings_Time">
+						<a class="mui-navigate-right" data-text="WEB_deviceTime">
+							&nbsp;
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<ul class="mui-table-view ui-siwtchlist">
+				<!--重启设备-->
+				<li class="mui-table-view-cell center-style mui-hidden" id="restart">
+					<img src="../images/appConfig/restart.png" alt="" class="" />
+					<span class="" data-text="WEB_device_manager_device_reboot">&nbsp;</span>
+				</li>
+				<!--转让设备-->
+				<li class="mui-table-view-cell mui-hidden center-style" id="devMakeOver">
+					<img src="../images/appConfig/transform.png" alt="" class="" />
+					<span class="" data-text="WEB_deviceTransfer">&nbsp;</span>
+				</li>
+			</ul>
+			<!--删除设备-->
+			<ul class="mui-table-view ui-siwtchlist mui-hidden" id="delDevice">
+				<li class="mui-table-view-cell" id="delDevice_tap">
+					<a>
+						<span class="ui-devicereboot" data-text="WEB_delDevice">&nbsp;</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/dsbridge.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/libs/md5.js"></script>
+		<script src="../js/libs/jquery-3.4.1.min.js"></script>
+		<script src="../js/libs/sha2.js"></script>
+		<script src="../js/resource.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/customSetting.js"></script>
+		<script src="../js/loadCss.js"></script>
+    <script id="langScript"></script>
+		<script>
+			var langTip;
+			checkType(localStorage.AppType); //加载特定样式
+			var deviceNameVal = document.getElementById("deviceNameVal");
+			var accessProtocolVal = document.getElementById("accessProtocolVal");
+			var deviceEditionVal = document.getElementById("deviceEditionVal");
+			var deviceInfosVal = document.getElementById("deviceInfosVal");
+			var baseInfoSN = document.getElementById("baseInfoSN");
+			var baseInfoModel = document.getElementById("baseInfoModel");
+			var baseInfodeviceName = document.getElementById("baseInfodeviceName");
+			mui.init();
+			var typeLan = initLang();
+			langTip = typeLan.lang;
+			initPage();
+			initData();
+			initEvent();
+
+			function initPage() {
+				initRemoteConfig();
+				////设备图标为IPClogo还是NVRlogo
+				var imgSrc = "";
+				if((localStorage.deviceType == "1" && localStorage.channelId == "0") || (localStorage.deviceType == "2" && localStorage.channelId == "0")) {
+					imgSrc = "../images/appConfig/NVR3x.png";
+				} else {
+					imgSrc = "../images/appConfig/IPC3x.png";
+				}
+				// 设备名称
+				document.getElementById("deviceLogo").src = imgSrc;
+				deviceNameVal.innerText = localStorage.deviceName;
+				baseInfodeviceName.innerText = localStorage.deviceName;
+				// 设备版本：VMS、免注册不显示；其他都显示，版本数值有就填上
+				if(localStorage.isNoAccount == "1" || localStorage.deviceType == "2") {
+					$("#deviceEdition").remove();
+				} else {
+					document.getElementById("deviceEdition").classList.remove("mui-hidden");
+					deviceEditionVal.innerText = localStorage.versionNumber;
+					//设备在线且有新版本时显示红点
+					if(localStorage.hasNewVersion == "1" && localStorage.deviceStatus == "1") {
+						document.getElementById("redPoint").classList.remove("mui-hidden");
+					}
+				}
+
+				// 接入协议：不为空即显示
+				if(localStorage.sdkType != "") {
+					document.getElementById("accessProtocol").classList.remove("mui-hidden");
+					accessProtocolVal.innerText = localStorage.sdkType;
+				} else {
+					$("#accessProtocol").remove();
+				}
+
+				// 设备账号：仅免注册设备支持、免注册通道不支持
+				if(localStorage.isNoAccount != "0" && localStorage.channelId == "0") {
+					document.getElementById("deviceInfos").classList.remove("mui-hidden");
+					$("#deviceInfosVal").html(localStorage.LocalDeviceUname);
+				}
+				//原生侧传入是否支持显示设备型号
+				if(localStorage.isSupportShowDevModel == "1") {
+					//设备型号为空不显示
+					if(localStorage.deviceModel != "") {
+						$("#baseInfoModel").removeClass("mui-hidden");
+						//						deviceModelVal.innerText = localStorage.deviceModel;
+						baseInfoModel.innerText = langTip["WEB_deviceModel"] + ":" + localStorage.deviceModel;
+					}
+				}
+				//原生侧传入是否支持显示设备序列号
+				if(localStorage.isSupportShowDevSN == "1") {
+					//设备序列号为空不显示
+					if(localStorage.devSn != "") {
+						$("#baseInfoSN").removeClass("mui-hidden");
+						//						deviceSNVal.innerText = localStorage.devSn.substr(0, 20);
+						baseInfoSN.innerText = langTip["WEB_SerialNo"] + ":" + localStorage.devSn.substr(0, 20);
+					}
+				}
+			}
+
+			function initData() {
+				dsBridgeFuncSyn.dismiss();
+			}
+
+			function initEvent() {
+				document.getElementById("deviceName").addEventListener("tap", function() {
+					if(localStorage.isShare == "1" && (localStorage.deviceType == "1" && localStorage.channelId != "0") || localStorage.isNoAccount == "1" && (localStorage.deviceType == "1" && localStorage.channelId != "0") || (localStorage.deviceType == "2" && localStorage.channelId != "0")) {
+						showToast(langTip["WEB_unSupported"]);
+					} else {
+						if(localStorage.deviceType == "1" && localStorage.channelId != "0") {
+							if(localStorage.channelStatus == "0") { // 通道离线时，不支持修改通道名称
+								showToast(langTip["WEB_toast_devicenotonline"]);
+							} else {
+								// TODO:页面跳转+传参
+								var Url = "web/newPages/settings_ChannelName.html";
+								dsBridgeFuncSyn.pageTo(Url, "");
+							}
+						} else {
+							dsBridgeFuncSyn.goToFunctionPage(1);
+						}
+					}
+				})
+
+				if(document.getElementById("deviceEdition")) {
+					document.getElementById("deviceEdition").addEventListener("tap", function() {
+						dsBridgeFuncSyn.goToFunctionPage(4);
+					})
+				}
+				if(document.getElementById("accessProtocol")) {
+					document.getElementById("accessProtocol").addEventListener("tap", function() {
+						dsBridgeFuncSyn.goToFunctionPage(6);
+					})
+				}
+
+				document.getElementById("deviceInfos").addEventListener("tap", function() {
+					dsBridgeFuncSyn.goToFunctionPage(5);
+				})
+
+				// 时间设置
+				document.getElementById("settings_Time").addEventListener('tap', function() {
+					jumpToWebPage("settings_Time");
+				});
+
+				document.getElementById("restart").addEventListener('tap', restart); //重启按钮点击事件
+
+				if(document.getElementById("devMakeOver")) {
+					document.getElementById("devMakeOver").addEventListener('tap', function() {
+						//跳转到原生转让设备功能页面
+						dsBridgeFuncSyn.goToFunctionPage(8);
+					});
+				}
+
+				//删除设备
+				document.getElementById("delDevice_tap").addEventListener('tap', function() {
+					dsBridgeFuncAsyn.doFunction(13, "");
+				});
+
+			}
+			/**
+			 * 重启设备
+			 */
+			function restart() {
+				var btnArray = [langTip["WEB_cancel"], langTip["WEB_button_ok"]];
+				mui.confirm(langTip["WEB_reboot_confirm"], langTip["WEB_dialog_title_notify"], btnArray, function(e) {
+					if(e.index == 1) {
+						dsBridgeFuncSyn.showLoading();
+						SendAjax(LAPI.Reboot, 'put', function(code, data) {
+							dsBridgeFuncSyn.dismiss();
+							if(code == 0) {
+								showToast(langTip["WEB_cloud_upgrade_rebooting"]);
+								dsBridgeFuncSyn.deviceOffLine();
+							} else {
+								showToast(langTip["WEB_search_device_is_added_failed"] + "(" + code + ")", code);
+							}
+						});
+					}
+				}, 'div');
+			}
+			//初始化远程配置配置
+			function initRemoteConfig() {
+				//分享设备、免注册设备不支持远程配置
+				if(localStorage.isSupportRemoteConfig == "0") {
+					document.getElementById("WebConfig").classList.add("mui-hidden");
+				}
+				//转让设备：devMakeOver 通道不显示；分享设备不显示；免注册设备不显示；海外服务器不显示
+				if((localStorage.deviceType == "0" && localStorage.channelId != "0") || (localStorage.deviceType == "1" && localStorage.channelId != "0") || localStorage.isShare == "1" || localStorage.isNoAccount == "1") {
+					$("#devMakeOver").remove();
+				} else {
+					document.getElementById("devMakeOver").classList.remove("mui-hidden");
+					isShowDeviceDiv = true;
+				}
+
+				//删除设备：delDevice 通道不支持
+				if((localStorage.deviceType == "1" && localStorage.channelId == "0") || (localStorage.deviceType == "0" && localStorage.channelId == "0")) {
+					if(localStorage.AppType == "1" || localStorage.AppType == "2" || localStorage.AppType == "3" || localStorage.AppType == "4") {
+						document.getElementById("delDevice").classList.remove("mui-hidden"); //删除设备
+					}
+				}
+				/************************IPC配置************************/
+				if(localStorage.deviceType == "0" && localStorage.channelId == "0") {
+
+					/*********************************通用配置********************************/
+
+					document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+					// 判断是否支持时间配置
+					if(localStorage.sdkVer) {
+						if(judgeSDkVersion("1.8.0")) {
+							document.getElementById("settings_Time").classList.remove("mui-hidden");
+						}
+					}
+
+					document.getElementById("restart").classList.remove("mui-hidden"); //重启设备
+					if(localStorage.AppType == "1" || localStorage.AppType == "2" || localStorage.AppType == "3" || localStorage.AppType == "4") {
+						document.getElementById("delDevice").classList.remove("mui-hidden"); //删除设备
+					}
+
+					if(localStorage.dvt == 100) { // 接入设备为门铃时显示时间配置、扬声器音量、人形检测使能；同时屏蔽运动检测所有功能
+						//时间配置
+						document.getElementById("settings_Time").classList.remove("mui-hidden");
+					}
+				}
+
+				/************************NVR配置************************/
+				if(localStorage.deviceType == "1" && localStorage.channelId == "0") {
+					/*********************************通用配置********************************/
+
+					document.getElementById("generalConfigUl").classList.remove("mui-hidden");
+					//支持时间配置
+					document.getElementById("settings_Time").classList.remove("mui-hidden");
+					//重启设备
+					document.getElementById("restart").classList.remove("mui-hidden");
+
+					if(localStorage.AppType == "1" || localStorage.AppType == "2" || localStorage.AppType == "3" || localStorage.AppType == "4") {
+						document.getElementById("delDevice").classList.remove("mui-hidden"); //删除设备
+					}
+				}
+
+				/************************NVR通道配置************************/
+				if(localStorage.deviceType == "1" && localStorage.channelId != "0") {
+
+				}
+
+				/************************IPC通道配置************************/
+				if(localStorage.deviceType == "0" && localStorage.channelId != "0") {
+
+				}
+
+				/************************VMS及其通道配置************************/
+				if(localStorage.deviceType == "2") {
+					if(localStorage.channelId == "0") {
+						if(localStorage.AppType == "1" || localStorage.AppType == "2" || localStorage.AppType == "3" || localStorage.AppType == "4") {
+							document.getElementById("delDevice").classList.remove("mui-hidden"); //删除设备
+						}
+					}
+				}
+				//分享设备、免注册设备不支持远程配置
+				if(localStorage.isSupportRemoteConfig == "0") {
+					document.getElementById("restart").classList.add("mui-hidden");
+				}
+			}
+			/*********************************监听原生App侧上报事件**************************************/
+			/******************新增原生App上报Web功能接口******************/
+			dsBridge.register("callWebDoFuncAsyn", function(args) {
+				var webInfo = JSON.parse(args);
+				for(var key in webInfo) {
+					switch(webInfo[key].whichInfo) {
+						case "deviceStatus": // 更新设备在线状态
+							localStorage.deviceStatus = webInfo[key].infoValue;
+							if(localStorage.deviceStatus == "1" && localStorage.hasNewVersion == "1") { // 设备在线且有新版本时显示红点
+								document.getElementById("redPoint").classList.remove("mui-hidden");
+							} else {
+								document.getElementById("redPoint").classList.add("mui-hidden");
+							}
+							break;
+						case "deviceName": //更新设备名称
+							localStorage.deviceName = webInfo[key].infoValue;
+							deviceNameVal.innerText = localStorage.deviceName;
+							baseInfodeviceName.innerText = localStorage.deviceName;
+							break;
+						case "sdkType": //更新SDK类型
+							localStorage.sdkType = webInfo[key].infoValue;
+							accessProtocolVal.innerHTML = localStorage.sdkType;
+							break;
+						case "hasNewVersion": //是否有新版本
+							localStorage.hasNewVersion = webInfo[key].infoValue;
+							if(localStorage.hasNewVersion == "1" && localStorage.deviceStatus == "1") { // 设备在线且有新版本时显示红点
+								document.getElementById("redPoint").classList.remove("mui-hidden");
+							} else {
+								document.getElementById("redPoint").classList.add("mui-hidden");
+							}
+							break;
+						case "versionNumber": //当前版本号
+							localStorage.versionNumber = webInfo[key].infoValue;
+							deviceEditionVal.innerHTML = localStorage.versionNumber;
+							break;
+						case "LocalDeviceUname": //免注册设备用户名更新
+							localStorage.LocalDeviceUname = webInfo[key].infoValue;
+							deviceInfosVal.innerHTML = localStorage.LocalDeviceUname;
+							break;
+						case "updateChannelName": // TODO：通道名称修改成功后，详情页同步更新
+							localStorage.deviceName = webInfo[key].infoValue;
+							deviceNameVal.innerText = localStorage.deviceName;
+							baseInfodeviceName.innerText = localStorage.deviceName;
+							break;
+						case "workingStatus":
+							localStorage.workingStatus = webInfo[key].infoValue;
+							break;
+						case "channelStatus":
+							localStorage.channelStatus = webInfo[key].infoValue;
+							break;
+						default:
+							break;
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

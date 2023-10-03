@@ -1,0 +1,87 @@
+@charset "utf-8";
+@import "Variables_EZlive";
+
+.ui-dateok,
+.mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after,
+.mui-radio input[type='radio']:checked:before,
+.mui-checkbox input[type='checkbox']:checked:before {
+  color: $theme;
+}
+
+.mui-popover.mui-popover-action .mui-table-view {
+  margin: 0px;
+  text-align: left;
+  color: $theme;
+  border-radius: 0px;
+  background-color: #ffffff;
+}
+
+.mui-table-view-cell .ui-tip {
+  background: transparent;
+  color: $theme;
+  width: 90%;
+  height: 100%;
+  text-align: right;
+}
+
+.ui-iknow .mui-btn,.mui-content .ui-large-btn {
+  color: $theme;
+  border: 1px solid $theme;
+}
+
+.mui-content .ui-large-btn1 {
+  background-color: $theme;
+  color: #ffffff;
+}
+#topDiv .ui-js {
+  content: url($image1 + '/cancel_sj.png');
+}
+.ui-placeholder-imgbox img {
+  content: url($image1 + '/placeholder_chart@3x.png');
+  width: 100%;
+}
+
+.wapp-side-btn-close {
+  background: url($image + '/close@3x.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-addedit {
+  background: url($image + '/motion_draw_normal.png') no-repeat;
+  background-size: 100% 100%;
+}
+      
+.wapp-side-btn-addedit-select {
+  background: url($image + '/motion_draw_selected.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit {
+  background: url($image + '/motion_eraser_norma.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit-select {
+  background: url($image + '/motion_eraser_selected.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-deledit-disable {
+  background: url($image + '/motion_eraser_disable@3x.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-del {
+  background: url($image + '/delete_normal.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-del-disable {
+  background: url($image + '/delete_disable@3x.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.wapp-side-btn-commit {
+  background: url($image + '/checked.png') no-repeat;
+  background-size: 100% 100%;
+}
