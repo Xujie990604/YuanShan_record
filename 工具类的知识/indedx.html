@@ -18,7 +18,28 @@
   <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script>
-    
+
+
+    deviceList = [1]
+
+    sendData = {
+      shareTo: "xujie",
+      remark: "beizhu",
+      endTime: "123456",
+      deviceList: undefined
+    }
+    // sendInfoIndex: 每轮循环开始时，数组的下标起始值
+    for (var sendInfoIndex = 0; deviceList.length > sendInfoIndex; sendInfoIndex += 100) {
+      // 当前剩余的设备数量
+      var remainDeviceLength = deviceList.length - sendInfoIndex;
+      if (remainDeviceLength >= 100) {
+        sendData.deviceList = deviceList.slice(sendInfoIndex, sendInfoIndex + 100)
+      } else {
+        sendData.deviceList = deviceList.slice(sendInfoIndex, sendInfoIndex + remainDeviceLength)
+      }
+      console.log(sendData);
+    }
+
 
   </script>
 </body>
