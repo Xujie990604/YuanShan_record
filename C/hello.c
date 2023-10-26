@@ -13,7 +13,6 @@ int main()
     printf("最终的结果是%f\n", xpow);
   }
   printf("程序退出\n");
-  
 
   return 0;
 }
