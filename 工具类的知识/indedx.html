@@ -14,33 +14,28 @@
 
 
 <body>
-  <canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;"></canvas>
   <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script>
+    var Flock = function (n) {
+      this.seagulls = n;
+    };
 
+    Flock.prototype.conjoin = function (other) {
+      this.seagulls += other.seagulls;
+      return this;
+    };
 
-    deviceList = [1]
+    Flock.prototype.breed = function (other) {
+      this.seagulls = this.seagulls * other.seagulls;
+      return this;
+    };
 
-    sendData = {
-      shareTo: "xujie",
-      remark: "beizhu",
-      endTime: "123456",
-      deviceList: undefined
-    }
-    // sendInfoIndex: 每轮循环开始时，数组的下标起始值
-    for (var sendInfoIndex = 0; deviceList.length > sendInfoIndex; sendInfoIndex += 100) {
-      // 当前剩余的设备数量
-      var remainDeviceLength = deviceList.length - sendInfoIndex;
-      if (remainDeviceLength >= 100) {
-        sendData.deviceList = deviceList.slice(sendInfoIndex, sendInfoIndex + 100)
-      } else {
-        sendData.deviceList = deviceList.slice(sendInfoIndex, sendInfoIndex + remainDeviceLength)
-      }
-      console.log(sendData);
-    }
+    var flock_a = new Flock(4);
+    var flock_b = new Flock(2);
+    var flock_c = new Flock(0);
 
-
+    var result = flock_a.conjoin(flock_c).breed(flock_b).conjoin(flock_a.breed(flock_b)).seagulls;
   </script>
 </body>
 
