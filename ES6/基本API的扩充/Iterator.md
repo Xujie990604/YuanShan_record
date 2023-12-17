@@ -23,9 +23,9 @@ const obj = {
 
 ## 介绍
 
-- 一是为各种数据结构，提供一个统一的、简便的访问接口
-- 二是使得数据结构的成员能够按某种次序排列
-- 三是 ES6 创造了一种新的遍历命令 for...of 循环，Iterator 接口主要供 for...of 消费
+- 一、是为各种数据结构，提供一个统一的、简便的访问接口
+- 二、是使得数据结构的成员能够按某种次序排列
+- 三、是 ES6 创造了一种新的遍历命令 for...of 循环，Iterator 接口主要供 for...of 消费
 
 ## Iterator 接口
 
@@ -52,8 +52,8 @@ console.log(iter.next()); //{value: 3, done: false}
 
 - 解构赋值时
 - 使用 ... 扩展运算符时
-- yield\*
-- 由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用了遍历器接口(例如: for…of Array.from() Map(), Set() Promise.all()Promise.race())
+- `yield*`
+- 由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用了遍历器接口(例如: for…of Array.from() Map(), Set() Promise.all() Promise.race())
 
 ## 几种遍历方法的对比
 
@@ -63,7 +63,7 @@ console.log(iter.next()); //{value: 3, done: false}
 
 ### foreach
 
-- 无法使用 return break 来终止循环
+- 无法使用 continue break 来终止循环
 
 ### for in
 
@@ -74,5 +74,5 @@ console.log(iter.next()); //{value: 3, done: false}
 ### for of
 
 - 有着同 for...in 一样的简洁语法，但是没有 for...in 那些缺点。
-- 不同于 forEach 方法，它可以与 break, continue 和 return 配合使用
+- 不同于 forEach 方法，它可以与 break, continue 配合使用
 - 提供了遍历所有数据结构的统一操作接口

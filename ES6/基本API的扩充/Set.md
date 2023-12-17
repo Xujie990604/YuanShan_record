@@ -7,9 +7,11 @@
 // Set函数可以接受一个数组（或者具有 iterable 接口的其他数据结构）作为参数，用来初始化。
 // 数组去重！！！这是目前知道的一个比较实用的用法
 [...new Set(arr)]
+
 // Array.from()可以将 Set 结构转换为数组
 // 这也是数组去重的一种方式
 Array.from(new Set(arr))
+
 // 字符串去重
 [...new Set(str)].join("")
 ```

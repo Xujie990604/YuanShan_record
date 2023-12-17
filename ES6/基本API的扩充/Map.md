@@ -5,7 +5,7 @@
 * 作为一个构造函数，Map 也可以接受一个数组当做参数，该数组的成员也是一个个表示键值对的数组
 
 ```JS
-// 不仅仅是数组,任何具有 Iterator 接口,且每个成员都是一个双元素的数组的数据结构都可以当作 Map 构造函数的参数
+// 不仅仅是数组,任何具有 Iterator 接口, 且每个成员都是一个双元素的数组的数据结构都可以当作 Map 构造函数的参数
 const map = new Map([
   ['name', '张三'],
   ['title', 'Author']
@@ -17,7 +17,7 @@ const map = new Map([
 ### size属性
 
 * map.size
-* map成员个数
+* map 成员个数
 
 ### set
 
@@ -75,7 +75,7 @@ const newMap = new Map(mapArray.filter(([key, value]) => key > 1 ))
 
 ## 与其他数据结构转化
 
-### map转换成数组
+### map 转换成数组
 
 * 使用扩展运算符将 Map 转化为数组
 
@@ -91,7 +91,7 @@ const map = new Map([
 const array = [...map]
 ```
 
-### 数组转化成map
+### 数组转化成 map
 
 * 把数组传入 Map 构造函数，就可以转化为 Map
 
@@ -100,7 +100,7 @@ const array = [...map]
 new Map([[true, 7],[{foo: 3}, ['abc']]])
 ```
 
-### 对象转成map
+### 对象转成 map
 
 ```js
 const obj = {
