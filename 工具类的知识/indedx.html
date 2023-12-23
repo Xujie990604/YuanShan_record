@@ -18,21 +18,6 @@
   <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 
   <script>
-    var compose = function(f,g) {
-      return function(x) {
-        return f(g(x))
-      }
-    }
-
-    var toUpperCase = function (x) { 
-      return x.toUpperCase()
-     }
-
-     var exclaim = function(x) {
-      return x + "!"
-     }
-
-     var shout = compose(toUpperCase, exclaim)
   </script>
 </body>
 
