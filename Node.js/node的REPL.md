@@ -10,6 +10,7 @@
 
 - node 进程中的信息
 - process.argv 中存储着我们执行 node 命令时传入的参数
+- process.env 返回包含用户环境的对象
 
 ## console
 

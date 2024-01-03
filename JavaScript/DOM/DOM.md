@@ -1,10 +1,3 @@
-<!--
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-05-09 20:54:21
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\JAVAScript+ES6\JavaScript\DOM\DOM.md
- * @Description: 
--->
 # DOM(文档对象模型)
 
 * 文档对象模型(Document Object Model)，javaScript 提供了 DOM API 来操作 DOM

@@ -1,6 +1,6 @@
 # plugin 和 loader
 
-## 一，插件
+## 一、插件
 
 - 对于 webpack 现有功能的扩展，可以贯穿 Webpack 打包的生命周期，执行不同的任务比如打包优化，文件压缩, 代码检查。
 
@@ -17,7 +17,7 @@
 9. purgecss-webpack-plugin 清除无用的 CSS
 10. `EsLint` 很严格的 JS 代码规范
 
-## 二，loader
+## 二、loader
 
 - webpack 默认支持处理 `js` 和 `json` 文件，其他类型的处理不了，需要借助 `loader` 来转化特定类型的文件，将文件转化为 webpack 能处理的类型。
 
@@ -25,20 +25,19 @@
 
 1. style-loader 把 css 语句写入 style 标签中，然后插入到 html 页面里
 2. css-loader 识别 CSS 语法
-3. style-loader 是用来解析 css，把 css 渲染到 DOM 上
-4. postcss-loader 识别 postcss 语法
-5. sass-loader 识别 scss 语法
-6. babel-loader 识别 ES6+ 语法并转移成兼容指定浏览器的 JS 代码
-7. cache-loader 缓存一些性能开销较大的 loader 的处理结果
-8. thread-loader 开启多进程打包优化
-9. url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
-10. vue-loader(vue 加载) 和 vue-template-compiler(vue 模板编译)
+3. postcss-loader 识别 postcss 语法
+4. sass-loader 识别 scss 语法
+5. babel-loader 识别 ES6+ 语法并转移成兼容指定浏览器的 JS 代码
+6. cache-loader 缓存一些性能开销较大的 loader 的处理结果
+7. thread-loader 开启多进程打包优化
+8. url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
+9. vue-loader(vue 加载) 和 vue-template-compiler(vue 模板编译)
 
 ### babel
 
 - 作用
 
-## 三，postCSS
+## 三、postCSS
 
 - postCSS 不是单纯的 plugin 或者 loader。它和 webpack 一样，`是一个工具, 是一个平台`。
 - postCSS 本身并没有实际的功能，需要引入对应的插件工具后才能拥有对应的功能。
