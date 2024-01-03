@@ -1,6 +1,6 @@
 # plugin 和 loader
 
-## 一，插件
+## 一、插件
 
 - 对于 webpack 现有功能的扩展，可以贯穿 Webpack 打包的生命周期，执行不同的任务比如打包优化，文件压缩, 代码检查。
 
@@ -17,7 +17,7 @@
 9. purgecss-webpack-plugin 清除无用的 CSS
 10. `EsLint` 很严格的 JS 代码规范
 
-## 二，loader
+## 二、loader
 
 - webpack 默认支持处理 `js` 和 `json` 文件，其他类型的处理不了，需要借助 `loader` 来转化特定类型的文件，将文件转化为 webpack 能处理的类型。
 
@@ -37,7 +37,7 @@
 
 - 作用
 
-## 三，postCSS
+## 三、postCSS
 
 - postCSS 不是单纯的 plugin 或者 loader。它和 webpack 一样，`是一个工具, 是一个平台`。
 - postCSS 本身并没有实际的功能，需要引入对应的插件工具后才能拥有对应的功能。
