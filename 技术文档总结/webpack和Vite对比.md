@@ -3,12 +3,12 @@
 - webpack 是一个用于`现代 JavaScript` 应用程序的 `静态模块` `打包工具`(对标 Rollup)
 - Vite 是一个更上层的工具链方案，对标的是 (webpack + 针对 web 的常用配置 + webpack-dev-server)
 
-## 一，开箱即用，配置简单
+## 一、开箱即用，配置简单
 
 - 由于 Webpack 没有预设场景，设计的十分灵活，导致配置项复杂，插件机制和内部逻辑晦涩难懂。即使是最常见的 WEB 场景也需要大量的配置。并且大量的 loader 之间虽然单独发布但是却隐藏隐式耦合(各种版本之间)。
 - Vite 则预设了场景 `WEB`,并且将大部分常见的 WEB 构建需求都直接做成了默认的配置(TS JS ES6 file CSS SCSS font 等)，并且 Vite 也提供了脚手架方便集成 ESlint Prettier TS Test。
 
-## 二，构建项目的区别
+## 二、构建项目的区别
 
 ### webpack
 

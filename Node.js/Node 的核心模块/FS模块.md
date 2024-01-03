@@ -8,7 +8,7 @@ const fs = require("fs");
 
 // 参数一： 文件路径
 // 参数二 (可选)：读取文件的编码格式，默认utf-8
-//参数三： 回调函数
+// 参数三： 回调函数
 fs.readFile(__dirname + "/1.text", "utf-8", (err, data) => {
   console.log(err);
   console.log(data);
