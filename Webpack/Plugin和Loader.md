@@ -32,6 +32,7 @@
 7. thread-loader 开启多进程打包优化
 8. url-loader 和 file-loader 类似，但是可以将较小的文件转成 base64 的 URI，然后图片可以和其他资源放在一个请求中，减少对服务器的压力
 9. vue-loader(vue 加载) 和 vue-template-compiler(vue 模板编译)
+10. ts-loader 识别 TS 语法
 
 ### babel
 
