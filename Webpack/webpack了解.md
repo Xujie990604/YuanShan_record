@@ -25,7 +25,7 @@
 - npm init 生成 package.json 文件
 - npm init -y 一键生成 package.json 文件(不需要手动输入一些信息)
 - node_modules 文件下的 bin 目录包含了可以使用的指令, 同时拥有全局和局部的 webpack,想要使用局部的 webpack 时，需要到本地目录中执行 webpack node_modules/.bin/webpack。 想要直接使用局部 webpack 打包，可以使用 npx webpack 指令
-- 在项目的 package.json 的 scripts 中执行的命令时会自动使用局部的插件
+- 在项目的 package.json 的 scripts 中执行的命令时会自动使用`局部的插件`
 - 命令行参数的优先级，高于配置文件的参数优先级
 - npx webpack --analyze 来分析 bundle
 - webpack 的强大特性之一就是能通过 `import` 导入任何类型的模块(eg: .css)
