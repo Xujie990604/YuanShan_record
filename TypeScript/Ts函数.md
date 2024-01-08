@@ -40,7 +40,7 @@ function fullName(firstname: string, lastName?: string): string {
 }
 
 fullName('xu', 'jie')  //xujie
-(fullName('xu') //xuundefined
+fullName('xu') //xuundefined
 ```
 
 ### 默认参数
