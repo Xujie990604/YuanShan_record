@@ -9,7 +9,7 @@
 
 ## 单文件组件
 
-* 我们可以使用一种类型 HTML 的格式来书写 Vue 组件
+* 我们可以使用一种类似 HTML 的格式来书写 Vue 组件
 * 单文件组件(.vue 文件)英文缩写 SFC
 * 单文件组件中会有一个组件的逻辑，模板，样式
 
@@ -22,15 +22,9 @@
 
 * 能够使用纯 TypeScript 声明 props 和自定义事件。
 * `<script setup>` 里面的代码会被编译成组件 setup() 函数的内容。这意味着与普通的 `<script>` 只在组件被首次引入的时候执行一次不同，`<script setup>` 中的代码会在 `每次组件实例被创建` 的时候执行
-* 当使用 `<script setup>` 的时候，任何在 `<script setup>` 声明的顶层的绑定 (包括变量，函数声明，`以及 import 导入的内容`) 都能在模板中直接使用(因为 `<template>` 会被编译成和 `setup()` 同一作用域内的渲染函数)
-* 组件使用前不需要注册，导入后就可以直接使用
+* 当使用 `<script setup>` 的时候，任何在 `<script setup>` 声明的顶层的绑定 (包括变量，函数声明，`以及 import 导入的内容`) 都能在模板中直接使用(因为 `<template>` 会被编译成, 在 `setup()` 函数作用域内的 rander() 渲染函数)
 * defineProps() 和 defineEmits():为了在声明 props 和 emits 选项时获得完整的类型推导支持，我们可以使用 defineProps 和 defineEmits API，它们将自动地在 `<script setup>` 中可用
 * `<script setup>` 中可以使用顶层 await。结果代码会被编译成 `async setup()`
-
-## 依赖注入与全局属性
-
-* Vue3 中的全局属性仅作为对于 Vue2 中的 Vue.prototype 的兼容，只推荐在 Vue3 的选项式 API 写法中使用
-* Vue3 的组合式 API 写法只能在`模板`中访问到全局属性，无法在 `<script>` 中访问全局属性，因此十分不推荐在 Vue3 + 组合式 API 的写法中使用全局属性，而是全面使用`依赖注入`来代替
 
 ## 自定义指令
 
@@ -47,31 +41,12 @@
 2. 通过 `app.provide()` 使一个资源可被注入进整个应用。
 3. 向 `app.config.globalProperties` 中添加一些全局实例属性或方法
 
-## 动态绑定多个值
-
-```js
-// 这是一个包含多个 attribute 的 js 对象
-const objAttrs = {
-  id: 'app',
-  class: 'content'
-}
-// 可以通过不带参数的 v-bind 将 objAttrs 绑定到单个元素上
-<div v-bind="objAttrs"></div>
-```
-
-## JS 表达式
-
-* 在 Vue 中 js 表达式可以被使用在以下场景中
-
-1. 在文本插值中
-2. 在任何 Vue 指令(以 v-开头的 attribute)attribute 的值中
-
-```js
-{{ OK ? 'YES': "NO" }}
-<div :id="`list-${id}`"></div>
-```
-
 ## 模板中受限的全局访问
 
 * 模板中的表达式将被沙盒化，仅能访问到受限的全局对象，比如 Math Date
 * 例如用户添加在 window 上的属性并不能直接在模板中使用，除非使用 app.config.globalProperties 显式的添加它们
+
+### 依赖注入与全局属性
+
+* Vue3 中的全局属性仅作为对于 Vue2 中的 Vue.prototype 的兼容，只推荐在 Vue3 的选项式 API 写法中使用
+* Vue3 的组合式 API 写法只能在`模板`中访问到全局属性，无法在 `<script>` 中访问全局属性，因此十分不推荐在 Vue3 + 组合式 API 的写法中使用全局属性，而是全面使用`依赖注入`来代替
