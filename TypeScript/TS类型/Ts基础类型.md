@@ -52,7 +52,8 @@ user?.info?.name
 const user = { number: 10 }
 
 // 只有当 user.number 为 null 或者 undefined 的时候才会返回 '暂无数据'
-user.number ??  '暂无数据'    
+user.number ??  '暂无数据' 
+   
 // 当 user.number 为 false 类型(undefined, null, false, 0, '')时就会返回 '暂无数据'
 // 所有的 false 类型都会返回 '暂无数据'，有时候会出现意料之外的行为
 user.number || '暂无数据'
