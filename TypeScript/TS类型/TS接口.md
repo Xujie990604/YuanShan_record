@@ -1,8 +1,8 @@
 # TS接口
 
-## type 和 interface 的对比
+## 一、type 和 interface 的对比
 
-### 相同点
+### 1.1 相同点
 
 * 都可以用来定义对象，并且支持 1. 可选参数 2. readonly
 
@@ -35,7 +35,7 @@ type b = (name: string, age:number) => void
 2. type 使用 &(交叉类型) 实现继承
 ```
 
-### 不同点
+### 二、不同点
 
 * type 能够声明基本类型 & 联合类型 & 元组类型
 
@@ -62,9 +62,9 @@ type b = {
 }
 ```
 
-## 接口的使用
+## 二、接口的使用
 
-### 接口的继承
+### 2.1 接口的继承
 
 ```ts
 interface aType {
@@ -86,7 +86,7 @@ let obj: cType = {
 }
 ```
 
-### 可选参数
+### 2.2 可选参数
 
 ```ts
 // ?代表 name 属性是一个可选的参数
@@ -96,7 +96,7 @@ interface paramsTs{
 }
 ```
 
-### 只读属性
+### 2.3 只读属性
 
 ```ts
 // readonly 代表属性只能在被初次创建时给一个值，创建完成之后就不能在修改属性的值了
@@ -107,7 +107,7 @@ interface Point {
 }
 ```
 
-### class 实现 interface
+### 2.4 class 实现 interface
 
 ```ts
 // 定义一个接口

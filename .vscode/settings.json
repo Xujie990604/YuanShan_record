@@ -11,7 +11,10 @@
   ],
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable",
   "files.associations": {
-    "stdio.h": "c"
+    "pages.json": "jsonc",
+    "manifest.json": "jsonc",
+    "stdio.h": "c",
+    "string.h": "c"
   },
   "liveServer.settings.port": 5501
 }
