@@ -1,10 +1,4 @@
-/*
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-10-27 17:26:11
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stack.js
- * @Description: 基于数组来定义一个栈的数据结构
- */
+// 基于数组来定义一个栈的数据结构
 class Stack {
   // 类的默认方法
   constructor() {

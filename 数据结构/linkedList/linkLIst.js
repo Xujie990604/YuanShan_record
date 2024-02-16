@@ -1,11 +1,3 @@
-/*
- * @Author: xujie 1607526161@qq.com
- * @Date: 2022-11-27 22:46:04
- * @LastEditors: x09898 coder_xujie@163.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\linkedList\linkLIst.js
- * @Description: 链表数据结构的实现方式
- */
-
 // 用来对比两个结点是否一致
 function defaultEquals(a, b) {
   return a === b

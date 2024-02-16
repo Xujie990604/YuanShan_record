@@ -1,10 +1,4 @@
-/*
- * @Author: x09898 coder_xujie@163.com
- * @Date: 2022-11-01 15:36:37
- * @LastEditors: xujie 1607526161@qq.com
- * @FilePath: \HTML-CSS-Javascript-\dataStructure\stack\stackObj.js
- * @Description: 基于对象来创建一个栈的数据结构
- */
+// 基于对象来创建一个栈的数据结构
 class Stack {
   constructor() {
     // 存储数据
