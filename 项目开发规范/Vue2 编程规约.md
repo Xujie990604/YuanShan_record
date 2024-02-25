@@ -56,8 +56,7 @@ views/
 ```html
 // bad
 <my-component></my-component>
-<MyComponent></MyComponent>
-<my-component/>
+
 
 // good
 <MyComponent/>
