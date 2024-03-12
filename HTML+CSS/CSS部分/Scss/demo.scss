@@ -1,0 +1,15 @@
+.error {
+  font-size: 20px;
+  color: red;
+}
+
+.serious-error {
+  @extend .error;   // 编译之后会把 .error 的全部 css 属性引用过来。减少了重复代码的书写
+  font-width: 500;
+}
+
+// NOTE: .serious-error 不仅会继承 .error 自身的所有样式，任何跟 .error有关的组合选择器样式也会被 .serious-error 以组合选择器的形式继承
+header.error { 
+  // NOTE: 编译会新增一个组合选择器 header.serious-error
+  text-align: center
+}
