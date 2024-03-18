@@ -8,6 +8,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  flex: 0 0 100px;
+  background-color: red;
+}
+
+.device-info {
+  background-color: blue;
+  flex: 1 1 0;
+}
+
+.device-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
@@ -15,11 +35,12 @@
 
 
 <body>
-
-  <script>
-  console.log({});
-
-  </script>
+  <div class="container">
+    <div class="left">1</div>
+    <div class="right">
+      <div class="c">asdvasdvasdvasdvasdvasdvsklmnlaksndvlasdnojn</div>
+    </div>
+  </div>
 </body>
 
 
