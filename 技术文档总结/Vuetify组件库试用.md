@@ -26,6 +26,10 @@
 </v-app>
 ```
 
+### 路由的自动注册
+
+* TODO: 需要去了解实现
+
 ## 二、全局配置
 
 * Vuetify 允许您在设置应用程序时全局或每个组件设置默认 prop 值
@@ -122,6 +126,8 @@ export default createVuetify({
 
 * 当前的 H5 项目确实在动画方面存在一定的短板，页面的操作显得生硬不流畅
 
+TODO： Vue 路由切换级别的动画效果实现
+
 <img src="./img/Vuetify组件库试用/组件动画.gif" alt="GIF Description" />
 
 ### 3.3 调色板
@@ -159,7 +165,7 @@ export default createVuetify({
    .d-{breakpoint}-{value} for sm, md, lg, xl, and xxl
 
 | 屏幕大小            |       类名                  |
-| :--------------:   | :----------------------:   |
+| :--------------    | :--------------------   |
 | 全部隐藏            |     .d-none                |
 | 仅在 xs 大小时隐藏   |     .d-none .d-sm-flex     |
 | 仅在 sm 大小时隐藏   |     .d-sm-none .d-md-flex  |
@@ -172,17 +178,33 @@ export default createVuetify({
 
 4. 弹性布局辅助类
 
+| flex 辅助类         |       编译结果              |
+| :--------------  | :----------------------   |
+| .d-flex            |     display: flex !important;    |
+| .flex-fill         |     flex: 1 1 auto !important;    |
+| .flex-0-1-100(好像只有 100 才生效，其他值不可以)     |     flex: 0 1 100% !important;  |
+| .flex-row            |     flex-direction: row !important               |
+| .justify-center   |     justify-content: center !important      |
+| 以上的所有类名均可以加上断点使用   |  ....      |
+
+5. 尺寸工具类
+
+* 感觉这个并不全面，只能使用百分值， UnoCSS 等插件都是可以使用 `w-10px` 这种形式的，更加灵活方便
+
 ```scss
-.d-flex - > display: flex;
+.{prefix}-{size}
+prefix: h(高) w(宽) 
+size: auto screen 0 25 50 75 100 // screen 仅高度可用， 数字对应的是百分比
 ```
 
+6. 间距工具类，文本和排版工具类(详尽去看文档)
 
-```css
-
-
+```scss
+间距工具类格式：.{property}{direction}-{breakpoint}-{size}
+文本工具类格式：.text-{breakpoint}-{value}
 ```
 
-## 响应式布局
+## 四、响应式布局
 
 * 栅格系统、显示辅助类、断点
 * Vuetify 还在 JS 层面提供了当前设备的类型，拥有 JS 代码的响应式适配(eg: 按钮点击后 pc 需要弹窗再次确认，移动端则直接进行操作)
@@ -197,15 +219,130 @@ export default createVuetify({
 <600px          手机 xs
 ```
 
-## 四、布局
+## 五、主题
 
-## 五、主题(暗黑模式)
+### 主题的切换
 
-## vscode 适配
+* Vuetify 预装了两个主题 `dark` `light`, 可
 
-* 是否有 vscode 插件的支持？
-* 对比其他UI库会有哪些体验的提升
+```ts
+// 1. 配置默认主题
+// vuetify.ts
+export default createVuetify({
+  theme: {
+    defaultTheme: 'dark'
+  }
+})
 
-## tree-shaking
+// 2. 可以在运行时通过 JS 逻辑来更换主题
+<script lang="ts" setup>
+// 使用 Theme 相关 API
+import { useTheme } from 'vuetify'
+const theme = useTheme()
 
-* Vuetify 自动支持 tree-shaking 而无需任何的配置
+// 点击按钮进行主题的切换
+function toggleTheme () {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
+</script>
+```
+
+### 自定义主题
+
+* Vuetify 支持用户自定义主题
+
+#### 定义主题的内容
+
+```ts
+// 1. 自定义主题
+// vuetify.ts
+import { createApp } from 'vue'
+import { createVuetify, type ThemeDefinition  } from 'vuetify'
+const myCustomLightTheme: ThemeDefinition = {
+  dark: false,
+  colors: {
+    background: '#FFFFFF',
+    surface: '#FFFFFF',
+    'surface-bright': '#FFFFFF',
+    'surface-light': '#EEEEEE',
+    'surface-variant': '#424242',
+    'on-surface-variant': '#EEEEEE',
+    primary: '#1867C0',
+    'primary-darken-1': '#1F5592',
+    secondary: '#48A9A6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+    something: '#00ff00' // 自定义的一个颜色
+  },
+  variables: { // 自定义的变量
+    'border-color': '#000000',
+    'border-opacity': 0.12,
+  }
+}
+export default createVuetify({
+  theme: {
+    defaultTheme: 'myCustomLightTheme',
+    themes: {
+      myCustomLightTheme,
+    },
+  },
+})
+```
+
+#### 使用主题的内容
+
+1. background、surface、primary 等是 Vuetify 内置的色值
+2. something 是用户自定义的色值，Vuetify 将生成许多 `CSS` 类和变量供你在应用程序中使用
+
+```html
+<!-- 在 HTML 中使用 -->
+<div class="bg-something g">background color</div>
+<div class="text-something">text color</div>
+<div class="border-something">border color</div>
+<!-- 在 CSS 中使用, 前缀是 --v-theme- -->
+.btn {
+  background-color: rgb(var(--v-theme-something));
+}
+```
+
+3. border-color、border-opacity 是用户自定义的变量
+
+```css
+.btn {
+  border: 5px solid var(--v-border-color);
+}
+```
+
+![主题变量](./img/Vuetify组件库试用/主题变量.jpg)
+
+### 局部主题
+
+* Vuetify 支持一个应用程序中同时存在多种主题
+
+```html
+<!-- 1. 大部分组件都支持 theme prop, 并且该主题会影响自身以及所有子组件 -->
+<v-card theme="dark">
+  <!-- button uses dark theme -->
+  <v-btn>foo</v-btn>
+</v-card>
+
+<!-- 2. 为应用程序的大块部分设置主题 -->
+<v-theme-provider theme="high-contrast">
+  <!-- uses the high-contrast theme -->
+  <v-card>...</v-card>
+  <v-btn>...</v-btn>
+</v-theme-provider>
+```
+
+## 五、vscode 适配
+
+* vuetify-vscode 插件: 效果未知
+
+## 六、tree-shaking
+
+* tree-shaking：移除 JavaScript 上下文中的未引用代码 (dead-code)
+* 依赖于 ES2015 的模块语法. 模块的导入（import）和导出（export）语句必须是静态的，也就是说，导入和导出的内容在编译时就能确定，而不是在运行时。这样工具链才能分析出哪些模块或哪些导出是实际被使用的。
+* Vuetify 自动支持 tree-shaking 而无需手动导入
