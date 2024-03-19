@@ -35,7 +35,7 @@
 * Vuetify 允许您在设置应用程序时全局或每个组件设置默认 prop 值
 
 ```ts
-// plugins/vuetify.js
+// plugins/vuetify.ts
 import { createVuetify } from 'vuetify'
 import { VBtn } from 'vuetify/components';
 
@@ -75,11 +75,10 @@ export default createVuetify({
 * 默认提供程序允许您为应用程序的某个部分中的组件提供特定的默认 prop 值
   
 ```ts
-// xxx-xxx.vue
 // defaults 属性与 createVuetify 的 defaults 一致(也可以使用全局定义的别名)
+// xxx-xxx.vue
 <v-defaults-provider
-  :defaults="{'VBtn':{'color':'primary','size':'large','variant':'tonal'}}"
->
+  :defaults="{'VBtn':{'color':'primary','size':'large','variant':'tonal'}}">
   <v-btn>Button</v-btn>
 </v-defaults-provider>
 ```
@@ -91,7 +90,9 @@ export default createVuetify({
 ```scss
 // 修改当前文件后，需要重新编译项目后才会生效
 // NOTE: 有些属性可以在多个地方进行配置，权重关系如下
-// 权重关系：settings.scss < 组件内 < vuetify.ts > 组件内 + ！important
+// 权重关系：settings.scss < 组件内 < vuetify.ts < 组件内 + ！important
+
+// style/settings.scss
 @use 'vuetify/settings' with (
   // btn
   $button-height: 40px,
@@ -130,6 +131,26 @@ TODO： Vue 路由切换级别的动画效果实现
 
 <img src="./img/Vuetify组件库试用/组件动画.gif" alt="GIF Description" />
 
+```html
+<v-btn
+  class="ma-2"
+  color="primary"
+  @click="expand = !expand"
+>
+  Expand Transition
+</v-btn>
+
+<!-- 被 v-expand-transition 组件包含的内容将拥有动画效果 -->
+<v-expand-transition>
+  <v-card
+    v-show="expand"
+    class="mx-auto bg-secondary"
+    height="100"
+    width="100"
+  ></v-card>
+</v-expand-transition>
+```
+
 ### 3.3 调色板
 
 * 开发者可以直接访问 Vuetify 提供的 颜色值，并通过 scss 和 JS，这些值可以在样式表、组件、color 属性上使用
@@ -141,7 +162,7 @@ TODO： Vue 路由切换级别的动画效果实现
 </v-btn>
 ```
 
-* 规范中的每种颜色都会转换为背景和文本变体，以便通过`类`在应用程序中进行样式设置
+* 规范中的每种颜色都会转换为背景和文本变体，以便通过 `类名` 在应用程序中进行样式设置
 
 ```scss
 // text语法格式： text-{color}-{lighten|darken}-{n}
@@ -155,7 +176,7 @@ TODO： Vue 路由切换级别的动画效果实现
 
 * Vuetify 将常用的 CSS 样式(阴影、颜色、间距、flex)集合都封装成了 CSS 类名，我们仅需要添加类名便能得到对应的样式，很少需要手动去写 CSS 样式代码
 * 通过 js 执行操作 CSS 样式会比较繁琐，在 Vuetify 中可以直接用 JS 来操作类名(操作类名较简单)，来实现改变样式的效果
-* TODO: 带来的问题是，CSS 的类名要去哪里查询？是否有插件的支持
+TODO: 带来的问题是，CSS 的类名要去哪里查询？是否有插件的支持
 * 和传统 css 开发形式的好处：1. 项目能达到统一的样式风格 2. 用 vuetify 提供的类名能够更好的实现响应式开发(配合断点去使用)
 
 1. border-radius 辅助类 详见：工具类 - 边距圆角
@@ -207,23 +228,31 @@ size: auto screen 0 25 50 75 100 // screen 仅高度可用， 数字对应的是
 ## 四、响应式布局
 
 * 栅格系统、显示辅助类、断点
+
+### 4.1 断点
+
 * Vuetify 还在 JS 层面提供了当前设备的类型，拥有 JS 代码的响应式适配(eg: 按钮点击后 pc 需要弹窗再次确认，移动端则直接进行操作)
 * 裁定断点，在不同的断点内应用不同的样式
 * 移动优先(xs 可忽略)： .text-xs-h1 除了手机外，还能向上影响其他的断点，.text-md-h1 笔记本、桌面端、超大屏
 
-```scss
-> 1904px        超大屏 xl
-1264px><1904px  桌面端 lg
-960px><1264px   笔记本 md
-600px><960px    平板 sm
-<600px          手机 xs
-```
+| 范围               |       类型                   |   代码   |
+| :--------------   | :---------------             | :-----  |
+| < 600px           |    小型到大型的手机             |    xs   |
+| 600px > < 960px   |    小型到中型的平板             |  sm     |
+| 960px > < 1280px  |    大型平板到笔记本电脑          |    md   |
+| 1280px > < 1920px |     从笔记本电脑到桌面电脑       | lg      |
+| 1920px > < 2560px | 分辨率 1080p 到 1440p 的桌面电脑|  xl      |
+| > 2560px          |   4K 和超宽屏幕                |  xxl     |
+
+### 4.2 栅格布局
+
+TODO：待使用，应该是适合 PC 端，移动端应该比较少用到，在家配合翻译查看
 
 ## 五、主题
 
-### 主题的切换
+### 5.1 主题的切换
 
-* Vuetify 预装了两个主题 `dark` `light`, 可
+* Vuetify 预装了两个主题 `dark` `light`
 
 ```ts
 // 1. 配置默认主题
@@ -247,7 +276,7 @@ function toggleTheme () {
 </script>
 ```
 
-### 自定义主题
+### 5.2 自定义主题
 
 * Vuetify 支持用户自定义主题
 
@@ -255,7 +284,7 @@ function toggleTheme () {
 
 ```ts
 // 1. 自定义主题
-// vuetify.ts
+// plugins/vuetify.ts
 import { createApp } from 'vue'
 import { createVuetify, type ThemeDefinition  } from 'vuetify'
 const myCustomLightTheme: ThemeDefinition = {
@@ -277,9 +306,10 @@ const myCustomLightTheme: ThemeDefinition = {
     warning: '#FB8C00',
     something: '#00ff00' // 自定义的一个颜色
   },
-  variables: { // 自定义的变量
+  variables: {
     'border-color': '#000000',
     'border-opacity': 0.12,
+    'u-border-color': 'red' // 自定义的一个颜色变量
   }
 }
 export default createVuetify({
@@ -308,17 +338,21 @@ export default createVuetify({
 }
 ```
 
-3. border-color、border-opacity 是用户自定义的变量
+3. border-color、border-opacity 是 Vuetify 内置的变量
+4. u-border-color 是用户自定义的变量
 
 ```css
 .btn {
   border: 5px solid var(--v-border-color);
+  border: 5px solid var(--v-u-border-color);
 }
 ```
 
+* 未修改主题状态
+
 ![主题变量](./img/Vuetify组件库试用/主题变量.jpg)
 
-### 局部主题
+### 5.3 局部主题
 
 * Vuetify 支持一个应用程序中同时存在多种主题
 
@@ -346,3 +380,35 @@ export default createVuetify({
 * tree-shaking：移除 JavaScript 上下文中的未引用代码 (dead-code)
 * 依赖于 ES2015 的模块语法. 模块的导入（import）和导出（export）语句必须是静态的，也就是说，导入和导出的内容在编译时就能确定，而不是在运行时。这样工具链才能分析出哪些模块或哪些导出是实际被使用的。
 * Vuetify 自动支持 tree-shaking 而无需手动导入
+
+## 七、基础组件的使用
+
+* 示例中使用的全是 Vue3 的语法，在学习官网之前请先掌握 Vue3 的基础语法，重点学习插槽，具名插槽，作用域插槽
+
+### 组件特点
+
+* 颗粒度更小，业务组件需要单独进行封装
+* bottom sheets 仅仅规范了一个底部面板的样式，面板内可以包含的内容是任意的，推荐 v-card v-list v-sheet，并且确认，取消按钮的逻辑也需要自己实现 。但是 u-view picker 直接在底部面板中内置了 单列，多列，时间，地区等常见场景以及确认，取消按钮，底部安全区
+
+### 骨架的功能
+
+* 当前 H5 页面的一个较大缺陷，加载 -> 加载完成 这个过程，页面会由`空白`变成`有内容`。页面的切换比较生硬。
+* Vuetify 内置了诸多内置类型：actions， article，avatar，button，card ......
+
+```html
+<!-- 1. 可以基于内置类型进行自身的翻倍 -->
+<v-skeleton-loader type="button@2">
+  ...
+</v-skeleton-loader>
+
+<!-- 2.可以基于内置类型进行组合 -->
+<v-skeleton-loader type="button, article, card">
+  ...
+</v-skeleton-loader>
+```
+
+### 栅格布局
+
+* Vuetify 带有一个使用 flexbox 构建的 12 点网络系统
+* 栅格布局可以搭配着断点进行使用
+TODO：栅格布局的偏移量和其他特性的使用
