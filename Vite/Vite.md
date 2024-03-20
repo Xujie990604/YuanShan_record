@@ -1,6 +1,6 @@
 # Vite
 
-* Vite 预设了场景 `WEB`, 并且将大部分常见的 WEB 构建需求都直接做成了默认的配置(TS、JSX、CSS SCSS、 LESS、 POSTCSS、CSS Modules、 )
+* Vite 预设了场景 `WEB`, 并且将大部分常见的 WEB 构建需求都直接做成了默认的配置(TS、JSX、CSS、SCSS、LESS、POSTCSS、CSS Modules)
 
 ## 一、开发阶段
 
@@ -14,7 +14,7 @@
 ### 1.2 仅执行转译
 
 * Vite 仅执行 `.ts` 的转译工作(使用 ESBuild 将 ts 转成 js)，并`不执行`类型检查。并假定类型检查已经由 IDE 实现了。
-* 因为类型检查需要了解`整个模块图`，这和 Vite 开发阶段`按需编译`的原则相违背。
+* 因为类型检查需要了解`整个模块图`，这和 Vite 开发阶段 `按需编译` 的原则相违背。
 * 同理 Eslint 的静态分析也与 Vite 的工作流程解耦
   
 ## 二、build 阶段
