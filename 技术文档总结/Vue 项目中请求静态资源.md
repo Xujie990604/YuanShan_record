@@ -1,5 +1,7 @@
 # Vue 请求静态资源
 
+TODO：添加上 Vite 和 webpack 的对比
+
 ## **一， Vue的public和assets文件夹的不同**
 
 ### **Public文件夹（static）**

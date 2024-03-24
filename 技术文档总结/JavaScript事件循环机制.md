@@ -1,5 +1,8 @@
 # JavaScript 事件循环机制
 
+TODO: 学习相关知识(时间循环、Promise、async await)之后，完善这一块的文档
+TODO: 对 node 的拓展，node 因为时间循环机制而存在的优势，和劣势
+
 ## 一， 事件循环机制
 
 ### 同步任务和异步任务

@@ -1,5 +1,8 @@
 # Webpack 和 Vite 对比
 
+TODO:  添加更加真实的数据对比、打包生成产物的对比
+TODO： 在使用层面的对比
+
 - webpack 是一个用于`现代 JavaScript` 应用程序的 `静态模块` `打包工具`(对标 Rollup)
 - Vite 是一个更上层的工具链方案，对标的是 (webpack + 针对 web 的常用配置 + webpack-dev-server)
 
