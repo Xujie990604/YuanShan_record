@@ -15,12 +15,14 @@
 
 <body>
   <script>
-    try {
-      let userInfo = {}
-      let length = userInfo.name.length
-    } catch (error) {
-      console.log('err:', error.message);
-    }
+function add(...numbers) {
+  console.log(numbers);
+  console.log(...numbers);
+    return numbers;
+}
+
+add(1,2,3,4,5)
+    
   </script>
 </body>
 
