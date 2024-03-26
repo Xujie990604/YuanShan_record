@@ -15,21 +15,11 @@
 
 <body>
   <script>
-    const arr = [1, '2', false, 0]
-    for (const item of arr) {
-      switch (item) {
-        case 1:
-          console.log('当前数字1');
-          break;
-        case '2':
-          console.log('当前字符2');
-          break;
-        case false:
-          console.log('当前布尔false');
-          break;
-        default:
-          break;
-      }
+    try {
+      let userInfo = {}
+      let length = userInfo.name.length
+    } catch (error) {
+      console.log('err:', error.message);
     }
   </script>
 </body>
