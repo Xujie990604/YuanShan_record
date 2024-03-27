@@ -12,19 +12,19 @@
 // `||` 用于变量赋值
 // 只要 device.count 的值转化为布尔值为 false 就会返回 '- -' 占位符
 // 布尔值为 false: undefined null 0 false "" NaN
-let deviceCount = device.count || '- -'
+let deviceCount = device.count || "- -";
 
-// 可能 device.count 为 0 时并不想显示 '- -' 
+// 可能 device.count 为 0 时并不想显示 '- -'
 // 可以使用 `??` 进行改进, 只有 device.count 为 undefined 或者 null 时才返回 '- -'
-let deviceCount = device.count ?? '- -'
+let deviceCount = device.count ?? "- -";
 
 //  && 用于避免在 undefined 上读取数据报错
-if(user && user.info) {
-  let userName = user.info.name
+if (user && user.info) {
+  let userName = user.info.name;
 }
 
 // 使用 `?.` 进行优化
-let userName = user?.info?.name
+let userName = user?.info?.name;
 ```
 
 - str1 + str2 能十分方便的拼接字符串
@@ -34,13 +34,14 @@ let userName = user?.info?.name
 - 数值的隐式类型转换(包括但不限于 undefined == null、1 == '1'、[] == 0), JS 糟粕的精髓所在 -------- 使用 === 代替 ==
 
 ```js
-TODO: 网上去搜那个很离谱的东西
+TODO: 网上去搜那个很离谱的东西;
 
 // TS 是不是就禁止了一些涉及到隐形类型转换的操作 ， 比如 数字不能和字母相加
 ```
 
 - typeof (Array | Object | null) === 'object' ----------- 使用 instanceof 来判断数组或对象
-- typeof 未定义变量、未初始化变量 的返回值都是 undefined    ------- 变量在声明时一定要初始化一个值，这样在 typeof 返回 undefined 时才能明确这是变量未声明。
+TODO: 没有一个内置的函数来完全判断值的类型是什么，需要自己去封装
+- typeof 未定义变量、未初始化变量 的返回值都是 undefined ------- 变量在声明时一定要初始化一个值，这样在 typeof 返回 undefined 时才能明确这是变量未声明。
 - 弱类型和过度的容错导致 JS 代码很容易写出各种隐患 ---------- 使用一个良好的统一的代码编写风格
 - 基于全局变量的编程模型 ---------- 会导致变量名之间的互相冲突和大型程序的难以维护(使用 ES6 的 module)
 - 不声明变量就可以使用，并且会被添加到全局变量中
@@ -84,3 +85,17 @@ TODO: 网上去搜那个很离谱的东西
 ## 数组缺点
 
 - 查询速度会比真正的数组结构慢
+
+### 3.1 new Array() 令人困惑
+
+- 使用 `new Array(3)` 声明数组时，无法区分是想要长度为 3 还是仅包含一个数值 3
+- 使用 ES6 的 `Array.of()` 解决这个问题
+
+|           参数           |               结果                |
+| :----------------------: | :-------------------------------: |
+|       new Array()        |                []                 |
+|        Array.of()        |                []                 |
+| new Array(3) `!注意结果` | [undefined, undefined, undefined] |
+|       Array.of(3)        |                [3]                |
+|   new Array(3, 11, 8)    |            [3, 11, 8]             |
+|    Array.of(3, 11, 8)    |            [3, 11, 8]             |
