@@ -55,13 +55,13 @@ console.log(iter.next()); //{value: 3, done: false}
 - `yield*`
 - 由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用了遍历器接口(例如: for…of Array.from() Map(), Set() Promise.all() Promise.race())
 
-## 几种遍历方法的对比
+## 三、几种遍历方法的对比
 
 ### for 循环
 
 - 最原始的遍历方式，写起来比较麻烦
 
-### foreach
+### forEach
 
 - 无法使用 continue break 来终止循环
 
