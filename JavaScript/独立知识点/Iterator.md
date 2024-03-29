@@ -50,6 +50,9 @@ console.log(iter.next()); //{value: 3, done: false}
 
 ## 调用 Iterator 的场合
 
+TODO：总结几种遍历方式的异同点，以及 forEach 不能使用 break 的解决方案
+TODO： for-of 解决了 for-in 的哪些缺点？原型？顺序？
+
 - 解构赋值时
 - 使用 ... 扩展运算符时
 - `yield*`

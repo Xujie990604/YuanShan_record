@@ -15,28 +15,11 @@
 
 <body>
   <script>
-    // let a = [
-    //   {
-    //     number: 1
-    //   }, {
-    //     number: 2
-    //   }
-    // ];
-    // let sum = values.reduce((prev, cur, index, array) => {
-    //   console.log(cur);
-    //   console.log(prev);
-    //   return prev + cur.number
-    // }, 0);
-    // console.log(sum);
-
-    const arr = [1, 2, 3, 4, 5]
-    let number = 0
-    arr.reduce((total, item, index, arr) => {
-      number++
-      return total + item
-    }, 0)
-    console.log(number);
-
+    const set = new Set([1,2,'3','name'])
+    console.log(set);
+    console.log(set.keys());
+    console.log(set.values());
+    console.log(set.entries());
 
   </script>
 </body>
