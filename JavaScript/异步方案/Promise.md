@@ -151,15 +151,15 @@ let d = Promise.all(); // 无效的语法
 
 ```js
 Promise.all([
-    new Promise(() => {
-        ...
-    }),
-    new Promise(() => {
-        ...
-    })
+  new Promise(() => {
+      ...
+  }),
+  new Promise(() => {
+      ...
+  })
 ]).then(results => {
-    result[0] //里面是第一次执行的结果
-    result[1] //里面是第二次执行的结果
+  result[0] //里面是第一次执行的结果
+  result[1] //里面是第二次执行的结果
 })
 ```
 

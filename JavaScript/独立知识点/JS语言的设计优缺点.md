@@ -12,19 +12,19 @@
 // `||` 用于变量赋值
 // 只要 device.count 的值转化为布尔值为 false 就会返回 '- -' 占位符
 // 布尔值为 false: undefined null 0 false "" NaN
-let deviceCount = device.count || '- -'
+let deviceCount = device.count || "- -";
 
-// 可能 device.count 为 0 时并不想显示 '- -' 
+// 可能 device.count 为 0 时并不想显示 '- -'
 // 可以使用 `??` 进行改进, 只有 device.count 为 undefined 或者 null 时才返回 '- -'
-let deviceCount = device.count ?? '- -'
+let deviceCount = device.count ?? "- -";
 
 //  && 用于避免在 undefined 上读取数据报错
-if(user && user.info) {
-  let userName = user.info.name
+if (user && user.info) {
+  let userName = user.info.name;
 }
 
 // 使用 `?.` 进行优化
-let userName = user?.info?.name
+let userName = user?.info?.name;
 ```
 
 - str1 + str2 能十分方便的拼接字符串
@@ -34,18 +34,19 @@ let userName = user?.info?.name
 - 数值的隐式类型转换(包括但不限于 undefined == null、1 == '1'、[] == 0), JS 糟粕的精髓所在 -------- 使用 === 代替 ==
 
 ```js
-TODO: 网上去搜那个很离谱的东西
+TODO: 网上去搜那个很离谱的东西;
 
 // TS 是不是就禁止了一些涉及到隐形类型转换的操作 ， 比如 数字不能和字母相加
 ```
 
 - typeof (Array | Object | null) === 'object' ----------- 使用 instanceof 来判断数组或对象
-- typeof 未定义变量、未初始化变量 的返回值都是 undefined    ------- 变量在声明时一定要初始化一个值，这样在 typeof 返回 undefined 时才能明确这是变量未声明。
+  TODO: 没有一个内置的函数来完全判断值的类型是什么，需要自己去封装
+- typeof 未定义变量、未初始化变量 的返回值都是 undefined ------- 变量在声明时一定要初始化一个值，这样在 typeof 返回 undefined 时才能明确这是变量未声明。
 - 弱类型和过度的容错导致 JS 代码很容易写出各种隐患 ---------- 使用一个良好的统一的代码编写风格
 - 基于全局变量的编程模型 ---------- 会导致变量名之间的互相冲突和大型程序的难以维护(使用 ES6 的 module)
 - 不声明变量就可以使用，并且会被添加到全局变量中
 - 没有块级作用域，变量可以重复声明，变量声明会自动提升 ------- 使用 let, const
-- NAN === NAN ---------- 使用 Object.is()
+- NAN === NAN， +0 -0 ---------- 使用 Object.is()
 - with() eval() ------- 不要使用
 - if for 后面不加代码块时写单行语句不会报错 ------ 不要这样做
 
@@ -60,9 +61,30 @@ TODO: 网上去搜那个很离谱的东西
 
 ## 对象缺点
 
-- 使用 for in 遍历对象时，会输出原型上的属性。并且顺序是不固定的 ----- 可以改用 Object.values() 来遍历对象
+- 使用 for in 遍历对象时，会输出原型上的属性。 ----- 可以改用 Object.values() 来遍历对象
+
+```js
+
+```
+
+- 对象属性的顺序是不固定的 ----- map 实例会维护插入的顺序
+
+```js
+// 按照顺序进行遍历
+```
+
 - 伪类(构造函数长得像类，但其实是函数)会误导 JS 程序员编写过于复杂的层次结构。许多复杂的类层次结构产生的原因是静态类型检查的约束，但是 JS 中并不存在静态类型检查。
+
+```js
+// JS 中并不具有完整的面向对象编程特性
+// JS 天生是鸭子类型的，很多情况能轻松做到 Java 做不到的事情，因为无需搞那么麻烦
+```
+
 - 永远不要使用 new Boolean() new Number() new String() 来显视的声明基本类型包装类
+
+```js
+// 显式使用包装类时，带来的一些匪夷所思问题
+```
 
 ## 函数优点
 
@@ -84,3 +106,17 @@ TODO: 网上去搜那个很离谱的东西
 ## 数组缺点
 
 - 查询速度会比真正的数组结构慢
+
+### 3.1 new Array() 令人困惑
+
+- 使用 `new Array(3)` 声明数组时，无法区分是想要长度为 3 还是仅包含一个数值 3
+- 使用 ES6 的 `Array.of()` 解决这个问题
+
+|           参数           |               结果                |
+| :----------------------: | :-------------------------------: |
+|       new Array()        |                []                 |
+|        Array.of()        |                []                 |
+| new Array(3) `!注意结果` | [undefined, undefined, undefined] |
+|       Array.of(3)        |                [3]                |
+|   new Array(3, 11, 8)    |            [3, 11, 8]             |
+|    Array.of(3, 11, 8)    |            [3, 11, 8]             |
