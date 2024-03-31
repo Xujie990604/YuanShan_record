@@ -14,23 +14,16 @@
 
 
 <body>
+  <div id="app"></div>
   <script>
-    const arr = [1, '2', false, 0]
-    for (const item of arr) {
-      switch (item) {
-        case 1:
-          console.log('当前数字1');
-          break;
-        case '2':
-          console.log('当前字符2');
-          break;
-        case false:
-          console.log('当前布尔false');
-          break;
-        default:
-          break;
-      }
-    }
+const app = document.querySelector("#app")
+console.time("操作DOM")
+for(let index = 0; index < 10000; index++) {
+  const div = document.createElement("div")
+  div.setAttribute("class", "child")
+  app.appendChild(div)
+}
+console.timeEnd("操作DOM")
   </script>
 </body>
 
