@@ -16,19 +16,19 @@
 <body>
   <div id="app"></div>
   <script>
-const app = document.querySelector("#app")
-console.time("操作DOM")
-for(let index = 0; index < 10000; index++) {
-  const div = document.createElement("div")
-  div.setAttribute("class", "child")
-  app.appendChild(div)
-}
-console.timeEnd("操作DOM")
-    const set = new Set([1,2,'3','name'])
-    console.log(set);
-    console.log(set.keys());
-    console.log(set.values());
-    console.log(set.entries());
+    const obj = {
+      name: 'foo',
+      age: 18,
+      sex: 0
+    }
+    obj.__proto__.sss = 'sss'
+
+    for (const key in obj) {
+      if (Object.hasOwnProperty.call(obj, key)) {
+        console.log(key);
+      }
+    }
+
 
   </script>
 </body>
