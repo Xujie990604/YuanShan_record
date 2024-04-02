@@ -16,19 +16,13 @@
 <body>
   <div id="app"></div>
   <script>
-    const obj = {
-      name: 'foo',
-      age: 18,
-      sex: 0
-    }
-    obj.__proto__.sss = 'sss'
-
-    for (const key in obj) {
-      if (Object.hasOwnProperty.call(obj, key)) {
-        console.log(key);
-      }
-    }
-
+const user = {
+  name: 'foo',
+  age: 18,
+  money: 20
+}
+const a = { ...user, money: user.money * 2 }; // {name: 'foo', age: 18, money: 40}
+console.log(a);
 
   </script>
 </body>
