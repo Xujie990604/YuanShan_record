@@ -16,14 +16,47 @@
 <body>
   <div id="app"></div>
   <script>
-const user = {
-  name: 'foo',
-  age: 18,
-  money: 20
-}
-const a = { ...user, money: user.money * 2 }; // {name: 'foo', age: 18, money: 40}
-console.log(a);
+    const DeviceCapabilities = {
+      HardwareCapabilities: {
+        SupportedVideoChannelNum: 10,
+        SupportedRadarChannelNum: 10,
+        SupportWifi: 0,
+        Support4G: 1
+      },
+      SoftwareCapability: {
+        OSSTypeNum: 5,
+        SupportOSSTypeList: {
+          OSSTypeName: 'foo',
+          OSSTypeTitle: 'bar',
+          SupportOSSTypeTitle: 'bar',
+        }
+      }
+    }
+    if (DeviceCapabilities.HardwareCapabilities.Support4G &&
+      DeviceCapabilities.SoftwareCapability.SupportOSSTypeList.OSSTypeName) {
+      // ...
+    } else if (DeviceCapabilities.HardwareCapabilities.SupportWifi || DeviceCapabilities.SoftwareCapability.SupportOSSTypeList.SupportOSSTypeTitle) {
+      // ...
+    }
 
+    const {
+      HardwareCapabilities: {
+        SupportWifi,
+        Support4G
+      },
+      SoftwareCapability: {
+        SupportOSSTypeList: {
+          OSSTypeName,
+          SupportOSSTypeTitle
+        }
+      }
+    } = DeviceCapabilities
+
+    if (Support4G && OSSTypeName) {
+      // ...
+    } else if (SupportWifi && SupportOSSTypeTitle) {
+      // ...
+    }
   </script>
 </body>
 
