@@ -17,7 +17,7 @@ TODO： 在使用层面的对比
 
 1. Webpack 在启动时，会先构建项目模块的依赖图，如果在项目中的某个地方改动了代码，Webpack 则会对相关的依赖重新打包，随着项目的增大，其打包速度也会下降。
 
-![Webpack工作原理](./img/webpac和Vite的对比/webpack打包.png)
+![Webpack工作原理](../img/三方插件&工具/åwebpac和Vite的对比/webpack打包.png)
 
 ### Vite
 
@@ -25,8 +25,8 @@ TODO： 在使用层面的对比
 - Vite 以 原生 ESM 方式提供源码。这实际上是让浏览器接管了打包程序的部分工作
 - 在开发阶段使用 ESbuild 进行 `转译`。Esbuild 则选择使用 Go 语言编写能够充分利用 CPU 的多核性能。Esbuild 具有非常快的速度，打包速度却是其他工具的 10 ～ 100 倍。(快就一个字，开发时能实现秒开)
 
-![Esbuild打包速度](./img/webpac和Vite的对比/Esbuild打包速度.png)
+![Esbuild打包速度](../img/三方插件&工具/webpac和Vite的对比/Esbuild打包速度.png)
 
 - 在生产环境下使用 Rollup 进行打包。尽管 esbuild 速度更快，但 Vite 采用了 Rollup 灵活的插件 API 和基础建设，这对 Vite 在生态中的成功起到了重要作用。目前来看，我们认为 Rollup 提供了更好的性能与灵活性方面的权衡。
 
-![Vite工作原理](./img/webpac和Vite的对比/vite运行.png)
+![Vite工作原理](../img/三方插件&工具/webpac和Vite的对比/vite运行.png)

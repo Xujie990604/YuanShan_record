@@ -4,11 +4,11 @@
 
 ### 1.1 基本语法
 
-![flex属性概述](./img/WEB响应式布局/flex属性概述.jpg)
+![flex属性概述](../img/CSS文档/WEB响应式布局/flex属性概述.jpg)
 
 ### 1.2 打点省略的问题
 
-![flex属性flex打点失效场景概述](./img/WEB响应式布局/flex打点失效场景.jpg)
+![flex属性flex打点失效场景概述](../img/CSS文档/WEB响应式布局/flex打点失效场景.jpg)
 
 * 在自适应元素上加 `width: 0;` `overflow: hidden;` 可解决打点失效问题
 
@@ -101,11 +101,11 @@ window.addEventListener('resize', init)
 
 ### 3.2 左侧固定，右侧自适应
 
-![demo1](./img/WEB响应式布局/demo-two.png)
+![demo1](../img/CSS文档/WEB响应式布局/demo-two.png)
 
 ### 3.3 表单元素
 
-![demo2](./img/WEB响应式布局/demo-form.png)
+![demo2](../img/CSS文档/WEB响应式布局/demo-form.png)
 
 1. u-view 组件的内置元素没有使用默认的 rpx
 2. 组件内部的样式覆盖繁琐，且存在影响功能问题(u-switch 切换时存在问题)
@@ -185,7 +185,7 @@ page {
 </style>
 ```
 
-![demo2](./img/WEB响应式布局/demo-ipad.png)
+![demo2](../img/CSS文档/WEB响应式布局/demo-ipad.png)
 
 ## 五、对 PC 端的适配
 

@@ -125,7 +125,7 @@ export default createVuetify({
 
 - 当前的 H5 项目确实在动画方面存在一定的短板，页面的操作显得生硬不流畅
 
-<img src="./img/Vuetify组件库试用/组件动画.gif" alt="GIF Description" />
+<img src="../img/三方插件&工具/Vuetify组件库试用/组件动画.gif" alt="GIF Description" />
 
 ```html
 <v-btn class="ma-2" color="primary" @click="expand = !expand">
@@ -400,7 +400,7 @@ export default createVuetify({
 }
 ```
 
-![主题变量](./img/Vuetify组件库试用/主题变量.jpg)
+![主题变量](../img/三方插件&工具/Vuetify组件库试用/主题变量.jpg)
 
 ### 6.3 局部主题
 
@@ -494,7 +494,7 @@ export default createVuetify({
 - Vuetify 的文档对新手不太友好，不推荐全文通读的方式，需要一遍遍的翻阅
 - Vuetify 的文档并没有完全汉化，推荐沉浸式翻译的插件，译文不会覆盖原文，而是会排列在原文的下面。
 
-![翻译插件效果](./img/Vuetify组件库试用/翻译插件效果.jpg)
+![翻译插件效果](../img/三方插件&工具/Vuetify组件库试用/翻译插件效果.jpg)
 
 ## 十、总结
 
