@@ -205,7 +205,7 @@ export function addNumber(num1, num2) {
 
 - 全部采用小写方式， 以中划线分隔，有复数结构时，要采用复数命名法， 缩写不用复数
 
-```
+```js
 // bad 
 script/style/demo_scripts/demoStyle/imgs/doc
 
@@ -217,7 +217,7 @@ scripts/styles/components/images/utils/layouts/demo-style/demo-scripts/img/doc
 
 - 全部采用小写方式， 以中划线分隔
 
-```
+```js
 // bad
 renderDom.js/UserManagement.html
 
@@ -229,7 +229,7 @@ render-dom.js/signup.css/index.html/company-logo.png
 
 - 代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。 说明：正确的 英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用
 
-```
+```js
 // bad
 DaZhe [打折]  /  getPingfenByName() [评分]   /  int 年龄 = 18 
 
@@ -244,8 +244,8 @@ zhejiang/hangzhou/rmb        等国际通用的名称，可视为英文
 - 禁止在`代码`和 `注释`中出现任何同公司，产品，开发者姓名，工号相关的内容。
 - 禁止在`代码` 和`注释`中出现侮辱性词汇
 
-```
-//1. 公司相关
+```js
+// 1. 公司相关
 uniview SMB
 // 2.产品相关
 UCS ezcloud

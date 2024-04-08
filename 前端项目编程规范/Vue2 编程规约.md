@@ -8,7 +8,7 @@
 
 ### 组件文件名为 kebab-case 格式
 
-```text
+```js
 // bad 
 myComponent.vue
 mycomponnet.vue
@@ -21,7 +21,7 @@ my-component.vue
 
 - 看到 `base-xxx` 就能知道这是一个 `基础组件`
 
-```text
+```js
 // bad
 base-ui/
 |--my-button.vue
@@ -102,7 +102,7 @@ props: {
 this.$emit('click-button')
 ```
 
-## 二，router 规范
+## 二、router 规范
 
 ### path 采用 kebab-case 格式
 
